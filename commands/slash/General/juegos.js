@@ -2,21 +2,28 @@ const Gamecord = require("discord-gamecord");
 
 module.exports = {
     name: "juegos",
-    description: "Calcular ping del bot.",
+    description: "Lista de juegos disponibles.",
     type: 1,
-    options: [],
-    choices: [
-        { name: "🆎 Wordle 🆎", value: "wordle" },
-        { name: "🐍 Snake 🐍", value: "snake" },
-        { name: "🎩 Ahorcado 🎩", value: "ahorcado" },
-        { name: "💣 buscaminas 💣", value: "buscaminas" },
-        { name: "🔎 Busca el Emoji 🔎", value: "buscaelemoji" },
-        { name: "🤔 Acierta el Pokemon 🤔", value: "aciertaelpokemon" },
-        { name: "🔖 ¿Qué prefieres? 🔖", value: "queprefieres" },
-        { name: "🧩 parejas 🧩", value: "parejas" },
-        { name: "🔢 2048 🔢", value: "2048" },
-        { name: "🧨 Inundación 🧨", value: "inundacion" },
-        { name: "📝 Dedos Ágiles 📝", value: "dedosagiles" },
+    options: [
+        {
+            type: 3,
+            name: "juego",
+            description: "Juegos disponibles",
+            require: true,
+            choices: [
+                { name: "🆎 Wordle 🆎", value: "wordle" },
+                { name: "🐍 Snake 🐍", value: "snake" },
+                { name: "🎩 Ahorcado 🎩", value: "ahorcado" },
+                { name: "💣 buscaminas 💣", value: "buscaminas" },
+                { name: "🔎 Busca el Emoji 🔎", value: "buscaelemoji" },
+                { name: "🤔 Acierta el Pokemon 🤔", value: "aciertaelpokemon" },
+                { name: "🔖 ¿Qué prefieres? 🔖", value: "queprefieres" },
+                { name: "🧩 parejas 🧩", value: "parejas" },
+                { name: "🔢 2048 🔢", value: "2048" },
+                { name: "🧨 Inundación 🧨", value: "inundacion" },
+                { name: "📝 Dedos Ágiles 📝", value: "dedosagiles" },
+            ],
+        },
     ],
     permissions: {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
