@@ -4,7 +4,7 @@ module.exports = {
     Prefix: process.env.PREFIX,
 
     Users: {
-        OWNERS: [process.env.ID_OWNER], // THE BOT OWNERS ID.
+        OWNERS: [process.env.ID_OWNER],
     },
 
     Handlers: {
