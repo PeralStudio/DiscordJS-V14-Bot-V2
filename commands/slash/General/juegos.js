@@ -9,7 +9,7 @@ module.exports = {
             type: 3,
             name: "juego",
             description: "Juegos disponibles",
-            require: true,
+            required: true,
             choices: [
                 { name: "🆎 Wordle 🆎", value: "wordle" },
                 { name: "🐍 Snake 🐍", value: "snake" },
