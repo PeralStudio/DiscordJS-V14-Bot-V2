@@ -1,4 +1,11 @@
-const { Client, Partials, Collection, GatewayIntentBits, ActivityType } = require("discord.js");
+const {
+    Client,
+    Partials,
+    Collection,
+    GatewayIntentBits,
+    ActivityType,
+    IntentsBitField,
+} = require("discord.js");
 const config = require("./config/config");
 require("dotenv").config();
 const colors = require("colors");
@@ -20,6 +27,10 @@ const client = new Client({
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildVoiceStates,
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.GuildVoiceStates,
     ],
     partials: [
         Partials.Channel,
