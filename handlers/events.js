@@ -1,8 +1,9 @@
 const fs = require("fs");
 const colors = require("colors");
+const superDjs = require("super-djs");
 
 module.exports = (client) => {
-    console.log("0------------------| Events Handler:".blue);
+    console.log(superDjs.colourText("------------------>> Events Handler:", "blue"));
 
     fs.readdirSync("./events/").forEach((dir) => {
         const commands = fs.readdirSync(`./events/${dir}`).filter((file) => file.endsWith(".js"));
