@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 module.exports = (client) => {
     console.log(superDjs.colourText("[DATABASE] Connecting to MongoDB...", "yellow"));
     const mongo = process.env.MONGO_URL || config.Handlers.MONGO;
+    mongoose.set("strictQuery", false);
 
     if (!mongo) {
         console.warn("[WARN] A Mongo URI/URL isn't provided! (Not required)");
@@ -18,15 +19,17 @@ module.exports = (client) => {
             })
             .then(() =>
                 console.log(
-                    `
+                    superDjs.colourText(
+                        `
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║       Conectado a la base de datos MONGODB!         ║
 ║                                                     ║
-╚═════════════════════════════════════════════════════╝`.green
+╚═════════════════════════════════════════════════════╝`,
+                        "green"
+                    )
                 )
             )
-
             .catch((err) => console.log(err));
     }
 };
