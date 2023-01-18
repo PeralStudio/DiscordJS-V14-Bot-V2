@@ -2,6 +2,7 @@ const { Client, Partials, Collection, GatewayIntentBits, ActivityType } = requir
 const config = require("./config/config");
 require("dotenv").config();
 const colors = require("colors");
+const superDjs = require("super-djs");
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
 const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
 const setIntervalTwitch = require("./functions/setIntervalTwitch");
@@ -85,7 +86,7 @@ const pickPresence = async () => {
             status: statusArray[option].status,
         });
     } catch (error) {
-        console.log(error);
+        console.log(superDjs.colourText(error), "red");
     }
 };
 
@@ -116,8 +117,10 @@ require("http")
 const AuthenticationToken = process.env.TOKEN_DISCORD || config.Client.TOKEN;
 if (!AuthenticationToken) {
     console.warn(
-        "[CRASH] Authentication Token for Discord bot is required! Use Envrionment Secrets or config.js."
-            .red
+        superDjs.colourText(
+            "[CRASH] Authentication Token for Discord bot is required! Use Envrionment Secrets or config.js.",
+            "red"
+        )
     );
     return process.exit();
 }
@@ -138,13 +141,15 @@ module.exports = client;
 
 // Login to the bot:
 client.login(AuthenticationToken).catch((err) => {
-    console.error("[CRASH] Something went wrong while connecting to your bot...");
-    console.error("[CRASH] Error from Discord API:" + err);
+    console.error(
+        superDjs.colourText("[CRASH] Something went wrong while connecting to your bot...", "red")
+    );
+    console.error(superDjs.colourText("[CRASH] Error from Discord API:", "red" + err));
     return process.exit();
 });
 
 // Handle errors:
 process.on("unhandledRejection", async (err, promise) => {
-    console.error(`[ANTI-CRASH] Unhandled Rejection: ${err}`.red);
+    console.log(superDjs.colourText(`[ANTI-CRASH] Unhandled Rejection: ${err}`, "red"));
     console.error(promise);
 });

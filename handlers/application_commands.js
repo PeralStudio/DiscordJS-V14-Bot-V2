@@ -141,7 +141,7 @@ module.exports = (client, config) => {
         console.log(
             superDjs.colourText(
                 "[HANDLER] Started registering all the application commands.",
-                "tomato"
+                "green"
             )
         );
 

@@ -11,9 +11,14 @@ module.exports = (client, config) => {
         let pull = require(`../modals/${file}`);
         if (pull.id) {
             client.modals.set(pull.id, pull);
-            console.log(`[HANDLER - MODALS] Loaded a file: ${file}`.brightGreen);
+            console.log(superDjs.colourText(`[HANDLER - MODALS] Loaded a file: ${file}`, "green"));
         } else {
-            console.log(`[HANDLER - MODALS] Couldn't load the file ${file}. Missing modal ID.`.red);
+            console.log(
+                superDjs.colourText(
+                    `[HANDLER - MODALS] Couldn't load the file ${file}. Missing modal ID.`,
+                    "red"
+                )
+            );
             continue;
         }
     }
