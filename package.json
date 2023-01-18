@@ -31,7 +31,7 @@
     "mathjs": "^11.5.0",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^6.5.2",
+    "mongoose": "^6.8.4",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.7",
     "node-google-translate-skidz": "^1.1.2",
