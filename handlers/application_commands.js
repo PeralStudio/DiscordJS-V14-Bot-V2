@@ -11,7 +11,7 @@ module.exports = (client, config) => {
 
     // Slash commands handler:
     fs.readdirSync("./commands/slash/").forEach((dir) => {
-        console.log("[!] Started loading slash commands...".yellow);
+        console.log(superDjs.colourText("[!] Started loading slash commands...", "yellow"));
         const SlashCommands = fs
             .readdirSync(`./commands/slash/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -22,8 +22,10 @@ module.exports = (client, config) => {
             if ((pull.name, pull.description, pull.type == 1)) {
                 client.slash_commands.set(pull.name, pull);
                 console.log(
-                    `[HANDLER - SLASH] Loaded a file: ${pull.name} (#${client.slash_commands.size})`
-                        .brightGreen
+                    superDjs.colourText(
+                        `[HANDLER - SLASH] Loaded a file: ${pull.name} (#${client.slash_commands.size})`,
+                        "green"
+                    )
                 );
 
                 commands.push({
@@ -42,8 +44,10 @@ module.exports = (client, config) => {
                 });
             } else {
                 console.log(
-                    `[HANDLER - SLASH] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`
-                        .red
+                    superDjs.colourText(
+                        `[HANDLER - SLASH] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`,
+                        "red"
+                    )
                 );
                 continue;
             }
@@ -52,7 +56,7 @@ module.exports = (client, config) => {
 
     // User commands handler:
     fs.readdirSync("./commands/user/").forEach((dir) => {
-        console.log("[!] Started loading user commands...".yellow);
+        console.log(superDjs.colourText("[!] Started loading user commands...", "yellow"));
         const UserCommands = fs
             .readdirSync(`./commands/user/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -63,8 +67,10 @@ module.exports = (client, config) => {
             if ((pull.name, pull.type == 2)) {
                 client.user_commands.set(pull.name, pull);
                 console.log(
-                    `[HANDLER - USER] Loaded a file: ${pull.name} (#${client.user_commands.size})`
-                        .brightGreen
+                    superDjs.colourText(
+                        `[HANDLER - USER] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
+                        "green"
+                    )
                 );
 
                 commands.push({
@@ -73,8 +79,10 @@ module.exports = (client, config) => {
                 });
             } else {
                 console.log(
-                    `[HANDLER - USER] Couldn't load the file ${file}, missing module name value or type isn't 2.`
-                        .red
+                    superDjs.colourText(
+                        `[HANDLER - USER] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
+                        "red"
+                    )
                 );
                 continue;
             }
@@ -83,7 +91,7 @@ module.exports = (client, config) => {
 
     // Message commands handler:
     fs.readdirSync("./commands/message/").forEach((dir) => {
-        console.log("[!] Started loading message commands...".yellow);
+        console.log(superDjs.colourText("[!] Started loading message commands...", "yellow"));
         const UserCommands = fs
             .readdirSync(`./commands/message/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -94,8 +102,10 @@ module.exports = (client, config) => {
             if ((pull.name, pull.type == 3)) {
                 client.message_commands.set(pull.name, pull);
                 console.log(
-                    `[HANDLER - MESSAGE] Loaded a file: ${pull.name} (#${client.user_commands.size})`
-                        .brightGreen
+                    superDjs.colourText(
+                        `[HANDLER - MESSAGE] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
+                        "green"
+                    )
                 );
 
                 commands.push({
@@ -104,8 +114,10 @@ module.exports = (client, config) => {
                 });
             } else {
                 console.log(
-                    `[HANDLER - MESSAGE] Couldn't load the file ${file}, missing module name value or type isn't 2.`
-                        .red
+                    superDjs.colourText(
+                        `[HANDLER - MESSAGE] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
+                        "red"
+                    )
                 );
                 continue;
             }
@@ -114,20 +126,33 @@ module.exports = (client, config) => {
 
     // Registering all the application commands:
     if (!config.Client.ID) {
-        console.log("[CRASH] You need to provide your bot ID in config.js!".red + "\n");
+        console.log(
+            superDjs.colourText(
+                "[CRASH] You need to provide your bot ID in config.js!",
+                "red" + "\n"
+            )
+        );
         return process.exit();
     }
 
     const rest = new REST({ version: "10" }).setToken(config.Client.TOKEN || process.env.TOKEN);
 
     (async () => {
-        console.log("[HANDLER] Started registering all the application commands.".yellow);
+        console.log(
+            superDjs.colourText(
+                "[HANDLER] Started registering all the application commands.",
+                "tomato"
+            )
+        );
 
         try {
             await rest.put(Routes.applicationCommands(config.Client.ID), { body: commands });
 
             console.log(
-                "[HANDLER] Successfully registered all the application commands.".brightGreen
+                superDjs.colourText(
+                    "[HANDLER] Successfully registered all the application commands.",
+                    "green"
+                )
             );
         } catch (err) {
             console.log(err);
