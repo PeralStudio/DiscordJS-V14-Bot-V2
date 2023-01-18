@@ -1,5 +1,6 @@
 const ytch = require("yt-channel-info");
 const dotenv = require("dotenv");
+const superDjs = require("super-djs");
 const youtube = require("../schemas/youtubeSchema");
 const deleteOldMsg = require("./deleteOldMsg.js");
 const checkRepeatMsgs = require("./checkRepeatMsgs.js");
@@ -28,9 +29,12 @@ const setIntervalYoutube = async (client, userId) => {
             });
 
         console.log(
-            `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid",
-            })})`
+            superDjs.colourText(
+                `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
+                    timeZone: "Europe/Madrid",
+                })})`,
+                "blue"
+            )
         );
 
         if (ultimoVideo === undefined) return;

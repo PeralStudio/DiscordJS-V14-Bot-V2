@@ -1,3 +1,4 @@
+const superDjs = require("super-djs");
 const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -65,14 +66,17 @@ const deleteOldMsg = (client, channelID) => {
                         }
 
                         console.log(
-                            `${
-                                oldMessages.size
-                            } ${text1} ${text2} ${text3} del canal: ${channelName} (${new Date().toLocaleTimeString(
-                                "es-ES",
-                                {
-                                    timeZone: "Europe/Madrid",
-                                }
-                            )})`
+                            superDjs.colourText(
+                                `${
+                                    oldMessages.size
+                                } ${text1} ${text2} ${text3} del canal: ${channelName} (${new Date().toLocaleTimeString(
+                                    "es-ES",
+                                    {
+                                        timeZone: "Europe/Madrid",
+                                    }
+                                )})`,
+                                "yellow"
+                            )
                         );
 
                         if (channelID === ELRELLANO_CHANNEL_ID) {

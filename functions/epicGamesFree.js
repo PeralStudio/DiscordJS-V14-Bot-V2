@@ -2,6 +2,7 @@ const { IntentsBitField, Client, GatewayIntentBits, EmbedBuilder } = require("di
 const { getGames } = require("epic-free-games");
 const cron = require("node-cron");
 const dayjs = require("dayjs");
+const superDjs = require("super-djs");
 const deleteOldMsg = require("./deleteOldMsg");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -31,12 +32,15 @@ const epicGamesFree = async (client) => {
             deleteOldMsg(clientDC, EPICGAMES_CHANNEL_ID);
 
             console.log(
-                `(Es jueves (18:30) Envia embeds al canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
-                    "es-ES",
-                    {
-                        timeZone: "Europe/Madrid",
-                    }
-                )})`
+                superDjs.colourText(
+                    `(Es jueves (18:30) Envia embeds al canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
+                        "es-ES",
+                        {
+                            timeZone: "Europe/Madrid",
+                        }
+                    )})`,
+                    "green"
+                )
             );
 
             getGames("ES", true)

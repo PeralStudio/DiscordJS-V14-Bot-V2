@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const nodeSuperFetch = require("node-superfetch");
+const superDjs = require("super-djs");
 const twitch = require("../schemas/twitchSchema");
 const deleteOldMsg = require("./deleteOldMsg");
 const checkRepeatMsgs = require("./checkRepeatMsgs");
@@ -23,9 +24,12 @@ const setIntervalTwitch = async (client, user) => {
         await checkRepeatMsgs(client, TWITCH_CHANNEL_ID);
 
         console.log(
-            `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid",
-            })})`
+            superDjs.colourText(
+                `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
+                    timeZone: "Europe/Madrid",
+                })})`,
+                "blue"
+            )
         );
 
         const httpHeaders = {

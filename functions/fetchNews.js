@@ -2,6 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const deleteOldMsg = require("./deleteOldMsg");
 const axios = require("axios");
 const cron = require("node-cron");
+const superDjs = require("super-djs");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -66,12 +67,15 @@ const fetchNews = async (client, user) => {
                 await client.channels.cache.get(NOTICIAS_CHANNEL_ID).send({ embeds: [embed] });
 
                 console.log(
-                    `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
-                        "es-ES",
-                        {
-                            timeZone: "Europe/Madrid",
-                        }
-                    )}`
+                    superDjs.colourText(
+                        `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
+                            "es-ES",
+                            {
+                                timeZone: "Europe/Madrid",
+                            }
+                        )}`,
+                        "green"
+                    )
                 );
             });
         },

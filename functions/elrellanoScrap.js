@@ -1,5 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cherio");
+const superDjs = require("super-djs");
 const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 const deleteOldMsg = require("./deleteOldMsg.js");
@@ -14,12 +15,15 @@ const elrellanoScrap = async (client) => {
         deleteOldMsg(client, ELRELLANO_CHANNEL_ID);
 
         console.log(
-            `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
-                "es-ES",
-                {
-                    timeZone: "Europe/Madrid",
-                }
-            )}`
+            superDjs.colourText(
+                `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
+                    "es-ES",
+                    {
+                        timeZone: "Europe/Madrid",
+                    }
+                )}`,
+                "blue"
+            )
         );
 
         // try {
@@ -157,12 +161,15 @@ const elrellanoScrap = async (client) => {
                         await newData.save();
 
                         console.log(
-                            `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
-                                "es-ES",
-                                {
-                                    timeZone: "Europe/Madrid",
-                                }
-                            )}`
+                            superDjs.colourText(
+                                `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
+                                    "es-ES",
+                                    {
+                                        timeZone: "Europe/Madrid",
+                                    }
+                                )}`,
+                                "green"
+                            )
                         );
                     }
                 }
