@@ -1,0 +1,46 @@
+{
+  "author": "Joshua Goralczyk",
+  "version": "6.0.8",
+  "main": "./dist/src/index.js",
+  "types": "typings/src/index.d.ts",
+  "license": "MIT",
+  "name": "aki-api",
+  "bugs": {
+    "url": "https://github.com/jgoralcz/aki-api/issues"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "https-proxy-agent": "^5.0.0"
+  },
+  "description": "An API for Akinator. Supports up to 15 languages.",
+  "homepage": "https://github.com/jgoralcz/aki-api#readme",
+  "keywords": [
+    "aki",
+    "akinator",
+    "magic",
+    "aki promise",
+    "akinator promise",
+    "discord akinator",
+    "discord-akinator",
+    "discordjs akinator",
+    "discordjs-akinator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgoralcz/aki-api.git"
+  },
+  "scripts": {
+    "start": "npx ts-node src/",
+    "eslint": "eslint . --ext .ts",
+    "build": "tsc",
+    "test": "npx ts-node tests/"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "eslint": "^7.30.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
