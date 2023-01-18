@@ -2,6 +2,7 @@ const config = require("../config/config.js");
 require("dotenv").config();
 const colors = require("colors");
 const superDjs = require("super-djs");
+const mongoose = require("mongoose");
 
 module.exports = (client) => {
     console.log(superDjs.colourText("[DATABASE] Connecting to MongoDB...", "yellow"));
@@ -10,17 +11,22 @@ module.exports = (client) => {
     if (!mongo) {
         console.warn("[WARN] A Mongo URI/URL isn't provided! (Not required)");
     } else {
-        superDjs.connectMongoDB(
-            mongo,
-            true,
-            console.log(
-                `
+        mongoose
+            .connect(mongo, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+            .then(() =>
+                console.log(
+                    `
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║       Conectado a la base de datos MONGODB!         ║
 ║                                                     ║
-╚═════════════════════════════════════════════════════╝`.rainbow
+╚═════════════════════════════════════════════════════╝`.green
+                )
             )
-        );
+
+            .catch((err) => console.log(err));
     }
 };
