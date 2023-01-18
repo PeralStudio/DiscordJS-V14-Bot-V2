@@ -1,6 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cherio");
-const elrellano = require("../Schemas/elrellanoSchema.js");
+const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 const deleteOldMsg = require("./deleteOldMsg.js");
 dotenv.config();

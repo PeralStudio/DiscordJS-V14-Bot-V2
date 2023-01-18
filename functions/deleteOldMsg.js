@@ -1,4 +1,4 @@
-const elrellano = require("../Schemas/elrellanoSchema.js");
+const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 dotenv.config();
 
