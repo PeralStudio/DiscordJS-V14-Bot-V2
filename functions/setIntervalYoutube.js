@@ -1,6 +1,6 @@
 const ytch = require("yt-channel-info");
 const dotenv = require("dotenv");
-const youtube = require("../Schemas/youtubeSchema.js");
+const youtube = require("../schemas/youtubeSchema");
 const deleteOldMsg = require("./deleteOldMsg.js");
 const checkRepeatMsgs = require("./checkRepeatMsgs.js");
 dotenv.config();
