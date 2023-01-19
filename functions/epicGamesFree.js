@@ -78,7 +78,7 @@ const epicGamesFree = async (client) => {
                             `${
                                 res?.currentGames[0]?.description
                             }\n\nhttps://store.epicgames.com/es-ES/p/${
-                                res.currentGames[0].urlSlug.includes("-")
+                                res.currentGames[0]?.urlSlug.includes("-")
                                     ? res?.currentGames[0]?.urlSlug
                                     : res?.currentGames[0]?.offerMappings[0]?.pageSlug
                             }`
@@ -162,7 +162,7 @@ const epicGamesFree = async (client) => {
                             `${
                                 res?.currentGames[2]?.description
                             }\n\nhttps://store.epicgames.com/es-ES/p/${
-                                res.currentGames[2].urlSlug.includes("-")
+                                res.currentGames[2]?.urlSlug.includes("-")
                                     ? res?.currentGames[2]?.urlSlug
                                     : res?.currentGames[2]?.offerMappings[2]?.pageSlug
                             }`
@@ -203,7 +203,7 @@ const epicGamesFree = async (client) => {
                         )
                         .setDescription(
                             `${
-                                res.nextGames[0].description
+                                res.nextGames[0]?.description
                             }\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res?.nextGames[0]?.urlSlug.includes("-")
                                     ? res?.nextGames[0]?.urlSlug
