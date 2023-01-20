@@ -165,3 +165,5 @@ process.on("unhandledRejection", async (err, promise) => {
     console.log(superDjs.colourText(`[ANTI-CRASH] Unhandled Rejection: ${err}`, "red"));
     console.error(promise);
 });
+
+require(`./handlers/antiCrash`)(client);
