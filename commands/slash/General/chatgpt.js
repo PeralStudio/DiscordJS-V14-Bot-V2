@@ -1,4 +1,3 @@
-const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const axios = require("axios");
 
@@ -19,10 +18,6 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         const texto = interaction.options.get("texto").value;
-        let textToSend;
-        const filter = (response) => {
-            return response.content.toLowerCase() === "cuanto es 2+3?";
-        };
 
         const options = {
             method: "POST",
@@ -42,7 +37,6 @@ module.exports = {
 
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
         const result = await getData();
-        // await interaction.deleteReply();
         await interaction.editReply({ content: result, ephemeral: true });
     },
 };
