@@ -8,6 +8,7 @@ const {
 } = require("discord.js");
 const config = require("./config/config");
 require("dotenv").config();
+
 const colors = require("colors");
 const superDjs = require("super-djs");
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
