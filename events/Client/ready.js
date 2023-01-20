@@ -13,9 +13,9 @@ client.once("ready", async () => {
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║     Bot conectado como ${client.user.tag}!            ║
-║     (${new Date().toLocaleTimeString("es-ES", {
+║                    (${new Date().toLocaleTimeString("es-ES", {
                 timeZone: "Europe/Madrid",
-            })})                                      ║
+            })})                       ║
 ║                                                     ║
 ╚═════════════════════════════════════════════════════╝`,
             "green"
