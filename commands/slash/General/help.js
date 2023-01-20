@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+const { pagination, TypesButtons, StylesButton } = require("@devraelfreeze/discordjs-pagination");
 require("dotenv").config();
 
 module.exports = {
@@ -55,11 +56,11 @@ module.exports = {
                     value: "`Cartelera de cine.`",
                     inline: true,
                 },
-                // {
-                //     name: `*${process.env.PREFIX}encuesta*`
-                //     value: "`Crear una encuesta.`",
-                //     inline: true,
-                // },
+                {
+                    name: `*${process.env.PREFIX}chatgpt + texto*`,
+                    value: "`Consulta a Chat GPT-3`",
+                    inline: true,
+                },
                 {
                     name: `*${process.env.PREFIX}google*`,
                     value: "`Búsqueda google`",
@@ -86,10 +87,22 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}arder + @usuario*`,
-                    value: "`Ardiendo en pasión.`",
+                    name: `*${process.env.PREFIX}encuesta*`,
+                    value: "`Crear encuesta.`",
                     inline: true,
-                },
+                }
+            )
+            .setTimestamp()
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL(),
+            });
+
+        const embed1 = new EmbedBuilder()
+            .setColor("#C28F2C")
+            // .setThumbnail(client.user.displayAvatarURL())
+            .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
+            .addFields(
                 {
                     name: `*${process.env.PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
@@ -106,6 +119,11 @@ module.exports = {
                     inline: true,
                 },
                 {
+                    name: `*${process.env.PREFIX}arder + @usuario*`,
+                    value: "`Ardiendo en pasión.`",
+                    inline: true,
+                },
+                {
                     name: `*${process.env.PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
                     inline: true,
@@ -115,11 +133,11 @@ module.exports = {
                     value: "`Texto a voz.`",
                     inline: true,
                 },
-                // {
-                //     name: `*${process.env.PREFIX}serverinfo*`,
-                //     value: "`Información del servidor.`",
-                //     inline: true,
-                // },
+                {
+                    name: `*${process.env.PREFIX}serverinfo*`,
+                    value: "`Información del servidor.`",
+                    inline: true,
+                },
                 {
                     name: `*${process.env.PREFIX}traducir + texto*`,
                     value: "`Traducir texto a Ingles.`",
@@ -157,6 +175,36 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL(),
             });
 
-        await interaction.reply({ embeds: [embed] });
+        // await interaction.reply({ embeds: [embed] });
+
+        const embeds = [embed, embed1];
+
+        await pagination({
+            interaction: interaction,
+            embeds: embeds, // Array of embeds objects
+            author: interaction.member.user,
+            time: 120000, // miliseconds for timeout
+            fastSkip: false,
+            disableButtons: true,
+            pageTravel: false,
+            /** Enable buttons pagination system only for member with ID: 123456789 */
+            // customFilter: (interaction) => {
+            //     return interaction.member.user.id === "123456789";
+            // },
+            buttons: [
+                {
+                    value: TypesButtons.previous,
+                    label: "⬅️ Anterior",
+                    style: StylesButton.Success,
+                    emoji: null,
+                },
+                {
+                    value: TypesButtons.next,
+                    label: "Siguiente ➡️",
+                    style: StylesButton.Success,
+                    emoji: null,
+                },
+            ],
+        });
     },
 };
