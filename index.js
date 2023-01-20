@@ -162,7 +162,7 @@ client.login(AuthenticationToken).catch((err) => {
 
 // Handle errors:
 process.on("unhandledRejection", async (err, promise) => {
-    console.log(superDjs.colourText(`[ANTI-CRASH] Unhandled Rejection: ${err}`, "red"));
+    console.log(superDjs.colourText(`[ANTI-CRASH] Unhandled Rejection:  ${err}`, "red"));
     console.error(promise);
 });
 
