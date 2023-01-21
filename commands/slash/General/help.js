@@ -42,8 +42,13 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}meme*`,
-                    value: "`Meme random reddit.`",
+                    name: `*${process.env.PREFIX}fakeyou + personaje*`,
+                    value: "`Tts con voces de personajes.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}chatgpt + texto*`,
+                    value: "`Consulta a Chat GPT-3.`",
                     inline: true,
                 },
                 {
@@ -57,8 +62,8 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}chatgpt + texto*`,
-                    value: "`Consulta a Chat GPT-3`",
+                    name: `*${process.env.PREFIX}meme*`,
+                    value: "`Meme random reddit.`",
                     inline: true,
                 },
                 {
@@ -69,11 +74,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}yt + texto*`,
                     value: "`Buscar video youtube.`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
-                    value: "`Playlist de youtube.`",
                     inline: true,
                 },
                 {
@@ -106,6 +106,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
+                    value: "`Playlist de youtube.`",
                     inline: true,
                 },
                 {
