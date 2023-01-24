@@ -1,5 +1,6 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 const { inspect } = require("util");
+const deleteOldMsg = require("../functions/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
@@ -12,6 +13,7 @@ module.exports = (client) => {
     const embed = new EmbedBuilder().setColor("Red");
 
     client.on("error", (err) => {
+        deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         console.log(err);
 
         embed
@@ -28,6 +30,7 @@ module.exports = (client) => {
     });
 
     process.on("unhandledRejection", (reason, promise) => {
+        deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         console.log(reason, "\n", promise);
 
         embed
@@ -53,6 +56,7 @@ module.exports = (client) => {
     });
 
     process.on("uncaughtException", (err, origin) => {
+        deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         console.log(err, "\n", origin);
 
         embed
@@ -78,6 +82,7 @@ module.exports = (client) => {
     });
 
     process.on("uncaughtExceptionMonitor", (err, origin) => {
+        deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         console.log(err, "\n", origin);
 
         embed
@@ -103,6 +108,7 @@ module.exports = (client) => {
     });
 
     process.on("warning", (warn) => {
+        deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         console.log(warn);
 
         embed

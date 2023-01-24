@@ -9,6 +9,7 @@ const {
     TWITCH_CHANNEL_ID,
     EPICGAMES_CHANNEL_ID,
     NOTICIAS_CHANNEL_ID,
+    ERRORES_BOT_CHANNEL,
 } = process.env;
 
 const deleteOldMsg = (client, channelID) => {
@@ -35,6 +36,10 @@ const deleteOldMsg = (client, channelID) => {
         case NOTICIAS_CHANNEL_ID:
             channelName = "📰-noticias";
             time = 720 * 60 * 1000;
+            break;
+        case ERRORES_BOT_CHANNEL:
+            channelName = "❌errores-bot🤖";
+            time = 360 * 60 * 1000;
             break;
     }
 
