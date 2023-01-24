@@ -67,4 +67,16 @@ module.exports = [
         name: "doraemon",
         value: "TM:9b7sezbhr15d",
     },
+    {
+        name: "marianorajoy",
+        value: "TM:yd6fp1bbdq92",
+    },
+    {
+        name: "shinshan",
+        value: "TM:kz5y4hrk6h5n",
+    },
+    {
+        name: "glados",
+        value: "TM:60tmfnpahvbx",
+    },
 ];
