@@ -5,10 +5,12 @@ const {
     GatewayIntentBits,
     ActivityType,
     IntentsBitField,
+    EmbedBuilder,
 } = require("discord.js");
 const config = require("./config/config");
 require("dotenv").config();
 
+const { Player } = require("discord-player");
 const colors = require("colors");
 const superDjs = require("super-djs");
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
@@ -145,6 +147,13 @@ client.user_commands = new Collection();
 client.message_commands = new Collection();
 client.modals = new Collection();
 client.events = new Collection();
+client.player = new Player(client, {
+    ytdlOptions: {
+        quality: "highestaudio",
+        highWaterMark: 1 << 25,
+    },
+});
+client.queueToList = [];
 
 module.exports = client;
 
