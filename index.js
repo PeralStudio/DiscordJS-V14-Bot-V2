@@ -6,9 +6,9 @@ const {
     ActivityType,
     IntentsBitField,
 } = require("discord.js");
+
 const config = require("./config/config");
 require("dotenv").config();
-
 const { Player } = require("discord-player");
 const superDjs = require("super-djs");
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
