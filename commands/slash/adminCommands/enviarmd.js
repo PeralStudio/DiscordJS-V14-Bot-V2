@@ -18,6 +18,11 @@ module.exports = {
             description: "Mensaje a enviar.",
             required: true,
         },
+        {
+            type: 11,
+            name: "archivo",
+            description: "Adjuntar archivo (opcional).",
+        },
     ],
     permissions: {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
@@ -41,12 +46,27 @@ module.exports = {
         }
         const textToSend = interaction.options.get("mensaje").value;
         const userToSend = interaction.options.get("usuario").value;
+        const attchToSend = interaction.options.get("archivo")?.attachment?.attachment;
 
         //send md to user
         client.users
             .fetch(userToSend)
             .then((user) => {
-                user.send(textToSend);
+                user.send({ content: textToSend, files: attchToSend && [attchToSend] });
+
+                interaction.reply({
+                    ephemeral: false,
+                    embeds: [
+                        new EmbedBuilder()
+                            .setDescription(
+                                `✅  Mensaje enviado correctamente a **${
+                                    client.users.cache.get(userToSend).username
+                                }#${client.users.cache.get(userToSend).discriminator}** .`
+                            )
+                            .setColor("#EA3939"),
+                    ],
+                });
+                setTimeout(() => interaction.deleteReply(), 3000);
             })
             .catch((err) => {
                 interaction.reply({
@@ -58,19 +78,5 @@ module.exports = {
                     ],
                 });
             });
-
-        interaction.reply({
-            ephemeral: false,
-            embeds: [
-                new EmbedBuilder()
-                    .setDescription(
-                        `✅  Mensaje enviado correctamente a **${
-                            client.users.cache.get(userToSend).username
-                        }#${client.users.cache.get(userToSend).discriminator}** .`
-                    )
-                    .setColor("#EA3939"),
-            ],
-        });
-        setTimeout(() => interaction.deleteReply(), 3000);
     },
 };
