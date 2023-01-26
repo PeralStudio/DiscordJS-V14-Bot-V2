@@ -172,6 +172,16 @@ module.exports = {
                     name: `*${process.env.PREFIX}email*`,
                     value: "`Enviar email. (Admin)`",
                     inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}crear-canal*`,
+                    value: "`Crear canal. (Admin)`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}borrar-canal*`,
+                    value: "`Borrar canal. (Admin)`",
+                    inline: true,
                 }
             )
             .setTimestamp()
