@@ -11,8 +11,8 @@ module.exports = {
 };
 
 client.on("messageCreate", async (message) => {
-    const guildID = message.guild.id;
-    const userID = message.author.id;
+    const guildID = message.guild?.id;
+    const userID = message.author?.id;
 
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
