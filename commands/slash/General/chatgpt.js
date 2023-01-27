@@ -24,7 +24,7 @@ module.exports = {
             url: "https://you-chat-gpt.p.rapidapi.com/",
             headers: {
                 "content-type": "application/json",
-                "X-RapidAPI-Key": process.env.CHATGPT_RAPIDAPI,
+                "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
                 "X-RapidAPI-Host": "you-chat-gpt.p.rapidapi.com",
             },
             data: { question: texto, max_response_time: 15 },
