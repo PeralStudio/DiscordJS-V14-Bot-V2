@@ -1,6 +1,6 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 const { inspect } = require("util");
-const deleteOldMsg = require("../functions/deleteOldMsg");
+const deleteOldMsg = require("../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({

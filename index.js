@@ -13,11 +13,11 @@ const { Player } = require("discord-player");
 const superDjs = require("super-djs");
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
 const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
-const setIntervalTwitch = require("./functions/setIntervalTwitch");
-const setIntervalYoutube = require("./functions/setIntervalYoutube");
-const fetchNews = require("./functions/fetchNews");
-const epicGamesFree = require("./functions/epicGamesFree");
-const elrellanoScrap = require("./functions/elrellanoScrap");
+const setIntervalTwitch = require("./services/setIntervalTwitch");
+const setIntervalYoutube = require("./services/setIntervalYoutube");
+const fetchNews = require("./services/fetchNews");
+const epicGamesFree = require("./services/epicGamesFree");
+const elrellanoScrap = require("./services/elrellanoScrap");
 
 // Creating a new client:
 const client = new Client({
