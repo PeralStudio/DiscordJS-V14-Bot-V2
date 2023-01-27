@@ -9,4 +9,7 @@ module.exports = [
     "kxmi",
     "kerios",
     "adertyh",
+    "cabravoladora",
+    "midudev",
+    "nategentile7",
 ];
