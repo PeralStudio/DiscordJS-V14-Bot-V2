@@ -26,6 +26,12 @@ module.exports = {
                     value: "`Información Invocador.`",
                     inline: true,
                 },
+                //!todo Activar cuando funcione la api
+                // {
+                //     name: `*${process.env.PREFIX}lol-tierlist*`,
+                //     value: "`Tierlist Campeones.`",
+                //     inline: true,
+                // }
                 {
                     name: `*${process.env.PREFIX}lolparche*`,
                     value: "`Notas parche Lol`",
@@ -89,6 +95,16 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}encuesta*`,
                     value: "`Crear encuesta.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}nivel + @usuario*`,
+                    value: "`Ver tu nivel.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}actividad*`,
+                    value: "`Iniciar una actividad.`",
                     inline: true,
                 }
             )
