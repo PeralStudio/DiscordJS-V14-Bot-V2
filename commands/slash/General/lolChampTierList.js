@@ -87,7 +87,7 @@ module.exports = {
             url: "https://league-of-legends-galore.p.rapidapi.com/api/getChampTierList",
             params: { tier: "s+", region: selectedRegion, rank: selectedRank },
             headers: {
-                "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+                "X-RapidAPI-Key": process.env.RAPIDAPI_SECUNDARY_KEY,
                 "X-RapidAPI-Host": "league-of-legends-galore.p.rapidapi.com",
             },
         };
