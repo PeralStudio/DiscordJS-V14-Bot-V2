@@ -26,12 +26,11 @@ module.exports = {
                     value: "`Información Invocador.`",
                     inline: true,
                 },
-                //!todo Activar cuando funcione la api
-                // {
-                //     name: `*${process.env.PREFIX}lol-tierlist*`,
-                //     value: "`Tierlist Campeones.`",
-                //     inline: true,
-                // }
+                {
+                    name: `*${process.env.PREFIX}lol-tierlist*`,
+                    value: "`Tierlist Campeones.`",
+                    inline: true,
+                },
                 {
                     name: `*${process.env.PREFIX}lolparche*`,
                     value: "`Notas parche Lol`",
