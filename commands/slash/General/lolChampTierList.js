@@ -92,10 +92,12 @@ module.exports = {
             },
         };
 
+        let embed;
+
         await axios
             .request(options)
             .then(function (response) {
-                const embed = new EmbedBuilder()
+                embed = new EmbedBuilder()
                     .setTitle(`Campeones tier S+ (${division})`)
                     .addFields(
                         {
@@ -136,11 +138,11 @@ module.exports = {
                         text: process.env.NAME_BOT,
                         iconURL: client?.user.displayAvatarURL(),
                     });
-
-                interaction.reply({ embeds: [embed], ephemeral: true });
             })
             .catch(function (error) {
                 console.error("error", error);
             });
+
+        interaction.reply({ embeds: [embed], ephemeral: true });
     },
 };
