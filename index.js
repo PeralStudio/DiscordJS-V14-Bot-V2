@@ -6,11 +6,11 @@ const {
     ActivityType,
     IntentsBitField,
 } = require("discord.js");
-
 const config = require("./config/config");
 require("dotenv").config();
 const { Player } = require("discord-player");
 const superDjs = require("super-djs");
+
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
 const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
 const setIntervalTwitch = require("./services/setIntervalTwitch");
@@ -105,9 +105,12 @@ const pickPresence = async () => {
 
 setInterval(pickPresence, 60 * 1000);
 
+//function interval Twitch for show new Streams of a user
 for (const user of usersToAlertTwitch) {
     setIntervalTwitch(client, user);
 }
+
+//function interval Youtube for show new videos of a user
 for (const user of usersToAlertYoutube) {
     setIntervalYoutube(client, user);
 }
