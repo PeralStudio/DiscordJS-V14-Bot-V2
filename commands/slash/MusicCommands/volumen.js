@@ -19,6 +19,8 @@ module.exports = {
     run: async (client, interaction, config) => {
         const queue = client.player.getQueue(interaction.guild);
         const volume = interaction.options.get("volumen").value;
+        const volumeNunmber = parseInt(volume);
+        const iconVolume = volumeNunmber < 50 ? "🔉" : "🔊";
 
         if (!queue)
             return await interaction.reply({
@@ -40,7 +42,7 @@ module.exports = {
         return await interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setTitle(`🔉 Volumen: ${volume}%`)
+                    .setTitle(`${iconVolume} Volumen: ${volume}%`)
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
