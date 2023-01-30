@@ -32,6 +32,7 @@
     "fakeyou-api": "^1.0.0",
     "ffmpeg-static": "^5.1.0",
     "figlet": "^1.5.2",
+    "format-duration": "^3.0.2",
     "googlethis": "^1.7.0",
     "mathjs": "^11.5.0",
     "moment": "^2.29.4",
