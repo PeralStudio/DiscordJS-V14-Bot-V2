@@ -21,7 +21,7 @@ module.exports = {
 
         const options = {
             method: "POST",
-            url: "https://you-chat-gpt.p.rapidapi.com/",
+            url: "https://you-chat-gpt.p.rapidapi.com/TextOnly",
             headers: {
                 "content-type": "application/json",
                 "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
