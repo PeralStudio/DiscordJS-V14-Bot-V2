@@ -119,6 +119,11 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
+                    name: `*${process.env.PREFIX}github + @usuario*`,
+                    value: "`Github de un usuario.`",
+                    inline: true,
+                },
+                {
                     name: `*${process.env.PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
                     inline: true,
