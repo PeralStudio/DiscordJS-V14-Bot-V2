@@ -1,13 +1,14 @@
+const { EmbedBuilder } = require("discord.js");
 const SoundBoard = require("djs-soundboard");
 
 module.exports = {
-    name: "audio",
-    description: "Ardiendo en pasión.",
+    name: "sonidos",
+    description: "Efectos de Sonido.",
     type: 1,
     options: [
         {
             type: 3,
-            name: "audio",
+            name: "audios",
             description: "Audios disponibles",
             required: true,
             choices: [
@@ -33,7 +34,48 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
-        const selectedSound = interaction.options.get("audio").value;
+        const selectedSound = interaction.options.get("audios").value;
+
+        if (!interaction.member.voice.channelId) {
+            await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`¡No estás en un canal de voz!`)
+                        .setColor("#EA3939")
+                        .setTimestamp()
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+                ephemeral: true,
+            });
+
+            setTimeout(() => interaction.deleteReply(), 4000);
+            return;
+        }
+
+        if (
+            interaction.guild.members.me.voice.channelId &&
+            interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId
+        ) {
+            await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`¡No estás en mi canal de voz!`)
+                        .setColor("#EA3939")
+                        .setTimestamp()
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+                ephemeral: true,
+            });
+
+            setTimeout(() => interaction.deleteReply(), 4000);
+            return;
+        }
 
         let sound = new SoundBoard();
         let channel = interaction.member.voice.channel;
@@ -43,6 +85,6 @@ module.exports = {
             .reply({ content: `✅ Audio ${selectedSound} enviado correctamente`, ephemeral: true })
             .catch((e) => console.error);
 
-        setTimeout(() => interaction.deleteReply(), 3000);
+        setTimeout(() => interaction.deleteReply(), 4000);
     },
 };
