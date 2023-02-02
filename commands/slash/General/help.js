@@ -212,6 +212,16 @@ module.exports = {
                     name: `*${process.env.PREFIX}borrar-canal*`,
                     value: "`Borrar canal. (Admin)`",
                     inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}crear-backup*`,
+                    value: "`Crear Backup. (Admin)`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}info-backup*`,
+                    value: "`Info Backup. (Admin)`",
+                    inline: true,
                 }
             )
             .setTimestamp()
