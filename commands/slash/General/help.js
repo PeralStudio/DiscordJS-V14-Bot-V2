@@ -107,8 +107,18 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}elrellano + página*`,
-                    value: "`Vídeos elrellano.`",
+                    name: `*${process.env.PREFIX}qr*`,
+                    value: "`Crear codigo QR.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}tweet*`,
+                    value: "`Crear Tweet.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}playstore + texto*`,
+                    value: "`Buscar App.`",
                     inline: true,
                 },
                 {
@@ -119,6 +129,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}elrellano + página*`,
+                    value: "`Vídeos elrellano.`",
                     inline: true,
                 }
             )
@@ -133,6 +148,11 @@ module.exports = {
             // .setThumbnail(client.user.displayAvatarURL())
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
+                {
+                    name: `*${process.env.PREFIX}texto-doble + texto*`,
+                    value: "`Crear texto doble.`",
+                    inline: true,
+                },
                 {
                     name: `*${process.env.PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
