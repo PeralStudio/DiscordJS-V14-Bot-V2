@@ -35,8 +35,6 @@ module.exports = {
                 });
             }
 
-            console.log(app);
-
             let embed = new EmbedBuilder()
                 .setColor("#4384F4")
                 .setThumbnail(app.icon)
