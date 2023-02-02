@@ -57,8 +57,8 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}elrellano + página*`,
-                    value: "`Vídeos elrellano.`",
+                    name: `*${process.env.PREFIX}sonidos*`,
+                    value: "`Efectos de Sonido.`",
                     inline: true,
                 },
                 {
@@ -105,6 +105,21 @@ module.exports = {
                     name: `*${process.env.PREFIX}actividad*`,
                     value: "`Iniciar una actividad.`",
                     inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}elrellano + página*`,
+                    value: "`Vídeos elrellano.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}github + @usuario*`,
+                    value: "`Github de un usuario.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}tiempo + ciudad*`,
+                    value: "`Información del tiempo.`",
+                    inline: true,
                 }
             )
             .setTimestamp()
@@ -119,11 +134,6 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
-                    name: `*${process.env.PREFIX}github + @usuario*`,
-                    value: "`Github de un usuario.`",
-                    inline: true,
-                },
-                {
                     name: `*${process.env.PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
                     inline: true,
@@ -131,11 +141,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}tiempo + ciudad*`,
-                    value: "`Información del tiempo.`",
                     inline: true,
                 },
                 {
@@ -173,6 +178,11 @@ module.exports = {
                 //     value: "`Información sobre el coronavirus.`",
                 //     inline: true,
                 // },
+                {
+                    name: `*${process.env.PREFIX}help*`,
+                    value: "`Mostrar Comandos.`",
+                    inline: true,
+                },
                 {
                     name: `*${process.env.PREFIX}ping*`,
                     value: "`Ping del bot.`",
