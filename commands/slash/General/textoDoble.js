@@ -16,9 +16,9 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
-        const texto = interaction.options.get("texto").value;
+        const text = interaction.options.get("texto").value;
 
-        const res = await fetch(`https://api.popcatdev.repl.co/doublestruck?text=${texto}`);
+        const res = await fetch(`https://api.popcatdev.repl.co/doublestruck?text=${text}`);
         const response = await res.json();
 
         await interaction.reply({ content: response.text });
