@@ -27,27 +27,21 @@ module.exports = {
         const user = interaction.options.getUser("usuario");
         const text = interaction.options.get("texto").value;
 
-        try {
-            fetch(
-                `https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`
-            )
-                .then((res) => res.json())
-                .then(async (data) => {
-                    let embed = new EmbedBuilder()
-                        .setImage(`${data.message}`)
-                        .setColor("BLUE")
-                        .setTimestamp()
-                        .setFooter({
-                            text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        });
-
-                    await interaction.reply({ embeds: [embed], fetchReply: true }).then((m) => {
-                        m.react("😀"), m.react("🤣");
+        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`)
+            .then((res) => res.json())
+            .then(async (data) => {
+                let embed = new EmbedBuilder()
+                    .setImage(`${data.message}`)
+                    .setColor("BLUE")
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL(),
                     });
+
+                return await interaction.reply({ embeds: [embed], fetchReply: true }).then((m) => {
+                    m.react("😀"), m.react("🤣");
                 });
-        } catch (error) {
-            console.log("error", error);
-        }
+            });
     },
 };
