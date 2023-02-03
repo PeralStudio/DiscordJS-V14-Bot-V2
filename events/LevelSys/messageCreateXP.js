@@ -13,6 +13,7 @@ module.exports = {
 client.on("messageCreate", async (message) => {
     const guildID = message.guild?.id;
     const userID = message.author?.id;
+    const username = `${message.author.username}#${message.author.discriminator}`;
 
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
@@ -30,6 +31,7 @@ client.on("messageCreate", async (message) => {
             {
                 guildID,
                 userID,
+                user: username,
                 $inc: { xp: xpAmount },
             },
             { upsert: true, new: true }
@@ -70,6 +72,7 @@ client.on("messageCreate", async (message) => {
             {
                 guildID,
                 userID,
+                user: username,
             },
             {
                 level,
