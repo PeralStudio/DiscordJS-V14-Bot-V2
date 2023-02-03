@@ -29,9 +29,9 @@ client.on("messageCreate", async (message) => {
                 userID,
             },
             {
+                user: username,
                 guildID,
                 userID,
-                user: username,
                 $inc: { xp: xpAmount },
             },
             { upsert: true, new: true }
@@ -70,9 +70,9 @@ client.on("messageCreate", async (message) => {
 
         await xpSchema.updateOne(
             {
+                user: username,
                 guildID,
                 userID,
-                user: username,
             },
             {
                 level,
@@ -87,5 +87,5 @@ client.on("messageCreate", async (message) => {
 
     setTimeout(() => {
         coolDown.delete(message.author.id);
-    }, 30 * 1000);
+    }, 10 * 1000);
 });
