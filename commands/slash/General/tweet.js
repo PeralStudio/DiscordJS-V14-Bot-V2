@@ -30,9 +30,6 @@ module.exports = {
         const options = {
             method: "GET",
             url: `https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`,
-            headers: {
-                "content-type": "application/json",
-            },
         };
 
         let response = await axios.request(options);
