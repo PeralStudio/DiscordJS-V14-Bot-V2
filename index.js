@@ -52,59 +52,6 @@ const client = new Client({
     },
 });
 
-// Random presence bot
-const statusArray = [
-    {
-        name: `Achant | /help`,
-        type: ActivityType.Playing,
-        status: "online",
-    },
-    {
-        name: `Double Dragon | /help`,
-        type: ActivityType.Playing,
-        status: "online",
-    },
-    {
-        name: `Golden Axe | /help`,
-        type: ActivityType.Playing,
-        status: "dnd",
-    },
-    {
-        name: `El Fary | /help`,
-        type: ActivityType.Listening,
-        status: "online",
-    },
-    {
-        name: `Gat y Gos | /help`,
-        type: ActivityType.Watching,
-        status: "idle",
-    },
-    {
-        name: `Vaca y Pollo | /help`,
-        type: ActivityType.Watching,
-        status: "online",
-    },
-];
-const pickPresence = async () => {
-    const option = Math.floor(Math.random() * statusArray.length);
-
-    try {
-        await client.user.setPresence({
-            activities: [
-                {
-                    name: statusArray[option].name,
-                    type: statusArray[option].type,
-                },
-            ],
-            status: statusArray[option].status,
-        });
-    } catch (error) {
-        console.log(superDjs.colourText(error), "red");
-    }
-};
-
-setInterval(pickPresence, 60 * 1000);
-
 //function interval Twitch for show new Streams of a user
 for (const user of usersToAlertTwitch) {
     setIntervalTwitch(client, user);
