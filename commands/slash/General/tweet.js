@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const fetch = require("node-fetch");
+const axios = require("axios");
 require("dotenv").config();
 
 module.exports = {
@@ -27,21 +27,27 @@ module.exports = {
         const user = interaction.options.getUser("usuario");
         const text = interaction.options.get("texto").value;
 
-        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`)
-            .then((res) => res.json())
-            .then(async (data) => {
-                let embed = new EmbedBuilder()
-                    .setImage(`${data.message}`)
-                    .setColor("BLUE")
-                    .setTimestamp()
-                    .setFooter({
-                        text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
-                    });
+        const options = {
+            method: "GET",
+            url: `https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`,
+            headers: {
+                "content-type": "application/json",
+            },
+        };
 
-                return await interaction.reply({ embeds: [embed], fetchReply: true }).then((m) => {
-                    m.react("😀"), m.react("🤣");
-                });
+        let response = await axios.request(options);
+
+        let embed = new EmbedBuilder()
+            .setImage(`${response.data.message}`)
+            .setColor("BLUE")
+            .setTimestamp()
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL(),
             });
+
+        await interaction.reply({ embeds: [embed], fetchReply: true }).then((m) => {
+            m.react("😀"), m.react("🤣");
+        });
     },
 };
