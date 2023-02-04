@@ -7,6 +7,7 @@ module.exports = {
 };
 
 client.on("guildMemberAdd", async (member) => {
+    console.log("member: ", member);
     if (member.guild.id === process.env.GUILD_ID) {
         const imagesArray = [
             "https://i.postimg.cc/C5kLJdsD/istockphoto-1164222265-612x612.png",
