@@ -27,7 +27,17 @@ module.exports = {
         const user = interaction.options.getUser("usuario");
         const text = interaction.options.get("texto").value;
 
-        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`)
+        const headers = {
+            "Access-Control-Allow-Origin": "*" /* @dev First, read about security */,
+            "Access-Control-Allow-Methods": "OPTIONS, GET",
+            "Access-Control-Max-Age": 2592000, // 30 days
+            "Content-Type": "application/json; charset=utf-8",
+        };
+
+        fetch(
+            `https://nekobot.xyz/api/imagegen?type=tweet&username=${user.username}&text=${text}`,
+            { method: "GET", headers: headers }
+        )
             .then((response) => response.json())
             .then((data) => {
                 let embed = new EmbedBuilder()
