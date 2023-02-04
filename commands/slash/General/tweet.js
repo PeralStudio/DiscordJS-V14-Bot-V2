@@ -28,6 +28,7 @@ module.exports = {
         const text = interaction.options.get("texto").value;
 
         const headers = {
+            "User-Agent": "ANYTHING_WILL_WORK_HERE",
             "Access-Control-Allow-Origin": "*" /* @dev First, read about security */,
             "Access-Control-Allow-Methods": "OPTIONS, GET",
             "Access-Control-Max-Age": 2592000, // 30 days
