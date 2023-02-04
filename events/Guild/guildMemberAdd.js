@@ -7,7 +7,7 @@ module.exports = {
 };
 
 client.on("guildMemberAdd", async (member) => {
-    console.log("member: ", member);
+    console.log("member: ", member.user.username);
     if (member.guild.id === process.env.GUILD_ID) {
         const imagesArray = [
             "https://i.postimg.cc/C5kLJdsD/istockphoto-1164222265-612x612.png",
@@ -16,9 +16,9 @@ client.on("guildMemberAdd", async (member) => {
             "https://i.postimg.cc/kMY74FjV/1194219.png",
         ];
 
-        const random = Math.floor(Math.random() * imagesArray.length);
+        const random = await Math.floor(Math.random() * imagesArray.length);
 
-        const welcomer = new Welcomer()
+        const welcomer = await new Welcomer()
             .setUsername(member.user.username)
             .setDiscriminator(member.user.discriminator)
             .setGuildName(member.guild.name)
