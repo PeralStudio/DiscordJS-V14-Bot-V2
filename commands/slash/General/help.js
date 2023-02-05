@@ -111,11 +111,11 @@ module.exports = {
                     value: "`Crear codigo QR.`",
                     inline: true,
                 },
-                {
-                    name: `*${process.env.PREFIX}tweet*`,
-                    value: "`Crear Tweet.`",
-                    inline: true,
-                },
+                // {
+                //     name: `*${process.env.PREFIX}tweet*`,
+                //     value: "`Crear Tweet.`",
+                //     inline: true,
+                // },
                 {
                     name: `*${process.env.PREFIX}playstore + texto*`,
                     value: "`Buscar App.`",
