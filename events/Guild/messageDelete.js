@@ -1,5 +1,6 @@
 const { AuditLogEvent, EmbedBuilder } = require("discord.js");
 const client = require("../../index");
+const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 module.exports = {
@@ -7,6 +8,8 @@ module.exports = {
 };
 
 client.on("messageDelete", async (message) => {
+    deleteOldMsg(client, process.env.LOGS_CHANNEL_ID);
+
     await message.guild
         .fetchAuditLogs({
             type: AuditLogEvent.MessageDelete,
