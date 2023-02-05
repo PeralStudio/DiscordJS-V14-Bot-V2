@@ -25,7 +25,7 @@ client.on("messageDelete", async (message) => {
 
             const embed = new EmbedBuilder()
                 .setAuthor({
-                    name: `🗑️ Borrado por por ${authorDelete.tag}`,
+                    name: `🗑️ Borrado por ${authorDelete.tag}`,
                     iconURL: message.author.displayAvatarURL({ dynamic: true }),
                 })
                 .addFields(
