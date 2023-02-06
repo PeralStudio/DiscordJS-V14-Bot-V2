@@ -14,6 +14,7 @@ client.on("messageCreate", async (message) => {
     const guildID = message.guild?.id;
     const userID = message.author?.id;
     const username = `${message.author.username}#${message.author.discriminator}`;
+    const channelToSend = client.channels.cache.get(process.env.GENERAL_CHANNEL_ID);
 
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
@@ -61,8 +62,8 @@ client.on("messageCreate", async (message) => {
                 .setDiscriminator(message.author.discriminator);
 
             rank.build().then((data) => {
-                message.reply({
-                    content: `🎉 Enhorabuena has alcanzado el nivel ${level} 🎉`,
+                channelToSend.send({
+                    content: `🎉 Enhorabuena <@${message.author.id}>  ha alcanzado el nivel ${level} 🎉`,
                     files: [new AttachmentBuilder(data, { name: "Rank.png" })],
                 });
             });
