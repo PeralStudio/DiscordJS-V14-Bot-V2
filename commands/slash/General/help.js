@@ -127,6 +127,11 @@ module.exports = {
                     inline: true,
                 },
                 {
+                    name: `*${process.env.PREFIX}emoji-list*`,
+                    value: "`Emojis disponibles Servidor.`",
+                    inline: true,
+                },
+                {
                     name: `*${process.env.PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
                     inline: true,
