@@ -63,7 +63,7 @@ client.on("messageCreate", async (message) => {
 
             rank.build().then((data) => {
                 channelToSend.send({
-                    content: `🎉 Enhorabuena <@${message.author.id}>  ha alcanzado el nivel ${level} 🎉`,
+                    content: `🎉 ¡Enhorabuena! <@${message.author.id}> ha alcanzado el nivel ${level} 🎉`,
                     files: [new AttachmentBuilder(data, { name: "Rank.png" })],
                 });
             });
