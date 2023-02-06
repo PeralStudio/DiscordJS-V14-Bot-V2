@@ -1,11 +1,4 @@
-const {
-    Client,
-    Partials,
-    Collection,
-    GatewayIntentBits,
-    ActivityType,
-    IntentsBitField,
-} = require("discord.js");
+const { Client, Partials, Collection, GatewayIntentBits, IntentsBitField } = require("discord.js");
 const config = require("./config/config");
 require("dotenv").config();
 const { Player } = require("discord-player");
