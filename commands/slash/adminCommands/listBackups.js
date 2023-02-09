@@ -43,7 +43,7 @@ module.exports = {
                     iconURL: client.user.displayAvatarURL(),
                 });
 
-            interaction.reply({ embeds: [embed] });
+            interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
             const embed = new EmbedBuilder()
                 .setTitle(`⛔ No hay backups disponibles`)
@@ -54,7 +54,7 @@ module.exports = {
                     iconURL: client.user.displayAvatarURL(),
                 });
 
-            interaction.reply({ embeds: [embed] });
+            interaction.reply({ embeds: [embed], ephemeral: true });
         }
     },
 };
