@@ -116,51 +116,92 @@ module.exports = {
                 ephemeral: true,
             });
 
-        switch (selectedRadio) {
-            case urlRadio.cadenaSer:
-                radio = urlRadio.cadenaSer;
-                name = "Cadena Ser";
-                break;
-            case urlRadio.cadenaDial:
-                radio = urlRadio.cadenaDial;
-                name = "Cadena Dial";
-                break;
-            case urlRadio.losCuarenta:
-                radio = urlRadio.losCuarenta;
-                name = "Los 40";
-                break;
-            case urlRadio.losCuarentaClassic:
-                radio = urlRadio.losCuarentaClassic;
-                name = "Los 40 Classic";
-                break;
-            case urlRadio.cope:
-                radio = urlRadio.cope;
-                name = "Cope";
-                break;
-            case urlRadio.esRadio:
-                radio = urlRadio.esRadio;
-                name = "EsRadio";
-                break;
-            case urlRadio.radiole:
-                radio = urlRadio.radiole;
-                name = "Radiolé";
-                break;
-            case urlRadio.activaFm:
-                radio = urlRadio.activaFm;
-                name = "Activa FM";
-                break;
-            case urlRadio.hitFm:
-                radio = urlRadio.hitFm;
-                name = "Hit Fm";
-                break;
-            case urlRadio.rneRadioNacional:
-                radio = urlRadio.rneRadioNacional;
-                name = "RNE Radio Nacional";
-                break;
-            default:
-                radio = urlRadio.cadenaSer;
-                name = "Cadena Ser";
-                break;
+        // switch (selectedRadio) {
+        //     case urlRadio.cadenaSer:
+        //         radio = urlRadio.cadenaSer;
+        //         name = "Cadena Ser";
+        //         break;
+        //     case urlRadio.cadenaDial:
+        //         radio = urlRadio.cadenaDial;
+        //         name = "Cadena Dial";
+        //         break;
+        //     case urlRadio.losCuarenta:
+        //         radio = urlRadio.losCuarenta;
+        //         name = "Los 40";
+        //         break;
+        //     case urlRadio.losCuarentaClassic:
+        //         radio = urlRadio.losCuarentaClassic;
+        //         name = "Los 40 Classic";
+        //         break;
+        //     case urlRadio.cope:
+        //         radio = urlRadio.cope;
+        //         name = "Cope";
+        //         break;
+        //     case urlRadio.esRadio:
+        //         radio = urlRadio.esRadio;
+        //         name = "EsRadio";
+        //         break;
+        //     case urlRadio.radiole:
+        //         radio = urlRadio.radiole;
+        //         name = "Radiolé";
+        //         break;
+        //     case urlRadio.activaFm:
+        //         radio = urlRadio.activaFm;
+        //         name = "Activa FM";
+        //         break;
+        //     case urlRadio.hitFm:
+        //         radio = urlRadio.hitFm;
+        //         name = "Hit Fm";
+        //         break;
+        //     case urlRadio.rneRadioNacional:
+        //         radio = urlRadio.rneRadioNacional;
+        //         name = "RNE Radio Nacional";
+        //         break;
+        //     default:
+        //         radio = urlRadio.cadenaSer;
+        //         name = "Cadena Ser";
+        //         break;
+        // }
+
+        if (selectedRadio === urlRadio.cadenaSer) {
+            radio = urlRadio.cadenaSer;
+            name = "Cadena Ser";
+        }
+        if (selectedRadio === urlRadio.cadenaDial) {
+            radio = urlRadio.cadenaDial;
+            name = "Cadena Dial";
+        }
+        if (selectedRadio === urlRadio.losCuarenta) {
+            radio = urlRadio.losCuarenta;
+            name = "Los 40";
+        }
+        if (selectedRadio === urlRadio.losCuarentaClassic) {
+            radio = urlRadio.losCuarentaClassic;
+            name = "Los 40 Classic";
+        }
+        if (selectedRadio === urlRadio.cope) {
+            radio = urlRadio.cope;
+            name = "Cope";
+        }
+        if (selectedRadio === urlRadio.esRadio) {
+            radio = urlRadio.esRadio;
+            name = "EsRadio";
+        }
+        if (selectedRadio === urlRadio.radiole) {
+            radio = urlRadio.radiole;
+            name = "Radiolé";
+        }
+        if (selectedRadio === urlRadio.activaFm) {
+            radio = urlRadio.activaFm;
+            name = "Activa FM";
+        }
+        if (selectedRadio === urlRadio.hitFm) {
+            radio = urlRadio.hitFm;
+            name = "Hit Fm";
+        }
+        if (selectedRadio === urlRadio.rneRadioNacional) {
+            radio = urlRadio.rneRadioNacional;
+            name = "RNE Radio Nacional";
         }
 
         const voiceChannel = interaction.member.voice.channelId;
