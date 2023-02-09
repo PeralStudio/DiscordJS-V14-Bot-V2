@@ -137,8 +137,13 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}elrellano + página*`,
-                    value: "`Vídeos elrellano.`",
+                    name: `*${process.env.PREFIX}play-radio + emisora*`,
+                    value: "`Reproducir emisora radio.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}stop-radio*`,
+                    value: "`Detener radio.`",
                     inline: true,
                 }
             )
@@ -171,6 +176,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}bigtext + texto*`,
                     value: "`Texto grande con numeros y letras.`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}elrellano + página*`,
+                    value: "`Vídeos elrellano.`",
                     inline: true,
                 },
                 {
@@ -246,6 +256,16 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}info-backup*`,
                     value: "`Info Backup. (Admin)`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}list-backup*`,
+                    value: "`Listar Backups. (Admin)`",
+                    inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}delete-backup*`,
+                    value: "`Borrar Backup. (Admin)`",
                     inline: true,
                 }
             )
