@@ -38,7 +38,7 @@ module.exports = {
                 .then((backupInfos) => {
                     const date = new Date(backupInfos.data.createdTimestamp);
                     embed = new EmbedBuilder()
-                        .setTitle("🔎 Información del backup")
+                        .setTitle("🔎ㅤInformación del backup")
                         .addFields(
                             {
                                 name: "Backup ID",
@@ -63,7 +63,7 @@ module.exports = {
                                 inline: false,
                             }
                         )
-                        .setColor("#FF0000")
+                        .setColor("#D4B053")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
@@ -71,13 +71,13 @@ module.exports = {
                 })
                 .catch((err) => {
                     embed = new EmbedBuilder()
-                        .setTitle("⛔ No existe un backup con ese ID.\n")
+                        .setTitle("⛔ㅤNo existe un backup con ese ID.\n")
                         .addFields({
                             name: "Backup ID",
                             value: idBackup,
                             inline: false,
                         })
-                        .setColor("#FF0000")
+                        .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
