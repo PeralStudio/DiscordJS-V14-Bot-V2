@@ -54,7 +54,7 @@ module.exports = {
                                 inline: false,
                             },
                             {
-                                name: "Tmañao",
+                                name: "Tamañao",
                                 value: `${backupInfos.size} kb`,
                                 inline: false,
                             },
@@ -68,12 +68,19 @@ module.exports = {
                         )
                         .setColor("#FF0000");
                 })
-
                 .catch((err) => {
-                    interaction.reply({
-                        ephemeral: true,
-                        content: "No se pudo encontrar el backup.\n" + err,
-                    });
+                    embed = new EmbedBuilder()
+                        .setAuthor({
+                            name: "No existe un backup con ese ID.",
+                            iconURL: interaction.user.displayAvatarURL(),
+                        })
+                        .setDescription("⛔ No existe un backup con ese ID.")
+                        .addFields({
+                            name: "Backup ID",
+                            value: idBackup,
+                            inline: false,
+                        })
+                        .setColor("#FF0000");
                 });
 
             return embed;
