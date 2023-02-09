@@ -38,7 +38,7 @@ module.exports = {
                 .then((backupInfos) => {
                     const date = new Date(backupInfos.data.createdTimestamp);
                     embed = new EmbedBuilder()
-                        .setTitle("🔎ㅤInformación del backup")
+                        .setTitle("🔎 Información del backup")
                         .addFields(
                             {
                                 name: "Backup ID",
@@ -71,7 +71,7 @@ module.exports = {
                 })
                 .catch((err) => {
                     embed = new EmbedBuilder()
-                        .setTitle("⛔ㅤNo existe un backup con ese ID.\n")
+                        .setTitle("⛔ No existe un backup con ese ID.\n")
                         .addFields({
                             name: "Backup ID",
                             value: idBackup,

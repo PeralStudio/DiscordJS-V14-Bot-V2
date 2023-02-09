@@ -46,7 +46,7 @@ module.exports = {
             interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
             const embed = new EmbedBuilder()
-                .setTitle(`⛔ㅤNo hay backups disponibles`)
+                .setTitle(`⛔ No hay backups disponibles`)
                 .setColor("#db1e1e")
                 .setTimestamp()
                 .setFooter({

@@ -33,7 +33,7 @@ module.exports = {
                 .then(async (backupData) => {
                     embed = new EmbedBuilder()
                         .setTitle(
-                            "✅ㅤ¡La copia de seguridad ha sido creada! Para cargarla, escriba este comando en el servidor de su elección: `" +
+                            "✅ ¡La copia de seguridad ha sido creada! Para cargarla, escriba este comando en el servidor de su elección: `" +
                                 process.env.PREFIX +
                                 "load-backup " +
                                 backupData.id +
@@ -49,7 +49,7 @@ module.exports = {
                 })
                 .catch(async (e) => {
                     embed = new EmbedBuilder()
-                        .setDescription(`❌ㅤError: ${e}`)
+                        .setDescription(`❌ Error: ${e}`)
                         .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
