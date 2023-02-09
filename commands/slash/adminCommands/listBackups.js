@@ -34,7 +34,7 @@ module.exports = {
 
         if (backupsArray.length > 0) {
             const embed = new EmbedBuilder()
-                .setTitle(`Backups disponibles`)
+                .setTitle(`📂 Backups disponibles`)
                 .setDescription(`${bakcupsList}`)
                 .setColor("#D4B053")
                 .setTimestamp()
