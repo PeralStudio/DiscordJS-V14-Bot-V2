@@ -34,7 +34,7 @@ module.exports = {
 
         if (backupsArray.length > 0) {
             const embed = new EmbedBuilder()
-                .setTitle(`📂 Backups disponibles`)
+                .setTitle(`Backups disponibles`)
                 .setDescription(`${bakcupsList}`)
                 .setColor("#D4B053")
                 .setTimestamp()
@@ -46,8 +46,8 @@ module.exports = {
             interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
             const embed = new EmbedBuilder()
-                .setTitle(`⛔ No hay backups disponibles`)
-                .setColor("#D4B053")
+                .setTitle(`⛔ㅤNo hay backups disponibles`)
+                .setColor("#db1e1e")
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
