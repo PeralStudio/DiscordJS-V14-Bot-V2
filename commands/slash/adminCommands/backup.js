@@ -33,14 +33,14 @@ module.exports = {
                 .then(async (backupData) => {
                     embed = new EmbedBuilder()
                         .setTitle(
-                            "✅ ¡La copia de seguridad ha sido creada! Para cargarla, escriba este comando en el servidor de su elección: `" +
+                            "✅ㅤ¡La copia de seguridad ha sido creada! Para cargarla, escriba este comando en el servidor de su elección: `" +
                                 process.env.PREFIX +
                                 "load-backup " +
                                 backupData.id +
                                 "`!"
                         )
                         .setDescription(`Backup creado por <@${interaction.user.id}>`)
-                        .setColor("BLUE")
+                        .setColor("#1cc91c")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
@@ -48,10 +48,9 @@ module.exports = {
                         .setTimestamp();
                 })
                 .catch(async (e) => {
-                    console.log(e);
                     embed = new EmbedBuilder()
-                        .setDescription(`❌ Error: ${e}`)
-                        .setColor("BLUE")
+                        .setDescription(`❌ㅤError: ${e}`)
+                        .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
