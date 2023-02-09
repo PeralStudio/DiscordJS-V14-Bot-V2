@@ -54,7 +54,7 @@ module.exports = {
                                 inline: false,
                             },
                             {
-                                name: "Tamañao",
+                                name: "Tamaño",
                                 value: `${backupInfos.size} kb`,
                                 inline: false,
                             },
