@@ -32,8 +32,6 @@ module.exports = {
             .map((backup) => ":open_file_folder: `" + backup + "`")
             .join("\n\n");
 
-        console.log(backupsArray.length);
-
         if (backupsArray.length > 0) {
             const embed = new EmbedBuilder()
                 .setTitle(`Backups disponibles`)
