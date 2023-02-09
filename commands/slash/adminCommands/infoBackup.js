@@ -38,10 +38,7 @@ module.exports = {
                 .then((backupInfos) => {
                     const date = new Date(backupInfos.data.createdTimestamp);
                     embed = new EmbedBuilder()
-                        .setAuthor({
-                            name: "Información del backup",
-                            iconURL: interaction.user.displayAvatarURL(),
-                        })
+                        .setTitle("🔎 Información del backup")
                         .addFields(
                             {
                                 name: "Backup ID",
@@ -66,21 +63,25 @@ module.exports = {
                                 inline: false,
                             }
                         )
-                        .setColor("#FF0000");
+                        .setColor("#FF0000")
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        });
                 })
                 .catch((err) => {
                     embed = new EmbedBuilder()
-                        .setAuthor({
-                            name: "No existe un backup con ese ID.",
-                            iconURL: interaction.user.displayAvatarURL(),
-                        })
-                        .setDescription("⛔ No existe un backup con ese ID.")
+                        .setTitle("⛔ No existe un backup con ese ID.\n")
                         .addFields({
                             name: "Backup ID",
                             value: idBackup,
                             inline: false,
                         })
-                        .setColor("#FF0000");
+                        .setColor("#FF0000")
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        });
                 });
 
             return embed;
