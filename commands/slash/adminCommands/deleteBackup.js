@@ -43,10 +43,10 @@ module.exports = {
                 .then(async () => {
                     embed = new EmbedBuilder()
                         .setTitle(
-                            `✅ ¡La copia de seguridad {${idBackup}} ha sido borrada con éxito!`
+                            `✅ㅤ¡La copia de seguridad {${idBackup}} ha sido borrada con éxito!`
                         )
                         .setDescription(`Backup borrado por <@${interaction.user.id}>`)
-                        .setColor("BLUE")
+                        .setColor("#1cc91c")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
@@ -56,8 +56,8 @@ module.exports = {
                 .catch(async (e) => {
                     console.log(e);
                     embed = new EmbedBuilder()
-                        .setDescription(`❌ Error: ${e}`)
-                        .setColor("BLUE")
+                        .setDescription(`❌ㅤError: ${e}`)
+                        .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
