@@ -42,7 +42,7 @@ module.exports = {
             output += `${result.url}\n`;
         }
 
-        interaction.reply({
+        await interaction.reply({
             content: output,
             ephemeral: true,
         });
