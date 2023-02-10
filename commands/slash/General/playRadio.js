@@ -3,6 +3,7 @@ const {
     createAudioPlayer,
     createAudioResource,
     AudioPlayerStatus,
+    getVoiceConnection,
 } = require("@discordjs/voice");
 const { EmbedBuilder } = require("discord.js");
 
@@ -164,22 +165,19 @@ module.exports = {
         }
 
         const voiceChannel = interaction.member.voice.channelId;
+        let connection = getVoiceConnection(voiceChannel);
 
-        const voiceConnection = joinVoiceChannel({
+        connection = joinVoiceChannel({
             channelId: voiceChannel,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild.voiceAdapterCreator,
-            selfMute: false,
         });
 
-        const resource = createAudioResource(radio, {
-            inputType: "stream",
-            inlineVolume: true,
-        });
+        let player = createAudioPlayer();
+        let res = createAudioResource(radio);
 
-        const player = createAudioPlayer();
-        voiceConnection.subscribe(player);
-        player.play(resource);
+        player.play(res);
+        connection.subscribe(player);
 
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
 
