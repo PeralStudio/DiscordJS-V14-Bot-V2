@@ -8,7 +8,7 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
-        let osIcon;
+        let osIcon = "";
 
         if (process.platform.includes("win")) {
             osIcon = "💻";
@@ -18,7 +18,7 @@ module.exports = {
             osIcon = "🐧";
         }
 
-        if (process.platform.includes("mac")) {
+        if (process.platform.includes("darwin" || "mac")) {
             osIcon = "🍎";
         }
 
