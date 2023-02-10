@@ -219,6 +219,11 @@ module.exports = {
                     inline: true,
                 },
                 {
+                    name: `*${process.env.PREFIX}bot-info*`,
+                    value: "`Info del bot.`",
+                    inline: true,
+                },
+                {
                     name: `*${process.env.PREFIX}ping*`,
                     value: "`Ping del bot.`",
                     inline: true,
