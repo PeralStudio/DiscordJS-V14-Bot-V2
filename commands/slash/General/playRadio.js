@@ -169,6 +169,7 @@ module.exports = {
             channelId: voiceChannel,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild.voiceAdapterCreator,
+            selfMute: false,
         });
 
         const resource = createAudioResource(radio, {
@@ -179,14 +180,13 @@ module.exports = {
         const player = createAudioPlayer();
         voiceConnection.subscribe(player);
         player.play(resource);
-        console.log(player);
 
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
 
-        // player.on(AudioPlayerStatus.Playing, async () => {
-        await interaction
-            .editReply({ content: "▶️ Reproduciendo `" + name + "`", ephemeral: true })
-            .catch((e) => console.log(e));
-        // });
+        player.on(AudioPlayerStatus.Playing, async () => {
+            await interaction
+                .editReply({ content: "▶️ Reproduciendo `" + name + "`", ephemeral: true })
+                .catch((e) => console.log(e));
+        });
     },
 };
