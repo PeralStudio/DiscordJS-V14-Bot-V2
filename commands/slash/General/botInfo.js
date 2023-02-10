@@ -8,6 +8,20 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
+        let osIcon;
+
+        if (process.platform.includes("win")) {
+            osIcon = "💻";
+        }
+
+        if (process.platform.includes("linux")) {
+            osIcon = "🐧";
+        }
+
+        if (process.platform.includes("mac")) {
+            osIcon = "🍎";
+        }
+
         const arderEmbed = new EmbedBuilder()
             .setTitle("ℹ️ Información del bot ℹ️\n")
             .setThumbnail(client.user.displayAvatarURL())
@@ -54,7 +68,17 @@ module.exports = {
                 },
                 {
                     name: `Plataforma: `,
-                    value: `${process.platform} ${process.arch}`,
+                    value: `${osIcon} ${process.platform} ${process.arch}`,
+                    inline: true,
+                },
+                {
+                    name: `Núcleos: `,
+                    value: `${process?.env?.NUMBER_OF_PROCESSORS || "0"}`,
+                    inline: true,
+                },
+                {
+                    name: `Uso CPU: `,
+                    value: `${(process.cpuUsage().system / 1024 / 1024).toFixed(2)}%`,
                     inline: true,
                 },
                 {
