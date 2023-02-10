@@ -44,7 +44,7 @@ const deleteOldMsg = (client, channelID) => {
             break;
         case LOGS_CHANNEL_ID:
             channelName = "📙-logs";
-            time = 2 * 1440 * 600 * 1000;
+            time = 2 * 1440 * 60 * 1000;
             break;
     }
 
