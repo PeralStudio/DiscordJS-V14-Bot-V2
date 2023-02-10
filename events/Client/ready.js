@@ -90,43 +90,4 @@ client.once("ready", async () => {
             "green"
         )
     );
-
-    console.log(
-        superDjs.colourText(
-            `Nombre del bot: `.italic.green +
-                `${client.user.tag}`.blue +
-                `\n` +
-                `Servidores: `.italic.green +
-                `${client.guilds.cache.size} Servers`.blue +
-                `\n` +
-                `Viendo: `.italic.green +
-                `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} Miembros`.blue +
-                `\n` +
-                `Prefix: `.italic.green +
-                `${process.env.PREFIX}`.blue +
-                `\n` +
-                `Comandos: `.italic.green +
-                `${client.prefix_commands.size + client.slash_commands.size}`.blue +
-                `\n` +
-                `Eventos: `.italic.green +
-                `${client.events.size}`.blue +
-                `\n` +
-                `Discord.js: `.italic.green +
-                `v${version}`.blue +
-                `\n` +
-                `Node.js: `.italic.green +
-                `${process.version}`.blue +
-                `\n` +
-                `Plataforma: `.italic.green +
-                `${process.platform} ${process.arch}`.blue +
-                `\n` +
-                `Memoria: `.italic.green +
-                `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${(
-                    process.memoryUsage().rss /
-                    1024 /
-                    1024
-                ).toFixed(2)} MB`.blue,
-            "green"
-        )
-    );
 });
