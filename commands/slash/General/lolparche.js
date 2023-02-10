@@ -64,22 +64,55 @@ module.exports = {
                         ],
                     });
                 } else {
-                    return interaction.reply({
-                        embeds: [
-                            new EmbedBuilder()
-                                .setColor("#C28F2C ")
-                                .setTitle("Algo a salido mal")
-                                .setDescription("Por favor, intentalo de nuevo mas tarde.")
-                                .setTimestamp()
-                                .setFooter({
-                                    text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
-                                }),
-                        ],
-                        ephemeral: true,
-                    });
+                    getNotes();
                 }
             }
         );
+
+        const getNotes = async () => {
+            await request(
+                `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${patchVersionWithDash}/`,
+                (err, res, html) => {
+                    if (!err && res.statusCode == 200) {
+                        const $ = cherio.load(html);
+                        // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
+                        const imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
+
+                        return interaction.reply({
+                            embeds: [
+                                new EmbedBuilder()
+                                    .setColor("#C28F2C")
+                                    .setTitle(`🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`)
+                                    .setDescription(
+                                        `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${patchVersionWithDash}/`
+                                    )
+                                    .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                                    .setImage(imgPathForEmbed)
+                                    .setTimestamp()
+                                    .setFooter({
+                                        text: process.env.NAME_BOT,
+                                        iconURL: client.user.displayAvatarURL(),
+                                    }),
+                            ],
+                        });
+                    } else {
+                        return interaction.reply({
+                            embeds: [
+                                new EmbedBuilder()
+                                    .setColor("#C28F2C ")
+                                    .setTitle("Algo a salido mal")
+                                    .setDescription("Por favor, intentalo de nuevo mas tarde.")
+                                    .setTimestamp()
+                                    .setFooter({
+                                        text: process.env.NAME_BOT,
+                                        iconURL: client.user.displayAvatarURL(),
+                                    }),
+                            ],
+                            ephemeral: true,
+                        });
+                    }
+                }
+            );
+        };
     },
 };
