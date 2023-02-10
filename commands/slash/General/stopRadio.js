@@ -10,6 +10,39 @@ module.exports = {
     run: async (client, interaction, config) => {
         const voiceChannel = interaction.member.voice.channelId;
 
+        if (!interaction.member.voice.channelId)
+            return await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`❌ ¡No estás en un canal de voz!`)
+                        .setColor("#db1e1e")
+                        .setTimestamp()
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+                ephemeral: true,
+            });
+
+        if (
+            interaction.guild.members.me.voice.channelId &&
+            interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId
+        )
+            return await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`❌ ¡No estás en mi canal de voz!`)
+                        .setColor("#db1e1e")
+                        .setTimestamp()
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+                ephemeral: true,
+            });
+
         const voiceConnection = joinVoiceChannel({
             channelId: voiceChannel,
             guildId: interaction.guildId,
