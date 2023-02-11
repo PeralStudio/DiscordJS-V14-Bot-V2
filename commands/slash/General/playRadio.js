@@ -11,9 +11,16 @@ const urlRadio = {
     cadenaSer:
         "https://playerservices.streamtheworld.com/api/livestream-redirect/SER_BARCELONA.mp3",
     cadenaDial: "http://live.radioatalaya.fm:8327/stream",
+    cadenaCien: "http://flucast-m01-02.flumotion.com/cope/cadena100.mp3",
+    catalunyaRadio: "https://shoutcast.ccma.cat/ccma/catalunyaradioHD.mp3",
+    flaixFm: "https://nodo05-cloud01.streaming-pro.com:8001/flaixfm.mp3",
+    flaixBac: "https://flaixbac.streaming-pro.com:8007/flaixbac.aacp",
     losCuarenta: "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
     losCuarentaClassic:
         "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
+    ondaCero: "http://stream.ondaceronoroeste.es:8000/stream",
+    radioMarca:
+        "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIOMARCA_NACIONAL.mp3",
     cope: "https://barcelona-copesedes-rrcast.flumotion.com/copesedes/barcelona.mp3",
     esRadio: "http://livestreaming3.esradio.fm/stream64.mp3",
     radiole: "http://streaming.indalteco.net:8005/radiole.mp3",
@@ -42,12 +49,36 @@ module.exports = {
                     value: urlRadio.cadenaDial,
                 },
                 {
+                    name: "📻 Cadena 100",
+                    value: urlRadio.cadenaCien,
+                },
+                {
+                    name: "📻 Catalunya Radio",
+                    value: urlRadio.catalunyaRadio,
+                },
+                {
+                    name: "📻 Flaix FM",
+                    value: urlRadio.flaixFm,
+                },
+                {
+                    name: "📻 Flaixbac",
+                    value: urlRadio.flaixBac,
+                },
+                {
                     name: "📻 Los40",
                     value: urlRadio.losCuarenta,
                 },
                 {
                     name: "📻 Los40 Classic",
                     value: urlRadio.losCuarentaClassic,
+                },
+                {
+                    name: "📻 Onda Cero",
+                    value: urlRadio.ondaCero,
+                },
+                {
+                    name: "📻 Radio Marca",
+                    value: urlRadio.radioMarca,
                 },
                 {
                     name: "📻 Cope",
@@ -126,6 +157,22 @@ module.exports = {
                 radio = urlRadio.cadenaDial;
                 name = "Cadena Dial";
                 break;
+            case urlRadio.cadenaCien:
+                radio = urlRadio.cadenaCien;
+                name = "Cadena 100";
+                break;
+            case urlRadio.catalunyaRadio:
+                radio = urlRadio.catalunyaRadio;
+                name = "Catalunya Radio";
+                break;
+            case urlRadio.flaixFm:
+                radio = urlRadio.flaixFm;
+                name = "Flaix Fm";
+                break;
+            case urlRadio.flaixBac:
+                radio = urlRadio.flaixBac;
+                name = "Flaixbac";
+                break;
             case urlRadio.losCuarenta:
                 radio = urlRadio.losCuarenta;
                 name = "Los 40";
@@ -133,6 +180,14 @@ module.exports = {
             case urlRadio.losCuarentaClassic:
                 radio = urlRadio.losCuarentaClassic;
                 name = "Los 40 Classic";
+                break;
+            case urlRadio.ondaCero:
+                radio = urlRadio.ondaCero;
+                name = "Onda Cero";
+                break;
+            case urlRadio.radioMarca:
+                radio = urlRadio.radioMarca;
+                name = "Radio Marca";
                 break;
             case urlRadio.cope:
                 radio = urlRadio.cope;
