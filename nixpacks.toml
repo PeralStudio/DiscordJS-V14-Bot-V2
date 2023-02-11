@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ['ffmpeg', 'libuuid']
+nixPkgs = ['...', 'libuuid']
