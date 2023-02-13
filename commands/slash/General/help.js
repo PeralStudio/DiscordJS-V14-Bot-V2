@@ -229,6 +229,11 @@ module.exports = {
                     inline: true,
                 },
                 {
+                    name: `*${process.env.PREFIX}eval*`,
+                    value: "`Evaluar codigo JavaScript. (Admin/Mods)`",
+                    inline: true,
+                },
+                {
                     name: `*${process.env.PREFIX}enviarmd + usuario*`,
                     value: "`Enviar mensajes privados. (Admin/Mods)`",
                     inline: true,
