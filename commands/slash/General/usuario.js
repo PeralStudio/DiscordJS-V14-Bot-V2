@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 require("dotenv").config();
 
 module.exports = {
-    name: "usuario",
+    name: "usuario-info",
     description: "Mostar información de un usuario.",
     type: 1,
     options: [
@@ -24,39 +24,42 @@ module.exports = {
             size: 1024,
         });
 
+        const member = interaction.options.get("usuario") || interaction.member;
+
         const userInfoEmbed = new EmbedBuilder()
             .setThumbnail(userAvatar)
             .setAuthor({
-                name:
-                    interaction.options.get("usuario").user.username +
-                    "#" +
-                    interaction.options.get("usuario").user.discriminator,
+                name: member.user.username + "#" + member.user.discriminator,
                 iconURL: userAvatar,
             })
             .addFields(
                 {
                     name: "Jugando a",
-                    value:
-                        interaction.options.get("usuario").member?.presence?.activities[0]?.name ||
-                        "Nada",
+                    value: member.member?.presence?.activities[0]?.name || "Nada",
                 },
                 {
                     name: "Creado",
-                    value: dayjs(interaction.options.get("usuario").user.createdAt).format(
-                        "DD/MM/YYYY"
-                    ),
+                    value: dayjs(member.user.createdAt).format("DD/MM/YYYY"),
                     inline: true,
                 },
                 {
                     name: "Estado",
                     value:
-                        interaction.options.get("usuario").member.presence?.status == "online"
+                        member.member.presence?.status == "online"
                             ? "En linea"
-                            : interaction.options.get("usuario").member.presence?.status == "idle"
+                            : member.member.presence?.status == "idle"
                             ? "Ausente"
-                            : interaction.options.get("usuario").member.presence?.status == "dnd"
+                            : member.member.presence?.status == "dnd"
                             ? "No molestar"
                             : "Desconectado",
+                    inline: true,
+                },
+                {
+                    name: "Roles",
+                    value:
+                        member.member._roles.length > 0
+                            ? `${member.member._roles.length}`
+                            : "Ninguno",
                     inline: true,
                 }
             )
