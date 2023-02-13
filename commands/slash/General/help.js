@@ -164,7 +164,7 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: `*${process.env.PREFIX}usuario + @usuario*`,
+                    name: `*${process.env.PREFIX}usuario-info + @usuario*`,
                     value: "`Información sobre un usuario.`",
                     inline: true,
                 },
