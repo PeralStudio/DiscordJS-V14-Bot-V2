@@ -63,8 +63,7 @@ elrellanoScrap(client);
 epicGamesFree(client);
 
 //Function to search for news every day
-//todo: Change api key {.env} when have more credits 'https://app.newscatcherapi.com/dashboard/'
-// fetchNews(client);
+fetchNews(client);
 
 // Host the bot:
 require("http")
