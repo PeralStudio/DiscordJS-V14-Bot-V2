@@ -55,11 +55,6 @@ client.once("ready", async () => {
                 type: ActivityType.Listening,
                 status: "online",
             },
-            {
-                name: `${membersCount} usuarios 🎮`,
-                type: ActivityType.Competing,
-                status: "online",
-            },
         ];
 
         const option = Math.floor(Math.random() * statusArray.length);
