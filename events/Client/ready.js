@@ -57,7 +57,7 @@ client.once("ready", async () => {
             },
             {
                 name: `${membersCount} usuarios 🎮`,
-                type: ActivityType.Streaming,
+                type: ActivityType.Custom,
                 status: "online",
             },
         ];
