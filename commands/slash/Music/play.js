@@ -134,7 +134,7 @@ module.exports = {
             return await interaction.followUp({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
+                        .setTitle(`⏱️ ¡Cargando canción\n **${track.title}**!`)
                         .setDescription(`**Comandos Disponibles**`)
                         .setThumbnail(track?.thumbnail)
                         .addFields([
