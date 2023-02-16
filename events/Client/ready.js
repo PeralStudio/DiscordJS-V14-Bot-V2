@@ -57,7 +57,7 @@ client.once("ready", async () => {
             },
             {
                 name: `${membersCount} usuarios 🎮`,
-                type: ActivityType.Custom,
+                type: ActivityType.Competing,
                 status: "online",
             },
         ];
