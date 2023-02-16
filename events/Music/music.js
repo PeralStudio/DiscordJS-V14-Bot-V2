@@ -1,7 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
 const client = require("../../index");
-const colors = require("colors");
-const superDjs = require("super-djs");
 require("dotenv").config();
 
 module.exports = {
