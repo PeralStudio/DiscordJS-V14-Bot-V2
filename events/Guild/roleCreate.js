@@ -1,7 +1,11 @@
-const { AuditLogEvent, EmbedBuilder } = require("discord.js");
+const { AuditLogEvent, EmbedBuilder, WebhookClient } = require("discord.js");
 const client = require("../../index");
 const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_LOGS_CHANNEL,
+});
 
 module.exports = {
     name: "roleCreate.js",
@@ -16,8 +20,6 @@ client.on("roleCreate", async (message) => {
         })
         .then(async (audit) => {
             const authorRole = audit.entries.first().executor;
-
-            const channel = await message.guild.channels.cache.get(process.env.LOGS_CHANNEL_ID);
 
             const embed = new EmbedBuilder()
                 .setAuthor({
@@ -35,6 +37,6 @@ client.on("roleCreate", async (message) => {
                 .setTimestamp()
                 .setColor("#04A350");
 
-            channel.send({ embeds: [embed] });
+            webhook.send({ embeds: [embed] });
         });
 });

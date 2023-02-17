@@ -1,7 +1,11 @@
-const { AuditLogEvent, EmbedBuilder } = require("discord.js");
+const { AuditLogEvent, EmbedBuilder, WebhookClient } = require("discord.js");
 const client = require("../../index");
 const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_LOGS_CHANNEL,
+});
 
 module.exports = {
     name: "messageDelete.js",
@@ -20,8 +24,6 @@ client.on("messageDelete", async (message) => {
             if (!message.content) return;
             if (message.author.bot) return;
             if (authorDelete.bot) return;
-
-            const channel = await message.guild.channels.cache.get(process.env.LOGS_CHANNEL_ID);
 
             const embed = new EmbedBuilder()
                 .setAuthor({
@@ -45,6 +47,6 @@ client.on("messageDelete", async (message) => {
                 .setTimestamp()
                 .setColor("#FF0000");
 
-            channel.send({ embeds: [embed] });
+            webhook.send({ embeds: [embed] });
         });
 });

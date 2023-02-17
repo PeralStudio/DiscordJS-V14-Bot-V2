@@ -1,7 +1,11 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 const client = require("../../index");
 // const usersDiscordSchema = require("../../schemas/usersDiscordSchema");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_LOGS_CHANNEL,
+});
 
 module.exports = {
     name: "guildMemberRemove",
@@ -33,4 +37,19 @@ client.on("guildMemberRemove", async (member) => {
     // if (dataUserDB) {
     //     dataUserDB.remove();
     // }
+
+    // Send bye message to the logs channel
+    const byeEmbed = new EmbedBuilder()
+        .setAuthor({
+            name: `:wave: ${member.user.username}#${member.user.discriminator} ha dejado el servidor!`,
+            iconURL: member.user.displayAvatarURL({ dynamic: true }),
+        })
+        .setFooter({
+            text: `${process.env.NAME_BOT}`,
+            iconURL: client.user.displayAvatarURL(),
+        })
+        .setTimestamp()
+        .setColor("#c9af30");
+
+    return webhook.send({ embeds: [byeEmbed] });
 });

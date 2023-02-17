@@ -1,7 +1,11 @@
-const { AuditLogEvent, EmbedBuilder } = require("discord.js");
+const { AuditLogEvent, EmbedBuilder, WebhookClient } = require("discord.js");
 const client = require("../../index");
 const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_LOGS_CHANNEL,
+});
 
 module.exports = {
     name: "channelCreate.js",
@@ -15,7 +19,6 @@ client.on("channelCreate", async (channel) => {
             type: AuditLogEvent.ChannelCreate,
         })
         .then(async (audit) => {
-            const channelLogs = await channel.guild.channels.cache.get(process.env.LOGS_CHANNEL_ID);
             const { executor } = audit.entries.first();
 
             let type = channel.type;
@@ -53,6 +56,6 @@ client.on("channelCreate", async (channel) => {
                 .setTimestamp()
                 .setColor("#04A350");
 
-            channelLogs.send({ embeds: [embed] });
+            webhook.send({ embeds: [embed] });
         });
 });
