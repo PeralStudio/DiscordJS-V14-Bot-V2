@@ -277,6 +277,11 @@ module.exports = {
                     name: `*${process.env.PREFIX}delete-backup*`,
                     value: "`Borrar Backup. (Admin)`",
                     inline: true,
+                },
+                {
+                    name: `*${process.env.PREFIX}bot-avatar*`,
+                    value: "`Cambiar avatar bot. (Admin)`",
+                    inline: true,
                 }
             )
             .setTimestamp()
