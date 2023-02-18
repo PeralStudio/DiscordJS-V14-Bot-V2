@@ -1,6 +1,5 @@
-const { ActivityType, version } = require("discord.js");
+const { ActivityType } = require("discord.js");
 const client = require("../../index");
-const colors = require("colors");
 const superDjs = require("super-djs");
 
 module.exports = {
