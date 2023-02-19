@@ -13,34 +13,71 @@ module.exports = {
             description: "Texto a traducir.",
             required: true,
         },
+        {
+            type: 3,
+            name: "entrada",
+            description: "Idioma de entrada.",
+            required: true,
+            choices: [
+                { name: "🇪🇸 -Español", value: "es" },
+                { name: "🇺🇸 -Ingles", value: "en" },
+                { name: "🇩🇪 -Aleman", value: "de" },
+                { name: "🇫🇷 -Frances", value: "fr" },
+                { name: "🇵🇹 -Portugal", value: "pt" },
+            ],
+        },
+        {
+            type: 3,
+            name: "salida",
+            description: "Idioma de salida.",
+            required: true,
+            choices: [
+                { name: "🇪🇸 -Español", value: "es" },
+                { name: "🇺🇸 -Ingles", value: "en" },
+                { name: "🇩🇪 -Aleman", value: "de" },
+                { name: "🇫🇷 -Frances", value: "fr" },
+                { name: "🇵🇹 -Portugues", value: "pt" },
+            ],
+        },
     ],
     permissions: {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
         const text = interaction.options.get("texto").value;
+        const translateInput = interaction.options.get("entrada").value;
+        const translateOutput = interaction.options.get("salida").value;
+
+        if (translateInput === translateOutput) {
+            const embedError = new EmbedBuilder()
+                .setTitle("❌ Debes selecionar diferentes idiomas.")
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL(),
+                })
+                .setTimestamp()
+                .setColor("#C28F2C");
+
+            return interaction.reply({ embeds: [embedError] });
+        }
+
         translate(
             {
                 text: text,
-                source: "es", // Este es la fuente, es decir el idioma que queremos pasar a el idioma puesto en target, ya saben con codigo i18n.
-                target: "en", // El idioma en i18n al que queremos traducir
+                source: translateInput,
+                target: translateOutput,
             },
             function (result) {
-                const embedTraductor = new EmbedBuilder() //Creamos el embed con el nombre encuesta
-
-                    // .setTitle(`${question} \n`)
+                const embedTraductor = new EmbedBuilder()
                     .setThumbnail("https://cdn-icons-png.flaticon.com/512/281/281776.png")
-                    .addFields(
-                        {
-                            name: "Original",
-                            value: result.sentences[0].orig,
-                        },
-                        {
-                            name: "Traducción",
-                            value: result.sentences[0].trans,
-                        }
+                    .setDescription(
+                        `**Original:**\n\`\`\`\n${result.sentences[0].orig}\`\`\`\n**Traducción:**\n\`\`\`\n${result.sentences[0].trans}\`\`\``
                     )
-                    // .setFooter(`Encuesta realizada por: ${message.author.tag}`)
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL(),
+                    })
+                    .setTimestamp()
                     .setColor("#C28F2C");
 
                 interaction.reply({ embeds: [embedTraductor] });
