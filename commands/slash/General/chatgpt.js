@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const axios = require("axios");
 
@@ -17,17 +18,17 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
-        const texto = interaction.options.get("texto").value;
+        const text = interaction.options.get("texto").value;
 
         const options = {
             method: "POST",
-            url: "https://you-chat-gpt.p.rapidapi.com/TextOnly",
+            url: "https://you-chat-gpt.p.rapidapi.com/",
             headers: {
                 "content-type": "application/json",
                 "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
                 "X-RapidAPI-Host": "you-chat-gpt.p.rapidapi.com",
             },
-            data: { question: texto, max_response_time: 15 },
+            data: { question: text, max_response_time: 15 },
         };
 
         const getData = async () => {
@@ -37,6 +38,19 @@ module.exports = {
 
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
         const result = await getData();
-        await interaction.editReply({ content: result, ephemeral: true });
+
+        const embed = new EmbedBuilder()
+            // .setThumbnail("https://cdn-icons-png.flaticon.com/512/281/281776.png")
+            .setDescription(
+                `**Entrada:**\n\`\`\`\n${text}\`\`\`\n**Respuesta:**\n\`\`\`\n${result}\`\`\``
+            )
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL(),
+            })
+            .setTimestamp()
+            .setColor("#C28F2C");
+
+        await interaction.editReply({ embeds: [embed], ephemeral: true });
     },
 };
