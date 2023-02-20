@@ -9,20 +9,33 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
-        const emojiList3 = interaction.guild.emojis.cache
+        const emojiList = interaction.guild.emojis.cache
             .map((e) => `${e}ㅤ\`:${e.name}:\``)
             .join("\n");
 
-        const embed = new EmbedBuilder()
-            .setTitle(`Emojis Disponibles`)
-            .setDescription(`${emojiList3}`)
-            .setColor("#D4B053")
-            .setTimestamp()
-            .setFooter({
-                text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
-            });
+        if (emojiList) {
+            const embed = new EmbedBuilder()
+                .setTitle(`Emojis Disponibles`)
+                .setDescription(`${emojiList}`)
+                .setColor("#D4B053")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL(),
+                });
 
-        interaction.reply({ embeds: [embed] });
+            interaction.reply({ embeds: [embed] });
+        } else {
+            const embed = new EmbedBuilder()
+                .setTitle(`❌ No Hay Emojis Disponibles`)
+                .setColor("#D4B053")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL(),
+                });
+
+            interaction.reply({ embeds: [embed] });
+        }
     },
 };
