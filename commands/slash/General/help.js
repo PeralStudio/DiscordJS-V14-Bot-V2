@@ -11,6 +11,61 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
     },
     run: async (client, interaction, config) => {
+        let embedAdmin;
+
+        if (interaction.user.id === process.env.ID_OWNER) {
+            embedAdmin = new EmbedBuilder()
+                .setTitle(`COMANDOS DISPONIBLES ADMIN **${client.user.username.toUpperCase()}** \n`)
+                .addFields(
+                    {
+                        name: `*${process.env.PREFIX}email*`,
+                        value: "`Enviar email. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}crear-canal*`,
+                        value: "`Crear canal. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}borrar-canal*`,
+                        value: "`Borrar canal. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}crear-backup*`,
+                        value: "`Crear Backup. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}info-backup*`,
+                        value: "`Info Backup. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}list-backup*`,
+                        value: "`Listar Backups. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}delete-backup*`,
+                        value: "`Borrar Backup. (Admin)`",
+                        inline: true,
+                    },
+                    {
+                        name: `*${process.env.PREFIX}bot-avatar*`,
+                        value: "`Cambiar avatar bot. (Admin)`",
+                        inline: true,
+                    }
+                )
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL(),
+                })
+                .setTimestamp()
+                .setColor("#C28F2C");
+        }
+
         const embed = new EmbedBuilder()
             .setColor("#C28F2C")
             // .setThumbnail(client.user.displayAvatarURL())
@@ -242,46 +297,6 @@ module.exports = {
                     name: `*${process.env.PREFIX}borrar + nº*`,
                     value: "`Borrar mensajes. (Admin/Mods)`",
                     inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}email*`,
-                    value: "`Enviar email. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}crear-canal*`,
-                    value: "`Crear canal. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}borrar-canal*`,
-                    value: "`Borrar canal. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}crear-backup*`,
-                    value: "`Crear Backup. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}info-backup*`,
-                    value: "`Info Backup. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}list-backup*`,
-                    value: "`Listar Backups. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}delete-backup*`,
-                    value: "`Borrar Backup. (Admin)`",
-                    inline: true,
-                },
-                {
-                    name: `*${process.env.PREFIX}bot-avatar*`,
-                    value: "`Cambiar avatar bot. (Admin)`",
-                    inline: true,
                 }
             )
             .setTimestamp()
@@ -292,7 +307,12 @@ module.exports = {
 
         // await interaction.reply({ embeds: [embed] });
 
-        const embeds = [embed, embed1];
+        let embeds;
+        if (embedAdmin) {
+            embeds = [embed, embed1, embedAdmin];
+        } else {
+            embeds = [embed, embed1];
+        }
 
         await pagination({
             interaction: interaction,
