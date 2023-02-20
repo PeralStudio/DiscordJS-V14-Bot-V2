@@ -15,7 +15,7 @@ module.exports = {
 
         if (emojiList) {
             const embed = new EmbedBuilder()
-                .setTitle(`Emojis Disponibles`)
+                .setTitle(`**Emojis Disponibles de **\`\`\`${interaction.guild.name}\`\`\``)
                 .setDescription(`${emojiList}`)
                 .setColor("#D4B053")
                 .setTimestamp()
@@ -27,7 +27,9 @@ module.exports = {
             interaction.reply({ embeds: [embed] });
         } else {
             const embed = new EmbedBuilder()
-                .setTitle(`❌ No Hay Emojis Disponibles`)
+                .setTitle(
+                    `**❌ No Hay Emojis Disponibles en  **\`\`\`${interaction.guild.name}\`\`\``
+                )
                 .setColor("#D4B053")
                 .setTimestamp()
                 .setFooter({
