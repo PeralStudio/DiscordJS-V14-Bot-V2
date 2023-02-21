@@ -305,14 +305,7 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL(),
             });
 
-        // await interaction.reply({ embeds: [embed] });
-
-        let embeds;
-        if (embedAdmin) {
-            embeds = [embed, embed1, embedAdmin];
-        } else {
-            embeds = [embed, embed1];
-        }
+        let embeds = embedAdmin ? [embed, embed1, embedAdmin] : [embed, embed1];
 
         await pagination({
             interaction: interaction,
