@@ -1,7 +1,6 @@
 const { ActivityType } = require("discord.js");
 const client = require("../../index");
 const superDjs = require("super-djs");
-const voiceDiscord = require(`@discordjs/voice`);
 
 module.exports = {
     name: "ready.js",
