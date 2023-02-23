@@ -8,44 +8,6 @@ module.exports = {
 };
 
 client.once("ready", async () => {
-    // Bot enter in voice channel and play radio
-    const guild = client.guilds.cache.find((g) => g.id === process.env.GUILD_ID);
-    const voiceChannel = "1078266970014752818";
-
-    let SERVER = client.guilds.cache.get(guild.id);
-
-    const connection = voiceDiscord.joinVoiceChannel({
-        channelId: voiceChannel,
-        guildId: guild.id,
-        adapterCreator: SERVER.voiceAdapterCreator,
-        selfDeaf: true,
-    });
-
-    const player = voiceDiscord.createAudioPlayer();
-    const resource = voiceDiscord.createAudioResource("http://stream.laut.fm/lofi", {
-        inlineVolume: true,
-    });
-    resource.volume.setVolume(0.8);
-
-    player.play(resource);
-    connection.subscribe(player);
-
-    player.on(voiceDiscord.AudioPlayerStatus.Playing, () => {
-        console.log(
-            superDjs.colourText(
-                `
-╔═════════════════════════════════════════════════════╗
-║                                                     ║
-║     Radio Conectada al canal: ${voiceChannel}   ║
-║                                                     ║
-║     del servidor: ${guild.name}                        ║
-║                                                     ║
-╚═════════════════════════════════════════════════════╝`,
-                "blue"
-            )
-        );
-    });
-
     let membersCount = client.guilds.cache
         .map((guild) => guild.memberCount)
         .reduce((a, b) => a + b, 0);
