@@ -13,7 +13,6 @@ client.once("ready", async () => {
 
     const pickPresence = async () => {
         // Random presence bot
-
         const statusArray = [
             // {
             //     name: `Achant | /help`,
