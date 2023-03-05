@@ -93,12 +93,13 @@ module.exports = {
         };
 
         let embed;
+        interaction.deferReply({ content: "Cargando...", ephemeral: true });
 
         await axios
             .request(options)
             .then(function (response) {
                 embed = new EmbedBuilder()
-                    .setTitle(`Campeones tier S+ (${division})`)
+                    .setTitle(`${selectedRegion.toUpperCase()} - Campeones tier S+ (${division})`)
                     .addFields(
                         {
                             name: response.data.sTier[0]?.name,
@@ -143,6 +144,6 @@ module.exports = {
                 console.error("error", error);
             });
 
-        interaction.reply({ embeds: [embed], ephemeral: true });
+        interaction.editReply({ embeds: [embed], ephemeral: true });
     },
 };
