@@ -28,7 +28,7 @@ client.on("guildMemberAdd", async (member) => {
 
     client.channels.cache.get(process.env.GENERAL_CHANNEL_ID).send({ embeds: [embed] });
 
-    // AÑADIR USUARIO A LA BASE DE DATOS CUANDO INGRESA AL SERVIDOR
+    // Add user to the database when he joins the server
     let dataUserDB = await usersDiscordSchema.findOne({
         id: member.user.id,
         user: member.user.username,
@@ -47,7 +47,7 @@ client.on("guildMemberAdd", async (member) => {
         dataUserDB.save();
     }
 
-    // Añadir rol a un usuario cuando se une al servidor
+    // Add role to a user when he joins the server
     member.roles.add("726770857531408404");
 
     // Send bye message to the logs channel
