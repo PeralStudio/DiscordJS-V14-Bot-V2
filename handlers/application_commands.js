@@ -40,7 +40,7 @@ module.exports = (client, config) => {
                         ? PermissionsBitField.resolve(
                               pull.permissions.DEFAULT_MEMBER_PERMISSIONS
                           ).toString()
-                        : null,
+                        : null
                 });
             } else {
                 console.log(
@@ -75,7 +75,7 @@ module.exports = (client, config) => {
 
                 commands.push({
                     name: pull.name,
-                    type: pull.type || 2,
+                    type: pull.type || 2
                 });
             } else {
                 console.log(
@@ -110,7 +110,7 @@ module.exports = (client, config) => {
 
                 commands.push({
                     name: pull.name,
-                    type: pull.type || 3,
+                    type: pull.type || 3
                 });
             } else {
                 console.log(

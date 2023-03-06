@@ -8,9 +8,9 @@ module.exports = {
                 new EmbedBuilder().setDescription(
                     "Modals are working! Here is what you have typed: " +
                         interaction.fields.getTextInputValue("something")
-                ),
+                )
             ],
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

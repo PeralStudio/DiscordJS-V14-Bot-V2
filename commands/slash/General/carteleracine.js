@@ -9,7 +9,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const author = interaction.user.id;
@@ -35,19 +35,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[0].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[1].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[0].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed2 = new EmbedBuilder()
@@ -64,19 +64,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[1].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[1].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[1].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed3 = new EmbedBuilder()
@@ -93,19 +93,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[2].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[2].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[2].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed4 = new EmbedBuilder()
@@ -122,19 +122,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[3].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[3].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[3].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed5 = new EmbedBuilder()
@@ -151,19 +151,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[4].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[4].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[4].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed6 = new EmbedBuilder()
@@ -180,19 +180,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[5].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[5].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[5].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed7 = new EmbedBuilder()
@@ -209,19 +209,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[6].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[6].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[6].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed8 = new EmbedBuilder()
@@ -238,19 +238,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[7].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[7].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[7].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed9 = new EmbedBuilder()
@@ -267,19 +267,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[8].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[8].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[8].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 const embed10 = new EmbedBuilder()
@@ -296,19 +296,19 @@ module.exports = {
                         {
                             name: "Fecha Estreno",
                             value: moment(data.results[9].release_date).format("DD-MM-YYYY"),
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Puntuación",
                             value: `⠀⠀${data.results[9].vote_average.toString()}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[9].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 await client.users.fetch(author).then((user) => {
@@ -323,8 +323,8 @@ module.exports = {
                             embed7,
                             embed8,
                             embed9,
-                            embed10,
-                        ],
+                            embed10
+                        ]
                     });
                 });
             })
@@ -334,8 +334,8 @@ module.exports = {
             .finally(() => {
                 interaction.reply({
                     content: ":white_check_mark: ¡ Se ha enviado la cartelera a tu DM !",
-                    ephemeral: true,
+                    ephemeral: true
                 });
             });
-    },
+    }
 };

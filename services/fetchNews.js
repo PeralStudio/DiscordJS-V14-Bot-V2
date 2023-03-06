@@ -26,11 +26,11 @@ const fetchNews = async (client, user) => {
                     page: "1",
                     countries: "ES",
                     page_size: "10",
-                    sources: "lasexta.com,elmundo.es,20minutos.es,eldiario.es,",
+                    sources: "lasexta.com,elmundo.es,20minutos.es,eldiario.es,"
                 },
                 headers: {
-                    "x-api-key": NEWSCATCHERAPI_KEY,
-                },
+                    "x-api-key": NEWSCATCHERAPI_KEY
+                }
             };
 
             await axios
@@ -60,7 +60,7 @@ const fetchNews = async (client, user) => {
                     .setTimestamp()
                     .setFooter({
                         text: `Fuente: ${element.rights} Autor: ${element.author}`,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     })
                     .setColor("#FF0000");
 
@@ -71,7 +71,7 @@ const fetchNews = async (client, user) => {
                         `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
                             "es-ES",
                             {
-                                timeZone: "Europe/Madrid",
+                                timeZone: "Europe/Madrid"
                             }
                         )}`,
                         "green"
@@ -80,7 +80,7 @@ const fetchNews = async (client, user) => {
             });
         },
         {
-            timezone: "Europe/Madrid",
+            timezone: "Europe/Madrid"
         }
     );
 };

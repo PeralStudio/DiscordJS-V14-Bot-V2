@@ -11,11 +11,11 @@ module.exports = {
             embeds: [
                 new EmbedBuilder().setTitle(`${user.user.tag}'s avatar:`).setImage(
                     user.displayAvatarURL({
-                        dynamic: true,
+                        dynamic: true
                     })
-                ),
+                )
             ],
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

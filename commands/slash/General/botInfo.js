@@ -7,7 +7,7 @@ module.exports = {
     description: "Información del bot",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const status = ["Desconectado", "Conectado", "Conectando", "Desconectado"];
@@ -28,19 +28,19 @@ module.exports = {
                 {
                     name: "☑️ Creado",
                     value: `<t:${parseInt(client.user.createdTimestamp / 1000)}:R>`,
-                    inline: true,
+                    inline: true
                 },
 
                 {
                     name: "☑️ Verificado",
                     value: client.user.flags & UserFlags.VerifiedBot ? "Yes" : "No",
-                    inline: true,
+                    inline: true
                 },
 
                 {
                     name: "🧑‍💻 Owner",
                     value: `${client.application.owner.tag || "None"}`,
-                    inline: true,
+                    inline: true
                 },
 
                 { name: "📔 Database", value: status[connection.readyState], inline: true },
@@ -48,7 +48,7 @@ module.exports = {
                 {
                     name: "💻 Sistema",
                     value: os.type().replace("Windows_NT", "Windows").replace("Darwin", "macOS"),
-                    inline: true,
+                    inline: true
                 },
 
                 { name: "🖥 CPU", value: `${os.cpus()[0].model}`, inline: true },
@@ -56,13 +56,13 @@ module.exports = {
                 {
                     name: "📊 Uso del CPU",
                     value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}%`,
-                    inline: true,
+                    inline: true
                 },
 
                 {
                     name: "📤 Activo",
                     value: `<t:${parseInt(client.readyTimestamp / 1000)}:R>`,
-                    inline: true,
+                    inline: true
                 },
 
                 { name: "💾 Node.js", value: process.version, inline: true },
@@ -74,7 +74,7 @@ module.exports = {
                 {
                     name: "⚒️ Comandos",
                     value: `${client.prefix_commands.size + client.slash_commands.size}`,
-                    inline: true,
+                    inline: true
                 },
 
                 { name: "💵 Servidores", value: `${client.guilds.cache.size}`, inline: true },
@@ -85,22 +85,22 @@ module.exports = {
                         (acc, guild) => acc + guild.memberCount,
                         0
                     )}`,
-                    inline: true,
+                    inline: true
                 },
 
                 {
                     name: "📚 Canales de Texto",
                     value: `${getChannelTypeSize([ChannelType.GuildText, ChannelType.GuildNews])}`,
-                    inline: true,
+                    inline: true
                 },
 
                 {
                     name: " 🔉 Canales de Voz",
                     value: `${getChannelTypeSize([
                         ChannelType.GuildVoice,
-                        ChannelType.GuildStageVoice,
+                        ChannelType.GuildStageVoice
                     ])}`,
-                    inline: true,
+                    inline: true
                 },
 
                 {
@@ -108,9 +108,9 @@ module.exports = {
                     value: `${getChannelTypeSize([
                         ChannelType.PublicThread,
                         ChannelType.PrivateThread,
-                        ChannelType.AnnouncementThread,
+                        ChannelType.AnnouncementThread
                     ])}`,
-                    inline: true,
+                    inline: true
                 }
             )
 
@@ -118,8 +118,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         await interaction.reply({ embeds: [arderEmbed] });
-    },
+    }
 };

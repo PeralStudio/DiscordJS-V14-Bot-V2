@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const twitch = new mongoose.Schema({
     user: {
         type: String,
-        required: true,
+        required: true
     },
     titulo: {
         type: String,
-        required: true,
+        required: true
     },
     date: {
         type: String,
-        required: true,
-    },
+        required: true
+    }
 });
 
 module.exports = mongoose.model("twitch", twitch);

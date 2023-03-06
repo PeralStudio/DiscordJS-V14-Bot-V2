@@ -10,11 +10,11 @@ module.exports = {
             type: 3,
             name: "codigo",
             description: "Código JS a evaluar.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (
@@ -26,8 +26,8 @@ module.exports = {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939"),
-                ],
+                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -52,5 +52,5 @@ module.exports = {
             interaction.reply({ embeds: [embed] });
         }
         return;
-    },
+    }
 };

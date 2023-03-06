@@ -5,5 +5,5 @@ module.exports = {
     type: 3, // Command type
     run: async (client, interaction, config) => {
         // execute
-    },
+    }
 };

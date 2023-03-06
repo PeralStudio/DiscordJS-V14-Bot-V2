@@ -9,7 +9,7 @@ dotenv.config();
 const setIntervalYoutube = async (client, userId) => {
     const { YOUTUBE_CHANNEL_ID, ID_OWNER } = process.env;
     const payload = {
-        channelId: userId,
+        channelId: userId
     };
     const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
@@ -31,7 +31,7 @@ const setIntervalYoutube = async (client, userId) => {
         console.log(
             superDjs.colourText(
                 `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
-                    timeZone: "Europe/Madrid",
+                    timeZone: "Europe/Madrid"
                 })})`,
                 "blue"
             )
@@ -40,7 +40,7 @@ const setIntervalYoutube = async (client, userId) => {
         if (ultimoVideo === undefined) return;
 
         let data = await youtube.findOne({
-            user: ultimoVideo.authorId,
+            user: ultimoVideo.authorId
         });
 
         if (!data) {
@@ -49,8 +49,8 @@ const setIntervalYoutube = async (client, userId) => {
                 titulo: ultimoVideo.title,
                 video_ID: ultimoVideo.videoId,
                 date: new Date().toLocaleString("es-ES", {
-                    timeZone: "Europe/Madrid",
-                }),
+                    timeZone: "Europe/Madrid"
+                })
             });
 
             if (ultimoVideo.liveNow === true) {
@@ -60,7 +60,7 @@ const setIntervalYoutube = async (client, userId) => {
                         " \n ¡ **`" +
                         ultimoVideo.author +
                         "`** esta en 🔴 `DIRECTO` ! \n https://www.youtube.com/watch?v=" +
-                        ultimoVideo.videoId,
+                        ultimoVideo.videoId
                 });
 
                 await newData.save();
@@ -77,7 +77,7 @@ const setIntervalYoutube = async (client, userId) => {
                         "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
                         ultimoVideo.durationText +
                         ")` \n https://www.youtube.com/watch?v=" +
-                        ultimoVideo.videoId,
+                        ultimoVideo.videoId
                 });
 
                 await newData.save();
@@ -99,19 +99,19 @@ const setIntervalYoutube = async (client, userId) => {
                             " \n ¡ **`" +
                             ultimoVideo.author +
                             "`** esta en 🔴 `DIRECTO` ! \n https://www.youtube.com/watch?v=" +
-                            ultimoVideo.videoId,
+                            ultimoVideo.videoId
                     });
 
                     await youtube.findOneAndUpdate(
                         {
-                            user: ultimoVideo.authorId,
+                            user: ultimoVideo.authorId
                         },
                         {
                             titulo: ultimoVideo.title,
                             video_ID: ultimoVideo.videoId,
                             date: new Date().toLocaleString("es-ES", {
-                                timeZone: "Europe/Madrid",
-                            }),
+                                timeZone: "Europe/Madrid"
+                            })
                         }
                     );
                 } else {
@@ -127,19 +127,19 @@ const setIntervalYoutube = async (client, userId) => {
                             "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
                             ultimoVideo.durationText +
                             ")` \n https://www.youtube.com/watch?v=" +
-                            ultimoVideo.videoId,
+                            ultimoVideo.videoId
                     });
 
                     await youtube.findOneAndUpdate(
                         {
-                            user: ultimoVideo.authorId,
+                            user: ultimoVideo.authorId
                         },
                         {
                             titulo: ultimoVideo.title,
                             video_ID: ultimoVideo.videoId,
                             date: new Date().toLocaleString("es-ES", {
-                                timeZone: "Europe/Madrid",
-                            }),
+                                timeZone: "Europe/Madrid"
+                            })
                         }
                     );
                 }

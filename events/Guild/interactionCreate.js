@@ -3,7 +3,7 @@ const client = require("../../index");
 const config = require("../../config/config.js");
 
 module.exports = {
-    name: "interactionCreate",
+    name: "interactionCreate"
 };
 
 client.on("interactionCreate", async (interaction) => {
@@ -56,9 +56,9 @@ client.on("interactionCreate", async (interaction) => {
                         .setDescription(
                             "Something went wrong... Probably the Modal ID is not defined in the modals handler."
                         )
-                        .setColor("Red"),
+                        .setColor("Red")
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         try {

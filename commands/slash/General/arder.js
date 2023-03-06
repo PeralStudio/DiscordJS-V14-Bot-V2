@@ -10,11 +10,11 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario que esta ardiendo.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const arderEmbed = new EmbedBuilder()
@@ -28,8 +28,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         await interaction.reply({ embeds: [arderEmbed] });
-    },
+    }
 };

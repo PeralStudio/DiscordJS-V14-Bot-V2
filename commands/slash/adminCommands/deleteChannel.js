@@ -10,11 +10,11 @@ module.exports = {
             type: 7,
             name: "canal",
             description: "Selecciona el canal a borrar.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const { options } = interaction;
@@ -26,8 +26,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para cambiar niveles.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -35,7 +35,7 @@ module.exports = {
 
         await interaction.reply({
             content: "Canal `" + channel.name + "` borrado correctamente.",
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

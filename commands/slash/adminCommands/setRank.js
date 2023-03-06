@@ -11,17 +11,17 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario",
-            required: true,
+            required: true
         },
         {
             type: 10,
             name: "nivel",
             description: "Nivel",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
@@ -30,8 +30,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para cambiar niveles.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -46,7 +46,7 @@ module.exports = {
 
         user = await xpSchema.findOne({
             guildID,
-            userID,
+            userID
         });
 
         try {
@@ -55,15 +55,15 @@ module.exports = {
                     {
                         user: `${member.user.username}#${member.user.discriminator}`,
                         guildID,
-                        userID,
+                        userID
                     },
                     {
                         level: newlvl,
-                        xp: 0,
+                        xp: 0
                     },
                     {
                         upsert: true,
-                        new: true,
+                        new: true
                     }
                 )
                 .then(() =>
@@ -72,11 +72,11 @@ module.exports = {
                             `El Nivel de <@${member.user.id}> ha sido cambiado a  ` +
                             "`" +
                             newlvl +
-                            "`",
+                            "`"
                     })
                 );
         } catch (error) {
             console.log(error);
         }
-    },
+    }
 };

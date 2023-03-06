@@ -8,7 +8,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const total = interaction.member.guild.memberCount;
@@ -32,7 +32,7 @@ module.exports = {
                 interaction.member.guild.iconURL({
                     format: "png",
                     dynamic: true,
-                    size: 1024,
+                    size: 1024
                 })
             )
             .setAuthor({
@@ -40,57 +40,57 @@ module.exports = {
                 iconURL: interaction.member.guild.iconURL({
                     format: "png",
                     dynamic: true,
-                    size: 1024,
-                }),
+                    size: 1024
+                })
             })
             .addFields(
                 { name: "\u200B", value: "\u200B" },
                 {
                     name: "©️ Creado",
                     value: dayjs(interaction.member.guild.createdAt).format("DD/MM/YYYY"),
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "💬 Canales",
                     value: `⠀⠀⠀⠀${interaction.member.guild.channels.cache.size.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "👨 Miembros",
                     value: `⠀⠀⠀⠀${total.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 { name: "\u200B", value: "\u200B" },
                 {
                     name: "🟢 En linea",
                     value: `⠀⠀⠀⠀${membersOnline.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "🟡 Ausentes",
                     value: `⠀⠀⠀⠀⠀${memberAusente.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "🔴 No molestar",
                     value: `⠀⠀⠀⠀⠀${memberDnd.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 { name: "\u200B", value: "\u200B" },
                 {
                     name: "❌ Offline",
                     value: `⠀⠀⠀${memberOfline.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "👮 Roles",
                     value: `⠀⠀⠀${interaction.member.guild.roles.cache.size.toString()}`,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "🌎 Region",
                     value: `⠀⠀⠀${interaction.member.guild.preferredLocale}`,
-                    inline: true,
+                    inline: true
                 },
                 { name: "\u200B", value: "\u200B" },
                 {
@@ -99,7 +99,7 @@ module.exports = {
                         .map((role) => role.name)
                         .sort()
                         .join(", ")}`,
-                    inline: true,
+                    inline: true
                 },
                 { name: "\u200B", value: "\u200B" }
             )
@@ -107,8 +107,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         await interaction.reply({ embeds: [serverInfoEmbed] });
-    },
+    }
 };

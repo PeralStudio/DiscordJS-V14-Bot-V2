@@ -4,11 +4,11 @@ const usersDiscordSchema = require("../../schemas/usersDiscordSchema");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "guildMemberAdd",
+    name: "guildMemberAdd"
 };
 
 client.on("guildMemberAdd", async (member) => {
@@ -23,7 +23,7 @@ client.on("guildMemberAdd", async (member) => {
         .setTimestamp()
         .setFooter({
             text: process.env.NAME_BOT,
-            iconURL: client.user.displayAvatarURL(),
+            iconURL: client.user.displayAvatarURL()
         });
 
     client.channels.cache.get(process.env.GENERAL_CHANNEL_ID).send({ embeds: [embed] });
@@ -32,7 +32,7 @@ client.on("guildMemberAdd", async (member) => {
     let dataUserDB = await usersDiscordSchema.findOne({
         id: member.user.id,
         user: member.user.username,
-        discriminator: member.user.discriminator,
+        discriminator: member.user.discriminator
     });
 
     if (!dataUserDB) {
@@ -41,8 +41,8 @@ client.on("guildMemberAdd", async (member) => {
             user: member.user.username,
             discriminator: member.user.discriminator,
             date: new Date().toLocaleString("es-ES", {
-                timeZone: "Europe/Madrid",
-            }),
+                timeZone: "Europe/Madrid"
+            })
         });
         dataUserDB.save();
     }
@@ -54,11 +54,11 @@ client.on("guildMemberAdd", async (member) => {
     const hiEmbed = new EmbedBuilder()
         .setAuthor({
             name: `:wave: ${member.user.username}#${member.user.discriminator} ha entrado al servidor!`,
-            iconURL: member.user.displayAvatarURL({ dynamic: true }),
+            iconURL: member.user.displayAvatarURL({ dynamic: true })
         })
         .setFooter({
             text: `${process.env.NAME_BOT}`,
-            iconURL: client.user.displayAvatarURL(),
+            iconURL: client.user.displayAvatarURL()
         })
         .setTimestamp()
         .setColor("#c9af30");

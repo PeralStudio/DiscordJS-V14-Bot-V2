@@ -6,7 +6,7 @@ module.exports = {
     description: "Canción anterior.",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const queue = client.player.getQueue(interaction.guild);
@@ -20,10 +20,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
         if (queue.previousTracks.length > 1) {
             queue.back();
@@ -35,9 +35,9 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ]
             });
         } else {
             return await interaction.reply({
@@ -48,11 +48,11 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
         }
-    },
+    }
 };

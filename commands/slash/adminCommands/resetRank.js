@@ -12,11 +12,11 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario al que resetear nivel",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
@@ -25,8 +25,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para resetear niveles.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -39,7 +39,7 @@ module.exports = {
 
         user = await xpSchema.findOne({
             guildID,
-            userID,
+            userID
         });
 
         try {
@@ -48,24 +48,24 @@ module.exports = {
                     {
                         user: `${member.user.username}#${member.user.discriminator}`,
                         guildID,
-                        userID,
+                        userID
                     },
                     {
                         level: 1,
-                        xp: 0,
+                        xp: 0
                     },
                     {
                         upsert: true,
-                        new: true,
+                        new: true
                     }
                 )
                 .then(() =>
                     interaction.reply({
-                        content: `El Nivel de <@${member.user.id}> ha sido reseteado correctamente`,
+                        content: `El Nivel de <@${member.user.id}> ha sido reseteado correctamente`
                     })
                 );
         } catch (error) {
             console.log(error);
         }
-    },
+    }
 };

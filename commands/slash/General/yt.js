@@ -11,11 +11,11 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a buscar en youtube.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const search = interaction.options.get("texto").value;
@@ -34,13 +34,13 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setDescription("⚠️ No se han encontrado resultados.")
-                            .setColor("#EA3939"),
-                    ],
+                            .setColor("#EA3939")
+                    ]
                 });
             } else {
                 let link = `https://www.youtube.com/watch?v=${result.items[1]["id"].videoId}`;
                 interaction.reply(link);
             }
         });
-    },
+    }
 };

@@ -9,24 +9,24 @@ module.exports = {
         {
             type: 11,
             name: "imagen",
-            description: "Adjuntar imagen.",
+            description: "Adjuntar imagen."
         },
         {
             type: 3,
             name: "url-imagen",
-            description: "Url imagen.",
-        },
+            description: "Url imagen."
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939"),
-                ],
+                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -44,5 +44,5 @@ module.exports = {
             .setColor("#D4B053");
 
         interaction.reply({ embeds: [embed], ephemeral: true });
-    },
+    }
 };

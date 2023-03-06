@@ -31,18 +31,18 @@ module.exports = {
                 { name: "🔉Sonic", value: "sonic" },
                 { name: "🔉Vegetta777", value: "vegeta777" },
                 { name: "🔉Yoda", value: "yoda" },
-                { name: "🔉2Pac (Tupac Amaru Shakur)", value: "2pac" },
-            ],
+                { name: "🔉2Pac (Tupac Amaru Shakur)", value: "2pac" }
+            ]
         },
         {
             type: 3,
             name: "texto",
             description: "Texto a enviar.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const char = interaction.options.get("personaje").value;
@@ -57,5 +57,5 @@ module.exports = {
         await interaction.deferReply({ content: "Cargando..." });
         const result = await fetchData();
         await interaction.editReply({ content: null, files: [result] });
-    },
+    }
 };

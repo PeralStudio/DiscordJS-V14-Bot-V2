@@ -6,7 +6,7 @@ module.exports = {
     description: "Ver lista de emojis disponibles.",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const emojiList = interaction.guild.emojis.cache
@@ -21,7 +21,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 });
 
             interaction.reply({ embeds: [embed] });
@@ -34,10 +34,10 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 });
 
             interaction.reply({ embeds: [embed] });
         }
-    },
+    }
 };

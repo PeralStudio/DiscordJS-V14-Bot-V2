@@ -10,7 +10,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         let currentVersionPatch;
@@ -59,9 +59,9 @@ module.exports = {
                                 .setTimestamp()
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
-                                }),
-                        ],
+                                    iconURL: client.user.displayAvatarURL()
+                                })
+                        ]
                     });
                 } else {
                     getNotes();
@@ -91,9 +91,9 @@ module.exports = {
                                     .setTimestamp()
                                     .setFooter({
                                         text: process.env.NAME_BOT,
-                                        iconURL: client.user.displayAvatarURL(),
-                                    }),
-                            ],
+                                        iconURL: client.user.displayAvatarURL()
+                                    })
+                            ]
                         });
                     } else {
                         return interaction.reply({
@@ -105,14 +105,14 @@ module.exports = {
                                     .setTimestamp()
                                     .setFooter({
                                         text: process.env.NAME_BOT,
-                                        iconURL: client.user.displayAvatarURL(),
-                                    }),
+                                        iconURL: client.user.displayAvatarURL()
+                                    })
                             ],
-                            ephemeral: true,
+                            ephemeral: true
                         });
                     }
                 }
             );
         };
-    },
+    }
 };

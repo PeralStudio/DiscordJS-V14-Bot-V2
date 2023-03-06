@@ -26,12 +26,12 @@ module.exports = {
                 { name: "🔊 Shut up", value: "shutup" },
                 { name: "🔊 Tecno blade bruh", value: "tecnobladebruh" },
                 { name: "🔊 Villager", value: "villager" },
-                { name: "🔊 X-files theme song", value: "x-files-theme-song-copy" },
-            ],
-        },
+                { name: "🔊 X-files theme song", value: "x-files-theme-song-copy" }
+            ]
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const selectedSound = interaction.options.get("audios").value;
@@ -45,10 +45,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
             setTimeout(() => interaction.deleteReply(), 4000);
@@ -67,10 +67,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
             setTimeout(() => interaction.deleteReply(), 4000);
@@ -86,5 +86,5 @@ module.exports = {
             .catch((e) => console.error);
 
         setTimeout(() => interaction.deleteReply(), 4000);
-    },
+    }
 };

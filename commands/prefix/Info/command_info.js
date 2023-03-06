@@ -4,7 +4,7 @@ module.exports = {
     config: {
         name: "info",
         description: "Get a command's information.",
-        usage: "info [command]",
+        usage: "info [command]"
     },
     permissions: ["SendMessages"],
     owner: false,
@@ -14,8 +14,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("Please provide a command name.")
-                        .setColor("Red"),
-                ],
+                        .setColor("Red")
+                ]
             });
 
         const command = client.prefix_commands.get(args[0].toLowerCase());
@@ -25,8 +25,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("Sorry, but that command doesn't exists.")
-                        .setColor("Red"),
-                ],
+                        .setColor("Red")
+                ]
             });
 
         return message.reply({
@@ -36,19 +36,19 @@ module.exports = {
                     .addFields(
                         {
                             name: "Description:",
-                            value: command.config.description || "No Description was provided.",
+                            value: command.config.description || "No Description was provided."
                         },
                         {
                             name: "Usage:",
                             value: command.config.usage
                                 ? codeBlock("txt", command.config.usage)
-                                : "No Usage was provided.",
+                                : "No Usage was provided."
                         },
                         { name: "Permissions:", value: command.permissions.join(", ") },
                         { name: "Developer only?", value: command.owner ? "Yes" : "No" }
                     )
-                    .setColor("Blue"),
-            ],
+                    .setColor("Blue")
+            ]
         });
-    },
+    }
 };

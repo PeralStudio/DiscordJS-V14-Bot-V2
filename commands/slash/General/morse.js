@@ -10,11 +10,11 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a convertir en morse.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         let alpha = " ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
@@ -49,7 +49,7 @@ module.exports = {
 
         interaction.reply({
             // tts: true, //Habilitar que el bot diga el mensaje
-            content: "```" + textToConvert + "```",
+            content: "```" + textToConvert + "```"
         });
-    },
+    }
 };

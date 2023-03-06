@@ -12,11 +12,11 @@ module.exports = {
             type: 3,
             name: "id-backup",
             description: "Id del backup.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const idBackup = interaction.options.get("id-backup").value;
@@ -25,8 +25,8 @@ module.exports = {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939"),
-                ],
+                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -43,30 +43,30 @@ module.exports = {
                             {
                                 name: "Backup ID",
                                 value: backupInfos.id,
-                                inline: false,
+                                inline: false
                             },
                             {
                                 name: "Servidor ID",
                                 value: backupInfos.data.guildID,
-                                inline: false,
+                                inline: false
                             },
                             {
                                 name: "Tamaño",
                                 value: `${backupInfos.size} kb`,
-                                inline: false,
+                                inline: false
                             },
                             {
                                 name: "Creado",
                                 value: `${moment(date)
                                     .locale("es")
                                     .format("DD/MM/YYYY (HH:mm:ss)")}`,
-                                inline: false,
+                                inline: false
                             }
                         )
                         .setColor("#D4B053")
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
+                            iconURL: client.user.displayAvatarURL()
                         });
                 })
                 .catch((err) => {
@@ -75,12 +75,12 @@ module.exports = {
                         .addFields({
                             name: "Backup ID",
                             value: idBackup,
-                            inline: false,
+                            inline: false
                         })
                         .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
+                            iconURL: client.user.displayAvatarURL()
                         });
                 });
 
@@ -90,5 +90,5 @@ module.exports = {
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
         const result = await getBackup();
         await interaction.editReply({ embeds: [result], ephemeral: true });
-    },
+    }
 };

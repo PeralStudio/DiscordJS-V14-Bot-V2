@@ -8,15 +8,15 @@ module.exports = {
     description: "Crear backup servidor.",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939"),
-                ],
+                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -28,7 +28,7 @@ module.exports = {
             backup.setStorageFolder(path.join(__dirname, "../../../backups"));
             await backup
                 .create(interaction.member.guild, {
-                    jsonBeautify: true,
+                    jsonBeautify: true
                 })
                 .then(async (backupData) => {
                     embed = new EmbedBuilder()
@@ -43,7 +43,7 @@ module.exports = {
                         .setColor("#1cc91c")
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
+                            iconURL: client.user.displayAvatarURL()
                         })
                         .setTimestamp();
                 })
@@ -53,7 +53,7 @@ module.exports = {
                         .setColor("#db1e1e")
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
+                            iconURL: client.user.displayAvatarURL()
                         })
                         .setTimestamp();
                 });
@@ -64,5 +64,5 @@ module.exports = {
         await interaction.deferReply({ content: "Cargando...", ephemeral: true });
         const result = await createBackup();
         await interaction.editReply({ embeds: [result], ephemeral: true });
-    },
+    }
 };

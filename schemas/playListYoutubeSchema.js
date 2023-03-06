@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 
 const playListYoutubeSchema = new mongoose.Schema({
     playListAuthor: {
-        type: String,
+        type: String
     },
     playListAuthorID: {
-        type: String,
+        type: String
     },
     playListTitle: {
-        type: String,
+        type: String
     },
     playlistUrl: {
-        type: String,
+        type: String
     },
     playListCount: {
-        type: Number,
-    },
+        type: Number
+    }
 });
 
 module.exports = mongoose.model("playListYoutube", playListYoutubeSchema);

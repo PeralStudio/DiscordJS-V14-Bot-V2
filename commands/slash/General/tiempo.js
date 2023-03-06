@@ -11,11 +11,11 @@ module.exports = {
             type: 3,
             name: "ciudad",
             description: "Ciudad a mostrar el tiempo.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         fetch(
@@ -37,43 +37,43 @@ module.exports = {
                         {
                             name: "Máxima",
                             value: `${data.main.temp_max.toFixed(1)}\u00B0C`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Mínima",
                             value: `${data.main.temp_min.toFixed(1)}\u00B0C`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Humedad",
                             value: `${data.main.humidity}%`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Viento",
                             value: `${data.wind.speed} m/s`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Presión",
                             value: `${data.main.pressure} hPa`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Nubes",
                             value: `${data.weather[0].description}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(`http://openweathermap.org/img/w/${data.weather[0].icon}.png`)
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
 
                 interaction.reply({ embeds: [embedTiempo] });
             })
             .catch((err) => console.log(err));
-    },
+    }
 };

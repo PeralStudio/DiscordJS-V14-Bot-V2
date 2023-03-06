@@ -4,11 +4,11 @@ const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "channelDelete.js",
+    name: "channelDelete.js"
 };
 
 client.on("channelDelete", async (channel) => {
@@ -16,7 +16,7 @@ client.on("channelDelete", async (channel) => {
 
     channel.guild
         .fetchAuditLogs({
-            type: AuditLogEvent.ChannelDelete,
+            type: AuditLogEvent.ChannelDelete
         })
         .then(async (audit) => {
             const { executor } = audit.entries.first();
@@ -33,25 +33,25 @@ client.on("channelDelete", async (channel) => {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `❌ Canal borrado por ${executor.tag}`,
-                    iconURL: executor.displayAvatarURL({ dynamic: true }),
+                    iconURL: executor.displayAvatarURL({ dynamic: true })
                 })
                 .addFields(
                     {
                         name: ` `,
-                        value: `Nombre del canal: **${channel.name}**`,
+                        value: `Nombre del canal: **${channel.name}**`
                     },
                     {
                         name: ` `,
-                        value: `Tipo de canal: **${type}**`,
+                        value: `Tipo de canal: **${type}**`
                     },
                     {
                         name: ` `,
-                        value: `ID del canal: **${channel.id}**`,
+                        value: `ID del canal: **${channel.id}**`
                     }
                 )
                 .setFooter({
                     text: `Autor: ${executor.id}`,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#FF0000");

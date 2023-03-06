@@ -3,7 +3,7 @@ const {
     EmbedBuilder,
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle,
+    ButtonStyle
 } = require("discord.js");
 const math = require("mathjs");
 
@@ -12,7 +12,7 @@ module.exports = {
     description: "Calculadora.",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const idPrefix = "calulator";
@@ -113,13 +113,13 @@ module.exports = {
         const msg = await interaction.reply({
             embeds: [embed],
             components: [row, row1, row2, row3, row4],
-            ephemeral: false,
+            ephemeral: false
         });
 
         let data = "";
         const col = msg.createMessageComponentCollector({
             filter: (i) => i.user.id === interaction.user.id,
-            time: 600000,
+            time: 600000
         });
 
         col.on("collect", async (i) => {
@@ -157,11 +157,11 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Blurple")
-                        .setDescription(`\`\`\`\n${data || extra}\n\`\`\``),
+                        .setDescription(`\`\`\`\n${data || extra}\n\`\`\``)
                 ],
                 components: [row, row1, row2, row3, row4],
-                ephemeral: false,
+                ephemeral: false
             });
         });
-    },
+    }
 };

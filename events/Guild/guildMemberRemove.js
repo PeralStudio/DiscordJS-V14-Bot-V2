@@ -4,11 +4,11 @@ const client = require("../../index");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "guildMemberRemove",
+    name: "guildMemberRemove"
 };
 
 client.on("guildMemberRemove", async (member) => {
@@ -21,7 +21,7 @@ client.on("guildMemberRemove", async (member) => {
         .setTimestamp()
         .setFooter({
             text: process.env.NAME_BOT,
-            iconURL: client.user.displayAvatarURL(),
+            iconURL: client.user.displayAvatarURL()
         });
 
     client.channels.cache.get(process.env.GENERAL_CHANNEL_ID).send({ embeds: [embed] });
@@ -42,11 +42,11 @@ client.on("guildMemberRemove", async (member) => {
     const byeEmbed = new EmbedBuilder()
         .setAuthor({
             name: `:wave: ${member.user.username}#${member.user.discriminator} ha dejado el servidor!`,
-            iconURL: member.user.displayAvatarURL({ dynamic: true }),
+            iconURL: member.user.displayAvatarURL({ dynamic: true })
         })
         .setFooter({
             text: `${process.env.NAME_BOT}`,
-            iconURL: client.user.displayAvatarURL(),
+            iconURL: client.user.displayAvatarURL()
         })
         .setTimestamp()
         .setColor("#c9af30");

@@ -10,11 +10,11 @@ module.exports = {
             type: 3,
             name: "volumen",
             description: "min: 1 - max: 100",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const queue = client.player.getQueue(interaction.guild);
@@ -31,10 +31,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         queue.setVolume(volume);
@@ -47,9 +47,9 @@ module.exports = {
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
-                    }),
-            ],
+                        iconURL: client.user.displayAvatarURL()
+                    })
+            ]
         });
-    },
+    }
 };

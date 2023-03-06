@@ -4,11 +4,11 @@ const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "messageUpdate.js",
+    name: "messageUpdate.js"
 };
 
 client.on("messageUpdate", async (message) => {
@@ -16,7 +16,7 @@ client.on("messageUpdate", async (message) => {
 
     await message.guild
         .fetchAuditLogs({
-            type: AuditLogEvent.MessageUpdate,
+            type: AuditLogEvent.MessageUpdate
         })
         .then(async (audit) => {
             const authorEdit = audit.entries.first().executor;
@@ -28,25 +28,25 @@ client.on("messageUpdate", async (message) => {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `✒️ Editado por ${authorEdit.tag}`,
-                    iconURL: message.author.displayAvatarURL({ dynamic: true }),
+                    iconURL: message.author.displayAvatarURL({ dynamic: true })
                 })
                 .addFields(
                     {
                         name: ` `,
-                        value: `Mensaje de ${message.author} ha sido editado en ${message.channel}`,
+                        value: `Mensaje de ${message.author} ha sido editado en ${message.channel}`
                     },
                     {
                         name: `Mensaje original`,
-                        value: `${message.content}`,
+                        value: `${message.content}`
                     },
                     {
                         name: ` Mensaje nuevo`,
-                        value: `${message.reactions.message.content}`,
+                        value: `${message.reactions.message.content}`
                     }
                 )
                 .setFooter({
                     text: `Autor: ${message.author.id} | Mensaje ID: ${message.id}`,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#c9af30");

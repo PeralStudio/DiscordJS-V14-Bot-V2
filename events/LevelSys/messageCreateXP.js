@@ -7,7 +7,7 @@ require("dotenv").config();
 const coolDown = new Set();
 
 module.exports = {
-    name: "messageCreateXP",
+    name: "messageCreateXP"
 };
 
 client.on("messageCreate", async (message) => {
@@ -27,13 +27,13 @@ client.on("messageCreate", async (message) => {
         user = await xpSchema.findOneAndUpdate(
             {
                 guildID,
-                userID,
+                userID
             },
             {
                 user: username,
                 guildID,
                 userID,
-                $inc: { xp: xpAmount },
+                $inc: { xp: xpAmount }
             },
             { upsert: true, new: true }
         );
@@ -49,7 +49,7 @@ client.on("messageCreate", async (message) => {
                     message.author.displayAvatarURL({
                         format: "png",
                         dynamic: true,
-                        size: 1024,
+                        size: 1024
                     })
                 )
                 .setCurrentXP(xp)
@@ -64,7 +64,7 @@ client.on("messageCreate", async (message) => {
             rank.build().then((data) => {
                 channelToSend.send({
                     content: `🎉 ¡Enhorabuena! <@${message.author.id}> ha alcanzado el nivel ${level} 🎉`,
-                    files: [new AttachmentBuilder(data, { name: "Rank.png" })],
+                    files: [new AttachmentBuilder(data, { name: "Rank.png" })]
                 });
             });
         }
@@ -73,11 +73,11 @@ client.on("messageCreate", async (message) => {
             {
                 user: username,
                 guildID,
-                userID,
+                userID
             },
             {
                 level,
-                xp,
+                xp
             }
         );
     } catch (error) {

@@ -16,8 +16,8 @@ module.exports = {
                 { name: "KR", value: "kr" },
                 { name: "NA", value: "na" },
                 { name: "LAN", value: "lan" },
-                { name: "LAS", value: "las" },
-            ],
+                { name: "LAS", value: "las" }
+            ]
         },
         {
             type: 3,
@@ -31,12 +31,12 @@ module.exports = {
                 { name: "Oro", value: "gold" },
                 { name: "Platino", value: "platinum" },
                 { name: "Diamante", value: "diamond" },
-                { name: "Maestro ", value: "master" },
-            ],
-        },
+                { name: "Maestro ", value: "master" }
+            ]
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const selectedRegion = interaction.options.data[0].value;
@@ -88,8 +88,8 @@ module.exports = {
             params: { tier: "s+", region: selectedRegion, rank: selectedRank },
             headers: {
                 "X-RapidAPI-Key": process.env.RAPIDAPI_SECUNDARY_KEY,
-                "X-RapidAPI-Host": "league-of-legends-galore.p.rapidapi.com",
-            },
+                "X-RapidAPI-Host": "league-of-legends-galore.p.rapidapi.com"
+            }
         };
 
         let embed;
@@ -104,32 +104,32 @@ module.exports = {
                         {
                             name: response.data.sTier[0]?.name,
                             value: `Winrate: ${response.data.sTier[0]?.winRate}\nPosición: ${response.data.sTier[0]?.role}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: response.data.sTier[1]?.name,
                             value: `Winrate: ${response.data.sTier[1]?.winRate}\nPosición: ${response.data.sTier[1]?.role}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: response.data.sTier[2]?.name,
                             value: `Winrate: ${response.data.sTier[2]?.winRate}\nPosición: ${response.data.sTier[2]?.role}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: response.data.sTier[3]?.name,
                             value: `Winrate: ${response.data.sTier[3]?.winRate}\nPosición: ${response.data.sTier[3]?.role}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: response.data.sTier[4]?.name,
                             value: `Winrate: ${response.data.sTier[4]?.winRate}\nPosición: ${response.data.sTier[4]?.role}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: response.data.sTier[5]?.name,
                             value: `Winrate: ${response.data.sTier[5]?.winRate}\nPosición: ${response.data.sTier[5]?.role}`,
-                            inline: true,
+                            inline: true
                         }
                     )
                     .setThumbnail(image)
@@ -137,7 +137,7 @@ module.exports = {
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client?.user.displayAvatarURL(),
+                        iconURL: client?.user.displayAvatarURL()
                     });
             })
             .catch(function (error) {
@@ -145,5 +145,5 @@ module.exports = {
             });
 
         interaction.editReply({ embeds: [embed], ephemeral: true });
-    },
+    }
 };

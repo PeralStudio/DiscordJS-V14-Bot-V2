@@ -26,24 +26,24 @@ const client = new Client({
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.GuildVoiceStates,
-        IntentsBitField.Flags.GuildPresences,
+        IntentsBitField.Flags.GuildPresences
     ],
     partials: [
         Partials.Channel,
         Partials.Message,
         Partials.User,
         Partials.GuildMember,
-        Partials.Reaction,
+        Partials.Reaction
     ],
     presence: {
         activities: [
             {
                 name: "Achant | /help",
-                type: 0,
-            },
+                type: 0
+            }
         ],
-        status: "dnd",
-    },
+        status: "dnd"
+    }
 });
 
 //function interval Twitch for show new Streams of a user
@@ -92,8 +92,8 @@ client.events = new Collection();
 client.player = new Player(client, {
     ytdlOptions: {
         quality: "highestaudio",
-        highWaterMark: 1 << 25,
-    },
+        highWaterMark: 1 << 25
+    }
 });
 client.queueToList = [];
 

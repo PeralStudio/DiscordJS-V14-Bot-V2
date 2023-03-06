@@ -18,12 +18,12 @@ module.exports = {
                 { name: "🎮 Checkers", value: "checkers" },
                 { name: "🎮 Letter", value: "lettertile" },
                 { name: "🎮 Spellcast", value: "spellcast" },
-                { name: "🎮 Ocho", value: "ocho" },
-            ],
-        },
+                { name: "🎮 Ocho", value: "ocho" }
+            ]
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         client.discordTogether = new DiscordTogether(client);
@@ -38,8 +38,8 @@ module.exports = {
         } else {
             return interaction.reply({
                 content: "Debes estar en un canal de voz.",
-                ephemeral: true,
+                ephemeral: true
             });
         }
-    },
+    }
 };

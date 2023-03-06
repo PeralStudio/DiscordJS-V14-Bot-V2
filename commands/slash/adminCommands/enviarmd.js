@@ -10,22 +10,22 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario al que enviar el mensaje.",
-            required: true,
+            required: true
         },
         {
             type: 3,
             name: "mensaje",
             description: "Mensaje a enviar.",
-            required: true,
+            required: true
         },
         {
             type: 11,
             name: "archivo",
-            description: "Adjuntar archivo (opcional).",
-        },
+            description: "Adjuntar archivo (opcional)."
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (
@@ -39,8 +39,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para enviar mensajes privados.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -63,8 +63,8 @@ module.exports = {
                                     client.users.cache.get(userToSend).username
                                 }#${client.users.cache.get(userToSend).discriminator}** .`
                             )
-                            .setColor("#EA3939"),
-                    ],
+                            .setColor("#EA3939")
+                    ]
                 });
                 setTimeout(() => interaction.deleteReply(), 3000);
             })
@@ -74,9 +74,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setDescription(`⚠️  No se pudo enviar el mensaje. Error: ${err}`)
-                            .setColor("#EA3939"),
-                    ],
+                            .setColor("#EA3939")
+                    ]
                 });
             });
-    },
+    }
 };

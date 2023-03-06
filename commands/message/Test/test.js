@@ -6,7 +6,7 @@ module.exports = {
     run: async (client, interaction, config) => {
         return interaction.reply({
             embeds: [new EmbedBuilder().setDescription("Test")],
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

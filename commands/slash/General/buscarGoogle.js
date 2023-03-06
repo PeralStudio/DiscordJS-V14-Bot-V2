@@ -10,11 +10,11 @@ module.exports = {
             type: 3,
             name: "búsqueda",
             description: "Texto para buscar en Google.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const searchTerm = interaction.options
@@ -28,8 +28,8 @@ module.exports = {
             safe: false,
             parse_ads: false,
             additional_params: {
-                hl: "es",
-            },
+                hl: "es"
+            }
         };
 
         const response = await google.search(searchTerm, options);
@@ -44,7 +44,7 @@ module.exports = {
 
         await interaction.reply({
             content: output,
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

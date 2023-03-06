@@ -11,18 +11,18 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "App a buscar.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const text = interaction.options.getString("texto");
 
         PlayStore.search({
             term: text,
-            num: 1,
+            num: 1
         }).then(async (data) => {
             let app;
 
@@ -31,7 +31,7 @@ module.exports = {
             } catch (error) {
                 return interaction.reply({
                     content: `No se encontró la app **${text}**`,
-                    ephemeral: true,
+                    ephemeral: true
                 });
             }
 
@@ -45,26 +45,26 @@ module.exports = {
                     {
                         name: `Precio`,
                         value: `${app.free ? "Gratis" : app.price}`,
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `Desarrolador`,
                         value: `${app.developer}`,
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `Valoración`,
                         value: `${app.scoreText}`,
-                        inline: true,
+                        inline: true
                     }
                 )
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 });
 
             await interaction.reply({ embeds: [embed] });
         });
-    },
+    }
 };

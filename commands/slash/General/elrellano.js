@@ -11,11 +11,11 @@ module.exports = {
             type: 4,
             name: "página",
             description: "Página a mostrar",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         let arrayVideos = [];
@@ -26,14 +26,14 @@ module.exports = {
             if (page <= 0) {
                 interaction.reply({
                     content: "❌ La primera página suele ser la `1` bobo.",
-                    ephemeral: true,
+                    ephemeral: true
                 });
                 return;
             }
             if (page > 1950) {
                 interaction.reply({
                     content: `❌ No hay tantas páginas.`,
-                    ephemeral: true,
+                    ephemeral: true
                 });
                 return;
             }
@@ -49,7 +49,7 @@ module.exports = {
                 if (arrayVideos.length <= 0) {
                     interaction.reply({
                         content: "❌ No se han encontrado videos. Intentalo mas tarde!",
-                        ephemeral: true,
+                        ephemeral: true
                     });
                     return;
                 }
@@ -62,21 +62,21 @@ module.exports = {
                                 arrayVideos[1] !== undefined ? arrayVideos[1] : ""
                             }\n${arrayVideos[2] !== undefined ? arrayVideos[2] : ""}\n${
                                 arrayVideos[3] !== undefined ? arrayVideos[3] : ""
-                            }\n${arrayVideos[4] !== undefined ? arrayVideos[4] : ""}\n`,
+                            }\n${arrayVideos[4] !== undefined ? arrayVideos[4] : ""}\n`
                         });
                     })
                     .finally(() => {
                         interaction.reply({
                             content: ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
-                            ephemeral: true,
+                            ephemeral: true
                         });
                     });
             } else {
                 interaction.reply({
                     content: "❌ Error en la petición. Intentalo mas tarde!",
-                    ephemeral: true,
+                    ephemeral: true
                 });
             }
         });
-    },
+    }
 };

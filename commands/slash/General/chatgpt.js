@@ -11,11 +11,11 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a enviar a chat GPT-3",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const text = interaction.options.get("texto").value;
@@ -26,9 +26,9 @@ module.exports = {
             headers: {
                 "content-type": "application/json",
                 "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-                "X-RapidAPI-Host": "you-chat-gpt.p.rapidapi.com",
+                "X-RapidAPI-Host": "you-chat-gpt.p.rapidapi.com"
             },
-            data: { question: text, max_response_time: 15 },
+            data: { question: text, max_response_time: 15 }
         };
 
         const getData = async () => {
@@ -46,11 +46,11 @@ module.exports = {
             )
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             })
             .setTimestamp()
             .setColor("#C28F2C");
 
         await interaction.editReply({ embeds: [embed], ephemeral: true });
-    },
+    }
 };

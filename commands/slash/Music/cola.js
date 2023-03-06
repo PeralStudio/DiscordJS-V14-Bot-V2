@@ -6,7 +6,7 @@ module.exports = {
     description: "Ver cola de reproducción.",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const queue = client.player.getQueue(interaction.guild);
@@ -20,10 +20,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         const embed = new EmbedBuilder()
@@ -34,8 +34,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         return await interaction.reply({ embeds: [embed] });
-    },
+    }
 };

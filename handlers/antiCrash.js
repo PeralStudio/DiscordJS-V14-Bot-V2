@@ -4,7 +4,7 @@ const deleteOldMsg = require("../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_ERRORESBOT,
+    url: process.env.WEBHOOK_ERRORESBOT
 });
 
 module.exports = (client) => {
@@ -23,7 +23,7 @@ module.exports = (client) => {
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         return webhook.send({ embeds: [embed] });
@@ -39,17 +39,17 @@ module.exports = (client) => {
             .addFields(
                 {
                     name: "Reason",
-                    value: `\`\`\`${inspect(reason, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(reason, { depth: 0 }).slice(0, 1000)}\`\`\``
                 },
                 {
                     name: "Promise",
-                    value: `\`\`\`${inspect(promise, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(promise, { depth: 0 }).slice(0, 1000)}\`\`\``
                 }
             )
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         return webhook.send({ embeds: [embed] });
@@ -65,17 +65,17 @@ module.exports = (client) => {
             .addFields(
                 {
                     name: "Error",
-                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``
                 },
                 {
                     name: "Origin",
-                    value: `\`\`\`${inspect(origin, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(origin, { depth: 0 }).slice(0, 1000)}\`\`\``
                 }
             )
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         return webhook.send({ embeds: [embed] });
@@ -91,17 +91,17 @@ module.exports = (client) => {
             .addFields(
                 {
                     name: "Error",
-                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``
                 },
                 {
                     name: "Origin",
-                    value: `\`\`\`${inspect(origin, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                    value: `\`\`\`${inspect(origin, { depth: 0 }).slice(0, 1000)}\`\`\``
                 }
             )
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         return webhook.send({ embeds: [embed] });
@@ -116,12 +116,12 @@ module.exports = (client) => {
             .setURL("https://nodejs.org/api/process.html#event-warning")
             .addFields({
                 name: "Warning",
-                value: `\`\`\`${inspect(warn, { depth: 0 }).slice(0, 1000)}\`\`\``,
+                value: `\`\`\`${inspect(warn, { depth: 0 }).slice(0, 1000)}\`\`\``
             })
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         return webhook.send({ embeds: [embed] });

@@ -18,8 +18,8 @@ const clientDC = new Client({
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
         IntentsBitField.Flags.GuildMembers,
-        GatewayIntentBits.GuildVoiceStates,
-    ],
+        GatewayIntentBits.GuildVoiceStates
+    ]
 });
 
 clientDC.login(TOKEN_DISCORD);
@@ -36,7 +36,7 @@ const epicGamesFree = async (client) => {
                     `(Es jueves (18:30) Envia embeds al canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
                         "es-ES",
                         {
-                            timeZone: "Europe/Madrid",
+                            timeZone: "Europe/Madrid"
                         }
                     )})`,
                     "green"
@@ -58,12 +58,12 @@ const epicGamesFree = async (client) => {
                             .setTimestamp()
                             .setFooter({
                                 text: NAME_BOT,
-                                iconURL: client?.user.displayAvatarURL(),
+                                iconURL: client?.user.displayAvatarURL()
                             })
                             .setColor("#ff0000");
 
                         client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
-                            embeds: [embedError],
+                            embeds: [embedError]
                         });
                     }
 
@@ -95,18 +95,18 @@ const epicGamesFree = async (client) => {
                                               res?.currentGames[0]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.currentGames[0]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#27963f");
 
@@ -137,18 +137,18 @@ const epicGamesFree = async (client) => {
                                               res?.currentGames[1]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.currentGames[1]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#27963f");
 
@@ -179,18 +179,18 @@ const epicGamesFree = async (client) => {
                                               res?.currentGames[2]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.currentGames[2]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#27963f");
 
@@ -222,18 +222,18 @@ const epicGamesFree = async (client) => {
                                               res?.nextGames[0]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.nextGames[0]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#ba3f3f");
 
@@ -264,18 +264,18 @@ const epicGamesFree = async (client) => {
                                               res?.nextGames[1]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.nextGames[1]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#ba3f3f");
 
@@ -306,18 +306,18 @@ const epicGamesFree = async (client) => {
                                               res?.nextGames[2]?.price?.totalPrice?.originalPrice
                                           )}€`
                                 }`,
-                                inline: true,
+                                inline: true
                             },
                             {
                                 name: "Desarroladora",
                                 value: `${res?.nextGames[2]?.seller?.name}`,
-                                inline: true,
+                                inline: true
                             }
                         )
                         .setTimestamp()
                         .setFooter({
                             text: NAME_BOT,
-                            iconURL: client?.user.displayAvatarURL(),
+                            iconURL: client?.user.displayAvatarURL()
                         })
                         .setColor("#ba3f3f");
 
@@ -330,7 +330,7 @@ const epicGamesFree = async (client) => {
                     res.nextGames[2] && (await embeds.push(embed6));
 
                     await client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
-                        embeds,
+                        embeds
                     });
                 })
                 .catch((err) => {
@@ -338,7 +338,7 @@ const epicGamesFree = async (client) => {
                 });
         },
         {
-            timezone: "Europe/Madrid",
+            timezone: "Europe/Madrid"
         }
     );
     // setTimeout(epicGamesFree, 14400000); //43200000 12Hours //21600000 6Hours //14400000 4Hours

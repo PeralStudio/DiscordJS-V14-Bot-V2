@@ -30,14 +30,14 @@ module.exports = {
                         return joinedServerTimestampInString.toString(); // Just making sure it's string.
                     } else
                         throw new ReferenceError('Invalid type. Use "discord" or "server" only.');
-                },
-            },
+                }
+            }
         };
 
         // Bot type handler:
         const bot = {
             true: "Yes",
-            false: "No",
+            false: "No"
         };
 
         // Acknowledgements handler:
@@ -62,8 +62,8 @@ module.exports = {
                     }
 
                     return result;
-                },
-            },
+                }
+            }
         };
 
         // Finals:
@@ -73,19 +73,19 @@ module.exports = {
                     .setTitle(`${user.user.tag}'s information:`)
                     .setThumbnail(
                         user.displayAvatarURL({
-                            dynamic: true,
+                            dynamic: true
                         })
                     )
                     .addFields(
                         {
                             name: "Full name",
                             value: `${user.user.tag}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Identification",
                             value: `\`${user.id}\``,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: `Roles [${user.roles.cache.size - 1}]`, // Use "-1" because we removed the "@everyone" role
@@ -95,7 +95,7 @@ module.exports = {
                                     .join(" ")
                                     .replace("@everyone", "") || "[No Roles]"
                             }`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Joined server at",
@@ -105,7 +105,7 @@ module.exports = {
                                 user,
                                 "server"
                             )})`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Joined Discord at",
@@ -115,21 +115,21 @@ module.exports = {
                                 user,
                                 "discord"
                             )})`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "A Bot?",
                             value: `${bot[user.user.bot]}`,
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Acknowledgements",
-                            value: `${acknowledgements.fetch.user(user)}`,
+                            value: `${acknowledgements.fetch.user(user)}`
                         }
                     )
-                    .setColor("Blue"),
+                    .setColor("Blue")
             ],
-            ephemeral: true,
+            ephemeral: true
         });
-    },
+    }
 };

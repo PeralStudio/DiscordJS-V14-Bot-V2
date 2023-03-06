@@ -4,11 +4,11 @@ const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "channelCreate.js",
+    name: "channelCreate.js"
 };
 
 client.on("channelCreate", async (channel) => {
@@ -16,7 +16,7 @@ client.on("channelCreate", async (channel) => {
 
     channel.guild
         .fetchAuditLogs({
-            type: AuditLogEvent.ChannelCreate,
+            type: AuditLogEvent.ChannelCreate
         })
         .then(async (audit) => {
             const { executor } = audit.entries.first();
@@ -33,25 +33,25 @@ client.on("channelCreate", async (channel) => {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `✅ Canal creado por ${executor.tag}`,
-                    iconURL: executor.displayAvatarURL({ dynamic: true }),
+                    iconURL: executor.displayAvatarURL({ dynamic: true })
                 })
                 .addFields(
                     {
                         name: ` `,
-                        value: `Nombre del canal: **${channel.name}** (<#${channel.id}>)`,
+                        value: `Nombre del canal: **${channel.name}** (<#${channel.id}>)`
                     },
                     {
                         name: ` `,
-                        value: `Tipo de canal: **${type}**`,
+                        value: `Tipo de canal: **${type}**`
                     },
                     {
                         name: ` `,
-                        value: `ID del canal: **${channel.id}**`,
+                        value: `ID del canal: **${channel.id}**`
                     }
                 )
                 .setFooter({
                     text: `Autor: ${executor.id}`,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#04A350");

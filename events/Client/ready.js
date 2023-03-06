@@ -3,7 +3,7 @@ const client = require("../../index");
 const superDjs = require("super-djs");
 
 module.exports = {
-    name: "ready.js",
+    name: "ready.js"
 };
 
 client.once("ready", async () => {
@@ -47,13 +47,13 @@ client.once("ready", async () => {
             {
                 name: `${membersCount} usuarios 👀`,
                 type: ActivityType.Watching,
-                status: "online",
+                status: "online"
             },
             {
                 name: `a ${membersCount} usuarios 🎧`,
                 type: ActivityType.Listening,
-                status: "online",
-            },
+                status: "online"
+            }
         ];
 
         const option = Math.floor(Math.random() * statusArray.length);
@@ -63,10 +63,10 @@ client.once("ready", async () => {
                 activities: [
                     {
                         name: statusArray[option].name,
-                        type: statusArray[option].type,
-                    },
+                        type: statusArray[option].type
+                    }
                 ],
-                status: statusArray[option].status,
+                status: statusArray[option].status
             });
         } catch (error) {
             console.log(superDjs.colourText(error), "red");
@@ -82,7 +82,7 @@ client.once("ready", async () => {
 ║                                                     ║
 ║     Bot conectado como ${client.user.tag}!            ║
 ║                    (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid",
+                timeZone: "Europe/Madrid"
             })})                       ║
 ║                                                     ║
 ╚═════════════════════════════════════════════════════╝`,

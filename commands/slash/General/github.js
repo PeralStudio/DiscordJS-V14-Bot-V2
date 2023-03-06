@@ -12,11 +12,11 @@ module.exports = {
             type: 3,
             name: "usuario",
             description: "Usuario github.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const user = interaction.options.get("usuario").value;
@@ -32,50 +32,50 @@ module.exports = {
                         {
                             name: "Nombre",
                             value: json.login || "No se ha encontrado",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Repositorios públicos",
                             value: json.public_repos.toString() || "0",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Seguidores",
                             value: json.followers.toString() || "0",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Bio",
                             value: json.bio || "Sin bio",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Creación",
                             value: moment(json.created_at).format("DD-MM-YYYY") || "Sin datos",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Modificado",
                             value: moment(json.updated_at).format("DD-MM-YYYY") || "Sin datos",
-                            inline: true,
+                            inline: true
                         },
                         {
                             name: "Github",
-                            value: json.html_url || "Sin datos",
+                            value: json.html_url || "Sin datos"
                         },
                         {
                             name: "Web",
-                            value: json.blog || "Sin datos",
+                            value: json.blog || "Sin datos"
                         }
                     )
                     .setColor("#191919")
                     .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
                 await interaction.reply({ embeds: [embed] });
             })
             .catch((err) => console.log("Solicitud fallida", err));
-    },
+    }
 };

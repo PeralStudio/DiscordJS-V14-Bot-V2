@@ -11,17 +11,17 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario a mostrar la información.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const userAvatar = interaction.options.get("usuario").user.displayAvatarURL({
             format: "png",
             dynamic: true,
-            size: 1024,
+            size: 1024
         });
 
         const member = interaction.options.get("usuario") || interaction.member;
@@ -30,17 +30,17 @@ module.exports = {
             .setThumbnail(userAvatar)
             .setAuthor({
                 name: member.user.username + "#" + member.user.discriminator,
-                iconURL: userAvatar,
+                iconURL: userAvatar
             })
             .addFields(
                 {
                     name: "Jugando a",
-                    value: member.member?.presence?.activities[0]?.name || "Nada",
+                    value: member.member?.presence?.activities[0]?.name || "Nada"
                 },
                 {
                     name: "Creado",
                     value: dayjs(member.user.createdAt).format("DD/MM/YYYY"),
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "Estado",
@@ -52,7 +52,7 @@ module.exports = {
                             : member.member.presence?.status == "dnd"
                             ? "No molestar"
                             : "Desconectado",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "Roles",
@@ -60,15 +60,15 @@ module.exports = {
                         member.member._roles.length > 0
                             ? `${member.member._roles.length}`
                             : "Ninguno",
-                    inline: true,
+                    inline: true
                 }
             )
             .setColor("#C28F2C")
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         await interaction.reply({ embeds: [userInfoEmbed] });
-    },
+    }
 };

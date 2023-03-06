@@ -19,7 +19,7 @@ const elrellanoScrap = async (client) => {
                 `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
                     "es-ES",
                     {
-                        timeZone: "Europe/Madrid",
+                        timeZone: "Europe/Madrid"
                     }
                 )}`,
                 "blue"
@@ -122,8 +122,8 @@ const elrellanoScrap = async (client) => {
                     url: !videoUrlYT ? videoUrl : videoUrl && videoUrlYT ? videoUrl : videoUrlYT,
                     // type: "Vídeos",
                     date: new Date().toLocaleString("es-ES", {
-                        timeZone: "Europe/Madrid",
-                    }),
+                        timeZone: "Europe/Madrid"
+                    })
                 });
             });
 
@@ -131,7 +131,7 @@ const elrellanoScrap = async (client) => {
                 if (video.url) {
                     const data = await elrellano.findOne({
                         title: video?.title,
-                        videoUrl: video?.url,
+                        videoUrl: video?.url
                     });
 
                     if (!data) {
@@ -141,8 +141,8 @@ const elrellanoScrap = async (client) => {
                             videoUrl: video.url,
                             // type: video.type,
                             date: new Date().toLocaleString("es-ES", {
-                                timeZone: "Europe/Madrid",
-                            }),
+                                timeZone: "Europe/Madrid"
+                            })
                         });
 
                         await client.channels.cache.get(ELRELLANO_CHANNEL_ID).send({
@@ -155,7 +155,7 @@ const elrellanoScrap = async (client) => {
                                 /* "\n`Categoría:`" +
                                 video.type + */
                                 "\n" +
-                                video.url,
+                                video.url
                         });
 
                         await newData.save();
@@ -165,7 +165,7 @@ const elrellanoScrap = async (client) => {
                                 `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
                                     "es-ES",
                                     {
-                                        timeZone: "Europe/Madrid",
+                                        timeZone: "Europe/Madrid"
                                     }
                                 )}`,
                                 "green"

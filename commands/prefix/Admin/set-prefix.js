@@ -4,7 +4,7 @@ module.exports = {
     config: {
         name: "prefix",
         description: "Set the prefix for the guild.",
-        usage: "prefix [new prefix]",
+        usage: "prefix [new prefix]"
     },
     permissions: ["Administrator"],
     owner: false,
@@ -14,8 +14,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle("Missing argument")
-                        .setDescription("Please provide a new prefix!"),
-                ],
+                        .setDescription("Please provide a new prefix!")
+                ]
             });
 
         if (args[0].length > 5)
@@ -25,8 +25,8 @@ module.exports = {
                         .setTitle("Missing argument")
                         .setDescription(
                             "Sorry, but the new prefix's length should be not over 5 characters!"
-                        ),
-                ],
+                        )
+                ]
             });
 
         // const newPrefix = await db.set(`guild_prefix_${message.guild.id}`, args[0]);
@@ -37,5 +37,5 @@ module.exports = {
         //   .setColor("Green");
 
         // return message.reply({ embeds: [finalEmbed] });
-    },
+    }
 };

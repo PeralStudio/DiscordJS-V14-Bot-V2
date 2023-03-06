@@ -4,11 +4,11 @@ const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "roleCreate.js",
+    name: "roleCreate.js"
 };
 
 client.on("roleCreate", async (message) => {
@@ -16,7 +16,7 @@ client.on("roleCreate", async (message) => {
 
     await message.guild
         .fetchAuditLogs({
-            type: AuditLogEvent.RoleCreate,
+            type: AuditLogEvent.RoleCreate
         })
         .then(async (audit) => {
             const authorRole = audit.entries.first().executor;
@@ -24,15 +24,15 @@ client.on("roleCreate", async (message) => {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `Rol Creado por ${authorRole.tag}`,
-                    iconURL: authorRole.displayAvatarURL({ dynamic: true }),
+                    iconURL: authorRole.displayAvatarURL({ dynamic: true })
                 })
                 .addFields({
                     name: ` `,
-                    value: "El rol `" + message.name + "` ha sido creado en " + message.guild.name,
+                    value: "El rol `" + message.name + "` ha sido creado en " + message.guild.name
                 })
                 .setFooter({
                     text: `Autor: ${authorRole.id} | Canal ID: ${message.id}`,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#04A350");

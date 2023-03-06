@@ -8,7 +8,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         red({
@@ -17,7 +17,7 @@ module.exports = {
             allowNSFW: false,
             allowModPost: false,
             allowCrossPost: false,
-            allowVideo: false,
+            allowVideo: false
         })
             .then((post) => {
                 const embed = new EmbedBuilder()
@@ -26,7 +26,7 @@ module.exports = {
                     .setImage(post.url)
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     });
                 if (!post.url) {
                     return interaction.reply({
@@ -38,15 +38,15 @@ module.exports = {
                                 .setTimestamp()
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
-                                }),
+                                    iconURL: client.user.displayAvatarURL()
+                                })
                         ],
-                        ephemeral: true,
+                        ephemeral: true
                     });
                 } else {
                     return interaction.reply({ embeds: [embed] });
                 }
             })
             .catch((err) => interaction.reply(`🔴 Error: ${err}`));
-    },
+    }
 };

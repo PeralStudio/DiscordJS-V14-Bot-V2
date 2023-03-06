@@ -11,11 +11,11 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a convertir en ASCII.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.options.get("texto").value.slice(1).length > 15) {
@@ -24,8 +24,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⚠️ El texto no puede superar los **15** caracteres.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -37,5 +37,5 @@ module.exports = {
                 .join(" "),
             (err, data) => interaction.reply("```" + data + "```")
         );
-    },
+    }
 };

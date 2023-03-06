@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
     config: {
         name: "ping",
-        description: "Replies with pong!",
+        description: "Replies with pong!"
     },
     permissions: ["SendMessages"],
     owner: false,
@@ -12,8 +12,8 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setDescription(`🏓 **Pong!** Client websocket ping: \`${client.ws.ping}\` ms.`)
-                    .setColor("Green"),
-            ],
+                    .setColor("Green")
+            ]
         });
-    },
+    }
 };

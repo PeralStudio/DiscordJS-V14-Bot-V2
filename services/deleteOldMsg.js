@@ -10,7 +10,7 @@ const {
     EPICGAMES_CHANNEL_ID,
     NOTICIAS_CHANNEL_ID,
     ERRORES_BOT_CHANNEL,
-    LOGS_CHANNEL_ID,
+    LOGS_CHANNEL_ID
 } = process.env;
 
 const deleteOldMsg = (client, channelID) => {
@@ -82,7 +82,7 @@ const deleteOldMsg = (client, channelID) => {
                                 } ${text1} ${text2} ${text3} del canal: ${channelName} (${new Date().toLocaleTimeString(
                                     "es-ES",
                                     {
-                                        timeZone: "Europe/Madrid",
+                                        timeZone: "Europe/Madrid"
                                     }
                                 )})`,
                                 "yellow"

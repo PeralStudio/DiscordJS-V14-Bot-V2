@@ -7,7 +7,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const item = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
@@ -23,7 +23,7 @@ module.exports = {
                     filter,
                     max: 1,
                     time: 30000,
-                    errors: ["time"],
+                    errors: ["time"]
                 })
                 .then(async (collected) => {
                     await interaction.followUp(
@@ -38,5 +38,5 @@ module.exports = {
                     );
                 });
         });
-    },
+    }
 };

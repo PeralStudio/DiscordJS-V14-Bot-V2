@@ -8,7 +8,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         let embedAdmin;
@@ -20,47 +20,47 @@ module.exports = {
                     {
                         name: `*${process.env.PREFIX}email*`,
                         value: "`Enviar email. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}crear-canal*`,
                         value: "`Crear canal. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}borrar-canal*`,
                         value: "`Borrar canal. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}crear-backup*`,
                         value: "`Crear Backup. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}info-backup*`,
                         value: "`Info Backup. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}list-backup*`,
                         value: "`Listar Backups. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}delete-backup*`,
                         value: "`Borrar Backup. (Admin)`",
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: `*${process.env.PREFIX}bot-avatar*`,
                         value: "`Cambiar avatar bot. (Admin)`",
-                        inline: true,
+                        inline: true
                     }
                 )
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#C28F2C");
@@ -74,97 +74,97 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}play + canción*`,
                     value: "`Reproduce una canción.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}lol + Invocador*`,
                     value: "`Información Invocador.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}lol-tierlist*`,
                     value: "`Tierlist Campeones.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}lolparche*`,
                     value: "`Notas parche Lol`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}akinator*`,
                     value: "`Jugar a Akinator.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}juegos*`,
                     value: "`Varios juegos disponibles.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}fakeyou + personaje*`,
                     value: "`Tts con voces de personajes.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}chatgpt + texto*`,
                     value: "`Consulta a Chat GPT-3.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}sonidos*`,
                     value: "`Efectos de Sonido.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}carteleracine*`,
                     value: "`Cartelera de cine.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}meme*`,
                     value: "`Meme random reddit.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}google*`,
                     value: "`Búsqueda google`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}yt + texto*`,
                     value: "`Buscar video youtube.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}asci + texto*`,
                     value: "`Texto a ASCII.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}avatar + @usuario*`,
                     value: "`Avatar de un usuario.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}encuesta*`,
                     value: "`Crear encuesta.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}nivel + @usuario*`,
                     value: "`Ver tu nivel.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}actividad*`,
                     value: "`Iniciar una actividad.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}qr*`,
                     value: "`Crear codigo QR.`",
-                    inline: true,
+                    inline: true
                 },
                 // {
                 //     name: `*${process.env.PREFIX}tweet*`,
@@ -174,38 +174,38 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}playstore + texto*`,
                     value: "`Buscar App.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}github + @usuario*`,
                     value: "`Github de un usuario.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}emoji-list*`,
                     value: "`Emojis disponibles Servidor.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}play-radio + emisora*`,
                     value: "`Reproducir emisora radio.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}stop-radio*`,
                     value: "`Detener radio.`",
-                    inline: true,
+                    inline: true
                 }
             )
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         const embed1 = new EmbedBuilder()
@@ -216,52 +216,52 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}texto-doble + texto*`,
                     value: "`Crear texto doble.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}usuario-info + @usuario*`,
                     value: "`Información sobre un usuario.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}bigtext + texto*`,
                     value: "`Texto grande con numeros y letras.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}elrellano + página*`,
                     value: "`Vídeos elrellano.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}arder + @usuario*`,
                     value: "`Ardiendo en pasión.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}tts + texto*`,
                     value: "`Texto a voz.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}serverinfo*`,
                     value: "`Información del servidor.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}traducir + texto*`,
                     value: "`Traducir texto a Ingles.`",
-                    inline: true,
+                    inline: true
                 },
                 // {
                 //     name: `*${process.env.PREFIX}corona + país*`,
@@ -271,38 +271,38 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}help*`,
                     value: "`Mostrar Comandos.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}bot-info*`,
                     value: "`Info del bot.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}ping*`,
                     value: "`Ping del bot.`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}eval*`,
                     value: "`Evaluar codigo JavaScript. (Admin/Mods)`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}enviarmd + usuario*`,
                     value: "`Enviar mensajes privados. (Admin/Mods)`",
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: `*${process.env.PREFIX}borrar + nº*`,
                     value: "`Borrar mensajes. (Admin/Mods)`",
-                    inline: true,
+                    inline: true
                 }
             )
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
 
         let embeds = embedAdmin ? [embed, embed1, embedAdmin] : [embed, embed1];
@@ -324,15 +324,15 @@ module.exports = {
                     value: TypesButtons.previous,
                     label: "⬅️ Anterior",
                     style: StylesButton.Success,
-                    emoji: null,
+                    emoji: null
                 },
                 {
                     value: TypesButtons.next,
                     label: "Siguiente ➡️",
                     style: StylesButton.Success,
-                    emoji: null,
-                },
-            ],
+                    emoji: null
+                }
+            ]
         });
-    },
+    }
 };

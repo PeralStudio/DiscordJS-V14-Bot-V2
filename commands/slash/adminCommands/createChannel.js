@@ -13,35 +13,35 @@ module.exports = {
             required: true,
             choices: [
                 { name: "Texto", value: "text" },
-                { name: "Voz", value: "voice" },
-            ],
+                { name: "Voz", value: "voice" }
+            ]
         },
         {
             type: 3,
             name: "nombre-canal",
             description: "Nombre del canal.",
-            required: true,
+            required: true
         },
         {
             type: 7,
             name: "padre",
             description: "Categoria del canal.",
-            required: true,
+            required: true
         },
         {
             type: 8,
             name: "permisos-rol",
             description: "Permisos del canal.",
-            required: true,
+            required: true
         },
         {
             type: 8,
             name: "excluidos",
-            description: "Excluidos del canal.",
-        },
+            description: "Excluidos del canal."
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const { guild, options } = interaction;
@@ -52,8 +52,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para cambiar niveles.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -71,12 +71,12 @@ module.exports = {
         if (everyone) {
             areExcludes = {
                 id: everyone || guild.id,
-                deny: [ViewChannel, ReadMessageHistory, SendMessages],
+                deny: [ViewChannel, ReadMessageHistory, SendMessages]
             };
         } else {
             areExcludes = {
                 id: everyone || guild.id,
-                allow: [ViewChannel, ReadMessageHistory, SendMessages],
+                allow: [ViewChannel, ReadMessageHistory, SendMessages]
             };
         }
 
@@ -88,15 +88,15 @@ module.exports = {
                 permissionOverwrites: [
                     {
                         id: permissions,
-                        allow: [ViewChannel, Connect, Speak],
+                        allow: [ViewChannel, Connect, Speak]
                     },
-                    areExcludes,
-                ],
+                    areExcludes
+                ]
             });
 
             await interaction.reply({
                 content: "Canal `" + channelName + "` creado correctamente.",
-                ephemeral: true,
+                ephemeral: true
             });
         }
 
@@ -108,16 +108,16 @@ module.exports = {
                 permissionOverwrites: [
                     {
                         id: permissions,
-                        allow: [ViewChannel, Connect, Speak],
+                        allow: [ViewChannel, Connect, Speak]
                     },
-                    areExcludes,
-                ],
+                    areExcludes
+                ]
             });
 
             await interaction.reply({
                 content: "Canal `" + channelName + "` creado correctamente.",
-                ephemeral: true,
+                ephemeral: true
             });
         }
-    },
+    }
 };

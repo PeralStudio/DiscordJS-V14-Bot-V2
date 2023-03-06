@@ -3,24 +3,24 @@ const mongoose = require("mongoose");
 const xpSchema = new mongoose.Schema({
     user: {
         type: String,
-        require: true,
+        require: true
     },
     guildID: {
         type: String,
-        require: true,
+        require: true
     },
     userID: {
         type: String,
-        require: true,
+        require: true
     },
     xp: {
         type: Number,
-        default: 0,
+        default: 0
     },
     level: {
         type: Number,
-        default: 1,
-    },
+        default: 1
+    }
 });
 
 module.exports = mongoose.model("userxp", xpSchema);

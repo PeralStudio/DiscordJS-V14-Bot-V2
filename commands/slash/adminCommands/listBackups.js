@@ -8,15 +8,15 @@ module.exports = {
     description: "Lista de backups",
     type: 1,
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939"),
-                ],
+                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -40,7 +40,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 });
 
             interaction.reply({ embeds: [embed], ephemeral: true });
@@ -51,10 +51,10 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 });
 
             interaction.reply({ embeds: [embed], ephemeral: true });
         }
-    },
+    }
 };

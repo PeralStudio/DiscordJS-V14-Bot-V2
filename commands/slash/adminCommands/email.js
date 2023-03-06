@@ -11,23 +11,23 @@ module.exports = {
             type: 3,
             name: "destinatario",
             description: "Destinatario del email.",
-            required: true,
+            required: true
         },
         {
             type: 3,
             name: "asunto",
             description: "Asunto del email.",
-            required: true,
+            required: true
         },
         {
             type: 3,
             name: "contenido",
             description: "Contenido del email.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
@@ -36,8 +36,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para enviar emails.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -53,15 +53,15 @@ module.exports = {
                 service: "gmail",
                 auth: {
                     user: process.env.EMAIL,
-                    pass: process.env.GMAIL_KEY,
-                },
+                    pass: process.env.GMAIL_KEY
+                }
             });
 
             var mailOptions = {
                 from: process.env.EMAIL,
                 to: destinatario,
                 subject: asunto,
-                text: contenido,
+                text: contenido
             };
 
             transporter.sendMail(mailOptions, async function (error, info) {
@@ -77,26 +77,26 @@ module.exports = {
                                     {
                                         name: "Destinatario",
                                         value: destinatario,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "Asunto",
                                         value: asunto,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "Contenido",
-                                        value: contenido,
-                                    },
+                                        value: contenido
+                                    }
                                 ])
                                 .setColor("#EA3939")
                                 .setTimestamp()
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
-                                }),
+                                    iconURL: client.user.displayAvatarURL()
+                                })
                         ],
-                        ephemeral: true,
+                        ephemeral: true
                     });
                 }
             });
@@ -106,10 +106,10 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("❌ Introduce un email valido.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
-    },
+    }
 };

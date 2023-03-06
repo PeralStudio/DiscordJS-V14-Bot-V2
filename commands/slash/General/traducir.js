@@ -11,7 +11,7 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a traducir.",
-            required: true,
+            required: true
         },
         {
             type: 3,
@@ -23,8 +23,8 @@ module.exports = {
                 { name: "🇺🇸 -Ingles", value: "en" },
                 { name: "🇩🇪 -Aleman", value: "de" },
                 { name: "🇫🇷 -Frances", value: "fr" },
-                { name: "🇵🇹 -Portugal", value: "pt" },
-            ],
+                { name: "🇵🇹 -Portugal", value: "pt" }
+            ]
         },
         {
             type: 3,
@@ -36,12 +36,12 @@ module.exports = {
                 { name: "🇺🇸 -Ingles", value: "en" },
                 { name: "🇩🇪 -Aleman", value: "de" },
                 { name: "🇫🇷 -Frances", value: "fr" },
-                { name: "🇵🇹 -Portugues", value: "pt" },
-            ],
-        },
+                { name: "🇵🇹 -Portugues", value: "pt" }
+            ]
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const text = interaction.options.get("texto").value;
@@ -53,7 +53,7 @@ module.exports = {
                 .setTitle("❌ Debes selecionar diferentes idiomas.")
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#C28F2C");
@@ -65,7 +65,7 @@ module.exports = {
             {
                 text: text,
                 source: translateInput,
-                target: translateOutput,
+                target: translateOutput
             },
             function (result) {
                 const embedTraductor = new EmbedBuilder()
@@ -75,7 +75,7 @@ module.exports = {
                     )
                     .setFooter({
                         text: process.env.NAME_BOT,
-                        iconURL: client.user.displayAvatarURL(),
+                        iconURL: client.user.displayAvatarURL()
                     })
                     .setTimestamp()
                     .setColor("#C28F2C");
@@ -83,5 +83,5 @@ module.exports = {
                 interaction.reply({ embeds: [embedTraductor] });
             }
         );
-    },
+    }
 };

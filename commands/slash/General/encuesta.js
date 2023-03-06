@@ -10,23 +10,23 @@ module.exports = {
             type: 3,
             name: "pregunta",
             description: "Pregunta de la encuesta.",
-            required: true,
+            required: true
         },
         {
             type: 3,
             name: "opción-1",
             description: "Respuesta 1 de la encuesta.",
-            required: true,
+            required: true
         },
         {
             type: 3,
             name: "opción-2",
             description: "Respuesta 2 de la encuesta.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const pregunta = interaction.options.get("pregunta").value; //Definimos que "Pregunta, opcion1, opcion2" equivale a test, el .split de test fue para separar estas definiciones
@@ -42,17 +42,17 @@ module.exports = {
                 {
                     name: react1,
                     value: opcion1,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: react2,
                     value: opcion2,
-                    inline: true,
+                    inline: true
                 }
             )
             .setFooter({
                 text: `${interaction.member.user.tag} \n`,
-                iconURL: interaction.member.user.displayAvatarURL(),
+                iconURL: interaction.member.user.displayAvatarURL()
             })
             .setThumbnail(
                 "https://upload.wikimedia.org/wikipedia/commons/d/dd/Strawpoll-logo-large.png"
@@ -62,9 +62,9 @@ module.exports = {
 
         const msg = await interaction.reply({
             embeds: [embedEncuesta],
-            fetchReply: true,
+            fetchReply: true
         }); //Mandamos el embed y lo guardamos en una variable msg
 
         await msg.react(`${react1}`), await msg.react(`${react2}`);
-    },
+    }
 };

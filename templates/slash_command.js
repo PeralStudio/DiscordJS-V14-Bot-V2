@@ -7,9 +7,9 @@ module.exports = {
     options: [], // Command options
     permissions: {
         DEFAULT_PERMISSIONS: "", // Client permissions needed
-        DEFAULT_MEMBER_PERMISSIONS: "", // User permissions needed
+        DEFAULT_MEMBER_PERMISSIONS: "" // User permissions needed
     },
     run: async (client, interaction, config) => {
         // execute
-    },
+    }
 };

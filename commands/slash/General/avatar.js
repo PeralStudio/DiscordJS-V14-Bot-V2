@@ -10,17 +10,17 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario a mostrar el avatar.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const userAvatar = interaction.options.get("usuario").user.displayAvatarURL({
             format: "png",
             dynamic: true,
-            size: 1024,
+            size: 1024
         });
 
         const embed = new EmbedBuilder()
@@ -30,8 +30,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL(),
+                iconURL: client.user.displayAvatarURL()
             });
         await interaction.reply({ embeds: [embed] });
-    },
+    }
 };

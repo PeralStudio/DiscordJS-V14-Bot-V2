@@ -15,7 +15,7 @@ module.exports = (client) => {
         mongoose
             .connect(mongo, {
                 useNewUrlParser: true,
-                useUnifiedTopology: true,
+                useUnifiedTopology: true
             })
             .then(() =>
                 console.log(

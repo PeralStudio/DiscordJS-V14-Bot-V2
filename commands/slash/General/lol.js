@@ -11,11 +11,11 @@ module.exports = {
             type: 3,
             name: "invocador",
             description: "Invocador a mostrar la información.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         let embed1;
@@ -47,8 +47,8 @@ module.exports = {
                                         interaction.options.get("invocador").value
                                     }** , comprueba que has escrito correctamente el nombre.`
                                 )
-                                .setColor("#EA3939"),
-                        ],
+                                .setColor("#EA3939")
+                        ]
                     });
                     return;
                 }
@@ -67,8 +67,8 @@ module.exports = {
                                                 interaction.options.get("invocador").value
                                             }** es UNRANKED, no hay datos.`
                                         )
-                                        .setColor("#EA3939"),
-                                ],
+                                        .setColor("#EA3939")
+                                ]
                             });
                             return;
                         }
@@ -80,46 +80,46 @@ module.exports = {
                                 summonerName,
                                 leaguePoints,
                                 wins,
-                                losses,
+                                losses
                             } = data[0];
 
                             embed1 = new EmbedBuilder()
                                 .setAuthor({
                                     name: `${summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "Tipo de cola",
-                                        value: queueType,
+                                        value: queueType
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "📈 División:",
                                         value: `⠀⠀⠀${tier}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏅 Rango:",
                                         value: `⠀⠀⠀${rank}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "💯 League Points:",
                                         value: `⠀⠀⠀${leaguePoints} LP`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "✅ Victorias:",
                                         value: `⠀⠀⠀${wins}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "❌ Derrotas:",
                                         value: `⠀⠀⠀${losses}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏆 Winrate:",
@@ -127,7 +127,7 @@ module.exports = {
                                             `⠀⠀⠀` +
                                             ((wins / (wins + losses)) * 100).toFixed(0) +
                                             "%",
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" }
                                 )
@@ -138,7 +138,7 @@ module.exports = {
                                 .setColor("#0099ff")
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
+                                    iconURL: client.user.displayAvatarURL()
                                 });
 
                             return interaction.reply({ embeds: [embed1] });
@@ -149,40 +149,40 @@ module.exports = {
 
                                 .setAuthor({
                                     name: `${data[0].summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "Tipo de cola",
-                                        value: data[0].queueType,
+                                        value: data[0].queueType
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "📈 División:",
                                         value: `⠀⠀⠀${data[0].tier}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏅 Rango:",
                                         value: `⠀⠀⠀${data[0].rank}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "💯 League Points:",
                                         value: `⠀⠀⠀${data[0].leaguePoints} LP`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "✅ Victorias:",
                                         value: `⠀⠀⠀${data[0].wins}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "❌ Derrotas:",
                                         value: `⠀⠀⠀${data[0].losses}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏆 Winrate:",
@@ -193,7 +193,7 @@ module.exports = {
                                                 100
                                             ).toFixed(0) +
                                             "%",
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" }
                                 )
@@ -204,48 +204,48 @@ module.exports = {
                                 .setColor("#0099ff")
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
+                                    iconURL: client.user.displayAvatarURL()
                                 });
 
                             embed2 = new EmbedBuilder()
                                 .setAuthor({
                                     name: `${data[1].summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "Tipo de cola",
-                                        value: data[1].queueType,
+                                        value: data[1].queueType
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "📈 División:",
                                         value: `⠀⠀⠀${data[1].tier}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏅 Rango:",
 
                                         value: `⠀⠀⠀${data[1].rank}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "💯 League Points:",
                                         value: `⠀⠀⠀${data[1].leaguePoints} LP`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" },
                                     {
                                         name: "✅ Victorias:",
                                         value: `⠀⠀⠀${data[1].wins}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "❌ Derrotas:",
 
                                         value: `⠀⠀⠀${data[1].losses}`,
-                                        inline: true,
+                                        inline: true
                                     },
                                     {
                                         name: "🏆 Winrate:",
@@ -257,7 +257,7 @@ module.exports = {
                                                 100
                                             ).toFixed(0) +
                                             "%",
-                                        inline: true,
+                                        inline: true
                                     },
                                     { name: "\u200B", value: "\u200B" }
                                 )
@@ -269,11 +269,11 @@ module.exports = {
                                 .setColor("#0099ff")
                                 .setFooter({
                                     text: process.env.NAME_BOT,
-                                    iconURL: client.user.displayAvatarURL(),
+                                    iconURL: client.user.displayAvatarURL()
                                 });
 
                             return interaction.reply({
-                                embeds: [embed1, embed2],
+                                embeds: [embed1, embed2]
                             });
                         }
                     })
@@ -281,5 +281,5 @@ module.exports = {
                         interaction.reply(`🔴 Error: ${err}`);
                     });
             });
-    },
+    }
 };

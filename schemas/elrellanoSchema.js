@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 
 const elrellanoSchema = new mongoose.Schema({
     title: {
-        type: String,
+        type: String
     },
     summary: {
-        type: String,
+        type: String
     },
     videoUrl: {
-        type: String,
+        type: String
     },
     type: {
-        type: String,
+        type: String
     },
     date: {
-        type: String,
-    },
+        type: String
+    }
 });
 
 module.exports = mongoose.model("elrellanovideo", elrellanoSchema);

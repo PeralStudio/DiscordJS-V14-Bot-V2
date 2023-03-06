@@ -9,11 +9,11 @@ module.exports = {
             type: 3,
             name: "texto",
             description: "Texto a crear.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const text = interaction.options.get("texto").value;
@@ -22,5 +22,5 @@ module.exports = {
         const response = await res.json();
 
         await interaction.reply({ content: response.text });
-    },
+    }
 };

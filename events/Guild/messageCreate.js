@@ -4,7 +4,7 @@ const config = require("../../config/config.js");
 require("dotenv").config();
 
 module.exports = {
-    name: "messageCreate",
+    name: "messageCreate"
 };
 
 client.on("messageCreate", async (message) => {
@@ -38,8 +38,8 @@ client.on("messageCreate", async (message) => {
                             .setDescription(
                                 `🚫 Unfortunately, you are not authorized to use this command.`
                             )
-                            .setColor("Red"),
-                    ],
+                            .setColor("Red")
+                    ]
                 });
         }
 
@@ -62,8 +62,8 @@ client.on("messageCreate", async (message) => {
                                         ", "
                                     )}**`
                                 )
-                                .setColor("Red"),
-                        ],
+                                .setColor("Red")
+                        ]
                     });
             }
         }

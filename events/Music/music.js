@@ -3,7 +3,7 @@ const client = require("../../index");
 require("dotenv").config();
 
 module.exports = {
-    name: "music.js",
+    name: "music.js"
 };
 
 // add the trackStart event so when a song will be played this message will be sent
@@ -27,9 +27,9 @@ client.player.on("trackStart", async (queue, track) => {
                 .setTimestamp()
                 .setFooter({
                     text: process.env.NAME_BOT,
-                    iconURL: client.user.displayAvatarURL(),
-                }),
-        ],
+                    iconURL: client.user.displayAvatarURL()
+                })
+        ]
     });
 });
 

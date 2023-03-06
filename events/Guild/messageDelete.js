@@ -4,11 +4,11 @@ const deleteOldMsg = require("../../services/deleteOldMsg");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_LOGS_CHANNEL,
+    url: process.env.WEBHOOK_LOGS_CHANNEL
 });
 
 module.exports = {
-    name: "messageDelete.js",
+    name: "messageDelete.js"
 };
 
 client.on("messageDelete", async (message) => {
@@ -16,7 +16,7 @@ client.on("messageDelete", async (message) => {
 
     await message.guild
         .fetchAuditLogs({
-            type: AuditLogEvent.MessageDelete,
+            type: AuditLogEvent.MessageDelete
         })
         .then(async (audit) => {
             const authorDelete = audit.entries.first().executor;
@@ -28,21 +28,21 @@ client.on("messageDelete", async (message) => {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `🗑️ Borrado por ${authorDelete.tag}`,
-                    iconURL: message.author.displayAvatarURL({ dynamic: true }),
+                    iconURL: message.author.displayAvatarURL({ dynamic: true })
                 })
                 .addFields(
                     {
                         name: ` `,
-                        value: `Mensaje de ${message.author} ha sido borrado en ${message.channel}`,
+                        value: `Mensaje de ${message.author} ha sido borrado en ${message.channel}`
                     },
                     {
                         name: `${message.content}`,
-                        value: ` `,
+                        value: ` `
                     }
                 )
                 .setFooter({
                     text: `Autor: ${message.author.id} | Mensaje ID: ${message.id}`,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
                 .setColor("#FF0000");

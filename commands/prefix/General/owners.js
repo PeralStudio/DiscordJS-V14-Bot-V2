@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
     config: {
         name: "owners",
-        description: "Replies with the registered owners only.",
+        description: "Replies with the registered owners only."
     },
     permissions: ["SendMessages"], // Since the "owner" is TRUE, then we can set the permissions to 'sendMessages'.
     owner: true,
@@ -23,8 +23,8 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setDescription(`Only owners command! \nOwners: **${ownersARRAY.join(", ")}**`)
-                    .setColor("Yellow"),
-            ],
+                    .setColor("Yellow")
+            ]
         });
-    },
+    }
 };

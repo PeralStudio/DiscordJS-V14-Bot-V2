@@ -19,7 +19,7 @@ const checkRepeatMsgs = async (client, channelID) => {
                         try {
                             await message.delete({
                                 timeout: 2000,
-                                reason: "deleting repeat messages",
+                                reason: "deleting repeat messages"
                             });
                         } catch (err) {
                             null;

@@ -10,17 +10,17 @@ module.exports = {
             type: 4,
             name: "nº-mensajes",
             description: "Nº de mensajes a borrar.",
-            required: true,
+            required: true
         },
         {
             type: 6,
             name: "usuario",
             description: "Eliminar mensajes de un usuario.",
-            required: false,
-        },
+            required: false
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const { channel, options } = interaction;
@@ -38,8 +38,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⛔ No tienes permisos para borrar mensajes.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
@@ -50,14 +50,14 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setDescription("⚠️  No puedes borrar más de 100 mensajes.")
-                        .setColor("#EA3939"),
-                ],
+                        .setColor("#EA3939")
+                ]
             });
             return;
         }
 
         const messages = await channel.messages.fetch({
-            limit: amount + 1,
+            limit: amount + 1
         });
         let singOrPlur = messages.size > 2 ? "mensajes" : "mensaje";
 
@@ -99,5 +99,5 @@ module.exports = {
                 setTimeout(() => interaction.deleteReply(), 4000);
             });
         }
-    },
+    }
 };

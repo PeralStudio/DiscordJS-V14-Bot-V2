@@ -3,29 +3,29 @@ const mongoose = require("mongoose");
 const youtube = new mongoose.Schema({
     user: {
         type: String,
-        required: true,
+        required: true
     },
     titulo: {
         type: String,
-        required: true,
+        required: true
     },
     video_ID: {
         type: String,
-        required: true,
+        required: true
     },
     date: {
         type: String,
-        required: true,
+        required: true
     },
     playListAuthorID: {
-        type: String,
+        type: String
     },
     playListCount: {
-        type: Number,
+        type: Number
     },
     playlistUrl: {
-        type: String,
-    },
+        type: String
+    }
 });
 
 module.exports = mongoose.model("youtube", youtube);

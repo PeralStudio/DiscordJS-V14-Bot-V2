@@ -3,7 +3,7 @@ const {
     createAudioPlayer,
     createAudioResource,
     AudioPlayerStatus,
-    getVoiceConnection,
+    getVoiceConnection
 } = require("@discordjs/voice");
 const { EmbedBuilder } = require("discord.js");
 
@@ -26,7 +26,7 @@ const urlRadio = {
     radiole: "http://streaming.indalteco.net:8005/radiole.mp3",
     activaFm: "http://stream.mediasector.es:8000/activafm-valencia.mp3",
     hitFm: "http://hitfm.kissfmradio.cires21.com/hitfm.mp3",
-    rneRadioNacional: "https://dispatcher.rndfnk.com/crtve/rne1/ara/mp3/high",
+    rneRadioNacional: "https://dispatcher.rndfnk.com/crtve/rne1/ara/mp3/high"
 };
 
 module.exports = {
@@ -42,73 +42,73 @@ module.exports = {
             choices: [
                 {
                     name: "📻 Cadena Ser",
-                    value: urlRadio.cadenaSer,
+                    value: urlRadio.cadenaSer
                 },
                 {
                     name: "📻 Cadena Dial",
-                    value: urlRadio.cadenaDial,
+                    value: urlRadio.cadenaDial
                 },
                 {
                     name: "📻 Cadena 100",
-                    value: urlRadio.cadenaCien,
+                    value: urlRadio.cadenaCien
                 },
                 {
                     name: "📻 Catalunya Radio",
-                    value: urlRadio.catalunyaRadio,
+                    value: urlRadio.catalunyaRadio
                 },
                 {
                     name: "📻 Flaix FM",
-                    value: urlRadio.flaixFm,
+                    value: urlRadio.flaixFm
                 },
                 {
                     name: "📻 Flaixbac",
-                    value: urlRadio.flaixBac,
+                    value: urlRadio.flaixBac
                 },
                 {
                     name: "📻 Los40",
-                    value: urlRadio.losCuarenta,
+                    value: urlRadio.losCuarenta
                 },
                 {
                     name: "📻 Los40 Classic",
-                    value: urlRadio.losCuarentaClassic,
+                    value: urlRadio.losCuarentaClassic
                 },
                 {
                     name: "📻 Onda Cero",
-                    value: urlRadio.ondaCero,
+                    value: urlRadio.ondaCero
                 },
                 {
                     name: "📻 Radio Marca",
-                    value: urlRadio.radioMarca,
+                    value: urlRadio.radioMarca
                 },
                 {
                     name: "📻 Cope",
-                    value: urlRadio.cope,
+                    value: urlRadio.cope
                 },
                 {
                     name: "📻 EsRadio",
-                    value: urlRadio.esRadio,
+                    value: urlRadio.esRadio
                 },
                 {
                     name: "📻 Radiolé",
-                    value: urlRadio.radiole,
+                    value: urlRadio.radiole
                 },
                 {
                     name: "📻 Activa FM",
-                    value: urlRadio.activaFm,
+                    value: urlRadio.activaFm
                 },
                 {
                     name: "📻 Hit Fm",
-                    value: urlRadio.hitFm,
+                    value: urlRadio.hitFm
                 },
                 {
                     name: "📻 RNE Radio Nacional",
-                    value: urlRadio.rneRadioNacional,
-                },
-            ],
-        },
+                    value: urlRadio.rneRadioNacional
+                }
+            ]
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const selectedRadio = interaction.options.get("emisoras").value;
@@ -124,10 +124,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         if (
@@ -142,10 +142,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         switch (selectedRadio) {
@@ -225,7 +225,7 @@ module.exports = {
         connection = joinVoiceChannel({
             channelId: voiceChannel,
             guildId: interaction.guildId,
-            adapterCreator: interaction.guild.voiceAdapterCreator,
+            adapterCreator: interaction.guild.voiceAdapterCreator
         });
 
         let player = createAudioPlayer();
@@ -241,5 +241,5 @@ module.exports = {
                 .editReply({ content: "▶️ Reproduciendo `" + name + "`", ephemeral: true })
                 .catch((e) => console.log(e));
         });
-    },
+    }
 };

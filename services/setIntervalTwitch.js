@@ -26,30 +26,30 @@ const setIntervalTwitch = async (client, user) => {
         console.log(
             superDjs.colourText(
                 `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
-                    timeZone: "Europe/Madrid",
+                    timeZone: "Europe/Madrid"
                 })})`,
                 "blue"
             )
         );
 
         const httpHeaders = {
-            "User-Agent": "PerBot",
+            "User-Agent": "PerBot"
         };
 
         const uptime = await nodeSuperFetch.get(`https://decapi.me/twitch/uptime/${user}`, {
-            headers: httpHeaders,
+            headers: httpHeaders
         });
         const avatar = await nodeSuperFetch.get(`https://decapi.me/twitch/avatar/${user}`, {
-            headers: httpHeaders,
+            headers: httpHeaders
         });
         const viewers = await nodeSuperFetch.get(`https://decapi.me/twitch/viewercount/${user}`, {
-            headers: httpHeaders,
+            headers: httpHeaders
         });
         const title = await nodeSuperFetch.get(`https://decapi.me/twitch/title/${user}`, {
-            headers: httpHeaders,
+            headers: httpHeaders
         });
         const game = await nodeSuperFetch.get(`https://decapi.me/twitch/game/${user}`, {
-            headers: httpHeaders,
+            headers: httpHeaders
         });
         // const accountCreation = await nodeSuperFetch.get(
         //     `https://decapi.me/twitch/creation/${user}`,
@@ -63,13 +63,13 @@ const setIntervalTwitch = async (client, user) => {
         if (uptime.text !== `${user} is offline`) {
             let data = await twitch.findOne({
                 user: user,
-                titulo: title.body,
+                titulo: title.body
             });
 
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `${capitalizedUser}`,
-                    iconURL: `${avatar.body}`,
+                    iconURL: `${avatar.body}`
                 })
                 .setTitle(`${title.body}`)
                 .setThumbnail(`${avatar.body}`)
@@ -78,19 +78,19 @@ const setIntervalTwitch = async (client, user) => {
                     {
                         name: "Jugando a",
                         value: `${game.body}`,
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: "Viewers",
                         value: `⠀${viewers.body}`,
-                        inline: true,
+                        inline: true
                     },
                     {
                         name: "Seguidores",
                         value: `⠀${followCount.body
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`,
-                        inline: true,
+                        inline: true
                     }
                 )
                 .setImage(
@@ -99,13 +99,13 @@ const setIntervalTwitch = async (client, user) => {
                 .setTimestamp()
                 .setFooter({
                     text: versionbot,
-                    iconURL: client.user.displayAvatarURL(),
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setColor("#AA70F8");
 
             if (!data) {
                 let dataDB = await twitch.findOne({
-                    user: user,
+                    user: user
                 });
 
                 if (!dataDB) {
@@ -113,8 +113,8 @@ const setIntervalTwitch = async (client, user) => {
                         user: user,
                         titulo: `${title.body}`,
                         date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid",
-                        }),
+                            timeZone: "Europe/Madrid"
+                        })
                     });
 
                     await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
@@ -126,7 +126,7 @@ const setIntervalTwitch = async (client, user) => {
                             game.body +
                             "`** ! \n https://twitch.tv/" +
                             user,
-                        embeds: [embed],
+                        embeds: [embed]
                     });
 
                     return await newData.save();
@@ -140,15 +140,15 @@ const setIntervalTwitch = async (client, user) => {
                             game.body +
                             "`** ! \n https://twitch.tv/" +
                             user,
-                        embeds: [embed],
+                        embeds: [embed]
                     });
 
                     return await dataDB.updateOne({
                         user: user,
                         titulo: `${title.body}`,
                         date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid",
-                        }),
+                            timeZone: "Europe/Madrid"
+                        })
                     });
                 }
             }
@@ -159,7 +159,7 @@ const setIntervalTwitch = async (client, user) => {
 
             await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
                 content: `<@${ID_OWNER}> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
-                embeds: [embed],
+                embeds: [embed]
             });
 
             await twitch.findOneAndUpdate({ user: user }, { titulo: title.body });

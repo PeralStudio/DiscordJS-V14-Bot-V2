@@ -3,20 +3,20 @@ const mongoose = require("mongoose");
 const usersDiscordSchema = new mongoose.Schema({
     id: {
         type: String,
-        required: true,
+        required: true
     },
     user: {
         type: String,
-        required: true,
+        required: true
     },
     discriminator: {
         type: String,
-        required: true,
+        required: true
     },
     date: {
         type: String,
-        required: true,
-    },
+        required: true
+    }
 });
 
 module.exports = mongoose.model("user", usersDiscordSchema);

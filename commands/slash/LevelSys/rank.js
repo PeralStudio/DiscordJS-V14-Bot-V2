@@ -12,11 +12,11 @@ module.exports = {
             type: 6,
             name: "usuario",
             description: "Usuario para ver nivel.",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const member = interaction.options.getMember("usuario") || interaction.member;
@@ -27,13 +27,13 @@ module.exports = {
 
         user = await xpSchema.findOne({
             guildID,
-            userID,
+            userID
         });
 
         if (!user) {
             user = {
                 level: 1,
-                xp: 0,
+                xp: 0
             };
         }
 
@@ -42,7 +42,7 @@ module.exports = {
                 member.user.displayAvatarURL({
                     format: "png",
                     dynamic: true,
-                    size: 1024,
+                    size: 1024
                 })
             )
             .setCurrentXP(user.xp)
@@ -56,8 +56,8 @@ module.exports = {
 
         rank.build().then((data) => {
             interaction.reply({
-                files: [new AttachmentBuilder(data, { name: "Rank.png" })],
+                files: [new AttachmentBuilder(data, { name: "Rank.png" })]
             });
         });
-    },
+    }
 };

@@ -3,7 +3,7 @@ const {
     ModalBuilder,
     TextInputBuilder,
     TextInputStyle,
-    ActionRowBuilder,
+    ActionRowBuilder
 } = require("discord.js");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     type: 1,
     options: [],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const modal = new ModalBuilder().setCustomId("myModal").setTitle("My Modal");
@@ -27,5 +27,5 @@ module.exports = {
         modal.addComponents(ActionRow);
 
         await interaction.showModal(modal);
-    },
+    }
 };

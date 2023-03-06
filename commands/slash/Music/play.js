@@ -10,11 +10,11 @@ module.exports = {
             type: 3,
             name: "cancion",
             description: "Canción o Url",
-            required: true,
-        },
+            required: true
+        }
     ],
     permissions: {
-        DEFAULT_MEMBER_PERMISSIONS: "SendMessages",
+        DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
         const query = interaction.options.get("cancion").value;
@@ -28,10 +28,10 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         if (
@@ -46,18 +46,18 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
 
         const queue = client.player.createQueue(interaction.guild, {
             metadata: {
-                channel: interaction.channel,
+                channel: interaction.channel
             },
             leaveOnEmptyCooldown: 60000,
-            leaveOnEmpty: false,
+            leaveOnEmpty: false
         });
 
         // verify vc connection
@@ -73,17 +73,17 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
+                            iconURL: client.user.displayAvatarURL()
+                        })
                 ],
-                ephemeral: true,
+                ephemeral: true
             });
         }
 
         await interaction.deferReply();
         const track = await client.player
             .search(query, {
-                requestedBy: interaction.user,
+                requestedBy: interaction.user
             })
             .then((x) => x.tracks[0]);
         if (!track) {
@@ -95,9 +95,9 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ]
             });
         }
         client.queueToList.push(track.title);
@@ -123,9 +123,9 @@ module.exports = {
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ]
             });
         } else {
             queue.play(track);
@@ -140,37 +140,37 @@ module.exports = {
                         .addFields([
                             {
                                 name: "`/cola`",
-                                value: "Ver la cola de reproducción.",
+                                value: "Ver la cola de reproducción."
                             },
                             {
                                 name: "`/anterior`",
-                                value: "Reproducir la canción anterior.",
+                                value: "Reproducir la canción anterior."
                             },
                             {
                                 name: "`/siguiente`",
-                                value: "Reproducir la canción siguiente.",
+                                value: "Reproducir la canción siguiente."
                             },
                             {
                                 name: "`/pause`",
-                                value: "Pausar la reproducción.",
+                                value: "Pausar la reproducción."
                             },
                             {
                                 name: "`/reanudar`",
-                                value: "Reanudar la canción actual.",
+                                value: "Reanudar la canción actual."
                             },
                             {
                                 name: "`/stop` ",
-                                value: "Detener la reproducción.",
-                            },
+                                value: "Detener la reproducción."
+                            }
                         ])
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
                             text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ]
             });
         }
-    },
+    }
 };
