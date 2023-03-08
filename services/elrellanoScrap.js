@@ -111,7 +111,7 @@ const elrellanoScrap = async (client) => {
                 videoUrlYT = $(element).find(".entry-content iframe").attr("src");
 
                 if (videoUrlYT && videoUrlYT.includes("rumble")) {
-                    // videoUrlYT = videoUrlYT.replace("/embed/", "/").replace("/?pub=c0in", "");  Sale el link pero no el video.
+                    // videoUrlYT = videoUrlYT.replace("/embed/", "/").replace("/?pub=c0in", "");  Get link but not working to see the video.
                     videoUrlYT = undefined;
                 }
 
@@ -182,7 +182,7 @@ const elrellanoScrap = async (client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 10000); //2-Hours 7200000 //30-Minutes 1800000
+    }, 1800000); //2-Hours 7200000 //30-Minutes 1800000
 };
 
 module.exports = elrellanoScrap;
