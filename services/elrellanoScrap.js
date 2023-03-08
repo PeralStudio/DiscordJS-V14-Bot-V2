@@ -110,6 +110,11 @@ const elrellanoScrap = async (client) => {
                 const videoUrl = $(element).find(".wp-block-video video").attr("src");
                 videoUrlYT = $(element).find(".entry-content iframe").attr("src");
 
+                if (videoUrlYT && videoUrlYT.includes("rumble")) {
+                    // videoUrlYT = videoUrlYT.replace("/embed/", "/").replace("/?pub=c0in", "");  Sale el link pero no el video.
+                    videoUrlYT = undefined;
+                }
+
                 if (!videoUrlYT) {
                     videoUrlYT = $(element)
                         .find(".entry-content .wp-block-embed iframe")
@@ -177,7 +182,7 @@ const elrellanoScrap = async (client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 1800000); //2-Hours 7200000 //30-Minutes 1800000
+    }, 10000); //2-Hours 7200000 //30-Minutes 1800000
 };
 
 module.exports = elrellanoScrap;
