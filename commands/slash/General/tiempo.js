@@ -1,6 +1,10 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 const fetch = require("node-fetch");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
 
 module.exports = {
     name: "tiempo",
@@ -18,10 +22,12 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
-        fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${
-                interaction.options.get("ciudad").value
-            }&units=metric&appid=40efccd434eefd0344923485b60fbda7&lang=es`
+        const city = interaction.options.get("ciudad").value;
+
+        await interaction.deferReply({ content: "Cargando...", ephemeral: true });
+
+        await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=40efccd434eefd0344923485b60fbda7&lang=es`
         )
             .then((res) => res.json())
             .then((data) => {
@@ -72,8 +78,53 @@ module.exports = {
                         iconURL: client.user.displayAvatarURL()
                     });
 
-                interaction.reply({ embeds: [embedTiempo] });
+                interaction.editReply({ embeds: [embedTiempo] });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                interaction.editReply({
+                    content:
+                        "❌ Error al obtener el tiempo. Verifica que la ciudad ingresada es correcta: `" +
+                        city +
+                        "`"
+                });
+
+                const errorEmbed = new EmbedBuilder()
+                    .setColor("#db1e1e")
+                    .setTitle("Error al obtener el tiempo")
+                    .addFields(
+                        {
+                            name: "Comando:",
+                            value: `**${interaction.commandName}**`,
+                            inline: true
+                        },
+                        {
+                            name: "Ciudad:",
+                            value: `**${city}**`,
+                            inline: true
+                        },
+                        {
+                            name: "Usuario:",
+                            value: `**${interaction.member.user.username}#${interaction.member.user.discriminator}**`,
+                            inline: true
+                        },
+                        {
+                            name: "Servidor:",
+                            value: `**${interaction.guild.name}**`,
+                            inline: true
+                        },
+                        {
+                            name: "Error:",
+                            value: `**${err}**`,
+                            inline: false
+                        }
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                webhook.send({ embeds: [errorEmbed] });
+            });
     }
 };
