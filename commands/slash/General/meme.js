@@ -1,6 +1,10 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 const red = require("reddit-fetch");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
 
 module.exports = {
     name: "meme",
@@ -21,9 +25,10 @@ module.exports = {
         })
             .then((post) => {
                 const embed = new EmbedBuilder()
-                    .setColor("#AA70F8 ")
+                    .setColor("#AA70F8")
                     .setTitle(post.title)
                     .setImage(post.url)
+                    .setTimestamp()
                     .setFooter({
                         text: process.env.NAME_BOT,
                         iconURL: client.user.displayAvatarURL()
@@ -47,6 +52,13 @@ module.exports = {
                     return interaction.reply({ embeds: [embed] });
                 }
             })
-            .catch((err) => interaction.reply(`🔴 Error: ${err}`));
+            .catch((err) => {
+                interaction.reply(
+                    `❌  Ocurrio un error al ejecutar el comando, intentalo de nuevo mas tarde.`
+                );
+                webhook.send({
+                    content: `Error comando: **${interaction.commandName}**\`\`\`${err}\`\`\``
+                });
+            });
     }
 };
