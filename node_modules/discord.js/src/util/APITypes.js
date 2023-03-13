@@ -29,6 +29,11 @@
  */
 
 /**
+ * @external APIAutoModerationAction
+ * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/interface/APIAutoModerationAction}
+ */
+
+/**
  * @external APIButtonComponent
  * @see {@link https://discord-api-types.dev/api/discord-api-types-v10#APIButtonComponent}
  */
@@ -174,6 +179,11 @@
  */
 
 /**
+ * @external ApplicationRoleConnectionMetadataType
+ * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationRoleConnectionMetadataType}
+ */
+
+/**
  * @external AutoModerationActionType
  * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/AutoModerationActionType}
  */
@@ -219,6 +229,11 @@
  */
 
 /**
+ * @external ForumLayoutType
+ * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/ForumLayoutType}
+ */
+
+/**
  * @external GatewayCloseCodes
  * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/GatewayCloseCodes}
  */
@@ -256,6 +271,11 @@
 /**
  * @external GuildMFALevel
  * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/GuildMFALevel}
+ */
+
+/**
+ * @external GuildMemberFlags
+ * @see {@link https://discord-api-types.dev/api/discord-api-types-v10/enum/GuildMemberFlags}
  */
 
 /**

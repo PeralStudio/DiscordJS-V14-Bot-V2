@@ -6,6 +6,7 @@ const VoiceState = require('./VoiceState');
 const TextBasedChannel = require('./interfaces/TextBasedChannel');
 const { DiscordjsError, ErrorCodes } = require('../errors');
 const GuildMemberRoleManager = require('../managers/GuildMemberRoleManager');
+const { GuildMemberFlagsBitField } = require('../util/GuildMemberFlagsBitField');
 const PermissionsBitField = require('../util/PermissionsBitField');
 
 /**
@@ -92,6 +93,16 @@ class GuildMember extends Base {
     if ('communication_disabled_until' in data) {
       this.communicationDisabledUntilTimestamp =
         data.communication_disabled_until && Date.parse(data.communication_disabled_until);
+    }
+
+    if ('flags' in data) {
+      /**
+       * The flags of this member
+       * @type {Readonly<GuildMemberFlagsBitField>}
+       */
+      this.flags = new GuildMemberFlagsBitField(data.flags).freeze();
+    } else {
+      this.flags ??= new GuildMemberFlagsBitField().freeze();
     }
   }
 
@@ -307,11 +318,21 @@ class GuildMember extends Base {
 
   /**
    * Edits this member.
-   * @param {GuildMemberEditData} data The data to edit the member with
+   * @param {GuildMemberEditOptions} options The options to provide
    * @returns {Promise<GuildMember>}
    */
-  edit(data) {
-    return this.guild.members.edit(this, data);
+  edit(options) {
+    return this.guild.members.edit(this, options);
+  }
+
+  /**
+   * Sets the flags for this member.
+   * @param {GuildMemberFlagsResolvable} flags The flags to set
+   * @param {string} [reason] Reason for setting the flags
+   * @returns {Promise<GuildMember>}
+   */
+  setFlags(flags, reason) {
+    return this.edit({ flags, reason });
   }
 
   /**
@@ -423,6 +444,7 @@ class GuildMember extends Base {
       this.avatar === member.avatar &&
       this.pending === member.pending &&
       this.communicationDisabledUntilTimestamp === member.communicationDisabledUntilTimestamp &&
+      this.flags.bitfield === member.flags.bitfield &&
       (this._roles === member._roles ||
         (this._roles.length === member._roles.length && this._roles.every((role, i) => role === member._roles[i])))
     );

@@ -138,7 +138,7 @@ class InteractionResponses {
 
   /**
    * Options that can be passed into {@link InteractionResponses#editReply}.
-   * @typedef {WebhookEditMessageOptions} InteractionEditReplyOptions
+   * @typedef {WebhookMessageEditOptions} InteractionEditReplyOptions
    * @property {MessageResolvable|'@original'} [message='@original'] The response to edit
    */
 
@@ -255,6 +255,7 @@ class InteractionResponses {
         type: InteractionResponseType.Modal,
         data: isJSONEncodable(modal) ? modal.toJSON() : this.client.options.jsonTransformer(modal),
       },
+      auth: false,
     });
     this.replied = true;
   }
