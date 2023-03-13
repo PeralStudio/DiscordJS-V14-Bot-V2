@@ -99,7 +99,7 @@ module.exports = {
                         return interaction.reply({
                             embeds: [
                                 new EmbedBuilder()
-                                    .setColor("#C28F2C ")
+                                    .setColor("#C28F2C")
                                     .setTitle("Algo a salido mal")
                                     .setDescription("Por favor, intentalo de nuevo mas tarde.")
                                     .setTimestamp()
