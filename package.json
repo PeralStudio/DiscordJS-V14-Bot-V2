@@ -46,6 +46,7 @@
     "node-google-translate-skidz": "^1.1.2",
     "node-superfetch": "^0.2.3",
     "nodemailer": "^6.7.8",
+    "openai": "^3.2.1",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
     "super-djs": "^1.7.4",
