@@ -43,8 +43,6 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL()
             });
 
-        await interaction.channel.send({
-            embeds: [embed]
-        });
+        await interaction.reply({ embeds: [embed] });
     }
 };
