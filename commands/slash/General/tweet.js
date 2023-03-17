@@ -1,8 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const fetch = require("node-fetch");
 require("dotenv").config();
-
-//! No funciona en el host "Api Acceso denegado"
 
 module.exports = {
     name: "tweet",
