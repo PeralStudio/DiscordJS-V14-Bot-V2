@@ -27,6 +27,8 @@ module.exports = {
         const text = interaction.options.get("texto").value;
         const avatarUrl = user.avatarURL({ extension: "jpg" });
 
+        await interaction.deferReply({ content: "Cargando..." });
+
         let image = `https://some-random-api.ml/canvas/tweet?avatar=${avatarUrl}&displayname=${
             user.username
         }&username=${user.username}&comment=${encodeURIComponent(text)}`;
@@ -40,6 +42,6 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL()
             });
 
-        await interaction.reply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
     }
 };
