@@ -1,10 +1,14 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 const deleteOldMsg = require("./deleteOldMsg");
 const axios = require("axios");
 const cron = require("node-cron");
 const superDjs = require("super-djs");
 const dotenv = require("dotenv");
 dotenv.config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
 
 const fetchNews = async (client, user) => {
     const { NEWSCATCHERAPI_KEY, NOTICIAS_CHANNEL_ID } = process.env;
@@ -39,7 +43,36 @@ const fetchNews = async (client, user) => {
                     news.push(response.data.articles);
                 })
                 .catch(function (error) {
-                    console.error(error);
+                    const embed = new EmbedBuilder()
+                        .setTitle("Error en la API de NewsCatcher")
+                        .setThumbnail(client.user.displayAvatarURL())
+                        .addFields(
+                            {
+                                name: "Status",
+                                value: `${error.response.data.status}`,
+                                inline: false
+                            },
+                            {
+                                name: "Error Code",
+                                value: `${error.response.data.error_code}`,
+                                inline: false
+                            },
+                            {
+                                name: "Message",
+                                value: `${error.response.data.message}`,
+                                inline: false
+                            }
+                        )
+                        .setTimestamp()
+                        .setColor("#ff0000")
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL()
+                        });
+
+                    return webhook.send({
+                        embeds: [embed]
+                    });
                 });
 
             news[0].forEach(async (element) => {
