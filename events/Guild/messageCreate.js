@@ -1,4 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, codeBlock } = require("discord.js");
+const { Configuration, OpenAIApi } = require("openai");
 const client = require("../../index");
 const config = require("../../config/config.js");
 require("dotenv").config();
@@ -8,6 +9,48 @@ module.exports = {
 };
 
 client.on("messageCreate", async (message) => {
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY
+    });
+    const openai = new OpenAIApi(configuration);
+
+    if (message.channel.id === process.env.CHAT_GPT_CHANNEL) {
+        if (message.author.bot) return;
+        let conversationLog = [{ role: "system", content: "You are a friendly chatbot." }];
+
+        try {
+            await message.channel.sendTyping();
+
+            let prevMessages = await message.channel.messages.fetch({ limit: 15 });
+            prevMessages.reverse();
+
+            prevMessages.forEach((msg) => {
+                if (message.content.startsWith("!")) return;
+                if (msg.author.id !== client.user.id && message.author.bot) return;
+                if (msg.author.id !== message.author.id) return;
+
+                conversationLog.push({
+                    role: "user",
+                    content: msg.content
+                });
+            });
+
+            const result = await openai
+                .createChatCompletion({
+                    model: "gpt-3.5-turbo",
+                    messages: conversationLog
+                    // max_tokens: 256, // limit token usage
+                })
+                .catch((error) => {
+                    console.log(`OPENAI ERR: ${error}`);
+                });
+
+            message.reply(result.data.choices[0].message);
+        } catch (error) {
+            console.log(`ERR: ${error}`);
+        }
+    }
+
     if (message.channel.type !== 0) return;
     if (message.author.bot) return;
 
