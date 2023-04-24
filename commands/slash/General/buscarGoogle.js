@@ -1,4 +1,5 @@
-const google = require("googlethis");
+const googleIt = require("google-it");
+const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 
 module.exports = {
@@ -22,29 +23,40 @@ module.exports = {
             .value.slice(process.env.PREFIX.length - 1)
             .split(" ")
             .join(" ");
+        const { user: author } = interaction;
+        let embed;
 
-        const options = {
-            page: 0,
-            safe: false,
-            parse_ads: false,
-            additional_params: {
-                hl: "es"
-            }
-        };
+        await interaction.deferReply({ content: "Cargando..." });
 
-        const response = await google.search(searchTerm, options);
-
-        if (response.results.length > 3) response.results.length = 3;
-
-        let output = "";
-        for (let i = 0; i < response.results.length; i++) {
-            const result = response.results[i];
-            output += `${result.url}\n`;
+        try {
+            const results = await googleIt({ query: searchTerm });
+            let index = 0;
+            embed = new EmbedBuilder()
+                .setAuthor({
+                    name: `${client.user.username}`,
+                    iconURL: `${client.user.displayAvatarURL()}`
+                })
+                .setThumbnail(
+                    "https://quoly.com/wp-content/uploads/2016/09/Google_-G-_Logo.svg_.png"
+                )
+                .setTitle(`Resultados de Google para \`\`\`${searchTerm}\`\`\``)
+                .setColor("4285F4")
+                .setTimestamp()
+                .setFooter({
+                    text: `${author.username}`,
+                    iconURL: author.displayAvatarURL(true)
+                })
+                .setDescription(
+                    results
+                        .slice(0, 5)
+                        .map((result) => `**${++index}** - [${result.title}](${result.link})\n`)
+                        .join("\n")
+                );
+        } catch (e) {
+            console.log(e);
+            interaction.editReply({ content: "Busqueda no encontrada", ephemeral: true });
         }
 
-        await interaction.reply({
-            content: output,
-            ephemeral: true
-        });
+        await interaction.editReply({ embeds: [embed] });
     }
 };
