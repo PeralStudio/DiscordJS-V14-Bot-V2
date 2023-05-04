@@ -28,6 +28,27 @@ const setIntervalYoutube = async (client, userId) => {
                 console.log(err);
             });
 
+        switch (userId) {
+            case "UCg1c09_sFOd-TVPCNgHw8qg":
+                userId = "Kerios";
+                break;
+            case "UCEx9whgAgQPG7e4dAXIq1VQ":
+                userId = "ElOjoNinja - Gameplays";
+                break;
+            case "UCmcBZPvWyXBKw0d6XE5XDOQ":
+                userId = "Elyoya";
+                break;
+            case "UCwXh0iKPlI4hXNntPECFSbg":
+                userId = "Zazza el italiano";
+                break;
+            case "UCNfoPrh2gSZpwijbb9SOKmA":
+                userId = "Portillo";
+                break;
+            default:
+                userId = userId;
+                break;
+        }
+
         console.log(
             superDjs.colourText(
                 `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
