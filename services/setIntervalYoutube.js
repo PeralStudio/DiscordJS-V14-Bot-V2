@@ -45,7 +45,6 @@ const setIntervalYoutube = async (client, userId) => {
                 userId = "Portillo";
                 break;
             default:
-                userId = userId;
                 break;
         }
 
