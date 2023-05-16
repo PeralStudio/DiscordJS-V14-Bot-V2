@@ -49,7 +49,7 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
         const embed = new EmbedBuilder()
             .setDescription(
-                ` <@${oldState.member.user.id}> 🔃 fué movido del canal https://discord.com/channels/${oldState.guild.id}/${oldState.channelId}  a https://discord.com/channels/${newState.guild.id}/${newState.channelId} `
+                ` <@${oldState.member.user.id}> 🔃 fué movido del canal https://discord.com/channels/${oldState.guild.id}/${oldState.channelId} \n a 👉 https://discord.com/channels/${newState.guild.id}/${newState.channelId} `
             )
             .setColor("#AA70F8")
             .setTimestamp()
