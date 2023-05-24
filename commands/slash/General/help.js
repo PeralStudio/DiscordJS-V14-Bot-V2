@@ -122,11 +122,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}meme*`,
-                    value: "`Meme random reddit.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}google*`,
                     value: "`Búsqueda google`",
                     inline: true
@@ -229,6 +224,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}pokemon + ID*`,
+                    value: "`Información sobre un pokemon.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}bigtext + texto*`,
                     value: "`Texto grande con numeros y letras.`",
                     inline: true
@@ -251,6 +251,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}tts + texto*`,
                     value: "`Texto a voz.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}meme*`,
+                    value: "`Meme random reddit.`",
                     inline: true
                 },
                 {
