@@ -8,9 +8,9 @@ module.exports = {
     type: 1,
     options: [
         {
-            type: 10,
-            name: "id",
-            description: "ID del pokemón",
+            type: 3,
+            name: "nombre-o-id",
+            description: "Nombre o ID del pokemón",
             required: true
         }
     ],
@@ -20,8 +20,8 @@ module.exports = {
     run: async (client, interaction, config) => {
         await interaction.deferReply();
 
-        const busqueda = interaction.options.getNumber("id");
-        const url_api = `https://pokeapi.co/api/v2/pokemon/${busqueda}`;
+        const busqueda = interaction.options.get("nombre-o-id");
+        const url_api = `https://pokeapi.co/api/v2/pokemon/${busqueda.value}`;
         let response = null;
 
         //Verificar si existe el pokemón
@@ -32,7 +32,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("#7bb8bd")
-                        .setDescription(`No se encontró ningún pokemón con el id \`${busqueda}\``)
+                        .setDescription(
+                            `No se encontró ningún pokemón con el id \`${busqueda.value}\``
+                        )
                 ],
                 ephemeral: true
             });
@@ -69,7 +71,9 @@ module.exports = {
         const EmbedShiny = new EmbedBuilder()
             .setTitle(`Pokedéx | \`${pokemonName} shiny\``)
             .setColor("#410000")
-            .setDescription(`${interaction.user?.username} buscó a al pokemón No.\`${busqueda}\``)
+            .setDescription(
+                `${interaction.user?.username} buscó a al pokemón \`${busqueda.value}\``
+            )
             .setImage(shinyArtworDefaultSpriteUrl)
             .setThumbnail(shinySpriteUrl)
             .addFields(
