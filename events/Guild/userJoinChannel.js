@@ -19,7 +19,9 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
         const embed = new EmbedBuilder()
             .setDescription(
-                ` <@${oldState.member.user.id}> 🔴 abandonó el canal https://discord.com/channels/${oldState.guild.id}/${oldState.channelId} `
+                ` <@${oldState.member.user.id}> 🔴 abandonó el canal https://discord.com/channels/${
+                    oldState.guild.id
+                }/${oldState.channelId} - ${client.user.displayAvatarURL()}`
             )
             .setColor("#AA70F8")
             .setTimestamp()
@@ -34,7 +36,9 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
         const embed = new EmbedBuilder()
             .setDescription(
-                ` <@${newState.member.user.id}> 🟢 entró al canal https://discord.com/channels/${oldState.guild.id}/${newState.channelId} `
+                ` <@${newState.member.user.id}> 🟢 entró al canal https://discord.com/channels/${
+                    oldState.guild.id
+                }/${newState.channelId} - ${client.user.displayAvatarURL()}`
             )
             .setColor("#AA70F8")
             .setTimestamp()
@@ -49,7 +53,13 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
         const embed = new EmbedBuilder()
             .setDescription(
-                ` <@${oldState.member.user.id}> 🔃 fué movido del canal https://discord.com/channels/${oldState.guild.id}/${oldState.channelId} \n a 👉 https://discord.com/channels/${newState.guild.id}/${newState.channelId} `
+                ` <@${
+                    oldState.member.user.id
+                }> 🔃 fué movido del canal https://discord.com/channels/${oldState.guild.id}/${
+                    oldState.channelId
+                } \n a 👉 https://discord.com/channels/${newState.guild.id}/${
+                    newState.channelId
+                } - ${client.user.displayAvatarURL()} `
             )
             .setColor("#AA70F8")
             .setTimestamp()
