@@ -16,5 +16,6 @@ module.exports = [
     "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
     "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
     "UCwXh0iKPlI4hXNntPECFSbg", // Zazza el italiano
-    "UCNfoPrh2gSZpwijbb9SOKmA" // Portillo"
+    "UCNfoPrh2gSZpwijbb9SOKmA", // Portillo"
+    "UC9eM3jqq5IfxbGHbuRR_jRw" //SFDXShow
 ];
