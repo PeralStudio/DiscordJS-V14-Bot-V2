@@ -1,6 +1,10 @@
-const { ActivityType } = require("discord.js");
+const { ActivityType, WebhookClient, EmbedBuilder } = require("discord.js");
 const client = require("../../index");
 const superDjs = require("super-djs");
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_LOGS_CHANNEL
+});
 
 module.exports = {
     name: "ready.js"
@@ -74,6 +78,41 @@ client.once("ready", async () => {
     };
 
     setInterval(pickPresence, 60 * 1000);
+
+    // webhook.send({
+    //     content: `🟢 <@${client.user.id}> Online \n\n **Estado:** ${client.user.presence.status} \n **Actividad:** ${client.user.presence.activities[0].name} \n **ID:** ${client.user.id} \n`
+    // });
+
+    const embed = new EmbedBuilder()
+        .setDescription(`🟢 <@${client.user.id}> Online`)
+        .addFields(
+            {
+                name: `Estado:`,
+                value: `${client.user.presence.status}`,
+                inline: false
+            },
+            {
+                name: `Actividad:`,
+                value: `${client.user.presence.activities[0].name}`,
+                inline: false
+            },
+            {
+                name: `ID:`,
+                value: `${client.user.id}`,
+                inline: false
+            },
+            {
+                name: `Fecha de conexión:`,
+                value: `${new Date().toLocaleTimeString("es-ES", {
+                    timeZone: "Europe/Madrid"
+                })}`
+            }
+        )
+        .setColor("#059F03")
+        .setTimestamp()
+        .setFooter({ text: "Logs" });
+
+    webhook.send({ embeds: [embed] });
 
     console.log(
         superDjs.colourText(
