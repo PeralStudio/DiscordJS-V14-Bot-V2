@@ -19,6 +19,7 @@
     "canvacord": "^5.4.8",
     "chalk": "^5.0.1",
     "cherio": "^1.0.0-rc.2",
+    "child_process": "^1.0.2",
     "dayjs": "^1.11.4",
     "discord-backup": "^3.3.2",
     "discord-gamecord": "^4.1.0",
