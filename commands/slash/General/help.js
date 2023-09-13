@@ -33,6 +33,11 @@ module.exports = {
                         inline: true
                     },
                     {
+                        name: `*${process.env.PREFIX}terminal*`,
+                        value: "`Terminal. (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}crear-backup*`,
                         value: "`Crear Backup. (Admin)`",
                         inline: true
