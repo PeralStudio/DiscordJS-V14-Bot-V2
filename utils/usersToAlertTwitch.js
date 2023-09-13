@@ -12,5 +12,6 @@ module.exports = [
     "cabravoladora",
     "midudev",
     "nategentile7",
-    "kingsleague"
+    "kingsleague",
+    "poloteli"
 ];
