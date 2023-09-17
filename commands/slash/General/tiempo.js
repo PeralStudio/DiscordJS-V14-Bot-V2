@@ -104,7 +104,7 @@ module.exports = {
                         },
                         {
                             name: "Usuario:",
-                            value: `**${interaction.member.user.username}#${interaction.member.user.discriminator}**`,
+                            value: `**${interaction.member.user.username}**`,
                             inline: true
                         },
                         {

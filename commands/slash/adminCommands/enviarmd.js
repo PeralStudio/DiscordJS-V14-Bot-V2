@@ -61,7 +61,7 @@ module.exports = {
                             .setDescription(
                                 `✅  Mensaje enviado correctamente a **${
                                     client.users.cache.get(userToSend).username
-                                }#${client.users.cache.get(userToSend).discriminator}** .`
+                                }** .`
                             )
                             .setColor("#EA3939")
                     ]

@@ -52,7 +52,7 @@ module.exports = {
             .setStatus(member?.presence?.status || "offline")
             .setProgressBar("#7a2cb2", "COLOR")
             .setUsername(member.user.username)
-            .setDiscriminator(member.user.discriminator);
+            .setDiscriminator("0000");
 
         rank.build().then((data) => {
             interaction.reply({

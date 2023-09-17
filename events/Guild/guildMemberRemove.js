@@ -41,7 +41,7 @@ client.on("guildMemberRemove", async (member) => {
     // Send bye message to the logs channel
     const byeEmbed = new EmbedBuilder()
         .setAuthor({
-            name: `:wave: ${member.user.username}#${member.user.discriminator} ha dejado el servidor!`,
+            name: `:wave: ${member.user.username} ha dejado el servidor!`,
             iconURL: member.user.displayAvatarURL({ dynamic: true })
         })
         .setFooter({

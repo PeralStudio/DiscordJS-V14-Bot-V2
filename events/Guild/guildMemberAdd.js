@@ -53,7 +53,7 @@ client.on("guildMemberAdd", async (member) => {
     // Send bye message to the logs channel
     const hiEmbed = new EmbedBuilder()
         .setAuthor({
-            name: `:wave: ${member.user.username}#${member.user.discriminator} ha entrado al servidor!`,
+            name: `:wave: ${member.user.username} ha entrado al servidor!`,
             iconURL: member.user.displayAvatarURL({ dynamic: true })
         })
         .setFooter({

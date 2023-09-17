@@ -13,7 +13,7 @@ module.exports = {
 client.on("messageCreate", async (message) => {
     const guildID = message.guild?.id;
     const userID = message.author?.id;
-    const username = `${message.author.username}#${message.author.discriminator}`;
+    const username = `${message.author.username}`;
     const channelToSend = client.channels.cache.get(process.env.GENERAL_CHANNEL_ID);
 
     if (message.author.bot /* || message.guild */) return;
@@ -59,7 +59,7 @@ client.on("messageCreate", async (message) => {
                 .setProgressBarTrack("#484B4E", "COLOR")
                 .setProgressBar("#7a2cb2", "COLOR")
                 .setUsername(message.author.username)
-                .setDiscriminator(message.author.discriminator);
+                .setDiscriminator("0000");
 
             rank.build().then((data) => {
                 channelToSend.send({

@@ -53,7 +53,7 @@ module.exports = {
             await xpSchema
                 .findOneAndUpdate(
                     {
-                        user: `${member.user.username}#${member.user.discriminator}`,
+                        user: `${member.user.username}`,
                         guildID,
                         userID
                     },

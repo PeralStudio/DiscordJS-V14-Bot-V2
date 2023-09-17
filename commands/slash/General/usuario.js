@@ -29,7 +29,7 @@ module.exports = {
         const userInfoEmbed = new EmbedBuilder()
             .setThumbnail(userAvatar)
             .setAuthor({
-                name: member.user.username + "#" + member.user.discriminator,
+                name: member.user.username,
                 iconURL: userAvatar
             })
             .addFields(
