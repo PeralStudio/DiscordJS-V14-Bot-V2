@@ -14,7 +14,7 @@ module.exports = {
 client.on("guildMemberRemove", async (member) => {
     const embed = new EmbedBuilder()
         .setTitle("¡Hasta luego! :wave:")
-        .setAuthor({ name: `${member.user.username.toUpperCase()} ha dejado el servidor.` })
+        .setDescription(`<@${member.user.id}> ha dejado el servidor.`)
         .setThumbnail(member.user.displayAvatarURL())
         .setImage("https://media1.tenor.com/images/59af6d17fa7477ae2379697aa8df134c/tenor.gif")
         .setColor("#D4B053")
