@@ -13,7 +13,7 @@ const webhook = new WebhookClient({
 });
 
 module.exports = {
-    name: "sourcebin",
+    name: "crear-sourcebin",
     description: "Crear un archivo en SourceBin",
     type: 1,
     options: [
