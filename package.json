@@ -50,6 +50,7 @@
     "openai": "^3.2.1",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
+    "sourcebin": "^5.0.0",
     "super-djs": "^1.7.4",
     "youtube-node": "^1.3.3",
     "yt-channel-info": "^3.2.1"
