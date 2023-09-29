@@ -23,6 +23,11 @@ module.exports = {
                         inline: true
                     },
                     {
+                        name: `*${process.env.PREFIX}crear-sourcebin*`,
+                        value: "`Crear SourceBin. (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}crear-canal*`,
                         value: "`Crear canal. (Admin)`",
                         inline: true
