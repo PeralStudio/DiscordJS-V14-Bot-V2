@@ -11,6 +11,7 @@ const setIntervalYoutube = require("./services/setIntervalYoutube");
 const fetchNews = require("./services/fetchNews");
 const epicGamesFree = require("./services/epicGamesFree");
 const elrellanoScrap = require("./services/elrellanoScrap");
+const birthdaysReminder = require("./services/birthdayReminder");
 
 // Creating a new client:
 const client = new Client({
@@ -64,6 +65,9 @@ epicGamesFree(client);
 
 //Function to search for news every day
 // fetchNews(client);
+
+//Function Birthdays
+birthdaysReminder();
 
 // Host the bot:
 require("http")
