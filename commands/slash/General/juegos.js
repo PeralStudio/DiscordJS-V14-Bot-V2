@@ -1,5 +1,7 @@
 const Gamecord = require("discord-gamecord");
 
+const themes = ["nature", "sport", "color", "camp", "fruit", "discord", "winter", "pokemon"];
+
 module.exports = {
     name: "juegos",
     description: "Lista de juegos disponibles.",
@@ -183,10 +185,11 @@ module.exports = {
             hangman: { hat: "🎩", head: "😟", shirt: "👕", pants: "🩳", boots: "👞👞" },
             customWord: "",
             timeoutTime: 120000,
-            theme: "palabras",
+            theme: themes[Math.floor(Math.random() * themes.length)],
             winMessage: "¡Ganaste! la palabra era **{word}**.",
             loseMessage: "¡Perdiste! la palabra era **{word}**.",
-            playerOnlyMessage: "Solo {player} puede usar estos botones."
+            playerOnlyMessage: "Solo {player} puede usar estos botones.",
+            timeoutMessage: "¡Perdiste! Te has quedado sin tiempo. La palabra era **{word}**."
         });
 
         const FastType = new Gamecord.FastType({
