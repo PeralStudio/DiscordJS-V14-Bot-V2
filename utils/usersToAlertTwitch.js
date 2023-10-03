@@ -13,5 +13,6 @@ module.exports = [
     "midudev",
     "nategentile7",
     "kingsleague",
-    "poloteli"
+    "poloteli",
+    "akaliarmy"
 ];
