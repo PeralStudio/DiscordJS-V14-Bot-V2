@@ -67,7 +67,7 @@ epicGamesFree(client);
 // fetchNews(client);
 
 //Function Birthdays
-birthdaysReminder();
+birthdaysReminder(client);
 
 // Host the bot:
 require("http")

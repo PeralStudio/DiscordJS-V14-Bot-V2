@@ -1,79 +1,44 @@
-const { WebhookClient, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
+const bdSchema = require("../schemas/birthdaySchema");
 const cron = require("node-cron");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
-const webhook = new WebhookClient({
-    url: process.env.WEBHOOK_GENERAL_CHANNEL
-});
+const birthdaysReminder = (client) => {
+    const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
-const birthdaysReminder = () => {
-    // YO
     cron.schedule(
-        "0 15 7 8 *",
-        () => {
-            const embed = new EmbedBuilder()
-                .setDescription(`🎂🎉 ¡¡Felicidades <@209338137346834433>!! 🎂🎉`)
-                .setImage("https://www.funimada.com/assets/images/cards/big/bday-261.gif")
-                .setColor("#059F03")
-                .setTimestamp()
-                .setFooter({ text: "🎂🎂🎂🎉🎉🎂🎂🎂" });
+        "1 0 * * *",
+        async () => {
+            const zoneId = "Europe/Madrid";
+            const today = new Date().toLocaleDateString("es-ES", { timeZone: zoneId });
+            const todayMonth = today.split("/")[1];
+            const todayDay = today.split("/")[0];
 
-            webhook.send({ embeds: [embed] });
-        },
-        {
-            timezone: "Europe/Madrid"
-        }
-    );
+            console.log(today);
 
-    // JOFRE
-    cron.schedule(
-        "0 15 21 3 *",
-        () => {
-            const embed = new EmbedBuilder()
-                .setDescription(`🎂🎉 ¡¡Felicidades <@179686774895935489>!! 🎂🎉`)
-                .setImage("https://www.funimada.com/assets/images/cards/big/bday-261.gif")
-                .setColor("#059F03")
-                .setTimestamp()
-                .setFooter({ text: "🎂🎂🎂🎉🎉🎂🎂🎂" });
+            const usersWithBirthdaysToday = await bdSchema.find({
+                Month: todayMonth,
+                Day: todayDay
+            });
 
-            webhook.send({ embeds: [embed] });
-        },
-        {
-            timezone: "Europe/Madrid"
-        }
-    );
+            usersWithBirthdaysToday.forEach(async (user) => {
+                const embed = new EmbedBuilder()
+                    .setTitle(guild.name)
+                    .setThumbnail(guild.iconURL())
+                    .setDescription(`¡Felicidades por tus ${user.Age} años <@${user.UserID}>!`)
+                    .addFields({
+                        name: "\u200B",
+                        value: `🎉 El día de tu cumpleaños es siempre un día mágico, disfrútalo…. ¡Y muchas felicidades! 🎉`
+                    })
+                    .setImage("https://www.funimada.com/assets/images/cards/big/bday-261.gif")
+                    .setColor("#059F03")
+                    .setTimestamp()
+                    .setFooter({ text: "🎂🎂🎂🎉🎉🎂🎂🎂" });
 
-    // DANIEL
-    cron.schedule(
-        "0 15 15 11 *",
-        () => {
-            const embed = new EmbedBuilder()
-                .setDescription(`🎂🎉 ¡¡Felicidades <@298585122519908364>!! 🎂🎉`)
-                .setImage("https://www.funimada.com/assets/images/cards/big/bday-261.gif")
-                .setColor("#059F03")
-                .setTimestamp()
-                .setFooter({ text: "🎂🎂🎂🎉🎉🎂🎂🎂" });
-
-            webhook.send({ embeds: [embed] });
-        },
-        {
-            timezone: "Europe/Madrid"
-        }
-    );
-
-    // HUGO
-    cron.schedule(
-        "0 15 22 4 *",
-        () => {
-            const embed = new EmbedBuilder()
-                .setDescription(`🎂🎉 ¡¡Felicidades <@254135921144758273>!! 🎂🎉`)
-                .setImage("https://www.funimada.com/assets/images/cards/big/bday-261.gif")
-                .setColor("#059F03")
-                .setTimestamp()
-                .setFooter({ text: "🎂🎂🎂🎉🎉🎂🎂🎂" });
-
-            webhook.send({ embeds: [embed] });
+                await client.users.fetch(user.UserID).then((user) => {
+                    user.send({ embeds: [embed] });
+                });
+            });
         },
         {
             timezone: "Europe/Madrid"
