@@ -102,6 +102,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}recordatorio*`,
+                    value: "`Crear recordatorio`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}akinator*`,
                     value: "`Jugar a Akinator.`",
                     inline: true
@@ -139,11 +144,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}yt + texto*`,
                     value: "`Buscar video youtube.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}asci + texto*`,
-                    value: "`Texto a ASCII.`",
                     inline: true
                 },
                 {
@@ -231,6 +231,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}asci + texto*`,
+                    value: "`Texto a ASCII.`",
                     inline: true
                 },
                 {
