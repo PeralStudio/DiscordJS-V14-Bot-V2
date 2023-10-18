@@ -51,6 +51,7 @@ module.exports = {
         if (!data) {
             await bdSchema.create({
                 UserID: interaction.user.id,
+                Username: interaction.user.username,
                 Age: age,
                 Year: birthYear,
                 Month: birthMonth,

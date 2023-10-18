@@ -2,6 +2,7 @@ const { model, Schema } = require(`mongoose`);
 
 let birthdaySchema = new Schema({
     UserID: String,
+    Username: String,
     Age: Number,
     Year: Number,
     Month: Number,
