@@ -63,7 +63,7 @@ module.exports = {
                 .setColor("Blurple")
                 .setTitle(`${interaction.user.username} | Restablecimiento de cumpleaños`)
                 .setDescription(`**👉 La información de tu cumpleaños se ha restablecido.**`);
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed], ephemeral: true });
         }
     }
 };
