@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../../../schemas/birthdaySchema");
+require("dotenv").config();
 
 module.exports = {
     name: "proximo-cumpleaños",
@@ -42,8 +43,14 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor("Blurple")
             .setTitle(`${interaction.user.username} | Próximo Cumpleaños`)
-            .setDescription(`**👉 Tu Próximo Cumpleaños es en \`${h}\`**`);
+            .setDescription(`**👉 Tu Próximo Cumpleaños es en \`${h}\`**`)
+            .setThumbnail(interaction.user.displayAvatarURL())
+            .setTimestamp()
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL()
+            });
 
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed], ephemeral: true });
     }
 };

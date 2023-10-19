@@ -1,7 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../../../schemas/birthdaySchema");
+require("dotenv").config();
 
-function age1(birthYear, birthMonth, birthDay) {
+const age1 = (birthYear, birthMonth, birthDay) => {
     const today = new Date();
     const birthdate = new Date(birthYear, birthMonth - 1, birthDay);
     let age = today.getFullYear() - birthdate.getFullYear();
@@ -10,7 +11,7 @@ function age1(birthYear, birthMonth, birthDay) {
         age--;
     }
     return age;
-}
+};
 
 module.exports = {
     name: "reset-cumpleaños",
@@ -61,8 +62,16 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor("Blurple")
-                .setTitle(`${interaction.user.username} | Restablecimiento de cumpleaños`)
-                .setDescription(`**👉 La información de tu cumpleaños se ha restablecido.**`);
+                .setTitle(`Restablecimiento de cumpleaños`)
+                .setDescription(
+                    `**✅ La información de tu cumpleaños se ha restablecido\n\n<@${data.UserID}> esta es la fecha que has registrado en la base de datos\n\n\`${data.Day}/${data.Month}/${data.Year}\nEdad: ${data.Age}\`**`
+                )
+                .setThumbnail(interaction.user.displayAvatarURL())
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
             await interaction.reply({ embeds: [embed], ephemeral: true });
         }
     }

@@ -1,7 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../../../schemas/birthdaySchema");
+require("dotenv").config();
 
-function age1(birthYear, birthMonth, birthDay) {
+const age1 = (birthYear, birthMonth, birthDay) => {
     const today = new Date();
     const birthdate = new Date(birthYear, birthMonth - 1, birthDay);
     let age = today.getFullYear() - birthdate.getFullYear();
@@ -10,7 +11,7 @@ function age1(birthYear, birthMonth, birthDay) {
         age--;
     }
     return age;
-}
+};
 
 module.exports = {
     name: "cumpleaños",
@@ -60,11 +61,17 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor("Blurple")
-                .setTitle(`${interaction.user.username} | Birthday`)
+                .setTitle(`${interaction.user.username} | Cumpleaños`)
                 .setDescription(
-                    `**👉 Has configurado correctamente tu fecha de nacimiento (\`${birthMonth}/${birthDay}/${birthYear}\`)[\`${age}\`]**`
-                );
-            await interaction.reply({ embeds: [embed] });
+                    `**✅ Has configurado correctamente tu fecha de nacimiento.\n\n\`${birthMonth}/${birthDay}/${birthYear}\`\n\`Edad: ${age}\`**`
+                )
+                .setThumbnail(interaction.user.displayAvatarURL())
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
+            await interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
             await interaction.reply({
                 content: `Ya has configurado tu fecha de cumpleaños. Utiliza /reset-cumpleaños para restablecerla.`,
