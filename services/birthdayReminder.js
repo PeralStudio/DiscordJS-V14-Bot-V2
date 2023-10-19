@@ -14,8 +14,6 @@ const birthdaysReminder = (client) => {
             const todayMonth = today.split("/")[1];
             const todayDay = today.split("/")[0];
 
-            console.log(today);
-
             const usersWithBirthdaysToday = await bdSchema.find({
                 Month: todayMonth,
                 Day: todayDay
