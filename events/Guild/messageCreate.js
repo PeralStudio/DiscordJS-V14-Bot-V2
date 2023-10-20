@@ -1,14 +1,39 @@
-const { EmbedBuilder, PermissionsBitField, codeBlock } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField, WebhookClient } = require("discord.js");
 const { Configuration, OpenAIApi } = require("openai");
 const client = require("../../index");
 const config = require("../../config/config.js");
 require("dotenv").config();
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_BOT_DMS_CHANNEL
+});
 
 module.exports = {
     name: "messageCreate"
 };
 
 client.on("messageCreate", async (message) => {
+    if (!message.guild) {
+        const embed = new EmbedBuilder()
+            .setAuthor({
+                name: message.author.username,
+                iconURL: message.author.displayAvatarURL()
+            })
+            .setTitle(`Mensaje recibido de ${message.author.username}`)
+            .setDescription(`${message.content}\n`)
+            .setThumbnail(message.author.displayAvatarURL())
+            .setColor("Random")
+            .setTimestamp()
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL()
+            });
+
+        webhook.send({
+            embeds: [embed]
+        });
+    }
+
     const configuration = new Configuration({
         apiKey: process.env.OPENAI_API_KEY
     });
