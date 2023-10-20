@@ -34,7 +34,7 @@ client.on("messageCreate", async (message) => {
         });
     }
 
-    // Interaction chatGPT in CHAT_GPT_CHANNEL channel
+    // Interaction chatGPT in BARD_GOOGLE_CHANNEL channel
     if (message.channel.id === process.env.BARD_GOOGLE_CHANNEL) {
         if (message.author.bot) return;
 
