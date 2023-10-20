@@ -11,8 +11,10 @@ module.exports = {
     name: "userJoinChannel.js"
 };
 
+//TODO Borrar mensajes antiguos dletemsg()
+
 client.on(Events.VoiceStateUpdate, (oldState, newState) => {
-    deleteOldMsg(client, process.env.LOGS_CHANNEL_ID);
+    deleteOldMsg(client, process.env.WEBHOOK_LOGS_CHANNEL);
 
     if (newState.channelId === null) {
         if (oldState.member.user.bot) return;

@@ -10,7 +10,8 @@ const {
     EPICGAMES_CHANNEL_ID,
     NOTICIAS_CHANNEL_ID,
     ERRORES_BOT_CHANNEL,
-    LOGS_CHANNEL_ID
+    LOGS_CHANNEL_ID,
+    WEBHOOK_BOT_DMS_CHANNEL
 } = process.env;
 
 const deleteOldMsg = (client, channelID) => {
@@ -45,6 +46,10 @@ const deleteOldMsg = (client, channelID) => {
         case LOGS_CHANNEL_ID:
             channelName = "📙-logs";
             time = 2 * 1440 * 60 * 1000;
+            break;
+        case WEBHOOK_BOT_DMS_CHANNEL:
+            channelName = "📙-logs";
+            time = 3 * 1440 * 60 * 1000;
             break;
     }
 
