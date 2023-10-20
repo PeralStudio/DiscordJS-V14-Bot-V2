@@ -23,6 +23,11 @@ module.exports = {
                         inline: true
                     },
                     {
+                        name: `*${process.env.PREFIX}ver-cumpleaños*`,
+                        value: "`Ver lista de cumpleaños en BBDD (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}crear-sourcebin*`,
                         value: "`Crear SourceBin. (Admin)`",
                         inline: true
@@ -92,8 +97,18 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}lol-tierlist*`,
-                    value: "`Tierlist Campeones.`",
+                    name: `*${process.env.PREFIX}cumpleaños*`,
+                    value: "`Agrega tu cumpleaños para felicitaciones.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}mi-cumpleaños*`,
+                    value: "`Información de tu cumpleaños.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}set-cumpleaños*`,
+                    value: "`Modifica la fecha de tu cumpleaños`",
                     inline: true
                 },
                 {
@@ -162,11 +177,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}actividad*`,
-                    value: "`Iniciar una actividad.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}qr*`,
                     value: "`Crear codigo QR.`",
                     inline: true
@@ -184,11 +194,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}github + @usuario*`,
                     value: "`Github de un usuario.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}emoji-list*`,
-                    value: "`Emojis disponibles Servidor.`",
                     inline: true
                 },
                 {
@@ -234,6 +239,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}actividad*`,
+                    value: "`Iniciar una actividad.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}asci + texto*`,
                     value: "`Texto a ASCII.`",
                     inline: true
@@ -259,6 +269,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}emoji-list*`,
+                    value: "`Emojis disponibles Servidor.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
                     inline: true
@@ -271,6 +286,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}meme*`,
                     value: "`Meme random reddit.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}lol-tierlist*`,
+                    value: "`Tierlist Campeones.`",
                     inline: true
                 },
                 {
