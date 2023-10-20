@@ -60,7 +60,7 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
             webhook.send({ embeds: [embed] });
         }
-        if (oldState.channelId === newState.channelId && newState.streaming === false) {
+        if (oldState.streaming === true && newState.streaming === false) {
             const embed = new EmbedBuilder()
                 .setDescription(
                     ` <@${oldState.member.user.id}> ⏹️ dejó de retransmitir en 👉 https://discord.com/channels/${newState.guild.id}/${newState.channelId}`
