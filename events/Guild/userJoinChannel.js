@@ -46,6 +46,35 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
         webhook.send({ embeds: [embed] });
     } else {
         if (oldState.member.user.bot) return;
+        if (oldState.channelId === newState.channelId && newState.streaming === true) {
+            const embed = new EmbedBuilder()
+                .setDescription(
+                    ` <@${oldState.member.user.id}> ⏺️ empezó a retransmitir en 👉 https://discord.com/channels/${newState.guild.id}/${newState.channelId}`
+                )
+                .setColor("#AA70F8")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
+
+            webhook.send({ embeds: [embed] });
+        }
+        if (oldState.channelId === newState.channelId && newState.streaming === false) {
+            const embed = new EmbedBuilder()
+                .setDescription(
+                    ` <@${oldState.member.user.id}> ⏹️ dejó de retransmitir en 👉 https://discord.com/channels/${newState.guild.id}/${newState.channelId}`
+                )
+                .setColor("#AA70F8")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
+
+            webhook.send({ embeds: [embed] });
+        }
+        if (oldState.channelId === newState.channelId) return;
 
         const embed = new EmbedBuilder()
             .setDescription(
