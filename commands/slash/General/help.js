@@ -137,8 +137,8 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}chatgpt + texto*`,
-                    value: "`Consulta a Chat GPT-3.`",
+                    name: `*${process.env.PREFIX}bard-google + texto*`,
+                    value: "`Consulta a Bard Google.`",
                     inline: true
                 },
                 {
