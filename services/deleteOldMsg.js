@@ -11,7 +11,7 @@ const {
     NOTICIAS_CHANNEL_ID,
     ERRORES_BOT_CHANNEL,
     LOGS_CHANNEL_ID,
-    WEBHOOK_BOT_DMS_CHANNEL
+    BOT_DMS_CHANNEL_ID
 } = process.env;
 
 const deleteOldMsg = (client, channelID) => {
@@ -47,8 +47,8 @@ const deleteOldMsg = (client, channelID) => {
             channelName = "📙-logs";
             time = 2 * 1440 * 60 * 1000;
             break;
-        case WEBHOOK_BOT_DMS_CHANNEL:
-            channelName = "📙-logs";
+        case BOT_DMS_CHANNEL_ID:
+            channelName = "📩bot-dms📩";
             time = 3 * 1440 * 60 * 1000;
             break;
     }
