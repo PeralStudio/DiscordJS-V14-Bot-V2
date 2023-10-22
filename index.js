@@ -64,7 +64,7 @@ elrellanoScrap(client);
 epicGamesFree(client);
 
 //Function to search for news every day
-// fetchNews(client);
+fetchNews(client);
 
 //Function Birthdays
 birthdaysReminder(client);
