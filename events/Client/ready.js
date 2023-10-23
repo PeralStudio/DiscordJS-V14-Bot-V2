@@ -18,36 +18,31 @@ client.once("ready", async () => {
     const pickPresence = async () => {
         // Random presence bot
         const statusArray = [
-            // {
-            //     name: `Achant | /help`,
-            //     type: ActivityType.Playing,
-            //     status: "online",
-            // },
-            // {
-            //     name: `Double Dragon | /help`,
-            //     type: ActivityType.Playing,
-            //     status: "online",
-            // },
-            // {
-            //     name: `Golden Axe | /help`,
-            //     type: ActivityType.Playing,
-            //     status: "dnd",
-            // },
-            // {
-            //     name: `El Fary | /help`,
-            //     type: ActivityType.Listening,
-            //     status: "online",
-            // },
-            // {
-            //     name: `Gat y Gos | /help`,
-            //     type: ActivityType.Watching,
-            //     status: "idle",
-            // },
-            // {
-            //     name: `Vaca y Pollo | /help`,
-            //     type: ActivityType.Watching,
-            //     status: "online",
-            // },
+            {
+                name: `Double Dragon 👊 | /help`,
+                type: ActivityType.Playing,
+                status: "online"
+            },
+            {
+                name: `Golden Axe 🪓 | /help`,
+                type: ActivityType.Playing,
+                status: "dnd"
+            },
+            {
+                name: `El Fary 🍋 | /help`,
+                type: ActivityType.Listening,
+                status: "online"
+            },
+            {
+                name: `Gat y Gos  😺🐶| /help`,
+                type: ActivityType.Watching,
+                status: "idle"
+            },
+            {
+                name: `Vaca y Pollo 🐮🍗 | /help`,
+                type: ActivityType.Watching,
+                status: "online"
+            },
             {
                 name: `${membersCount} usuarios 👀`,
                 type: ActivityType.Watching,
@@ -71,6 +66,12 @@ client.once("ready", async () => {
                     }
                 ],
                 status: statusArray[option].status
+            });
+
+            await client.user.setActivity({
+                name: statusArray[option].name,
+                type: statusArray[option].type,
+                url: "https://www.twitch.tv/elrellano"
             });
         } catch (error) {
             console.log(superDjs.colourText(error), "red");
