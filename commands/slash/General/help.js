@@ -224,6 +224,11 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
+                    name: `*${process.env.PREFIX}captura-web + texto*`,
+                    value: "`Crear captura web`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}texto-doble + texto*`,
                     value: "`Crear texto doble.`",
                     inline: true
