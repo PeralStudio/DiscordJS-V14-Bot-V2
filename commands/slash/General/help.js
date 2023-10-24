@@ -87,13 +87,18 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
-                    name: `*${process.env.PREFIX}play + canción*`,
-                    value: "`Reproduce una canción.`",
+                    name: `*${process.env.PREFIX}lol + Invocador*`,
+                    value: "`Información Invocador.`",
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}lol + Invocador*`,
-                    value: "`Información Invocador.`",
+                    name: `*${process.env.PREFIX}lolparche*`,
+                    value: "`Notas parche Lol`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}lol-status*`,
+                    value: "`Estado servicio de lol.`",
                     inline: true
                 },
                 {
@@ -109,11 +114,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}set-cumpleaños*`,
                     value: "`Modifica la fecha de tu cumpleaños`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}lolparche*`,
-                    value: "`Notas parche Lol`",
                     inline: true
                 },
                 {
@@ -139,6 +139,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}bard-google + texto*`,
                     value: "`Consulta a Bard Google.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}play + canción*`,
+                    value: "`Reproduce una canción.`",
                     inline: true
                 },
                 {
@@ -205,11 +210,6 @@ module.exports = {
                     name: `*${process.env.PREFIX}play-radio + emisora*`,
                     value: "`Reproducir emisora radio.`",
                     inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}stop-radio*`,
-                    value: "`Detener radio.`",
-                    inline: true
                 }
             )
             .setTimestamp()
@@ -226,6 +226,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}captura-web + texto*`,
                     value: "`Crear captura web`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}stop-radio*`,
+                    value: "`Detener radio.`",
                     inline: true
                 },
                 {
