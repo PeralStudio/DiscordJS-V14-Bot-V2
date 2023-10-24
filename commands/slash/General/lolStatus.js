@@ -35,7 +35,7 @@ module.exports = {
             const maintenances = response.data.maintenances;
             if (maintenances.length < 1) {
                 const embed = new EmbedBuilder()
-                    .setTitle("Estado del servicio de lol")
+                    .setTitle("Estado del servicio de League of Legends")
                     .setDescription("El servicio de lol está operativo")
                     .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
                     .setColor("#730213")
@@ -63,7 +63,7 @@ module.exports = {
                 if (spanishTranslation) {
                     const contentInSpanish = spanishTranslation.content;
                     const maintenanceEmbed = new EmbedBuilder()
-                        .setTitle("Estado del servicio de lol")
+                        .setTitle("Estado del servicio de League of Legends")
                         .setDescription(contentInSpanish)
                         .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
                         .addFields(
