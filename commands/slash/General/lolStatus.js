@@ -51,6 +51,7 @@ module.exports = {
             }
             for (let i = 0; i < maintenances.length; i++) {
                 const firstMaintenance = maintenances[i];
+                const platforms = firstMaintenance.platforms.join(", ");
                 const updates = firstMaintenance.updates;
                 const firstUpdate = updates[i];
                 const translations = firstUpdate.translations;
@@ -65,6 +66,14 @@ module.exports = {
                         .setTitle("Estado del servicio de lol")
                         .setDescription(contentInSpanish)
                         .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                        .addFields(
+                            { name: "\u200B", value: " " },
+                            {
+                                name: "Plataformas Afectadas",
+                                value: platforms
+                            },
+                            { name: "\u200B", value: " " }
+                        )
                         .setColor("#730213")
                         .setTimestamp()
                         .setFooter({
