@@ -52,8 +52,37 @@ module.exports = {
             }
 
             const platforms = response.data.maintenances[0].platforms.join(", ");
-            const firstUpdate = maintenances[0].translations;
-            const translations = maintenances[1].translations;
+            const firstUpdate = maintenances[0]?.translations;
+            const translations = maintenances[1]?.translations;
+
+            if (!firstUpdate) {
+                const embed = new EmbedBuilder()
+                    .setTitle("Estado del servicio de League of Legends")
+                    .setDescription("El servicio de lol está operativo")
+                    .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                    .setColor("#730213")
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                return await interaction.editReply({ embeds: [embed] });
+            }
+            if (!translations) {
+                const embed = new EmbedBuilder()
+                    .setTitle("Estado del servicio de League of Legends")
+                    .setDescription("El servicio de lol está operativo")
+                    .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                    .setColor("#730213")
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                return await interaction.editReply({ embeds: [embed] });
+            }
 
             const spanishTranslation = translations.find(
                 (translation) => translation.locale === "es_ES"
