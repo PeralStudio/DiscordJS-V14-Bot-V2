@@ -32,7 +32,8 @@ module.exports = {
             await interaction.deferReply({ content: "Cargando...", ephemeral: true });
             const response = await axios.request(options);
 
-            const maintenances = response.data.maintenances;
+            const maintenances = response.data.maintenances[0].updates;
+
             if (maintenances.length < 1) {
                 const embed = new EmbedBuilder()
                     .setTitle("Estado del servicio de League of Legends")
@@ -49,44 +50,65 @@ module.exports = {
 
                 return;
             }
-            for (let i = 0; i < maintenances.length; i++) {
-                const firstMaintenance = maintenances[i];
-                const platforms = firstMaintenance.platforms.join(", ");
-                const updates = firstMaintenance.updates;
-                const firstUpdate = updates[i];
-                const translations = firstUpdate.translations;
 
-                const spanishTranslation = translations.find(
-                    (translation) => translation.locale === "es_ES"
-                );
+            const platforms = response.data.maintenances[0].platforms.join(", ");
+            const firstUpdate = maintenances[0].translations;
+            const translations = maintenances[1].translations;
 
-                if (spanishTranslation) {
-                    const contentInSpanish = spanishTranslation.content;
-                    const maintenanceEmbed = new EmbedBuilder()
-                        .setTitle("Estado del servicio de League of Legends")
-                        .setDescription(contentInSpanish)
-                        .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
-                        .addFields(
-                            { name: "\u200B", value: " " },
-                            {
-                                name: "Plataformas Afectadas",
-                                value: platforms
-                            },
-                            { name: "\u200B", value: " " }
-                        )
-                        .setColor("#730213")
-                        .setTimestamp()
-                        .setFooter({
-                            text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL()
-                        });
+            const spanishTranslation = translations.find(
+                (translation) => translation.locale === "es_ES"
+            );
 
-                    await interaction.editReply({ embeds: [maintenanceEmbed] });
-                } else {
-                    webhook.send({
-                        content: `No se encontró la traducción en español.`
-                    });
-                }
+            const spanishTranslation2 = firstUpdate.find(
+                (translation) => translation.locale === "es_ES"
+            );
+
+            let maintenanceEmbed = new EmbedBuilder()
+                .setTitle("Estado del servicio de League of Legends")
+                .setDescription(spanishTranslation.content)
+                .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                .addFields(
+                    { name: "\u200B", value: " " },
+                    {
+                        name: "Plataformas Afectadas",
+                        value: platforms
+                    },
+                    { name: "\u200B", value: " " }
+                )
+                .setColor("#730213")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
+
+            let maintenanceEmbed2 = new EmbedBuilder()
+                .setTitle("Mensajes Anteriores")
+                .setDescription(spanishTranslation2.content)
+                .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                .addFields(
+                    { name: "\u200B", value: " " },
+                    {
+                        name: "Plataformas Afectadas",
+                        value: platforms
+                    },
+                    { name: "\u200B", value: " " }
+                )
+                .setColor("#730213")
+                .setTimestamp()
+                .setFooter({
+                    text: process.env.NAME_BOT,
+                    iconURL: client.user.displayAvatarURL()
+                });
+
+            if (spanishTranslation && !spanishTranslation2) {
+                await interaction.editReply({ embeds: [maintenanceEmbed] });
+            } else if (spanishTranslation && spanishTranslation2) {
+                await interaction.editReply({ embeds: [maintenanceEmbed, maintenanceEmbed2] });
+            } else {
+                webhook.send({
+                    content: `No se encontró la traducción en español.`
+                });
             }
         } catch (err) {
             webhook.send({
