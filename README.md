@@ -41,7 +41,7 @@ Follow these steps to start the bot on your Discord server:
     npm start
     ```
 
-## Contribuciones
+## Contributions
 
 Contributions are welcome. Before contributing, please read the following guidelines:
 
