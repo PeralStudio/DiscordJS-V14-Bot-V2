@@ -23,6 +23,7 @@
     "dayjs": "^1.11.4",
     "discord-backup": "^3.3.2",
     "discord-gamecord": "^4.4.1",
+    "discord-image-generation": "^1.4.25",
     "discord-player": "^5.4.0",
     "discord-together": "^1.3.31",
     "discord-tts": "^1.2.2",

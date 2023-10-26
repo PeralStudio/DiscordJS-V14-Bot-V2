@@ -1,0 +1,46 @@
+{
+  "name": "discord-image-generation",
+  "version": "1.4.25",
+  "description": "discord-image-generation is a powerful module that allow you to generate awesome images.",
+  "main": "src/index.js",
+  "types": "typings/index.d.ts",
+  "scripts": {
+    "test": "node tests/test.js"
+  },
+  "author": {
+    "name": "Mr¤KayJayDee",
+    "email": "killian.dalcin@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.mrkayjaydee.xyz/Mr-KayJayDee/discord-image-generation"
+  },
+  "bugs": {
+    "url": "https://git.mrkayjaydee.xyz/Mr-KayJayDee/discord-image-generation/issues"
+  },
+  "homepage": "https://git.mrkayjaydee.xyz/Mr-KayJayDee/discord-image-generation/src/branch/main/README.md",
+  "keywords": [
+    "discord",
+    "images",
+    "generation",
+    "gif",
+    "manipulation",
+    "canvas",
+    "jimp",
+    "photo",
+    "picture",
+    "drawing"
+  ],
+  "dependencies": {
+    "canvas": "^2.10.1",
+    "discord.js": "^14.7.1",
+    "gifencoder": "^2.0.1",
+    "jimp": "^0.16.0"
+  },
+  "overrides": {
+    "jimp": {
+      "jpeg-js": "^0.4.4"
+    }
+  }
+}
