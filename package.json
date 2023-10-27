@@ -49,6 +49,7 @@
     "node-superfetch": "^0.2.3",
     "nodemailer": "^6.7.8",
     "openai": "^3.2.1",
+    "puppeteer": "^21.4.1",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
     "sourcebin": "^5.0.0",
