@@ -44,6 +44,7 @@ client.on("messageCreate", async (message) => {
             headers: {
                 psid: process.env.BARD_PSID,
                 text: message.content,
+                model: "gchat",
                 "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
                 "X-RapidAPI-Host": "google-bard1.p.rapidapi.com"
             }
