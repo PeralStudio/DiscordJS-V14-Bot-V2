@@ -12,6 +12,7 @@ const fetchNews = require("./services/fetchNews");
 const epicGamesFree = require("./services/epicGamesFree");
 const elrellanoScrap = require("./services/elrellanoScrap");
 const birthdaysReminder = require("./services/birthdayReminder");
+const reminders = require("./services/reminders");
 
 // Creating a new client:
 const client = new Client({
@@ -68,6 +69,9 @@ fetchNews(client);
 
 //Function Birthdays
 birthdaysReminder(client);
+
+//Funtion Reminders
+reminders(client);
 
 // Host the bot:
 require("http")
