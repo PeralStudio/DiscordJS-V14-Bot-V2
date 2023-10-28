@@ -82,7 +82,7 @@ module.exports = {
             .setColor(`Orange`)
             .setTitle(`✅ Recordatorio Creado Correctamente`)
             .setDescription(
-                `Cuando finalice el temporizador del recordatorio,\n se enviará el recordatorio por mensaje privado`
+                `Cuando sea la fecha y hora indicada,\n se te se enviará el recordatorio por mensaje privado.`
             )
             .addFields(
                 { name: "\u200B", value: " " },
