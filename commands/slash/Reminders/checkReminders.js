@@ -26,6 +26,9 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL()
             })
             .setThumbnail(interaction.user.displayAvatarURL())
+            .setDescription(
+                `Para borrar un **Recordatorio**, usa el comando\n \`/borrar-recordatorios\``
+            )
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
@@ -33,8 +36,9 @@ module.exports = {
             });
 
         for (const task of userTasks) {
+            let numTask = userTasks.indexOf(task) + 1;
             embedTasks.addFields({
-                name: `${task.Task}`,
+                name: `${numTask}. ${task.Task}`,
                 value: `${task.Date}\nID: ${task.ID}`,
                 inline: true
             });

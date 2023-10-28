@@ -41,9 +41,9 @@ module.exports = {
         let day = interaction.options.getInteger(`dia`);
         let hour = interaction.options.getInteger(`hora`);
         let minutes = interaction.options.getInteger(`minutos`);
+        let desc = interaction.options.getString(`descripción`);
         let today = new Date();
         let month = today.getMonth();
-        let desc = interaction.options.getString(`descripción`);
         const codeID = generator.generate({
             length: 5,
             lowercase: false,

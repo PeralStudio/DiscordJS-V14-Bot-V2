@@ -1,10 +1,14 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 const reminderSchema = require("../../../schemas/reminderSchema");
 require("dotenv").config();
 
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
+
 module.exports = {
-    name: "borrar-recordatorios",
-    description: "Borrar recordatorio",
+    name: "borrar-recordatorio",
+    description: "Borrar un recordatorio",
     type: 1,
     options: [
         {
@@ -33,7 +37,9 @@ module.exports = {
         try {
             await reminderSchema.deleteOne({ UserID: interaction.user.id, ID: id });
         } catch (error) {
-            console.log(error);
+            webhook.send({
+                content: `Error comando: **${interaction.commandName}**\`\`\`${err}\`\`\``
+            });
         } finally {
             const embed = new EmbedBuilder()
                 .setColor(`Orange`)
