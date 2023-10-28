@@ -65,7 +65,10 @@ module.exports = {
 
         const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
 
-        if (userDate < todayDate)
+        var userDateD = new Date(userDate);
+        var todayDateD = new Date(todayDate);
+
+        if (userDateD < todayDateD)
             return interaction.reply({
                 content: `❌ La fecha introducida ya ha pasado.  ❌`,
                 ephemeral: true

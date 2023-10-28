@@ -65,14 +65,17 @@ module.exports = {
             });
         }
 
+        const userDate = new Date(
+            `${today.getFullYear()}-${month + 1}-${day} ${hour}:${minutes}`
+        ).toLocaleString("es-ES");
+
+        const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
+
+        var userDateD = new Date(userDate);
+        var todayDateD = new Date(todayDate);
+
         try {
-            const userDate = new Date(
-                `${today.getFullYear()}-${month + 1}-${day} ${hour}:${minutes}`
-            ).toLocaleString("es-ES");
-
-            const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
-
-            if (userDate < todayDate)
+            if (userDateD < todayDateD)
                 return interaction.reply({
                     content: `❌ La fecha introducida ya ha pasado.  ❌`,
                     ephemeral: true
@@ -130,6 +133,20 @@ module.exports = {
                 .setTitle(`✅ Recordatorio Editado Correctamente`)
                 .setDescription(
                     `Si quieres ver tus recordatorios, usa el comando \`/ver-recordatorios\``
+                )
+                .addFields(
+                    {
+                        name: `Tarea`,
+                        value: desc
+                    },
+                    {
+                        name: `Fecha`,
+                        value: userDate
+                    },
+                    {
+                        name: `ID`,
+                        value: id
+                    }
                 )
                 .setTimestamp()
                 .setFooter({
