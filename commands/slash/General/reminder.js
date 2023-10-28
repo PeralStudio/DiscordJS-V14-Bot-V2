@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+const cron = require("node-cron");
 require("dotenv").config();
 
 module.exports = {
@@ -7,25 +8,22 @@ module.exports = {
     type: 1,
     options: [
         {
-            type: 3,
-            name: "tiempo",
-            description: "Tiempo para el recordatorio",
-            required: true,
-            choices: [
-                { name: "1m", value: "60" },
-                { name: "2m", value: "120" },
-                { name: "5m", value: "300" },
-                { name: "10m", value: "600" },
-                { name: "15m", value: "900" },
-                { name: "20m", value: "1200" },
-                { name: "30m", value: "1800" },
-                { name: "45m", value: "2700" },
-                { name: "1h", value: "3600" },
-                { name: "2hs", value: "7200" },
-                { name: "3hs", value: "10800" },
-                { name: "5hs", value: "18000" },
-                { name: "10hs", value: "36000" }
-            ]
+            type: 4,
+            name: "dia",
+            description: "Día para el recordatorio",
+            required: true
+        },
+        {
+            type: 4,
+            name: "hora",
+            description: "Hora para el recordatorio",
+            required: true
+        },
+        {
+            type: 4,
+            name: "minutos",
+            description: "Minutos para el recordatorio",
+            required: true
         },
         {
             type: 3,
@@ -38,30 +36,60 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
-        const desc = interaction.options.getString(`descripción`);
-        const time = interaction.options.getString(`tiempo`);
-        const author = interaction.user.id;
+        let day = interaction.options.getInteger(`dia`);
+        let hour = interaction.options.getInteger(`hora`);
+        let minutes = interaction.options.getInteger(`minutos`);
+        let today = new Date();
+        let month = today.getMonth();
+        let desc = interaction.options.getString(`descripción`);
 
-        const seconds = Math.floor(time % 60);
-        const minutes = Math.floor((time / 60) % 60);
-        const hours = Math.floor((time / 60 / 60) % 24);
+        const userDate = new Date(
+            `${today.getFullYear()}-${month + 1}-${day} ${hour}:${minutes} `
+        ).toLocaleString("es-ES");
 
-        const formattedTime = [
-            hours.toString().padStart(2, "0"),
-            minutes.toString().padStart(2, "0"),
-            seconds.toString().padStart(2, "0")
-        ].join(":");
+        const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
+
+        if (userDate < todayDate)
+            return interaction.reply({
+                content: `❌ La fecha introducida ya ha pasado.  ❌`,
+                ephemeral: true
+            });
+
+        if (day > 31)
+            return interaction.reply({
+                content: `❌ El dìa introducido es incorrecto. ❌`,
+                ephemeral: true
+            });
+        if (hour > 23)
+            return interaction.reply({
+                content: `❌ La hora introducida es incorrecta. ❌`,
+                ephemeral: true
+            });
+        if (minutes > 59)
+            return interaction.reply({
+                content: `❌ Los minutos introducidos son incorrectos. ❌`,
+                ephemeral: true
+            });
+
+        if (minutes < 10) minutes = `0${minutes}`;
+        if (hour < 10) hour = `0${hour}`;
+        if (day < 10) day = `0${day}`;
+        if (month + 1 < 10) month = `0${month}`;
+
+        const cronTime = `${minutes} ${hour} ${day} ${month + 1} *`;
 
         const embed = new EmbedBuilder()
             .setColor(`Orange`)
-            .setTitle(`Recordatorio Creado Correctamente`)
+            .setTitle(`✅ Recordatorio Creado Correctamente`)
             .setDescription(
                 `Cuando finalice el temporizador del recordatorio,\n se enviará el recordatorio por mensaje privado`
             )
             .addFields(
                 { name: "\u200B", value: " " },
                 {
-                    name: `⏱️ Tiempo: ${formattedTime}\n\n📝 Tarea: ${desc}`,
+                    name: `📆  ${day}/${
+                        month + 1
+                    }/${today.getFullYear()}\n⏱️  ${hour}:${minutes}\n\n📝 Tarea: ${desc}`,
                     value: " "
                 },
                 { name: "\u200B", value: " " }
@@ -72,25 +100,41 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL()
             });
 
-        const remindEmbed = new EmbedBuilder()
-            .setColor(`Orange`)
-            .setTitle(`✅ Recordatorio`)
-            .setDescription(
-                `Tu temporizador de recordatorio ha terminado.\n Es hora de: **${desc}**`
-            )
-            .addFields({ name: "\u200B", value: " " })
-            .setTimestamp()
-            .setFooter({
-                text: process.env.NAME_BOT,
-                iconURL: client.user.displayAvatarURL()
-            });
-
         await interaction.reply({ embeds: [embed], ephemeral: true });
 
-        setTimeout(async () => {
-            await client.users.fetch(author).then((user) => {
-                user.send({ embeds: [remindEmbed] });
-            });
-        }, time * 1000);
+        const job = cron.schedule(
+            cronTime,
+            async () => {
+                const remindEmbed = new EmbedBuilder()
+                    .setColor(`Orange`)
+                    .setTitle(`✅ Recordatorio`)
+                    .addFields(
+                        { name: "\u200B", value: " " },
+                        {
+                            name: `Tu temporizador de recordatorio ha terminado`,
+                            value: ` `
+                        },
+                        { name: "\u200B", value: " " },
+                        {
+                            name: ` `,
+                            value: `📝 Tarea: **${desc}**`
+                        },
+                        { name: "\u200B", value: " " }
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                await interaction.user.send({ embeds: [remindEmbed] });
+                job.stop();
+            },
+            {
+                timezone: "Europe/Madrid"
+            }
+        );
+
+        job.start();
     }
 };
