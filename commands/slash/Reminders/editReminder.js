@@ -71,8 +71,8 @@ module.exports = {
 
         const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
 
-        var userDateD = new Date(userDate);
-        var todayDateD = new Date(todayDate);
+        const userDateD = new Date(userDate);
+        const todayDateD = new Date(todayDate);
 
         try {
             if (userDateD < todayDateD)
