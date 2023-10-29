@@ -39,7 +39,7 @@ module.exports = async function (client, input, botMessage, buttons, time) {
     if (buttons.length >= 7) buttonRows.push(buttonRow3)
 
     botMessage = await botMessage.edit({ embeds: [botMessage.embeds[0]], components: buttonRows });
-    // create our collector
+    //create a filter for when the user interacts with the buttons
     const filter = (i) => { 
         if (i.user == input.author.id) {
             return true;
@@ -51,6 +51,7 @@ module.exports = async function (client, input, botMessage, buttons, time) {
 
     let selection;
 
+    //await the user's selection
     await botMessage.awaitMessageComponent({
         filter: filter,
         time: 60000,
@@ -58,7 +59,7 @@ module.exports = async function (client, input, botMessage, buttons, time) {
         .then(async (i) => {
             selection = i;
         }).catch(() => {
-            // do nothing
+            //do nothing
         });
 
     return selection;
