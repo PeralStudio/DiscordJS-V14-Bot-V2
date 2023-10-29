@@ -31,6 +31,7 @@ module.exports = {
                 headers: {
                     psid: process.env.BARD_PSID,
                     text: prompt,
+                    model: "gchat",
                     "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
                     "X-RapidAPI-Host": "google-bard1.p.rapidapi.com"
                 }
