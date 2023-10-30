@@ -50,11 +50,14 @@ module.exports = {
                 });
 
             for (const item of collectionItemsData) {
+                const i = collectionItemsData.indexOf(item);
+
                 embedCollections.addFields({
-                    name: "Documento",
+                    name: `Documento ${i + 1}`,
                     value: `\`\`\`${JSON.stringify(item, null, 2)}\`\`\``
                 });
             }
+
             interaction.reply({
                 embeds: [embedCollections],
                 ephemeral: true
