@@ -49,6 +49,10 @@ const setIntervalYoutube = async (client, userId) => {
                 break;
             case "UC9eM3jqq5IfxbGHbuRR_jRw":
                 userId = "SFDXShow";
+                break;
+            case "UCvmKFknIG9Z_tj0ZyMHPViQ":
+                userId = "JRBmotors";
+                break;
             default:
                 break;
         }
