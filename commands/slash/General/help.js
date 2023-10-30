@@ -18,6 +18,11 @@ module.exports = {
                 .setTitle(`COMANDOS DISPONIBLES ADMIN **${client.user.username.toUpperCase()}** \n`)
                 .addFields(
                     {
+                        name: `*${process.env.PREFIX}bbdd*`,
+                        value: "`Ver colecciones BBDD. (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}email*`,
                         value: "`Enviar email. (Admin)`",
                         inline: true
