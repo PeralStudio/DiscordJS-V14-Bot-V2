@@ -55,7 +55,7 @@ module.exports = {
                 user.send({ content: textToSend, files: attchToSend && [attchToSend] });
 
                 interaction.reply({
-                    ephemeral: false,
+                    ephemeral: true,
                     embeds: [
                         new EmbedBuilder()
                             .setDescription(
