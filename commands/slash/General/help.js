@@ -23,6 +23,11 @@ module.exports = {
                         inline: true
                     },
                     {
+                        name: `*${process.env.PREFIX}bbdd + [colección]*`,
+                        value: "`Ver una colección. (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}email*`,
                         value: "`Enviar email. (Admin)`",
                         inline: true
