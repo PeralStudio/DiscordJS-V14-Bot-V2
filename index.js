@@ -74,9 +74,9 @@ birthdaysReminder(client);
 reminders(client);
 
 // Host the bot:
-require("http")
-    .createServer((req, res) => res.end("Ready."))
-    .listen(3000);
+// require("http")
+//     .createServer((req, res) => res.end("Ready."))
+//     .listen(3000);
 
 // Getting the bot token:
 const AuthenticationToken = process.env.TOKEN_DISCORD || config.Client.TOKEN;
