@@ -22,18 +22,18 @@ module.exports = {
             type: 11,
             name: "archivo",
             description: "Adjuntar archivo (opcional)."
+        },
+        {
+            type: 5,
+            name: "todos",
+            description: "Enviar mensaje a todos. (opcional)"
         }
     ],
     permissions: {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
-        if (
-            interaction.user.id !== process.env.ID_OWNER &&
-            interaction.user.id !== "254135921144758273" &&
-            interaction.user.id !== "298585122519908364" &&
-            interaction.user.id !== "179686774895935489"
-        ) {
+        if (interaction.user.id !== process.env.ID_OWNER) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
@@ -47,36 +47,66 @@ module.exports = {
         const textToSend = interaction.options.get("mensaje").value;
         const userToSend = interaction.options.get("usuario").value;
         const attchToSend = interaction.options.get("archivo")?.attachment?.attachment;
+        const sendToAll = interaction.options.get("todos")?.value;
 
-        //send md to user
-        client.users
-            .fetch(userToSend)
-            .then((user) => {
-                user.send({ content: textToSend, files: attchToSend && [attchToSend] });
+        if (!sendToAll) {
+            //send md to user
+            client.users
+                .fetch(userToSend)
+                .then((user) => {
+                    user.send({ content: textToSend, files: attchToSend && [attchToSend] });
 
+                    interaction.reply({
+                        ephemeral: true,
+                        embeds: [
+                            new EmbedBuilder()
+                                .setDescription(
+                                    `✅  Mensaje enviado correctamente a **${
+                                        client.users.cache.get(userToSend).username
+                                    }** .`
+                                )
+                                .setColor("#EA3939")
+                        ]
+                    });
+                    setTimeout(() => interaction.deleteReply(), 3000);
+                })
+                .catch((err) => {
+                    interaction.reply({
+                        ephemeral: true,
+                        embeds: [
+                            new EmbedBuilder()
+                                .setDescription(`⚠️  No se pudo enviar el mensaje. Error: ${err}`)
+                                .setColor("#EA3939")
+                        ]
+                    });
+                });
+        }
+
+        //send message to all user in server
+
+        if (sendToAll) {
+            const guild = client.guilds.cache.get(process.env.GUILD_ID);
+            const members = guild.members.fetch();
+
+            members.then((members) => {
+                members.forEach((member) => {
+                    if (member.bot) return;
+                    member.send({ content: textToSend, files: attchToSend && [attchToSend] });
+                });
                 interaction.reply({
                     ephemeral: true,
                     embeds: [
                         new EmbedBuilder()
                             .setDescription(
-                                `✅  Mensaje enviado correctamente a **${
-                                    client.users.cache.get(userToSend).username
-                                }** .`
+                                `✅  Mensaje enviado correctamente a todos los usuarios del servidor.`
                             )
                             .setColor("#EA3939")
                     ]
                 });
                 setTimeout(() => interaction.deleteReply(), 3000);
-            })
-            .catch((err) => {
-                interaction.reply({
-                    ephemeral: true,
-                    embeds: [
-                        new EmbedBuilder()
-                            .setDescription(`⚠️  No se pudo enviar el mensaje. Error: ${err}`)
-                            .setColor("#EA3939")
-                    ]
-                });
+
+                return;
             });
+        }
     }
 };
