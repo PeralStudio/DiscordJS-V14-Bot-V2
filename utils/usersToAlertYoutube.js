@@ -18,6 +18,5 @@ module.exports = [
     "UCwXh0iKPlI4hXNntPECFSbg", // Zazza el italiano
     "UCNfoPrh2gSZpwijbb9SOKmA", // Portillo"
     "UCFC19W1bS1Zv73fwgiexm-w", // comiendocondalmau
-    "UC9eM3jqq5IfxbGHbuRR_jRw", // SFDXShow
-    "UCvmKFknIG9Z_tj0ZyMHPViQ" // jrbmotors
+    "UC9eM3jqq5IfxbGHbuRR_jRw" // SFDXShow
 ];

@@ -4,7 +4,10 @@
   "description": "A Discord Bot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start index.js --name dcbot",
+    "restart": "pm2 restart dcbot",
+    "kill": "pm2 delete dcbot",
+    "start2": "node index.js",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -50,12 +53,13 @@
     "node-superfetch": "^0.2.3",
     "nodemailer": "^6.7.8",
     "openai": "^3.2.1",
-    "puppeteer": "^21.4.1",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
-    "sourcebin": "^5.0.0",
     "super-djs": "^1.7.4",
     "youtube-node": "^1.3.3",
     "yt-channel-info": "^3.2.1"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas-linux-arm64-gnu": "^0.1.44"
   }
 }

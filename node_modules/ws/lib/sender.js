@@ -1,8 +1,9 @@
-/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "^Duplex" }] */
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "^net|tls$" }] */
 
 'use strict';
 
-const { Duplex } = require('stream');
+const net = require('net');
+const tls = require('tls');
 const { randomFillSync } = require('crypto');
 
 const PerMessageDeflate = require('./permessage-deflate');
@@ -20,7 +21,7 @@ class Sender {
   /**
    * Creates a Sender instance.
    *
-   * @param {Duplex} socket The connection socket
+   * @param {(net.Socket|tls.Socket)} socket The connection socket
    * @param {Object} [extensions] An object containing the negotiated extensions
    * @param {Function} [generateMask] The function used to generate the masking
    *     key
