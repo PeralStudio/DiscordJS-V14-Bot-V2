@@ -1,8 +1,9 @@
 export {
-    Buttons,
-    ButtonsValues,
-    TypesButtons,
-    StylesButton,
-    PaginationOptions,
-    pagination
+   Buttons,
+   ButtonTypes,
+   ButtonsTypes,
+   ButtonStyles,
+   ButtonsStyles,
+   PaginationOptions,
+   pagination
 } from "./pagination";
