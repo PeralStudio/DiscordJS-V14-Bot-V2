@@ -18,28 +18,8 @@ module.exports = {
                 .setTitle(`COMANDOS DISPONIBLES ADMIN **${client.user.username.toUpperCase()}** \n`)
                 .addFields(
                     {
-                        name: `*${process.env.PREFIX}bbdd*`,
-                        value: "`Ver colecciones BBDD. (Admin)`",
-                        inline: true
-                    },
-                    {
-                        name: `*${process.env.PREFIX}bbdd + [colección]*`,
-                        value: "`Ver una colección. (Admin)`",
-                        inline: true
-                    },
-                    {
                         name: `*${process.env.PREFIX}email*`,
                         value: "`Enviar email. (Admin)`",
-                        inline: true
-                    },
-                    {
-                        name: `*${process.env.PREFIX}ver-cumpleaños*`,
-                        value: "`Ver lista de cumpleaños en BBDD (Admin)`",
-                        inline: true
-                    },
-                    {
-                        name: `*${process.env.PREFIX}crear-sourcebin*`,
-                        value: "`Crear SourceBin. (Admin)`",
                         inline: true
                     },
                     {
@@ -97,38 +77,23 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
+                    name: `*${process.env.PREFIX}play + canción*`,
+                    value: "`Reproduce una canción.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}lol + Invocador*`,
                     value: "`Información Invocador.`",
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}lol-tierlist*`,
+                    value: "`Tierlist Campeones.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}lolparche*`,
                     value: "`Notas parche Lol`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}lol-status*`,
-                    value: "`Estado servicio de lol.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}cumpleaños*`,
-                    value: "`Agrega tu cumpleaños para felicitaciones.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}mi-cumpleaños*`,
-                    value: "`Información de tu cumpleaños.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}set-cumpleaños*`,
-                    value: "`Modifica la fecha de tu cumpleaños`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}recordatorio*`,
-                    value: "`Crear recordatorio`",
                     inline: true
                 },
                 {
@@ -147,13 +112,8 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}bard-google + texto*`,
-                    value: "`Consulta a Bard Google.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}play + canción*`,
-                    value: "`Reproduce una canción.`",
+                    name: `*${process.env.PREFIX}chatgpt + texto*`,
+                    value: "`Consulta a Chat GPT-3.`",
                     inline: true
                 },
                 {
@@ -177,6 +137,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}asci + texto*`,
+                    value: "`Texto a ASCII.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}avatar + @usuario*`,
                     value: "`Avatar de un usuario.`",
                     inline: true
@@ -189,6 +154,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}nivel + @usuario*`,
                     value: "`Ver tu nivel.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}actividad*`,
+                    value: "`Iniciar una actividad.`",
                     inline: true
                 },
                 {
@@ -212,6 +182,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}emoji-list*`,
+                    value: "`Emojis disponibles Servidor.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
                     inline: true
@@ -219,6 +194,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}play-radio + emisora*`,
                     value: "`Reproducir emisora radio.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}stop-radio*`,
+                    value: "`Detener radio.`",
                     inline: true
                 }
             )
@@ -234,16 +214,6 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
-                    name: `*${process.env.PREFIX}captura-web + texto*`,
-                    value: "`Crear captura web`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}stop-radio*`,
-                    value: "`Detener radio.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}texto-doble + texto*`,
                     value: "`Crear texto doble.`",
                     inline: true
@@ -256,16 +226,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}actividad*`,
-                    value: "`Iniciar una actividad.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}asci + texto*`,
-                    value: "`Texto a ASCII.`",
                     inline: true
                 },
                 {
@@ -289,11 +249,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}emoji-list*`,
-                    value: "`Emojis disponibles Servidor.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
                     inline: true
@@ -306,11 +261,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}meme*`,
                     value: "`Meme random reddit.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}lol-tierlist*`,
-                    value: "`Tierlist Campeones.`",
                     inline: true
                 },
                 {

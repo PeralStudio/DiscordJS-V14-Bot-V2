@@ -39,7 +39,7 @@ module.exports = {
 
                 {
                     name: "🧑‍💻 Owner",
-                    value: `${client.application.owner.tag || "None"}`,
+                    value: `<@${client.application.owner.id || "Secreto"}>`,
                     inline: true
                 },
 

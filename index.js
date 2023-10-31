@@ -6,8 +6,8 @@ const superDjs = require("super-djs");
 
 const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
 const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
-const setIntervalTwitch = require("./services/setIntervalTwitch");
-const setIntervalYoutube = require("./services/setIntervalYoutube");
+const twitchCron = require("./services/twitchCron");
+const youtubeCron = require("./services/youtubeCron");
 const fetchNews = require("./services/fetchNews");
 const epicGamesFree = require("./services/epicGamesFree");
 const elrellanoScrap = require("./services/elrellanoScrap");
@@ -50,12 +50,12 @@ const client = new Client({
 
 //function interval Twitch for show new Streams of a user
 for (const user of usersToAlertTwitch) {
-    setIntervalTwitch(client, user);
+    twitchCron(client, user);
 }
 
 //function interval Youtube for show new videos of a user
 for (const user of usersToAlertYoutube) {
-    setIntervalYoutube(client, user);
+    youtubeCron(client, user);
 }
 
 //function Scrap Elrellano to show latest videos

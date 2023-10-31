@@ -19,16 +19,15 @@ client.on("messageUpdate", async (message) => {
             type: AuditLogEvent.MessageUpdate
         })
         .then(async (audit) => {
-            const entry = audit.entries.first();
-            if (!entry || !entry.executor) return;
+            const authorEdit = audit.entries.first().executor;
 
             if (!message.content) return;
             if (message.author.bot) return;
-            if (message.content === message.reactions.message.content) return;
+            // if (authorEdit.bot) return;
 
             const embed = new EmbedBuilder()
                 .setAuthor({
-                    name: `✒️ Editado por ${message.author}`,
+                    name: `✒️ Editado por ${authorEdit.tag}`,
                     iconURL: message.author.displayAvatarURL({ dynamic: true })
                 })
                 .addFields(
@@ -47,10 +46,10 @@ client.on("messageUpdate", async (message) => {
                 )
                 .setFooter({
                     text: `Autor: ${message.author.id} | Mensaje ID: ${message.id}`,
-                    iconURL: client.user.displayAvatarURL({ dynamic: true })
+                    iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp()
-                .setColor("Random");
+                .setColor("#c9af30");
 
             webhook.send({ embeds: [embed] });
         });

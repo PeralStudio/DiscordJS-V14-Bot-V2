@@ -38,8 +38,8 @@ module.exports = {
         for (const task of userTasks) {
             let numTask = userTasks.indexOf(task) + 1;
             embedTasks.addFields({
-                name: `${numTask}. ${task.Task}`,
-                value: `${task.Date}\nID: ${task.ID}`,
+                name: `📝 ${numTask}. ${task.Task}`,
+                value: `📆 ${task.Date}\n🆔 ${task.ID}`,
                 inline: true
             });
         }
