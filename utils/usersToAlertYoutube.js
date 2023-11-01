@@ -3,7 +3,6 @@ module.exports = [
     "vegetta777",
     "xFaRgAnxYTube",
     "RideMeFive",
-    "CenandoconPablo",
     "esttikSP",
     "JDalmau",
     "LordDraugr",
