@@ -4,10 +4,7 @@
   "description": "A Discord Bot",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --name dcbot",
-    "restart": "pm2 restart dcbot",
-    "kill": "pm2 delete dcbot",
-    "start2": "node index.js",
+    "start": "node index.js",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,11 +16,11 @@
     "@discordjs/opus": "^0.8.0",
     "@discordjs/voice": "^0.11.0",
     "axios": "^1.2.2",
-    "canvacord": "^5.4.8",
     "chalk": "^5.0.1",
     "cherio": "^1.0.0-rc.2",
     "child_process": "^1.0.2",
     "dayjs": "^1.11.4",
+    "discord-arts": "^0.5.8",
     "discord-backup": "^3.3.2",
     "discord-gamecord": "^4.1.0",
     "discord-image-generation": "^1.4.25",
@@ -58,8 +55,5 @@
     "super-djs": "^1.7.4",
     "youtube-node": "^1.3.3",
     "yt-channel-info": "^3.2.1"
-  },
-  "devDependencies": {
-    "@napi-rs/canvas-linux-arm64-gnu": "^0.1.44"
   }
 }
