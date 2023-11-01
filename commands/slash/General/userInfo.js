@@ -145,18 +145,18 @@ module.exports = {
 const addBadges = (badgeNames) => {
     if (!badgeNames.length) return ["X"];
     const badgeMap = {
-        ActiveDeveloper: "<:activedeveloper:1137081810656960512> ",
-        BugHunterLevel1: "<:discordbughunter1:1137081819423064175>",
-        BugHunterLevel2: "<:discordbughunter2:1137081823734800424>",
-        PremiumEarlySupporter: "<:discordearlysupporter:1137081826872139876>",
-        Partner: "<:discordpartner:1137081833612394569>",
-        Staff: "<:discordstaff:1137081836829409362>",
-        HypeSquadOnlineHouse1: "<:hypesquadbravery:1137081841761923184>", // bravery
-        HypeSquadOnlineHouse2: "<:hypesquadbrilliance:1137081843620008007>", // brilliance
-        HypeSquadOnlineHouse3: "<:hypesquadbalance:1137081838553276416>", // balance
-        Hypesquad: "<:hypesquadevents:1137081846824452096>",
-        CertifiedModerator: "<:olddiscordmod:1137081849131319336>",
-        VerifiedDeveloper: "<:discordbotdev:1137081815799169084>"
+        ActiveDeveloper: "<:activedeveloper:1169183724433330227>",
+        BugHunterLevel1: "<:discordbughunter1:1169183732985499668>",
+        BugHunterLevel2: "<:discordbughunter2:1169183735212671006>",
+        PremiumEarlySupporter: "<:discordearlysupporter:1169183738677178419>",
+        Partner: "<:discordpartner:1169183747942387742>",
+        Staff: "<:discordstaff:1169183751323013120>",
+        HypeSquadOnlineHouse1: "<:hypesquadbravery:1169183756888850492>", // bravery
+        HypeSquadOnlineHouse2: "<:hypesquadbrilliance:1169183760105873432>", // brilliance
+        HypeSquadOnlineHouse3: "<:hypesquadbalance:1169183753130741821>", // balance
+        Hypesquad: "<:hypesquadevents:1169183762194636840>",
+        CertifiedModerator: "<:olddiscordmod:1169183765776564255>",
+        VerifiedDeveloper: "<:discordbotdev:1169183729516814366>"
     };
 
     return badgeNames.map((badgeName) => badgeMap[badgeName] || "❔");
