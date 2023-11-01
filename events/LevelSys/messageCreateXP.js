@@ -1,7 +1,7 @@
 const { AttachmentBuilder } = require("discord.js");
 const xpSchema = require("../../schemas/xpSchema");
 const client = require("../../index");
-const { Rank } = require("canvacord");
+const { profileImage } = require("discord-arts");
 require("dotenv").config();
 
 const coolDown = new Set();
@@ -18,6 +18,8 @@ client.on("messageCreate", async (message) => {
 
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
+
+    await interaction.deferReply();
 
     let user;
 
@@ -44,28 +46,33 @@ client.on("messageCreate", async (message) => {
             ++level;
             xp = 0;
 
-            const rank = new Rank()
-                .setAvatar(
-                    message.author.displayAvatarURL({
-                        format: "png",
-                        dynamic: true,
-                        size: 1024
-                    })
-                )
-                .setCurrentXP(xp)
-                .setLevel(level)
-                .setRank(0, 0, false)
-                .setRequiredXP(level * 250)
-                .setProgressBarTrack("#484B4E", "COLOR")
-                .setProgressBar("#7a2cb2", "COLOR")
-                .setUsername(message.author.username)
-                .setDiscriminator("0000");
+            const profileBuffer = await profileImage(member.id, {
+                rankData: {
+                    currentXp: xp,
+                    requiredXp: level * 250,
+                    level
+                },
+                borderColor: ["#cc9900", "#b3b3b3"],
+                badgesFrame: true,
+                presenceStatus:
+                    member2.member.presence?.status == "online"
+                        ? "online"
+                        : member2.member.presence?.status == "idle"
+                        ? "idle"
+                        : member2.member.presence?.status == "dnd"
+                        ? "dnd"
+                        : "offline",
+                moreBackgroundBlur: true,
+                localDateType: "es"
+            });
 
-            rank.build().then((data) => {
-                channelToSend.send({
-                    content: `🎉 ¡Enhorabuena! <@${message.author.id}> ha alcanzado el nivel ${level} 🎉`,
-                    files: [new AttachmentBuilder(data, { name: "Rank.png" })]
-                });
+            const imageAttachment = new AttachmentBuilder(profileBuffer, {
+                name: "rank.png"
+            });
+
+            channelToSend.send({
+                content: `🎉 ¡Enhorabuena! <@${message.author.id}> ha alcanzado el nivel ${level} 🎉`,
+                files: [imageAttachment]
             });
         }
 

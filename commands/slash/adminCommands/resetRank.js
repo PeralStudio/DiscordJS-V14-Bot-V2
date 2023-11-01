@@ -1,6 +1,6 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 require("dotenv").config();
-const { Rank } = require("canvacord");
+const { profileImage } = require("discord-arts");
 const xpSchema = require("../../../schemas/xpSchema");
 
 module.exports = {
@@ -31,7 +31,9 @@ module.exports = {
             return;
         }
 
+        await interaction.deferReply();
         const member = interaction.options.getMember("usuario");
+        const member2 = interaction.options.get("usuario");
         let user;
 
         const guildID = member.guild.id;
@@ -59,11 +61,41 @@ module.exports = {
                         new: true
                     }
                 )
-                .then(() =>
-                    interaction.reply({
-                        content: `El Nivel de <@${member.user.id}> ha sido reseteado correctamente`
-                    })
-                );
+                .then(async () => {
+                    newUserXP = await xpSchema.findOne({
+                        guildID,
+                        userID
+                    });
+
+                    const profileBuffer = await profileImage(member.id, {
+                        rankData: {
+                            currentXp: newUserXP.xp,
+                            requiredXp: newUserXP.level * 250,
+                            level: newUserXP.level
+                        },
+                        borderColor: ["#cc9900", "#b3b3b3"],
+                        badgesFrame: true,
+                        presenceStatus:
+                            member2.member.presence?.status == "online"
+                                ? "online"
+                                : member2.member.presence?.status == "idle"
+                                ? "idle"
+                                : member2.member.presence?.status == "dnd"
+                                ? "dnd"
+                                : "offline",
+                        moreBackgroundBlur: true,
+                        localDateType: "es"
+                    });
+
+                    const imageAttachment = new AttachmentBuilder(profileBuffer, {
+                        name: "rank.png"
+                    });
+
+                    interaction.editReply({
+                        content: `El Nivel de <@${member.user.id}> ha sido reseteado correctamente`,
+                        files: [imageAttachment]
+                    });
+                });
         } catch (error) {
             console.log(error);
         }

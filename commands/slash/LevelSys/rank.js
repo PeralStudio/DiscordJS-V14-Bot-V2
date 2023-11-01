@@ -1,6 +1,6 @@
 const { AttachmentBuilder } = require("discord.js");
 require("dotenv").config();
-const { Rank } = require("canvacord");
+const { profileImage } = require("discord-arts");
 const xpSchema = require("../../../schemas/xpSchema");
 
 module.exports = {
@@ -19,7 +19,9 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
+        await interaction.deferReply();
         const member = interaction.options.getMember("usuario") || interaction.member;
+        const member2 = interaction.options.get("usuario");
         let user;
 
         const guildID = member.guild.id;
@@ -37,27 +39,28 @@ module.exports = {
             };
         }
 
-        const rank = new Rank()
-            .setAvatar(
-                member.user.displayAvatarURL({
-                    format: "png",
-                    dynamic: true,
-                    size: 1024
-                })
-            )
-            .setCurrentXP(user.xp)
-            .setLevel(user.level)
-            .setRank(0, 0, false)
-            .setRequiredXP(user.level * 250)
-            .setStatus(member?.presence?.status || "offline")
-            .setProgressBar("#7a2cb2", "COLOR")
-            .setUsername(member.user.username)
-            .setDiscriminator("0000");
-
-        rank.build().then((data) => {
-            interaction.reply({
-                files: [new AttachmentBuilder(data, { name: "Rank.png" })]
-            });
+        const profileBuffer = await profileImage(member.id, {
+            rankData: {
+                currentXp: user.xp,
+                requiredXp: user.level * 250,
+                level: user.level
+            },
+            borderColor: ["#cc9900", "#b3b3b3"],
+            badgesFrame: true,
+            presenceStatus:
+                member2.member.presence?.status == "online"
+                    ? "online"
+                    : member2.member.presence?.status == "idle"
+                    ? "idle"
+                    : member2.member.presence?.status == "dnd"
+                    ? "dnd"
+                    : "offline",
+            moreBackgroundBlur: true,
+            localDateType: "es"
         });
+        const imageAttachment = new AttachmentBuilder(profileBuffer, { name: "rank.png" });
+
+        interaction.editReply({ files: [imageAttachment] });
+        return;
     }
 };
