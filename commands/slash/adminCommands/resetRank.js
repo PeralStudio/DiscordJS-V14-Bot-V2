@@ -67,11 +67,21 @@ module.exports = {
                         userID
                     });
 
-                    const profileBuffer = await profileImage(member.id, {
+                    const ranking = await xpSchema.find({ guildID }).sort({
+                        level: -1,
+                        xp: -1
+                    });
+                    const position = ranking.findIndex((r) => r.userID == userID) + 1;
+
+                    const profileBuffer = await profileImage(userID, {
                         rankData: {
                             currentXp: newUserXP.xp,
                             requiredXp: newUserXP.level * 250,
-                            level: newUserXP.level
+                            level: newUserXP.level,
+                            rank: position,
+                            autoColorRank: true,
+                            barColor: "#BB8813",
+                            levelColor: "#D5D4D5"
                         },
                         borderColor: ["#cc9900", "#b3b3b3"],
                         badgesFrame: true,

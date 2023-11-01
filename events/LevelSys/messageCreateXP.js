@@ -19,8 +19,6 @@ client.on("messageCreate", async (message) => {
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
 
-    await interaction.deferReply();
-
     let user;
 
     try {
@@ -46,20 +44,30 @@ client.on("messageCreate", async (message) => {
             ++level;
             xp = 0;
 
-            const profileBuffer = await profileImage(member.id, {
+            const ranking = await xpSchema.find({ guildID }).sort({
+                level: -1,
+                xp: -1
+            });
+            const position = ranking.findIndex((r) => r.userID == userID) + 1;
+
+            const profileBuffer = await profileImage(userID, {
                 rankData: {
                     currentXp: xp,
                     requiredXp: level * 250,
-                    level
+                    level,
+                    rank: position,
+                    autoColorRank: true,
+                    barColor: "#BB8813",
+                    levelColor: "#D5D4D5"
                 },
                 borderColor: ["#cc9900", "#b3b3b3"],
                 badgesFrame: true,
                 presenceStatus:
-                    member2.member.presence?.status == "online"
+                    message.guild.presences.cache.get(userID).status == "online"
                         ? "online"
-                        : member2.member.presence?.status == "idle"
+                        : message.guild.presences.cache.get(userID).status == "idle"
                         ? "idle"
-                        : member2.member.presence?.status == "dnd"
+                        : message.guild.presences.cache.get(userID).status == "dnd"
                         ? "dnd"
                         : "offline",
                 moreBackgroundBlur: true,
