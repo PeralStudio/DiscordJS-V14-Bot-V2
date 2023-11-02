@@ -109,14 +109,14 @@ module.exports = {
             .setColor(`Orange`)
             .setTitle(`✅ Recordatorio Creado Correctamente`)
             .setDescription(
-                `Cuando sea la fecha y hora indicada,\n se te se enviará el recordatorio por mensaje privado.`
+                `**Cuando sea la fecha y hora indicada,\n se te se enviará el recordatorio por mensaje privado.**\n\n:eyes: Para **Ver un Recordatorio**, usa el comando\n \`/ver-recordatorios\`\n\n:pencil2: Para **Editar un Recordatorio**, usa el comando\n \`/editar-recordatorio\`\n\n:wastebasket: Para **borrar un Recordatorio**, usa el comando\n \`/borrar-recordatorio**\``
             )
             .addFields(
                 { name: "\u200B", value: " " },
                 {
-                    name: `📆  ${day}/${
+                    name: `📆 ${day}/${
                         month + 1
-                    }/${today.getFullYear()}\n⏱️  ${hour}:${minutes}\n\n📝 Tarea: ${desc}\n🆔 **${codeID}**`,
+                    }/${today.getFullYear()}\n⏱️ ${hour}:${minutes}\n\n📝 Tarea: ${desc}\n🆔 **${codeID}**`,
                     value: " "
                 },
                 { name: "\u200B", value: " " }

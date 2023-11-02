@@ -21,14 +21,14 @@ module.exports = {
         let embedTasks = new EmbedBuilder()
             .setColor(0x00ffff)
             .setAuthor({
-                name: interaction.user.tag,
-
+                name: interaction.user.username,
                 iconURL: interaction.user.displayAvatarURL()
             })
             .setThumbnail(interaction.user.displayAvatarURL())
             .setDescription(
-                `Para borrar un **Recordatorio**, usa el comando\n \`/borrar-recordatorios\``
+                `:pencil2: Para **Editar un Recordatorio**, usa el comando\n \`/editar-recordatorio\`\n\n:wastebasket: Para **borrar un Recordatorio**, usa el comando\n \`/borrar-recordatorio\``
             )
+            .addFields({ name: "\u200B", value: " " })
             .setTimestamp()
             .setFooter({
                 text: process.env.NAME_BOT,
@@ -36,12 +36,17 @@ module.exports = {
             });
 
         for (const task of userTasks) {
-            let numTask = userTasks.indexOf(task) + 1;
-            embedTasks.addFields({
-                name: `📝 ${numTask}. ${task.Task}`,
-                value: `📆 ${task.Date}\n🆔 ${task.ID}`,
-                inline: true
-            });
+            const date = task.Date.split(" ")[0].split(",")[0];
+            const hour = task.Date.split(" ")[1];
+
+            embedTasks.addFields(
+                {
+                    name: `📝 ${task.Task}`,
+                    value: `📆 ${date}\n⏱️ ${hour}\n🆔 ${task.ID}`,
+                    inline: true
+                },
+                { name: "\u200B", value: " " }
+            );
         }
         interaction.reply({ embeds: [embedTasks], ephemeral: true });
     }

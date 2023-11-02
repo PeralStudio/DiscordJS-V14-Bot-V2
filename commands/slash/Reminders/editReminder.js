@@ -128,25 +128,22 @@ module.exports = {
                 content: `Error comando: **${interaction.commandName}**\`\`\`${err}\`\`\``
             });
         } finally {
+            const date = userDate.split(" ")[0].split(",")[0];
+            const hour = userDate.split(" ")[1];
+
             const embed = new EmbedBuilder()
                 .setColor(`Orange`)
-                .setTitle(`✅ Recordatorio Editado Correctamente`)
                 .setDescription(
-                    `Si quieres ver tus recordatorios, usa el comando \`/ver-recordatorios\``
+                    `✅ **Recordatorio Editado Correctamente**\n\n:eyes: Para **Ver un Recordatorio**, usa el comando\n \`/ver-recordatorios\`\n\n:wastebasket: Para **borrar un Recordatorio**, usa el comando\n \`/borrar-recordatorio**\``
                 )
                 .addFields(
+                    { name: "\u200B", value: " " },
                     {
-                        name: `Tarea`,
-                        value: desc
+                        name: `📝 ${desc}`,
+                        value: `📆 ${date}\n⏱️ ${hour}\n🆔 ${id}`,
+                        inline: true
                     },
-                    {
-                        name: `Fecha`,
-                        value: userDate
-                    },
-                    {
-                        name: `ID`,
-                        value: id
-                    }
+                    { name: "\u200B", value: " " }
                 )
                 .setTimestamp()
                 .setFooter({
