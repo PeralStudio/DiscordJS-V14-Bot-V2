@@ -32,7 +32,6 @@ module.exports = {
             await interaction.deferReply({ content: "Cargando...", ephemeral: true });
             const response = await axios.request(options);
 
-            console.log(response.data);
             const maintenances = response.data.maintenances[0]?.updates;
 
             if (response.data.maintenances.length < 1) {
