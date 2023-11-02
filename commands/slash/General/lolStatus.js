@@ -32,9 +32,10 @@ module.exports = {
             await interaction.deferReply({ content: "Cargando...", ephemeral: true });
             const response = await axios.request(options);
 
-            const maintenances = response.data.maintenances[0].updates;
+            console.log(response.data);
+            const maintenances = response.data.maintenances[0]?.updates;
 
-            if (maintenances.length < 1) {
+            if (response.data.maintenances.length < 1) {
                 const embed = new EmbedBuilder()
                     .setTitle("Estado del servicio de League of Legends")
                     .setDescription("El servicio de lol está operativo")
