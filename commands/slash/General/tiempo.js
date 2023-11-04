@@ -31,28 +31,52 @@ module.exports = {
         )
             .then((res) => res.json())
             .then((data) => {
-                const embedTiempo = new EmbedBuilder()
+                const dateSunset = new Date(data.sys.sunset * 1000);
+                const optionsSunset = {
+                    timeZone: "Europe/Madrid",
+                    hour: "numeric",
+                    minute: "numeric"
+                };
 
+                const dateSunrise = new Date(data.sys.sunrise * 1000);
+                const optionsSunrise = {
+                    timeZone: "Europe/Madrid",
+                    hour: "numeric",
+                    minute: "numeric"
+                };
+
+                const dateSunsetFormat = dateSunset
+                    .toLocaleDateString("es-ES", optionsSunset)
+                    .split(",")[1];
+                const dateSunriseFormat = dateSunrise
+                    .toLocaleDateString("es-ES", optionsSunrise)
+                    .split(",")[1];
+
+                const embedTiempo = new EmbedBuilder()
                     .setColor("#AA70F8")
                     .setTitle(
-                        ` **${data.main.temp.toFixed(1)}\u00B0C** en ${data.name}, ${
+                        ` **${data.main.temp.toFixed(1)} \u00B0C** en ${data.name}, ${
                             data.sys.country
                         }`
                     )
                     .addFields(
+                        { name: "\u200B", value: " " },
                         {
                             name: "Máxima",
-                            value: `${data.main.temp_max.toFixed(1)}\u00B0C`,
+                            value: `${data.main.temp_max.toFixed(1)} \u00B0C`,
                             inline: true
                         },
                         {
                             name: "Mínima",
-                            value: `${data.main.temp_min.toFixed(1)}\u00B0C`,
+                            value: `${data.main.temp_min.toFixed(1)} \u00B0C`,
                             inline: true
                         },
                         {
-                            name: "Humedad",
-                            value: `${data.main.humidity}%`,
+                            name: "Nubes",
+                            value: `${
+                                data.weather[0].description.charAt(0).toUpperCase() +
+                                data.weather[0].description.slice(1)
+                            }`,
                             inline: true
                         },
                         {
@@ -61,15 +85,31 @@ module.exports = {
                             inline: true
                         },
                         {
+                            name: "Humedad",
+                            value: `${data.main.humidity}%`,
+                            inline: true
+                        },
+                        {
+                            name: "Sensación térmica",
+                            value: `${data.main.feels_like.toFixed(1)} \u00B0C`,
+                            inline: true
+                        },
+                        {
                             name: "Presión",
                             value: `${data.main.pressure} hPa`,
                             inline: true
                         },
                         {
-                            name: "Nubes",
-                            value: `${data.weather[0].description}`,
+                            name: "Salida de sol",
+                            value: `${dateSunriseFormat}`,
                             inline: true
-                        }
+                        },
+                        {
+                            name: "Puesta de sol",
+                            value: `${dateSunsetFormat}`,
+                            inline: true
+                        },
+                        { name: "\u200B", value: " " }
                     )
                     .setThumbnail(`http://openweathermap.org/img/w/${data.weather[0].icon}.png`)
                     .setTimestamp()
