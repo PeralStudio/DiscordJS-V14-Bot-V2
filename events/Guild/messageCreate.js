@@ -8,6 +8,10 @@ const webhook = new WebhookClient({
     url: process.env.WEBHOOK_BOT_DMS_CHANNEL
 });
 
+const errorWebhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
+
 module.exports = {
     name: "messageCreate"
 };
@@ -57,7 +61,12 @@ client.on("messageCreate", async (message) => {
 
             message.reply(response.data.response);
         } catch (error) {
-            console.error(error);
+            message.reply(
+                `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.\n\nError: ${error.response.data.messages}`
+            );
+            errorWebhook.send({
+                content: `Error en el canal **<#${message.channel.id}>**\n\nError: ${error.response.data.messages}`
+            });
         }
     }
 
