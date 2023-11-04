@@ -28,7 +28,8 @@ module.exports = {
             if (err) {
                 return console.log(err);
             }
-            if (result.items[1] == undefined) {
+
+            if (result.items.length < 1) {
                 return interaction.reply({
                     ephemeral: true,
                     embeds: [
@@ -38,7 +39,7 @@ module.exports = {
                     ]
                 });
             } else {
-                let link = `https://www.youtube.com/watch?v=${result.items[1]["id"].videoId}`;
+                let link = `https://www.youtube.com/watch?v=${result.items[0]["id"].videoId}`;
                 interaction.reply(link);
             }
         });
