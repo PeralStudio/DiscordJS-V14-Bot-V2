@@ -19,7 +19,11 @@ module.exports = {
 client.on("messageCreate", async (message) => {
     // Send md's bot msg receive to the channel BOT_DMS_CHANNEL
     if (!message.guild) {
+        let file;
         if (message.author.bot) return;
+        if (message.attachments.size > 0) {
+            file = message.attachments.first().url;
+        }
 
         const embed = new EmbedBuilder()
             .setAuthor({
@@ -29,6 +33,7 @@ client.on("messageCreate", async (message) => {
             .setTitle(`Mensaje recibido de ${message.author.username}`)
             .setDescription(`${message.content}\n`)
             .setThumbnail(message.author.displayAvatarURL())
+            .setImage(file && file)
             .setColor("Random")
             .setTimestamp()
             .setFooter({
