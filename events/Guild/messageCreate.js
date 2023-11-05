@@ -19,6 +19,8 @@ module.exports = {
 client.on("messageCreate", async (message) => {
     // Send md's bot msg receive to the channel BOT_DMS_CHANNEL
     if (!message.guild) {
+        if (message.author.bot) return;
+
         const embed = new EmbedBuilder()
             .setAuthor({
                 name: message.author.username,
