@@ -23,49 +23,49 @@ module.exports = {
 
         fetch(`https://api.github.com/users/${user}`)
             .then((response) => response.json())
-            .then(async (json) => {
+            .then(async (data) => {
                 const embed = new EmbedBuilder()
-                    .setTitle(json.login)
-                    .setURL(json.html_url)
-                    .setThumbnail(json.avatar_url)
+                    .setTitle(data.login)
+                    .setURL(data.html_url)
+                    .setThumbnail(data.avatar_url)
                     .addFields(
                         {
                             name: "Nombre",
-                            value: json.login || "No se ha encontrado",
+                            value: data.login || "No se ha encontrado",
                             inline: true
                         },
                         {
                             name: "Repositorios públicos",
-                            value: json.public_repos.toString() || "0",
+                            value: data.public_repos.toString() || "0",
                             inline: true
                         },
                         {
                             name: "Seguidores",
-                            value: json.followers.toString() || "0",
+                            value: data.followers.toString() || "0",
                             inline: true
                         },
                         {
                             name: "Bio",
-                            value: json.bio || "Sin bio",
+                            value: data.bio || "Sin bio",
                             inline: true
                         },
                         {
                             name: "Creación",
-                            value: moment(json.created_at).format("DD-MM-YYYY") || "Sin datos",
+                            value: moment(data.created_at).format("DD-MM-YYYY") || "Sin datos",
                             inline: true
                         },
                         {
                             name: "Modificado",
-                            value: moment(json.updated_at).format("DD-MM-YYYY") || "Sin datos",
+                            value: moment(data.updated_at).format("DD-MM-YYYY") || "Sin datos",
                             inline: true
                         },
                         {
                             name: "Github",
-                            value: json.html_url || "Sin datos"
+                            value: data.html_url || "Sin datos"
                         },
                         {
                             name: "Web",
-                            value: json.blog || "Sin datos"
+                            value: data.blog || "Sin datos"
                         }
                     )
                     .setColor("#191919")
