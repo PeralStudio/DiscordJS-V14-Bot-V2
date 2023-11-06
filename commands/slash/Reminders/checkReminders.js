@@ -41,8 +41,8 @@ module.exports = {
 
             embedTasks.addFields(
                 {
-                    name: `📝 ${task.Task}`,
-                    value: `📆 ${date}\n⏱️ ${hour}\n🆔 ${task.ID}`,
+                    name: ` `,
+                    value: `📝 **${task.Task}**\n\n📆 ${date}\n⏱️ ${hour}\n🆔 ${task.ID}`,
                     inline: true
                 },
                 { name: "\u200B", value: " " }
