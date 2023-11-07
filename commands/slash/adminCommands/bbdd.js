@@ -66,12 +66,14 @@ module.exports = {
             return;
         }
 
-        const collections = await connection.collections;
+        const collections = await connection.db.listCollections().toArray();
         const collectionsArray = [];
 
-        for (const collection in collections) {
-            const collectionsLength = await collections[collection].countDocuments();
-            collectionsArray.push(`**${collection}**: \`${collectionsLength} Documentos\``);
+        for (const collection of collections) {
+            const collectionsLength = await connection.db
+                .collection(collection.name)
+                .countDocuments();
+            collectionsArray.push(`**${collection.name}**: \`${collectionsLength} Documentos\``);
         }
 
         interaction.reply({
