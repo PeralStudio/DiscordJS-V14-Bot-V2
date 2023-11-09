@@ -1,4 +1,5 @@
 const { IntentsBitField, Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { translate } = require("@vitalets/google-translate-api");
 const { getGames } = require("epic-free-games");
 const cron = require("node-cron");
 const dayjs = require("dayjs");
@@ -75,9 +76,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[0]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res?.currentGames[0]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res.currentGames[0]?.urlSlug.includes("-")
                                     ? res?.currentGames[0]?.urlSlug
                                     : res?.currentGames[0]?.offerMappings[0]?.pageSlug
@@ -117,9 +118,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[1]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res?.currentGames[1]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res.currentGames[1]?.urlSlug.includes("-")
                                     ? res?.currentGames[1]?.urlSlug
                                     : res?.currentGames[1]?.offerMappings[0]?.pageSlug
@@ -159,9 +160,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[2]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res?.currentGames[2]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res.currentGames[2]?.urlSlug.includes("-")
                                     ? res?.currentGames[2]?.urlSlug
                                     : res?.currentGames[2]?.offerMappings[2]?.pageSlug
@@ -202,9 +203,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")}**\n\n${res?.nextGames[0]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res.nextGames[0]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res?.nextGames[0]?.urlSlug.includes("-")
                                     ? res?.nextGames[0]?.urlSlug
                                     : res?.nextGames[0]?.offerMappings[0]?.pageSlug
@@ -244,9 +245,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")}**\n\n${res?.nextGames[1]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res?.nextGames[1]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res?.nextGames[1]?.urlSlug.includes("-")
                                     ? res?.nextGames[1]?.urlSlug
                                     : res?.nextGames[1]?.offerMappings[0]?.pageSlug
@@ -286,9 +287,9 @@ const epicGamesFree = async (client) => {
                                 .format("DD/MM")}**\n\n${res?.nextGames[2]?.title}`
                         )
                         .setDescription(
-                            `${
+                            `${await translateText(
                                 res?.nextGames[2]?.description
-                            }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            )}\n\nhttps://store.epicgames.com/es-ES/p/${
                                 res?.nextGames[2]?.urlSlug.includes("-")
                                     ? res?.nextGames[2]?.urlSlug
                                     : res?.nextGames[2]?.offerMappings[0]?.pageSlug
@@ -342,6 +343,12 @@ const epicGamesFree = async (client) => {
         }
     );
     // setTimeout(epicGamesFree, 14400000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
+};
+
+const translateText = async (desc) => {
+    const { text } = await translate(desc, { to: "es" });
+
+    return text;
 };
 
 module.exports = epicGamesFree;
