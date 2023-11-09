@@ -33,8 +33,16 @@ module.exports = {
             const response = await axios.request(options);
 
             const maintenances = response.data.maintenances[0]?.updates;
+            const nextMaintenance = maintenances[0]?.translations;
+            const spanishNextMaintenance = maintenances[0]?.translations.find(
+                (translation) => translation.locale === "es_ES"
+            );
 
-            if (response.data.maintenances.length < 1) {
+            const platforms = response.data.maintenances[0].platforms.join(", ");
+            const firstUpdate = maintenances[0]?.translations;
+            const translations = maintenances[1]?.translations;
+
+            if (response.data.maintenances.length < 1 || nextMaintenance.length < 1) {
                 const embed = new EmbedBuilder()
                     .setTitle("Estado del servicio de League of Legends")
                     .setDescription("El servicio de lol está operativo")
@@ -51,9 +59,28 @@ module.exports = {
                 return;
             }
 
-            const platforms = response.data.maintenances[0].platforms.join(", ");
-            const firstUpdate = maintenances[0]?.translations;
-            const translations = maintenances[1]?.translations;
+            if (nextMaintenance) {
+                const maintenanceEmbed = new EmbedBuilder()
+                    .setTitle("Estado del servicio de League of Legends")
+                    .setDescription(spanishNextMaintenance.content)
+                    .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
+                    .addFields(
+                        { name: "\u200B", value: " " },
+                        {
+                            name: "Plataformas Afectadas",
+                            value: platforms
+                        },
+                        { name: "\u200B", value: " " }
+                    )
+                    .setColor("#730213")
+                    .setTimestamp()
+                    .setFooter({
+                        text: process.env.NAME_BOT,
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                return await interaction.editReply({ embeds: [maintenanceEmbed] });
+            }
 
             if (!firstUpdate) {
                 const embed = new EmbedBuilder()
