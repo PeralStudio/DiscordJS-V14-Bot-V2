@@ -8,7 +8,7 @@ const cron = require("node-cron");
 dotenv.config();
 
 const youtubeCron = async (client, userId) => {
-    const { YOUTUBE_CHANNEL_ID, ID_OWNER } = process.env;
+    const { YOUTUBE_CHANNEL_ID, ID_OWNER, LOFI_CHANNEL_ID } = process.env;
     const payload = {
         channelId: userId
     };
@@ -52,6 +52,13 @@ const youtubeCron = async (client, userId) => {
                     break;
                 case "UC9eM3jqq5IfxbGHbuRR_jRw":
                     userId = "SFDXShow";
+                    break;
+                case "UCvmKFknIG9Z_tj0ZyMHPViQ":
+                    userId = "JRBmotors";
+                    break;
+                case "UCNGH2ZZH3gPj0J1Z2HU0ITg":
+                    userId = "Lofi Serenade Hub";
+                    break;
                 default:
                     break;
             }
@@ -80,6 +87,21 @@ const youtubeCron = async (client, userId) => {
                         timeZone: "Europe/Madrid"
                     })
                 });
+
+                if (ultimoVideo.authorId === "UCNGH2ZZH3gPj0J1Z2HU0ITg") {
+                    await client.channels.cache.get(LOFI_CHANNEL_ID).send({
+                        content:
+                            "¡ **`" +
+                            ultimoVideo.author +
+                            "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
+                            ultimoVideo.durationText +
+                            ")` \n https://www.youtube.com/watch?v=" +
+                            ultimoVideo.videoId
+                    });
+                    await newData.save();
+
+                    return;
+                }
 
                 if (ultimoVideo.liveNow === true) {
                     await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
