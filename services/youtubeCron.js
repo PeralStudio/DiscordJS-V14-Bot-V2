@@ -136,6 +136,32 @@ const youtubeCron = async (client, userId) => {
                 if (data.titulo === ultimoVideo.title) {
                     return;
                 } else {
+                    if (data.user === "UCNGH2ZZH3gPj0J1Z2HU0ITg") {
+                        await client.channels.cache.get(LOFI_CHANNEL_ID).send({
+                            content:
+                                "¡ **`" +
+                                ultimoVideo.author +
+                                "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
+                                ultimoVideo.durationText +
+                                ")` \n https://www.youtube.com/watch?v=" +
+                                ultimoVideo.videoId
+                        });
+
+                        await youtube.findOneAndUpdate(
+                            {
+                                user: ultimoVideo.authorId
+                            },
+                            {
+                                titulo: ultimoVideo.title,
+                                video_ID: ultimoVideo.videoId,
+                                date: new Date().toLocaleString("es-ES", {
+                                    timeZone: "Europe/Madrid"
+                                })
+                            }
+                        );
+
+                        return;
+                    }
                     // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
                     if (ultimoVideo?.lengthSeconds < 120 && ultimoVideo.liveNow === false) {
                         console.log("Video menor a 60 segundos = short");
