@@ -13,5 +13,6 @@ module.exports = [
     "kingsleague",
     "poloteli",
     "willyrex",
-    "akaliarmy"
+    "akaliarmy",
+    "poker988hd"
 ];
