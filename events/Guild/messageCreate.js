@@ -50,27 +50,29 @@ client.on("messageCreate", async (message) => {
     if (message.channel.id === process.env.BARD_GOOGLE_CHANNEL) {
         if (message.author.bot) return;
 
-        const options = {
-            method: "GET",
-            url: "https://google-bard1.p.rapidapi.com/",
-            headers: {
-                psid: process.env.BARD_PSID,
-                text: message.content,
-                model: "gchat",
-                "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-                "X-RapidAPI-Host": "google-bard1.p.rapidapi.com"
-            }
-        };
+        const apiUrl = `https://api.artix.cloud/api/v1/AI/Chatgpt?q=${encodeURIComponent(
+            message.content
+        )}`;
 
         try {
             await message.channel.sendTyping();
-            const response = await axios.request(options);
 
-            message.reply(response.data.response);
+            const response = await axios.get(apiUrl);
+
+            if (response.status === 200) {
+                const chatData = response.data.chat;
+
+                await message.reply(chatData);
+            } else {
+                await message.reply(
+                    `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.\n\nError: ${error.response.data.messages}`
+                );
+            }
         } catch (error) {
-            message.reply(
+            await message.reply(
                 `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.\n\nError: ${error.response.data.messages}`
             );
+
             errorWebhook.send({
                 content: `Error en el canal **<#${message.channel.id}>**\n\nError: ${error.response.data.messages}`
             });
