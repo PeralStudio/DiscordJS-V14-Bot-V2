@@ -12,6 +12,7 @@ module.exports = [
     "nategentile7",
     "kingsleague",
     "poloteli",
+    "alexcampu4",
     "willyrex",
     "akaliarmy",
     "poker988hd"
