@@ -18,6 +18,5 @@ module.exports = [
     "UCFC19W1bS1Zv73fwgiexm-w", // comiendocondalmau
     "UC9eM3jqq5IfxbGHbuRR_jRw", // SFDXShow
     "UCvmKFknIG9Z_tj0ZyMHPViQ", // JRBmotors
-    "imantado", // Imantado
     "UCNGH2ZZH3gPj0J1Z2HU0ITg" // Lofi Serenade Hub
 ];
