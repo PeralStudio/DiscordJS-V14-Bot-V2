@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { pagination, TypesButtons, StylesButton } = require("@devraelfreeze/discordjs-pagination");
+const { pagination, ButtonTypes, ButtonStyles } = require("@devraelfreeze/discordjs-pagination");
 require("dotenv").config();
 
 module.exports = {
@@ -18,8 +18,23 @@ module.exports = {
                 .setTitle(`COMANDOS DISPONIBLES ADMIN **${client.user.username.toUpperCase()}** \n`)
                 .addFields(
                     {
+                        name: `*${process.env.PREFIX}bbdd*`,
+                        value: "`Ver colecciones BBDD. (Admin)`",
+                        inline: true
+                    },
+                    {
+                        name: `*${process.env.PREFIX}bbdd + [colección]*`,
+                        value: "`Ver una colección. (Admin)`",
+                        inline: true
+                    },
+                    {
                         name: `*${process.env.PREFIX}email*`,
                         value: "`Enviar email. (Admin)`",
+                        inline: true
+                    },
+                    {
+                        name: `*${process.env.PREFIX}ver-cumpleaños*`,
+                        value: "`Ver lista de cumpleaños en BBDD (Admin)`",
                         inline: true
                     },
                     {
@@ -61,6 +76,11 @@ module.exports = {
                         name: `*${process.env.PREFIX}bot-avatar*`,
                         value: "`Cambiar avatar bot. (Admin)`",
                         inline: true
+                    },
+                    {
+                        name: `*${process.env.PREFIX}enviarmd + usuario*`,
+                        value: "`Enviar mensajes privados. (Admin)`",
+                        inline: true
                     }
                 )
                 .setFooter({
@@ -77,23 +97,38 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
-                    name: `*${process.env.PREFIX}play + canción*`,
-                    value: "`Reproduce una canción.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}lol + Invocador*`,
                     value: "`Información Invocador.`",
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}lol-tierlist*`,
-                    value: "`Tierlist Campeones.`",
+                    name: `*${process.env.PREFIX}lolparche*`,
+                    value: "`Notas parche Lol`",
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}lolparche*`,
-                    value: "`Notas parche Lol`",
+                    name: `*${process.env.PREFIX}lol-status*`,
+                    value: "`Estado servicio de lol.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}cumpleaños*`,
+                    value: "`Agrega tu cumpleaños para felicitaciones.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}mi-cumpleaños*`,
+                    value: "`Información de tu cumpleaños.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}set-cumpleaños*`,
+                    value: "`Modifica la fecha de tu cumpleaños`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}recordatorio*`,
+                    value: "`Crear recordatorio`",
                     inline: true
                 },
                 {
@@ -112,8 +147,13 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}chatgpt + texto*`,
-                    value: "`Consulta a Chat GPT-3.`",
+                    name: `*${process.env.PREFIX}bard-google + texto*`,
+                    value: "`Consulta a Bard Google.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}play + canción*`,
+                    value: "`Reproduce una canción.`",
                     inline: true
                 },
                 {
@@ -137,11 +177,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}asci + texto*`,
-                    value: "`Texto a ASCII.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}avatar + @usuario*`,
                     value: "`Avatar de un usuario.`",
                     inline: true
@@ -154,11 +189,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}nivel + @usuario*`,
                     value: "`Ver tu nivel.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}actividad*`,
-                    value: "`Iniciar una actividad.`",
                     inline: true
                 },
                 {
@@ -182,11 +212,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}emoji-list*`,
-                    value: "`Emojis disponibles Servidor.`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
                     inline: true
@@ -194,11 +219,6 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}play-radio + emisora*`,
                     value: "`Reproducir emisora radio.`",
-                    inline: true
-                },
-                {
-                    name: `*${process.env.PREFIX}stop-radio*`,
-                    value: "`Detener radio.`",
                     inline: true
                 }
             )
@@ -214,6 +234,11 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
+                    name: `*${process.env.PREFIX}stop-radio*`,
+                    value: "`Detener radio.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}texto-doble + texto*`,
                     value: "`Crear texto doble.`",
                     inline: true
@@ -226,6 +251,16 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}actividad*`,
+                    value: "`Iniciar una actividad.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}asci + texto*`,
+                    value: "`Texto a ASCII.`",
                     inline: true
                 },
                 {
@@ -249,6 +284,11 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: `*${process.env.PREFIX}emoji-list*`,
+                    value: "`Emojis disponibles Servidor.`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
                     inline: true
@@ -261,6 +301,11 @@ module.exports = {
                 {
                     name: `*${process.env.PREFIX}meme*`,
                     value: "`Meme random reddit.`",
+                    inline: true
+                },
+                {
+                    name: `*${process.env.PREFIX}lol-tierlist*`,
+                    value: "`Tierlist Campeones.`",
                     inline: true
                 },
                 {
@@ -299,11 +344,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `*${process.env.PREFIX}enviarmd + usuario*`,
-                    value: "`Enviar mensajes privados. (Admin/Mods)`",
-                    inline: true
-                },
-                {
                     name: `*${process.env.PREFIX}borrar + nº*`,
                     value: "`Borrar mensajes. (Admin/Mods)`",
                     inline: true
@@ -331,15 +371,15 @@ module.exports = {
             // },
             buttons: [
                 {
-                    value: TypesButtons.previous,
+                    value: ButtonTypes.previous,
                     label: "⬅️ Anterior",
-                    style: StylesButton.Success,
+                    style: ButtonStyles.Success,
                     emoji: null
                 },
                 {
-                    value: TypesButtons.next,
+                    value: ButtonTypes.next,
                     label: "Siguiente ➡️",
-                    style: StylesButton.Success,
+                    style: ButtonStyles.Success,
                     emoji: null
                 }
             ]

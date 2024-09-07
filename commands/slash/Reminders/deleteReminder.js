@@ -35,6 +35,18 @@ module.exports = {
             });
         }
         try {
+            //!todo Eliminar el cron job creado en reminder.js al crear reminder
+            // const tasks = cron.getTasks();
+
+            // tasks.forEach((task) => {
+            //     const taskData = task.data;
+            //     console.log(task);
+            //     const taskUserID = taskData.UserID;
+            //     const taskID = taskData.ID;
+            //     if ( taskID === id) {
+            //         task.stop();
+            //     }
+            // });
             await reminderSchema.deleteOne({ UserID: interaction.user.id, ID: id });
         } catch (error) {
             webhook.send({

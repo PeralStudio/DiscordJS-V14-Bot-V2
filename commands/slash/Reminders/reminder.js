@@ -60,7 +60,7 @@ module.exports = {
             });
 
         const userDate = new Date(
-            `${today.getFullYear()}-${month + 1}-${day} ${hour}:${minutes}`
+            `${today.getFullYear()}-${Number(month) + 1}-${day} ${hour}:${minutes}`
         ).toLocaleString("es-ES");
 
         const todayDate = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
@@ -93,9 +93,9 @@ module.exports = {
         if (minutes < 10) minutes = `0${minutes}`;
         if (hour < 10) hour = `0${hour}`;
         if (day < 10) day = `0${day}`;
-        if (month + 1 < 10) month = `0${month}`;
+        if (Number(month) + 1 < 10) month = `0${month}`;
 
-        const cronTime = `${minutes} ${hour} ${day} ${month + 1} *`;
+        const cronTime = `${minutes} ${hour} ${day} ${Number(month) + 1} *`;
 
         for (const task of userTasks) {
             if (task.Cron === cronTime)
@@ -105,20 +105,29 @@ module.exports = {
                 });
         }
 
+        // Calcular la diferencia de tiempo entre el recordatorio y ahora
+        const timeDifference = userDateD - todayDateD;
+        const daysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hoursLeft = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+        const minutesLeft = Math.floor((timeDifference / (1000 * 60)) % 60);
+
+        const timeLeftString = `${daysLeft} día(s), ${hoursLeft} hora(s) y ${minutesLeft} minuto(s).`;
+
         const embed = new EmbedBuilder()
-            .setColor(`Orange`)
+            .setColor("#AA70F8")
             .setTitle(`✅ Recordatorio Creado Correctamente`)
             .setDescription(
-                `**Cuando sea la fecha y hora indicada,\n se te se enviará el recordatorio por mensaje privado.**\n\n:eyes: Para **Ver un Recordatorio**, usa el comando\n \`/ver-recordatorios\`\n\n:pencil2: Para **Editar un Recordatorio**, usa el comando\n \`/editar-recordatorio\`\n\n:wastebasket: Para **borrar un Recordatorio**, usa el comando\n \`/borrar-recordatorio**\``
+                `**Cuando sea la fecha y hora indicada,\n se te enviará el recordatorio por mensaje privado.**\n\n:eyes: Para **Ver un Recordatorio**, usa el comando\n \`/ver-recordatorios\`\n\n:pencil2: Para **Editar un Recordatorio**, usa el comando\n \`/editar-recordatorio\`\n\n:wastebasket: Para **borrar un Recordatorio**, usa el comando\n \`/borrar-recordatorio**\``
             )
             .addFields(
                 { name: "\u200B", value: " " },
                 {
                     name: `📆 ${day}/${
-                        month + 1
+                        Number(month) + 1 < 10 ? `0${Number(month) + 1}` : Number(month) + 1
                     }/${today.getFullYear()}\n⏱️ ${hour}:${minutes}\n\n📝 Tarea: ${desc}\n🆔 **${codeID}**`,
                     value: " "
                 },
+                { name: "⏳ Tiempo restante", value: timeLeftString },
                 { name: "\u200B", value: " " }
             )
             .setTimestamp()
@@ -142,7 +151,7 @@ module.exports = {
             cronTime,
             async () => {
                 const remindEmbed = new EmbedBuilder()
-                    .setColor(`Orange`)
+                    .setColor("#AA70F8")
                     .setTitle(`✅ Recordatorio`)
                     .addFields(
                         { name: "\u200B", value: " " },
@@ -174,7 +183,8 @@ module.exports = {
                 job.stop();
             },
             {
-                timezone: "Europe/Madrid"
+                timezone: "Europe/Madrid",
+                name: codeID
             }
         );
 

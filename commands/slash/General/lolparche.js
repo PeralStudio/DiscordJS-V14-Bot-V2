@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const cherio = require("cherio");
+const cheerio = require("cheerio");
 const fetch = require("node-fetch");
 const request = require("request");
 require("dotenv").config();
@@ -13,40 +13,44 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
+        // Responder inmediatamente a la interacción
+        await interaction.deferReply();
+
         let currentVersionPatch;
 
-        await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
-            .then((res) => res.json())
-            .then((version) => {
-                currentVersionPatch = version[0].slice(0, -2);
-            })
-            .catch((err) => {
-                console.log(err);
+        try {
+            const versionRes = await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`);
+            const versions = await versionRes.json();
+            currentVersionPatch = versions[0].slice(0, -2);
+        } catch (err) {
+            console.log(err);
+            return interaction.editReply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("#C28F2C")
+                        .setTitle("Algo a salido mal")
+                        .setDescription("Por favor, intentalo de nuevo mas tarde.")
+                        .setTimestamp()
+                        .setFooter({
+                            text: process.env.NAME_BOT,
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ],
+                ephemeral: true
             });
+        }
 
         const patchVersionWithDash = currentVersionPatch.replace(".", "-");
         const patchVersionWithDot = currentVersionPatch;
 
-        await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
-            .then((res) => res.json())
-            .then((version) => {
-                currentVersion = version[0];
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        const currentVersionWithDash = currentVersion.slice(0, -2).replace(".", "-");
-
-        await request(
+        request(
             `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`,
-            (err, res, html) => {
+            async (err, res, html) => {
                 if (!err && res.statusCode == 200) {
-                    const $ = cherio.load(html);
-                    // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
+                    const $ = cheerio.load(html);
                     const imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
 
-                    return interaction.reply({
+                    await interaction.editReply({
                         embeds: [
                             new EmbedBuilder()
                                 .setColor("#C28F2C")
@@ -70,15 +74,14 @@ module.exports = {
         );
 
         const getNotes = async () => {
-            await request(
+            request(
                 `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${patchVersionWithDash}/`,
-                (err, res, html) => {
+                async (err, res, html) => {
                     if (!err && res.statusCode == 200) {
-                        const $ = cherio.load(html);
-                        // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
+                        const $ = cheerio.load(html);
                         const imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
 
-                        return interaction.reply({
+                        await interaction.editReply({
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor("#C28F2C")
@@ -96,7 +99,7 @@ module.exports = {
                             ]
                         });
                     } else {
-                        return interaction.reply({
+                        await interaction.editReply({
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor("#C28F2C")

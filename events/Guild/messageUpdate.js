@@ -15,7 +15,7 @@ client.on("messageUpdate", async (message) => {
     deleteOldMsg(client, process.env.LOGS_CHANNEL_ID);
 
     await message.guild
-        .fetchAuditLogs({
+        ?.fetchAuditLogs({
             type: AuditLogEvent.MessageUpdate
         })
         .then(async (audit) => {

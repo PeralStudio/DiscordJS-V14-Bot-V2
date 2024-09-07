@@ -4,7 +4,10 @@
   "description": "A Discord Bot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start index.js --name dcbot",
+    "restart": "pm2 restart dcbot",
+    "kill": "pm2 delete dcbot",
+    "start2": "node index.js",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,8 +23,9 @@
     "chalk": "^5.0.1",
     "cherio": "^1.0.0-rc.2",
     "child_process": "^1.0.2",
+    "date-fns": "^3.6.0",
     "dayjs": "^1.11.4",
-    "discord-arts": "^0.5.8",
+    "discord-arts": "^0.6.1",
     "discord-backup": "^3.3.2",
     "discord-gamecord": "^4.1.0",
     "discord-image-generation": "^1.4.25",
@@ -29,11 +33,11 @@
     "discord-together": "^1.3.31",
     "discord-tts": "^1.2.2",
     "discord.js": "^14.8.0",
-    "discord.js-akinator": "^4.0.4",
+    "discord.js-akinator": "^4.1.5",
     "discord.js-minesweeper": "^1.1.0",
     "djs-soundboard": "^5.2.7",
     "dotenv": "^16.0.3",
-    "epic-free-games": "^3.1.1",
+    "epic-free-games": "^4.0.2",
     "fakeyou-api": "^1.0.0",
     "ffmpeg-static": "^5.1.0",
     "figlet": "^1.5.2",
@@ -45,7 +49,7 @@
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.8.4",
-    "node-cron": "^3.0.2",
+    "node-cron": "^3.0.3",
     "node-fetch": "^2.6.9",
     "node-google-translate-skidz": "^1.1.2",
     "node-superfetch": "^0.2.3",
@@ -53,8 +57,12 @@
     "openai": "^3.2.1",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
+    "soundboard-src": "^1.1.2",
     "super-djs": "^1.7.4",
-    "youtube-node": "^1.3.3",
-    "yt-channel-info": "^3.2.1"
+    "yt-channel-info": "^3.2.1",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas-linux-arm64-gnu": "^0.1.44"
   }
 }

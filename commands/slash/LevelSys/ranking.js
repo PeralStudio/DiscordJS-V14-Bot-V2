@@ -47,7 +47,7 @@ module.exports = {
 
         const embed1 = new EmbedBuilder()
             .setTitle("🥇 RANK 1 🥇")
-            .setColor("Random")
+            .setColor("#ffd700")
             .setImage("attachment://rank1.png");
 
         // RANK 2
@@ -73,7 +73,7 @@ module.exports = {
 
         const embed2 = new EmbedBuilder()
             .setTitle("🥈 RANK 2 🥈")
-            .setColor("Random")
+            .setColor("#c0c0c0")
             .setImage("attachment://rank2.png");
 
         // RANK 3
@@ -99,7 +99,7 @@ module.exports = {
 
         const embed3 = new EmbedBuilder()
             .setTitle("🥉 RANK 3 🥉")
-            .setColor("Random")
+            .setColor("#cd7f32")
             .setImage("attachment://rank3.png");
 
         await interaction.editReply({

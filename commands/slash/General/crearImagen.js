@@ -1,3 +1,4 @@
+const axios = require("axios");
 const { EmbedBuilder } = require("discord.js");
 const { Configuration, OpenAIApi } = require("openai");
 require("dotenv").config();
@@ -27,12 +28,20 @@ module.exports = {
         const prompt = interaction.options.getString("promt");
         await interaction.deferReply();
 
+        const options = {
+            method: "POST",
+            url: "https://open-ai21.p.rapidapi.com/texttoimage2",
+            headers: {
+                "x-rapidapi-key": "64a9059723msh7ebb4bec0560d4dp1e6b4cjsn7e281520106e",
+                "x-rapidapi-host": "open-ai21.p.rapidapi.com",
+                "Content-Type": "application/json"
+            },
+            data: { text: prompt }
+        };
+
         try {
-            const res = await openai.createImage({
-                prompt,
-                n: 1,
-                size: "1024x1024"
-            });
+            const response = await axios.request(options);
+
             const embed = new EmbedBuilder()
                 .setTitle(`OpenIA`)
                 .setAuthor({
@@ -47,16 +56,24 @@ module.exports = {
                     text: interaction.user.tag
                 })
                 .setThumbnail(client.user.displayAvatarURL())
-                .setImage(`${res.data.data[0].url}`)
+                .setImage(`${response.data.generated_image}`)
                 .setDescription(`Promt: \`\`\`${prompt}\`\`\``);
 
             await interaction.editReply({ embeds: [embed] });
         } catch (e) {
-            console.log(e.response);
+            console.log(e);
             return await interaction.editReply({
-                content: `solicitud fallida con el estado del codigo **${e.response.status}**`,
+                content: `solicitud fallida con el estado del codigo **${e}**`,
                 ephemeral: true
             });
         }
+
+        try {
+            const res = await openai.createImage({
+                prompt,
+                n: 1,
+                size: "1024x1024"
+            });
+        } catch (e) {}
     }
 };

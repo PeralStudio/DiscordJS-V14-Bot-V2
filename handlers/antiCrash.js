@@ -31,28 +31,39 @@ module.exports = (client) => {
 
     process.on("unhandledRejection", (reason, promise) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
-        console.log(reason, "\n", promise);
 
-        embed
+        // Crear un nuevo embed
+        const embed = new EmbedBuilder()
             .setTitle("Unhandled Rejection/Catch")
             .setURL("https://nodejs.org/api/process.html#event-unhandledrejection")
-            .addFields(
-                {
-                    name: "Reason",
-                    value: `\`\`\`${inspect(reason, { depth: 0 }).slice(0, 1000)}\`\`\``
-                },
-                {
-                    name: "Promise",
-                    value: `\`\`\`${inspect(promise, { depth: 0 }).slice(0, 1000)}\`\`\``
-                }
-            )
             .setTimestamp()
             .setFooter({
                 text: versionbot,
-                iconURL: client.user.displayAvatarURL()
+                iconURL: client?.user?.displayAvatarURL()
             });
 
-        return webhook.send({ embeds: [embed] });
+        // Inspeccionar y limitar el tamaño del contenido
+        const reasonText = inspect(reason, { depth: 0 }).slice(0, 1000);
+        const promiseText = inspect(promise, { depth: 0 }).slice(0, 1000);
+
+        // Añadir campos, asegurando que no excedan el límite
+        embed.addFields(
+            {
+                name: "Reason",
+                value: `\`\`\`${reasonText}\`\`\``
+            },
+            {
+                name: "Promise",
+                value: `\`\`\`${promiseText}\`\`\``
+            }
+        );
+
+        // Verificar el número de campos antes de enviar
+        if (embed.data.fields.length <= 25) {
+            webhook.send({ embeds: [embed] });
+        } else {
+            console.error("El embed tiene más de 25 campos, no se enviará.");
+        }
     });
 
     process.on("uncaughtException", (err, origin) => {

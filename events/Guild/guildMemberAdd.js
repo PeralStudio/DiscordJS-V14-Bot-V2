@@ -11,14 +11,18 @@ module.exports = {
     name: "guildMemberAdd"
 };
 
+const imagesRandomHello = [
+    "https://pa1.narvii.com/7134/e55a690bf6acab74324da299e923af2c30cd544br1-500-500_hq.gif",
+    "https://i.pinimg.com/originals/83/b8/09/83b809857acd41a7bad4935b4734f9fc.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2fc50159420125.5a2161afb3e4f.gif"
+];
+
 client.on("guildMemberAdd", async (member) => {
     const embed = new EmbedBuilder()
         .setTitle(`¡Bienvenido a ${member.guild.name}!`)
         .setDescription(`¡Hola! <@${member.id}>`)
         .setThumbnail(member.user.displayAvatarURL())
-        .setImage(
-            "https://pa1.narvii.com/7134/e55a690bf6acab74324da299e923af2c30cd544br1-500-500_hq.gif"
-        )
+        .setImage(imagesRandomHello[Math.floor(Math.random() * imagesRandomHello.length)])
         .setColor("#D4B053")
         .setTimestamp()
         .setFooter({

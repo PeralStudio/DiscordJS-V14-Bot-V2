@@ -5,11 +5,13 @@ const cron = require("node-cron");
 const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 const deleteOldMsg = require("./deleteOldMsg.js");
+const checkRepeatMsgs = require("./checkRepeatMsgs.js");
+const { format, parseISO, addHours } = require("date-fns");
 dotenv.config();
 
 const elrellanoScrap = async (client) => {
     const { ELRELLANO_CHANNEL_ID } = process.env;
-    const videos = [];
+    let videos = [];
 
     cron.schedule(
         "*/30 * * * *",
@@ -124,6 +126,31 @@ const elrellanoScrap = async (client) => {
                             .attr("src");
                     }
 
+                    // Extraer la fecha de publicación
+                    const datePublishedRaw = $(element)
+                        .find("time.entry-date.published")
+                        .attr("datetime");
+
+                    // Sumar 2 horas si estás seguro de que el datetime es UTC
+                    const datePublished = datePublishedRaw
+                        ? format(addHours(parseISO(datePublishedRaw), 2), "HH:mm dd/MM/yyyy")
+                        : "";
+
+                    let partes = datePublished.split(" ");
+
+                    let horaMinuto = partes[0].split(":");
+                    let hora = parseInt(horaMinuto[0], 10);
+                    let minuto = parseInt(horaMinuto[1], 10);
+
+                    let fecha = partes[1].split("/");
+                    let dia = parseInt(fecha[0], 10);
+                    let mes = parseInt(fecha[1], 10) - 1;
+                    let año = parseInt(fecha[2], 10);
+
+                    let fechaLocal = new Date(año, mes, dia, hora, minuto);
+                    let fechaUTC = new Date(fechaLocal.toISOString());
+                    let timestamp = Math.floor(fechaUTC.getTime() / 1000 - 7200);
+
                     videos.push({
                         title: title ? title : "",
                         summary: summary ? summary : "",
@@ -133,37 +160,62 @@ const elrellanoScrap = async (client) => {
                             ? videoUrl
                             : videoUrlYT,
                         // type: "Vídeos",
-                        date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid"
-                        })
+                        date: datePublished
+                            ? datePublished
+                            : new Date().toLocaleString("es-ES", {
+                                  timeZone: "Europe/Madrid"
+                              }),
+                        timestamp
                     });
                 });
 
                 videos.forEach(async (video, i) => {
+                    console.log(`Video begins || post: ${i} - Título: ${video?.title}`);
+
                     if (video.url) {
+                        console.log("video.url existe");
+
                         const data = await elrellano.findOne({
-                            title: video?.title,
+                            // title: video?.title,
                             videoUrl: video?.url
                         });
 
                         if (!data) {
+                            console.log("video no existe en BBDD");
+                            console.log("newData Begin");
+
                             const newData = new elrellano({
                                 title: video.title,
                                 summary: video.summary,
                                 videoUrl: video.url,
                                 // type: video.type,
-                                date: new Date().toLocaleString("es-ES", {
-                                    timeZone: "Europe/Madrid"
-                                })
+                                date: video.date,
+                                timestamp: video.timestamp
                             });
+
+                            console.log("newData:", newData);
+
+                            let partes = video.date.split(" ");
+
+                            let horaMinuto = partes[0].split(":");
+                            let hora = parseInt(horaMinuto[0], 10);
+                            let minuto = parseInt(horaMinuto[1], 10);
+
+                            let fecha = partes[1].split("/");
+                            let dia = parseInt(fecha[0], 10);
+                            let mes = parseInt(fecha[1], 10) - 1;
+                            let año = parseInt(fecha[2], 10);
+
+                            let fechaLocal = new Date(año, mes, dia, hora, minuto);
+                            let fechaUTC = new Date(fechaLocal.toISOString());
+                            let timestamp = Math.floor(fechaUTC.getTime() / 1000 - 7200);
 
                             await client.channels.cache.get(ELRELLANO_CHANNEL_ID).send({
                                 content:
                                     "`Título:` " +
                                     video.title +
                                     (video.summary && "\n" + "`Descripción:`" + video.summary) +
-                                    "\n`Fecha:`" +
-                                    video.date +
+                                    `\n Fecha: <t:${timestamp}:R>` +
                                     /* "\n`Categoría:`" +
                                 video.type + */
                                     "\n" +
@@ -171,6 +223,8 @@ const elrellanoScrap = async (client) => {
                             });
 
                             await newData.save();
+
+                            console.log("newData save");
 
                             console.log(
                                 superDjs.colourText(
@@ -183,9 +237,15 @@ const elrellanoScrap = async (client) => {
                                     "green"
                                 )
                             );
+
+                            console.log(`Video end || post: ${i} - Título: ${video?.title}`);
                         }
                     }
                 });
+
+                videos = [];
+
+                await checkRepeatMsgs(client, ELRELLANO_CHANNEL_ID);
             } catch (error) {
                 console.error(error);
             }

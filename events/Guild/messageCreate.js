@@ -46,38 +46,58 @@ client.on("messageCreate", async (message) => {
         });
     }
 
-    // Interaction chatGPT in BARD_GOOGLE_CHANNEL channel
+    //------------------------------------>>
+
     if (message.channel.id === process.env.BARD_GOOGLE_CHANNEL) {
         if (message.author.bot) return;
 
-        const apiUrl = `https://api.artix.cloud/api/v1/AI/Chatgpt?q=${encodeURIComponent(
-            message.content
-        )}`;
+        const options = {
+            method: "POST",
+            url: "https://open-ai21.p.rapidapi.com/conversationllama",
+            headers: {
+                "x-rapidapi-key": "64a9059723msh7ebb4bec0560d4dp1e6b4cjsn7e281520106e",
+                "x-rapidapi-host": "open-ai21.p.rapidapi.com",
+                "Content-Type": "application/json"
+            },
+            data: {
+                messages: [
+                    {
+                        role: "user",
+                        content: message.content
+                    }
+                ],
+                web_access: false,
+                system_prompt: " ",
+                temperature: 0.9,
+                top_k: 5,
+                top_p: 0.9,
+                max_tokens: 256
+            }
+        };
 
         try {
             await message.channel.sendTyping();
+            const response = await axios.request(options);
 
-            const response = await axios.get(apiUrl);
-
-            if (response.status === 200) {
-                const chatData = response.data.chat;
+            if (response.data.status) {
+                const chatData = response.data.result;
 
                 await message.reply(chatData);
             } else {
                 await message.reply(
-                    `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.\n\nError: ${error.response.data.messages}`
+                    `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.`
                 );
+
+                errorWebhook.send({
+                    content: `Error en el canal **<#${message.channel.id}>**\n\nError: ${error}`
+                });
             }
         } catch (error) {
-            await message.reply(
-                `Ha ocurrido un error, por favor intentalo de nuevo mas tarde.\n\nError: ${error.response.data.messages}`
-            );
-
-            errorWebhook.send({
-                content: `Error en el canal **<#${message.channel.id}>**\n\nError: ${error.response.data.messages}`
-            });
+            console.error(error);
         }
     }
+
+    //------------------------------------>>
 
     if (message.channel.type !== 0) return;
     if (message.author.bot) return;

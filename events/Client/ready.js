@@ -1,6 +1,17 @@
 const { ActivityType, WebhookClient, EmbedBuilder } = require("discord.js");
 const client = require("../../index");
 const superDjs = require("super-djs");
+require("dotenv").config();
+
+const birthdaysReminder = require("../../services/birthdayReminder");
+const usersToAlertTwitch = require("../../utils/usersToAlertTwitch");
+const usersToAlertYoutube = require("../../utils/usersToAlertYoutube");
+const twitchCron = require("../../services/twitchCron");
+const youtubeCron = require("../../services/youtubeCron");
+const elrellanoScrap = require("../../services/elrellanoScrap");
+const epicGamesFree = require("../../services/epicGamesFree");
+const fetchNews = require("../../services/fetchNews");
+const reminders = require("../../services/reminders");
 
 const webhook = new WebhookClient({
     url: process.env.WEBHOOK_LOGS_CHANNEL
@@ -76,6 +87,35 @@ client.once("ready", async () => {
             console.log(superDjs.colourText(error), "red");
         }
     };
+
+    //function interval Twitch for show new Streams of a user
+    setInterval(() => {
+        for (const user of usersToAlertTwitch) {
+            twitchCron(client, user);
+        }
+    }, 8 * 60 * 1000);
+
+    //function interval Youtube for show new videos of a user
+    setInterval(() => {
+        for (const user of usersToAlertYoutube) {
+            youtubeCron(client, user);
+        }
+    }, 6 * 60 * 1000);
+
+    //function Scrap Elrellano to show latest videos
+    elrellanoScrap(client);
+
+    //Function epicGamesFree push notifications when new free games
+    epicGamesFree(client);
+
+    //Function to search for news every day
+    fetchNews(client);
+
+    //Function Birthdays
+    birthdaysReminder(client);
+
+    //Funtion Reminders
+    reminders(client);
 
     setInterval(pickPresence, 60 * 1000);
 

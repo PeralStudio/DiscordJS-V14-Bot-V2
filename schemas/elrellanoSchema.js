@@ -15,6 +15,9 @@ const elrellanoSchema = new mongoose.Schema({
     },
     date: {
         type: String
+    },
+    timestamp: {
+        type: Number
     }
 });
 

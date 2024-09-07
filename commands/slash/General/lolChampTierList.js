@@ -98,37 +98,38 @@ module.exports = {
         await axios
             .request(options)
             .then(function (response) {
+                console.log(response);
                 embed = new EmbedBuilder()
                     .setTitle(`${selectedRegion.toUpperCase()} - Campeones tier S+ (${division})`)
                     .addFields(
                         {
-                            name: response.data.sTier[0]?.name,
-                            value: `Winrate: ${response.data.sTier[0]?.winRate}\nPosición: ${response.data.sTier[0]?.role}`,
+                            name: response.data?.sTier[0]?.name,
+                            value: `Winrate: ${response.data?.sTier[0]?.winRate}\nPosición: ${response.data?.sTier[0]?.role}`,
                             inline: true
                         },
                         {
-                            name: response.data.sTier[1]?.name,
-                            value: `Winrate: ${response.data.sTier[1]?.winRate}\nPosición: ${response.data.sTier[1]?.role}`,
+                            name: response.data?.sTier[1]?.name,
+                            value: `Winrate: ${response.data?.sTier[1]?.winRate}\nPosición: ${response.data?.sTier[1]?.role}`,
                             inline: true
                         },
                         {
-                            name: response.data.sTier[2]?.name,
-                            value: `Winrate: ${response.data.sTier[2]?.winRate}\nPosición: ${response.data.sTier[2]?.role}`,
+                            name: response.data?.sTier[2]?.name,
+                            value: `Winrate: ${response.data?.sTier[2]?.winRate}\nPosición: ${response.data?.sTier[2]?.role}`,
                             inline: true
                         },
                         {
-                            name: response.data.sTier[3]?.name,
-                            value: `Winrate: ${response.data.sTier[3]?.winRate}\nPosición: ${response.data.sTier[3]?.role}`,
+                            name: response.data?.sTier[3]?.name,
+                            value: `Winrate: ${response.data?.sTier[3]?.winRate}\nPosición: ${response.data?.sTier[3]?.role}`,
                             inline: true
                         },
                         {
-                            name: response.data.sTier[4]?.name,
-                            value: `Winrate: ${response.data.sTier[4]?.winRate}\nPosición: ${response.data.sTier[4]?.role}`,
+                            name: response.data?.sTier[4]?.name,
+                            value: `Winrate: ${response.data?.sTier[4]?.winRate}\nPosición: ${response.data?.sTier[4]?.role}`,
                             inline: true
                         },
                         {
-                            name: response.data.sTier[5]?.name,
-                            value: `Winrate: ${response.data.sTier[5]?.winRate}\nPosición: ${response.data.sTier[5]?.role}`,
+                            name: response.data?.sTier[5]?.name,
+                            value: `Winrate: ${response.data?.sTier[5]?.winRate}\nPosición: ${response.data?.sTier[5]?.role}`,
                             inline: true
                         }
                     )

@@ -1,6 +1,7 @@
 const { IntentsBitField, Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const { translate } = require("@vitalets/google-translate-api");
-const { getGames } = require("epic-free-games");
+// const { getGames } = require("epic-free-games");
+const { EpicFreeGames } = require("epic-free-games");
 const cron = require("node-cron");
 const dayjs = require("dayjs");
 const superDjs = require("super-djs");
@@ -44,7 +45,14 @@ const epicGamesFree = async (client) => {
                 )
             );
 
-            getGames("ES", true)
+            const epicFreeGames = new EpicFreeGames({
+                country: "ES",
+                locale: "es-ES",
+                includeAll: true
+            });
+
+            epicFreeGames
+                .getGames()
                 .then(async (res) => {
                     const formatPrice = (num) => {
                         if (!num) return;

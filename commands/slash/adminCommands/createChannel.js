@@ -51,7 +51,7 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription("⛔ No tienes permisos para cambiar niveles.")
+                        .setDescription("⛔ No tienes permisos para usar este comando.")
                         .setColor("#EA3939")
                 ]
             });

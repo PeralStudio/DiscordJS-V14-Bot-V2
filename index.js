@@ -4,15 +4,15 @@ require("dotenv").config();
 const { Player } = require("discord-player");
 const superDjs = require("super-djs");
 
-const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
-const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
-const twitchCron = require("./services/twitchCron");
-const youtubeCron = require("./services/youtubeCron");
-const fetchNews = require("./services/fetchNews");
-const epicGamesFree = require("./services/epicGamesFree");
-const elrellanoScrap = require("./services/elrellanoScrap");
-const birthdaysReminder = require("./services/birthdayReminder");
-const reminders = require("./services/reminders");
+// const usersToAlertTwitch = require("./utils/usersToAlertTwitch");
+// const usersToAlertYoutube = require("./utils/usersToAlertYoutube");
+// const twitchCron = require("./services/twitchCron");
+// const youtubeCron = require("./services/youtubeCron");
+// const fetchNews = require("./services/fetchNews");
+// const epicGamesFree = require("./services/epicGamesFree");
+// const elrellanoScrap = require("./services/elrellanoScrap");
+// const birthdaysReminder = require("./services/birthdayReminder");
+// const reminders = require("./services/reminders");
 
 // Creating a new client:
 const client = new Client({
@@ -48,30 +48,30 @@ const client = new Client({
     }
 });
 
-//function interval Twitch for show new Streams of a user
-for (const user of usersToAlertTwitch) {
-    twitchCron(client, user);
-}
+// //function interval Twitch for show new Streams of a user
+// for (const user of usersToAlertTwitch) {
+//     twitchCron(client, user);
+// }
 
-//function interval Youtube for show new videos of a user
-for (const user of usersToAlertYoutube) {
-    youtubeCron(client, user);
-}
+// //function interval Youtube for show new videos of a user
+// for (const user of usersToAlertYoutube) {
+//     youtubeCron(client, user);
+// }
 
-//function Scrap Elrellano to show latest videos
-elrellanoScrap(client);
+// //function Scrap Elrellano to show latest videos
+// elrellanoScrap(client);
 
-//Function epicGamesFree push notifications when new free games
-epicGamesFree(client);
+// //Function epicGamesFree push notifications when new free games
+// epicGamesFree(client);
 
-//Function to search for news every day
-fetchNews(client);
+// //Function to search for news every day
+// fetchNews(client);
 
-//Function Birthdays
-birthdaysReminder(client);
+// //Function Birthdays
+// birthdaysReminder(client);
 
-//Funtion Reminders
-reminders(client);
+// //Funtion Reminders
+// reminders(client);
 
 // Host the bot:
 // require("http")
