@@ -170,19 +170,21 @@ const elrellanoScrap = async (client) => {
                 });
 
                 videos.forEach(async (video, i) => {
-                    console.log(`Video begins || post: ${i} - Título: ${video?.title}`);
+                    console.log(
+                        `Verificando si existe video en BBDD || post: ${i} - Título: ${video?.title}`
+                    );
 
                     if (video.url) {
-                        console.log("video.url existe");
-
                         const data = await elrellano.findOne({
                             // title: video?.title,
                             videoUrl: video?.url
                         });
 
+                        if (data)
+                            console.log(`Video ya existe en BBDD: ${i} - Título: ${data.title}`);
+
                         if (!data) {
-                            console.log("video no existe en BBDD");
-                            console.log("newData Begin");
+                            console.log(`video no existe en BBDD  ${i} - Título: ${video.title}`);
 
                             const newData = new elrellano({
                                 title: video.title,
@@ -192,8 +194,6 @@ const elrellanoScrap = async (client) => {
                                 date: video.date,
                                 timestamp: video.timestamp
                             });
-
-                            console.log("newData:", newData);
 
                             let partes = video.date.split(" ");
 
@@ -224,7 +224,7 @@ const elrellanoScrap = async (client) => {
 
                             await newData.save();
 
-                            console.log("newData save");
+                            console.log(`Video Guardado en BBDD ${newData}`);
 
                             console.log(
                                 superDjs.colourText(
@@ -237,8 +237,6 @@ const elrellanoScrap = async (client) => {
                                     "green"
                                 )
                             );
-
-                            console.log(`Video end || post: ${i} - Título: ${video?.title}`);
                         }
                     }
                 });
