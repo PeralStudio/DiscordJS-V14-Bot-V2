@@ -234,6 +234,11 @@ module.exports = {
             .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
+                    name: `*${process.env.PREFIX}pelicula + título película*`,
+                    value: "`Enviar mensajes privados. (Admin)`",
+                    inline: true
+                },
+                {
                     name: `*${process.env.PREFIX}stop-radio*`,
                     value: "`Detener radio.`",
                     inline: true
