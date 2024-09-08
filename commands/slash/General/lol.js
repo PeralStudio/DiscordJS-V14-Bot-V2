@@ -86,6 +86,7 @@ module.exports = {
             }
 
             const summonerData = await summonerRes.json();
+
             const encryptedSummonerId = summonerData.id;
 
             // 3. Tercera llamada: Obtener la información de ligas usando el summonerId
@@ -116,7 +117,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setDescription(
-                                `ℹ️ El invocador **${gameName}#${tagLine}** es UNRANKED, no hay datos.`
+                                `ℹ️ El invocador **${gameName}#${tagLine.toUpperCase()}** (${
+                                    summonerData.summonerLevel
+                                })  es UNRANKED, no hay datos.`
                             )
                             .setColor("#EA3939")
                     ]
@@ -129,7 +132,7 @@ module.exports = {
 
                 return new EmbedBuilder()
                     .setAuthor({
-                        name: `${gameName}`,
+                        name: `${gameName} (${summonerData.summonerLevel})`,
                         iconURL: `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/profileicon/${summonerData.profileIconId}.png`
                     })
                     .addFields(
