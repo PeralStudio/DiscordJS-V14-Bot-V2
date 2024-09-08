@@ -21,9 +21,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setImage(
-                encodeURI(
-                    `https://chart.googleapis.com/chart?chl=${text}&chs=200x200&cht=qr&chld=H%7C0`
-                )
+                encodeURI(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${text}`)
             )
             .setColor("#F48226")
             .setTimestamp()
