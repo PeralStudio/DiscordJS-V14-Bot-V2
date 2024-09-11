@@ -9,7 +9,8 @@
     "kill": "pm2 delete dcbot",
     "start2": "node index.js",
     "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "patch-package"
   },
   "keywords": [],
   "author": "Peralstudio",
@@ -55,6 +56,8 @@
     "node-superfetch": "^0.2.3",
     "nodemailer": "^6.7.8",
     "openai": "^3.2.1",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "reddit-fetch": "^1.5.1",
     "request": "^2.88.2",
     "soundboard-src": "^1.1.2",
