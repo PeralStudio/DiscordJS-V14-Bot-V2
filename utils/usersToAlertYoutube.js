@@ -19,5 +19,6 @@ module.exports = [
     "UCCVPjsqUlFIfDXeWO7V1nLQ", // Reven
     "UCWU8fcAN3X8hjMR9k0rbV5g", // Nadie Sabe Nada
     "UCzFESlED8MTJOTHpQhxlqGg", // FRANK CUESTA - CANAL YOUTUBE
-    "UCdKPGAiw0WjT3IeZCkZlz1A" // Detección Metálica
+    "UCdKPGAiw0WjT3IeZCkZlz1A", // Detección Metálica
+    "UCeiyuZljcK9iXzMAgzb9kpA" // HRom
 ];

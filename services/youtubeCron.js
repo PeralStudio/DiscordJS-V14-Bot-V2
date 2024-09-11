@@ -28,6 +28,11 @@ const youtubeCron = async (client, userId) => {
             year: 31536000
         };
 
+        // Manejar el caso de "Live"
+        if (publishedText.toLowerCase() === "live") {
+            return now; // Si está en directo, retorna el tiempo actual
+        }
+
         const regex = /(\d+)\s(\w+)\sago/;
         const match = publishedText.match(regex);
 
@@ -118,6 +123,9 @@ const youtubeCron = async (client, userId) => {
             break;
         case "UCdKPGAiw0WjT3IeZCkZlz1A":
             userId = "Detección Metálica";
+            break;
+        case "UCeiyuZljcK9iXzMAgzb9kpA":
+            userId = "HRom";
             break;
         default:
             break;
