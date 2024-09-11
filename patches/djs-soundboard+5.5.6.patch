@@ -1,0 +1,80 @@
+diff --git a/node_modules/djs-soundboard/index.js b/node_modules/djs-soundboard/index.js
+index 3221d31..0091e09 100644
+--- a/node_modules/djs-soundboard/index.js
++++ b/node_modules/djs-soundboard/index.js
+@@ -15,35 +15,54 @@ class SoundBoard {
+     constructor(options) {}
+ 
+     async play(channel, sound) {
+-        let Sound = getSound(sound);
+-
+-        if (!Sound) throw new TypeError("[soundboard]: InValid Sound.");
+-
+-        let connection = getVoiceConnection(channel.guild.id);
+-
+-        if (!connection) {
+-            connection = joinVoiceChannel({
+-                channelId: channel.id,
+-                guildId: channel.guild.id,
+-                adapterCreator: channel.guild.voiceAdapterCreator
+-            });
++    // Obtener todos los sonidos
++    let allSounds = await All();
++
++    // Buscar el sonido correspondiente
++    let soundData = null;
++    for (const category of allSounds) {
++        for (const soundObj of category.sounds) {
++            if (soundObj.name === sound) {
++                soundData = soundObj;
++                break;
++            }
+         }
++        if (soundData) break;
++    }
+ 
+-        let allSounds = await All();
+-        let s = allSounds.find(c => c.sounds.find(e => c.name === sound));
+-        s = await Get(s.cat, sound);
++    // Si no encuentra el sonido, mostrar un mensaje de error
++    if (!soundData) {
++        throw new TypeError("[soundboard]: Invalid Sound.");
++    }
+ 
+-        let player = createAudioPlayer();
+-        let res = createAudioResource(s);
++    // Obtener el flujo de audio desde la ruta del archivo
++    const fs = require('fs');
++    const { createAudioResource } = require('@discordjs/voice');
+ 
+-        player.play(res);
+-        connection.subscribe(player);
++    let connection = getVoiceConnection(channel.guild.id);
+ 
+-        player.on(AudioPlayerStatus.Idle, () => {
+-            connection.destroy();
++    if (!connection) {
++        connection = joinVoiceChannel({
++            channelId: channel.id,
++            guildId: channel.guild.id,
++            adapterCreator: channel.guild.voiceAdapterCreator
+         });
+     }
+ 
++    let player = createAudioPlayer();
++    
++    // Crear un recurso de audio desde la ruta del archivo
++    let resource = createAudioResource(fs.createReadStream(soundData.path));
++
++    player.play(resource);
++    connection.subscribe(player);
++
++    player.on(AudioPlayerStatus.Idle, () => {
++        connection.destroy();
++    });
++}
++
++
+     async getAllSounds() {
+         return await All();
+     }
