@@ -119,10 +119,6 @@ client.once("ready", async () => {
 
     setInterval(pickPresence, 60 * 1000);
 
-    // webhook.send({
-    //     content: `🟢 <@${client.user.id}> Online \n\n **Estado:** ${client.user.presence.status} \n **Actividad:** ${client.user.presence.activities[0].name} \n **ID:** ${client.user.id} \n`
-    // });
-
     const embed = new EmbedBuilder()
         .setDescription(`🟢 <@${client.user.id}> Online`)
         .addFields(
