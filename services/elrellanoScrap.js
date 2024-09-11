@@ -14,7 +14,7 @@ const elrellanoScrap = async (client) => {
     let videos = [];
 
     cron.schedule(
-        "*/30 * * * *",
+        "*/30 8-23,0-1 * * *", // Cada 30min de 08:00 a 23:59 y también desde 00:00 hasta 01:00
         async () => {
             //Delete old messages
             deleteOldMsg(client, ELRELLANO_CHANNEL_ID);
@@ -180,9 +180,6 @@ const elrellanoScrap = async (client) => {
                             videoUrl: video?.url
                         });
 
-                        if (data)
-                            console.log(`Video ya existe en BBDD: ${i} - Título: ${data.title}`);
-
                         if (!data) {
                             console.log(`video no existe en BBDD  ${i} - Título: ${video.title}`);
 
@@ -224,8 +221,6 @@ const elrellanoScrap = async (client) => {
 
                             await newData.save();
 
-                            console.log(`Video Guardado en BBDD ${newData}`);
-
                             console.log(
                                 superDjs.colourText(
                                     `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
@@ -233,10 +228,12 @@ const elrellanoScrap = async (client) => {
                                         {
                                             timeZone: "Europe/Madrid"
                                         }
-                                    )}`,
+                                    )} \n(${i}) - Video Guardado en BBDD ${newData}`,
                                     "green"
                                 )
                             );
+                        } else {
+                            console.log(`Video ya existe en BBDD: ${i} - Título: ${data.title}`);
                         }
                     }
                 });
