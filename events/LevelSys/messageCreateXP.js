@@ -18,6 +18,7 @@ client.on("messageCreate", async (message) => {
 
     if (message.author.bot /* || message.guild */) return;
     if (coolDown.has(userID)) return;
+    if (!message.guild) return;
 
     let user;
 
@@ -63,11 +64,11 @@ client.on("messageCreate", async (message) => {
                 borderColor: ["#cc9900", "#b3b3b3"],
                 badgesFrame: true,
                 presenceStatus:
-                    message.guild.presences.cache.get(userID).status == "online"
+                    message.guild?.presences.cache.get(userID).status == "online"
                         ? "online"
-                        : message.guild.presences.cache.get(userID).status == "idle"
+                        : message.guild?.presences.cache.get(userID).status == "idle"
                         ? "idle"
-                        : message.guild.presences.cache.get(userID).status == "dnd"
+                        : message.guild?.presences.cache.get(userID).status == "dnd"
                         ? "dnd"
                         : "offline",
                 moreBackgroundBlur: true,
