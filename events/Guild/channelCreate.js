@@ -12,6 +12,8 @@ module.exports = {
 };
 
 client.on("channelCreate", async (channel) => {
+    if (channel.name === "🔴-la-revuelta") return;
+
     deleteOldMsg(client, process.env.LOGS_CHANNEL_ID);
 
     channel.guild
