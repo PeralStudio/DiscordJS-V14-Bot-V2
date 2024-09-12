@@ -140,14 +140,14 @@ const twitchCron = async (client, user) => {
                 await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
                     content:
                         `<@${ID_OWNER}> ` +
-                        "\n¡ **`" +
+                        "\n<:twitch2:1283532889572511795>¡**`" +
                         capitalizedUser +
                         "`** esta en directo jugando a **`" +
                         game.body +
-                        "`** ! \n" +
-                        ` 🔴 En directo <t:${durationToPastTimestamp(uptime.text)}:R>` +
-                        ` \n https://twitch.tv/` +
-                        user,
+                        "`**! \n" +
+                        `🔴 En directo <t:${durationToPastTimestamp(
+                            uptime.text
+                        )}:R>\nhttps://twitch.tv/${user}`,
                     embeds: [embed]
                 });
 
@@ -155,15 +155,15 @@ const twitchCron = async (client, user) => {
             } else {
                 await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
                     content:
-                        `<@${ID_OWNER}> ` +
-                        " \n ¡ **`" +
+                        `<@${ID_OWNER}>` +
+                        " \n<:twitch2:1283532889572511795>¡**`" +
                         capitalizedUser +
                         "`** esta en directo jugando a **`" +
                         game.body +
-                        "`** ! \n" +
-                        ` 🔴 En directo <t:${durationToPastTimestamp(uptime.text)}:R>` +
-                        ` \n https://twitch.tv/` +
-                        user,
+                        "`**! \n" +
+                        `🔴 En directo <t:${durationToPastTimestamp(
+                            uptime.text
+                        )}:R>\nhttps://twitch.tv/${user}`,
                     embeds: [embed]
                 });
 
@@ -182,11 +182,11 @@ const twitchCron = async (client, user) => {
         }
 
         await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
-            content: `<@${ID_OWNER}> \n ¡ **${capitalizedUser}** esta en directo jugando a **${
+            content: `<@${ID_OWNER}> \n<:twitch2:1283532889572511795>¡**${capitalizedUser}** esta en directo jugando a **${
                 game.body
-            }** ! \n 🔴 En directo <t:${durationToPastTimestamp(
+            }**! \n🔴 En directo <t:${durationToPastTimestamp(
                 uptime.text
-            )}:R> \n https://twitch.tv/${user}`,
+            )}:R>\nhttps://twitch.tv/${user}`,
             embeds: [embed]
         });
 
