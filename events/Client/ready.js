@@ -12,6 +12,7 @@ const elrellanoScrap = require("../../services/elrellanoScrap");
 const epicGamesFree = require("../../services/epicGamesFree");
 const fetchNews = require("../../services/fetchNews");
 const reminders = require("../../services/reminders");
+const alertLarevuelta = require("../../services/alertLarevuelta");
 
 const webhook = new WebhookClient({
     url: process.env.WEBHOOK_LOGS_CHANNEL
@@ -116,6 +117,8 @@ client.once("ready", async () => {
 
     //Funtion Reminders
     reminders(client);
+
+    alertLarevuelta(client);
 
     setInterval(pickPresence, 60 * 1000);
 
