@@ -23,7 +23,7 @@ module.exports = (client, config) => {
                 client.slash_commands.set(pull.name, pull);
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - SLASH] Loaded a file: ${pull.name} (#${client.slash_commands.size})`,
+                        `[HANDLER - SLASH(${dir})] Loaded a file: ${pull.name} (#${client.slash_commands.size})`,
                         "green"
                     )
                 );
@@ -45,7 +45,7 @@ module.exports = (client, config) => {
             } else {
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - SLASH] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`,
+                        `[HANDLER - SLASH(${dir})] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`,
                         "red"
                     )
                 );
@@ -68,7 +68,7 @@ module.exports = (client, config) => {
                 client.user_commands.set(pull.name, pull);
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - USER] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
+                        `[HANDLER - USER(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
                         "green"
                     )
                 );
@@ -80,7 +80,7 @@ module.exports = (client, config) => {
             } else {
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - USER] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
+                        `[HANDLER - USER(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
                         "red"
                     )
                 );
@@ -103,7 +103,7 @@ module.exports = (client, config) => {
                 client.message_commands.set(pull.name, pull);
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - MESSAGE] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
+                        `[HANDLER - MESSAGE(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
                         "green"
                     )
                 );
@@ -115,7 +115,7 @@ module.exports = (client, config) => {
             } else {
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - MESSAGE] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
+                        `[HANDLER - MESSAGE(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
                         "red"
                     )
                 );

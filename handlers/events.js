@@ -12,12 +12,15 @@ module.exports = (client) => {
             if (pull.name) {
                 client.events.set(pull.name, pull);
                 console.log(
-                    superDjs.colourText(`[HANDLER - EVENTS] Loaded a file: ${pull.name}`, "green")
+                    superDjs.colourText(
+                        `[HANDLER - EVENTS(${dir})] Loaded a file: ${pull.name}`,
+                        "green"
+                    )
                 );
             } else {
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - EVENTS] Couldn't load the file ${file}. missing name or aliases.`,
+                        `[HANDLER - EVENTS(${dir})] Couldn't load the file ${file}. missing name or aliases.`,
                         "red"
                     )
                 );

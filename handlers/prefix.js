@@ -15,14 +15,14 @@ module.exports = (client, config) => {
                 client.prefix_commands.set(pull.config.name, pull);
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - PREFIX] Loaded a file: ${pull.config.name} (#${client.prefix_commands.size})`,
+                        `[HANDLER - PREFIX(${dir})] Loaded a file: ${pull.config.name} (#${client.prefix_commands.size})`,
                         "green"
                     )
                 );
             } else {
                 console.log(
                     superDjs.colourText(
-                        `[HANDLER - PREFIX] Couldn't load the file ${file}, missing module name value.`,
+                        `[HANDLER - PREFIX(${dir})] Couldn't load the file ${file}, missing module name value.`,
                         "red"
                     )
                 );
