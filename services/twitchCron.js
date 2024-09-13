@@ -30,26 +30,33 @@ const twitchCron = async (client, user) => {
         "User-Agent": "PerBot"
     };
 
+    const TIMEOUT = 10000;
     let uptime, avatar, viewers, title, game, followCount;
 
     try {
         uptime = await nodeSuperFetch.get(`https://decapi.me/twitch/uptime/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
         avatar = await nodeSuperFetch.get(`https://decapi.me/twitch/avatar/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
         viewers = await nodeSuperFetch.get(`https://decapi.me/twitch/viewercount/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
         title = await nodeSuperFetch.get(`https://decapi.me/twitch/title/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
         game = await nodeSuperFetch.get(`https://decapi.me/twitch/game/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
         followCount = await nodeSuperFetch.get(`https://decapi.me/twitch/followcount/${user}`, {
-            headers: httpHeaders
+            headers: httpHeaders,
+            timeout: TIMEOUT
         });
     } catch (error) {
         console.error(`Error al obtener datos de Twitch para ${user}:`, error);
