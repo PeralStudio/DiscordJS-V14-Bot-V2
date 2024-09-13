@@ -188,7 +188,7 @@ const youtubeCron = async (client, userId) => {
             await newData.save();
         } else {
             // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-            if (ultimoVideo?.lengthSeconds < 120 && ultimoVideo.liveNow === false) {
+            if (ultimoVideo?.lengthSeconds < 240 && ultimoVideo.liveNow === false) {
                 return;
             }
             await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
