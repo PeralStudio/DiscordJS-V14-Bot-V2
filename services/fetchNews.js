@@ -1,6 +1,7 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 const deleteOldMsg = require("./deleteOldMsg");
 const cron = require("node-cron");
+const fetch = require("node-fetch");
 const superDjs = require("super-djs");
 require("dotenv").config();
 
@@ -10,46 +11,55 @@ const webhookNews = new WebhookClient({
 
 const fetchNews = async (client, user) => {
     const { GNEWS_KEY, NOTICIAS_CHANNEL_ID } = process.env;
-    const apiKey = GNEWS_KEY;
-    const url = `https://gnews.io/api/v4/search?q=general&lang=es&country=es&max=10&apikey=${apiKey}`;
+    const url = `https://gnews.io/api/v4/search?q=general&lang=es&country=es&max=10&apikey=${GNEWS_KEY}`;
 
     cron.schedule(
         "0 9 * * *",
         async () => {
-            // Delete old messages
-            deleteOldMsg(client, NOTICIAS_CHANNEL_ID);
+            // Eliminar mensajes antiguos
+            await deleteOldMsg(client, NOTICIAS_CHANNEL_ID);
 
-            // Fetch news
-            const response = await fetch(url);
-            const articles = await response.json();
+            try {
+                // Fetch de noticias
+                const response = await fetch(url);
 
-            // Send news to channel
-            for (const article of articles.articles) {
-                const embed = new EmbedBuilder()
-                    .setTitle(article?.title)
-                    .setDescription(article?.description)
-                    .setURL(article?.url)
-                    .setImage(article?.image)
-                    .setFooter({
-                        text: article?.source?.name
+                // Verificar si la respuesta es correcta
+                if (!response.ok) {
+                    throw new Error(`Error al obtener las noticias: ${response.statusText}`);
+                }
+
+                const articles = await response.json();
+
+                // Enviar noticias al canal
+                for (const article of articles.articles) {
+                    const embed = new EmbedBuilder()
+                        .setTitle(article?.title || "Sin título")
+                        .setDescription(article?.description || "Sin descripción")
+                        .setURL(article?.url)
+                        .setImage(article?.image)
+                        .setFooter({
+                            text: article?.source?.name || "Fuente desconocida"
+                        });
+
+                    await webhookNews.send({
+                        embeds: [embed]
                     });
 
-                await webhookNews.send({
-                    embeds: [embed]
-                });
-
-                // Print console logs
-                console.log(
-                    superDjs.colourText(
-                        `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
-                            "es-ES",
-                            {
-                                timeZone: "Europe/Madrid"
-                            }
-                        )}`,
-                        "green"
-                    )
-                );
+                    // Imprimir logs en la consola
+                    console.log(
+                        superDjs.colourText(
+                            `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
+                                "es-ES",
+                                {
+                                    timeZone: "Europe/Madrid"
+                                }
+                            )}`,
+                            "green"
+                        )
+                    );
+                }
+            } catch (error) {
+                console.error(`Error al obtener o enviar las noticias: ${error.message}`);
             }
         },
         {

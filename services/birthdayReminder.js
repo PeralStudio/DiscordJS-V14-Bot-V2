@@ -16,21 +16,20 @@ const birthdaysReminder = (client) => {
         async () => {
             const zoneId = "Europe/Madrid";
             const today = new Date().toLocaleDateString("es-ES", { timeZone: zoneId });
-            const todayMonth = today.split("/")[1];
-            const todayDay = today.split("/")[0];
+            const [todayDay, todayMonth] = today.split("/");
 
             try {
                 const usersWithBirthdaysToday = await bdSchema.find({
-                    Month: todayMonth,
-                    Day: todayDay
+                    Month: parseInt(todayMonth, 10),
+                    Day: parseInt(todayDay, 10)
                 });
 
-                if (!usersWithBirthdaysToday.length) {
+                if (usersWithBirthdaysToday.length === 0) {
                     console.log("No hay cumpleaños hoy.");
                     return;
                 }
 
-                usersWithBirthdaysToday.forEach(async (user) => {
+                for (const user of usersWithBirthdaysToday) {
                     const embed = new EmbedBuilder()
                         .setTitle(guild.name || "Servidor")
                         .setThumbnail(guild.iconURL() || "")
@@ -57,7 +56,7 @@ const birthdaysReminder = (client) => {
                             error
                         );
                     }
-                });
+                }
             } catch (error) {
                 console.error("Error al buscar usuarios con cumpleaños hoy:", error);
             }

@@ -22,38 +22,53 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         if (interaction.user.id !== process.env.ID_OWNER) {
-            interaction.reply({
+            return interaction.reply({
                 ephemeral: true,
                 embeds: [
-                    new EmbedBuilder().setDescription("⛔ No tienes permisos.").setColor("#EA3939")
+                    new EmbedBuilder()
+                        .setDescription("⛔ **No tienes permisos para usar este comando.**")
+                        .setColor("#EA3939")
                 ]
             });
-            return;
         }
 
-        const embed = new EmbedBuilder().setColor("Blurple").setTimestamp().setFooter({
-            text: process.env.NAME_BOT,
-            iconURL: client.user.displayAvatarURL()
-        });
+        const embed = new EmbedBuilder()
+            .setColor("Blurple")
+            .setTitle("🎉 Cumpleaños Registrados")
+            .setDescription("Aquí tienes la lista de los cumpleaños registrados:")
+            .setTimestamp()
+            .setFooter({
+                text: process.env.NAME_BOT,
+                iconURL: client.user.displayAvatarURL()
+            });
 
-        bdSchema.find({}, (err, data) => {
-            if (err) throw err;
+        bdSchema.find({}, async (err, data) => {
+            if (err) {
+                console.error(err);
+                return interaction.reply({
+                    ephemeral: true,
+                    embeds: [
+                        new EmbedBuilder()
+                            .setDescription("❌ **Hubo un error al recuperar los cumpleaños.**")
+                            .setColor("#EA3939")
+                    ]
+                });
+            }
+
             if (data.length < 1) {
-                embed.setDescription("❌ No hay cumpleaños registrados.");
-
-                interaction.reply({ embeds: [embed], ephemeral: true });
+                embed.setDescription("❌ **No hay cumpleaños registrados.**");
             } else {
-                data.forEach(async (user) => {
+                data.forEach((user) => {
                     const age = age1(user.Year, user.Month, user.Day);
                     embed.addFields({
                         name: `${user.Username}`,
-                        value: `\`${user.Day}/${user.Month}/${user.Year}\nEdad: ${age}\`\n\n`,
+                        value: `📅 \`${user.Day}/${user.Month}/${user.Year}\`\n🎂 \`${age}\``,
                         inline: true
                     });
                 });
-
-                interaction.reply({ embeds: [embed], ephemeral: true });
             }
+
+            interaction.reply({ embeds: [embed], ephemeral: true });
         });
     }
 };

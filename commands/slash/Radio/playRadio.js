@@ -39,72 +39,10 @@ module.exports = {
             name: "emisoras",
             description: "Emisoras de radio",
             required: true,
-            choices: [
-                {
-                    name: "📻 Cadena Ser",
-                    value: urlRadio.cadenaSer
-                },
-                {
-                    name: "📻 Cadena Dial",
-                    value: urlRadio.cadenaDial
-                },
-                {
-                    name: "📻 Cadena 100",
-                    value: urlRadio.cadenaCien
-                },
-                {
-                    name: "📻 Catalunya Radio",
-                    value: urlRadio.catalunyaRadio
-                },
-                {
-                    name: "📻 Flaix FM",
-                    value: urlRadio.flaixFm
-                },
-                {
-                    name: "📻 Flaixbac",
-                    value: urlRadio.flaixBac
-                },
-                {
-                    name: "📻 Los40",
-                    value: urlRadio.losCuarenta
-                },
-                {
-                    name: "📻 Los40 Classic",
-                    value: urlRadio.losCuarentaClassic
-                },
-                {
-                    name: "📻 Onda Cero",
-                    value: urlRadio.ondaCero
-                },
-                {
-                    name: "📻 Radio Marca",
-                    value: urlRadio.radioMarca
-                },
-                {
-                    name: "📻 Cope",
-                    value: urlRadio.cope
-                },
-                {
-                    name: "📻 EsRadio",
-                    value: urlRadio.esRadio
-                },
-                {
-                    name: "📻 Radiolé",
-                    value: urlRadio.radiole
-                },
-                {
-                    name: "📻 Activa FM",
-                    value: urlRadio.activaFm
-                },
-                {
-                    name: "📻 Hit Fm",
-                    value: urlRadio.hitFm
-                },
-                {
-                    name: "📻 RNE Radio Nacional",
-                    value: urlRadio.rneRadioNacional
-                }
-            ]
+            choices: Object.entries(urlRadio).map(([key, url]) => ({
+                name: `📻 ${key.replace(/([A-Z])/g, " $1")}`,
+                value: url
+            }))
         }
     ],
     permissions: {
@@ -112,10 +50,9 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         const selectedRadio = interaction.options.get("emisoras").value;
-        let radio;
-        let name;
+        let radioName = Object.keys(urlRadio).find((key) => urlRadio[key] === selectedRadio);
 
-        if (!interaction.member.voice.channelId)
+        if (!interaction.member.voice.channelId) {
             return await interaction.reply({
                 embeds: [
                     new EmbedBuilder()
@@ -129,117 +66,40 @@ module.exports = {
                 ],
                 ephemeral: true
             });
-
-        if (
-            interaction.guild.members.me.voice.channelId &&
-            interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId
-        )
-            return await interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(`❌ ¡No estás en mi canal de voz!`)
-                        .setColor("#db1e1e")
-                        .setTimestamp()
-                        .setFooter({
-                            text: process.env.NAME_BOT,
-                            iconURL: client.user.displayAvatarURL()
-                        })
-                ],
-                ephemeral: true
-            });
-
-        switch (selectedRadio) {
-            case urlRadio.cadenaSer:
-                radio = urlRadio.cadenaSer;
-                name = "Cadena Ser";
-                break;
-            case urlRadio.cadenaDial:
-                radio = urlRadio.cadenaDial;
-                name = "Cadena Dial";
-                break;
-            case urlRadio.cadenaCien:
-                radio = urlRadio.cadenaCien;
-                name = "Cadena 100";
-                break;
-            case urlRadio.catalunyaRadio:
-                radio = urlRadio.catalunyaRadio;
-                name = "Catalunya Radio";
-                break;
-            case urlRadio.flaixFm:
-                radio = urlRadio.flaixFm;
-                name = "Flaix Fm";
-                break;
-            case urlRadio.flaixBac:
-                radio = urlRadio.flaixBac;
-                name = "Flaixbac";
-                break;
-            case urlRadio.losCuarenta:
-                radio = urlRadio.losCuarenta;
-                name = "Los 40";
-                break;
-            case urlRadio.losCuarentaClassic:
-                radio = urlRadio.losCuarentaClassic;
-                name = "Los 40 Classic";
-                break;
-            case urlRadio.ondaCero:
-                radio = urlRadio.ondaCero;
-                name = "Onda Cero";
-                break;
-            case urlRadio.radioMarca:
-                radio = urlRadio.radioMarca;
-                name = "Radio Marca";
-                break;
-            case urlRadio.cope:
-                radio = urlRadio.cope;
-                name = "Cope";
-                break;
-            case urlRadio.esRadio:
-                radio = urlRadio.esRadio;
-                name = "EsRadio";
-                break;
-            case urlRadio.radiole:
-                radio = urlRadio.radiole;
-                name = "Radiolé";
-                break;
-            case urlRadio.activaFm:
-                radio = urlRadio.activaFm;
-                name = "Activa FM";
-                break;
-            case urlRadio.hitFm:
-                radio = urlRadio.hitFm;
-                name = "Hit Fm";
-                break;
-            case urlRadio.rneRadioNacional:
-                radio = urlRadio.rneRadioNacional;
-                name = "RNE Radio Nacional";
-                break;
-            default:
-                radio = urlRadio.cadenaSer;
-                name = "Cadena Ser";
-                break;
         }
 
         const voiceChannel = interaction.member.voice.channelId;
         let connection = getVoiceConnection(voiceChannel);
 
-        connection = joinVoiceChannel({
-            channelId: voiceChannel,
-            guildId: interaction.guildId,
-            adapterCreator: interaction.guild.voiceAdapterCreator
-        });
+        if (!connection) {
+            connection = joinVoiceChannel({
+                channelId: voiceChannel,
+                guildId: interaction.guildId,
+                adapterCreator: interaction.guild.voiceAdapterCreator
+            });
+        }
 
         let player = createAudioPlayer();
-        let res = createAudioResource(radio);
+        let resource = createAudioResource(selectedRadio);
 
-        player.play(res);
+        player.play(resource);
         connection.subscribe(player);
 
-        await interaction.deferReply({ content: "Cargando...", ephemeral: true });
+        await interaction.deferReply();
 
         player.on(AudioPlayerStatus.Playing, async () => {
-            await interaction
-                .editReply({ content: "▶️ Reproduciendo `" + name + "`", ephemeral: true })
-                .catch((e) => console.log(e));
+            await interaction.editReply({
+                content: `▶️ Reproduciendo \`${radioName}\``,
+                ephemeral: true
+            });
+        });
+
+        player.on("error", (error) => {
+            console.error("Error en el reproductor de audio:", error);
+            interaction.followUp({
+                content: `❌ Hubo un error al intentar reproducir la radio.`,
+                ephemeral: true
+            });
         });
     }
 };

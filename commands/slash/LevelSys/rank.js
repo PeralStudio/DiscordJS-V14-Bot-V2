@@ -5,14 +5,14 @@ const xpSchema = require("../../../schemas/xpSchema");
 
 module.exports = {
     name: "nivel",
-    description: "Ver tu nivel o de otros miembros.",
+    description: "Ver tu nivel o el de otros miembros.",
     type: 1,
     options: [
         {
             type: 6,
             name: "usuario",
             description: "Usuario para ver nivel.",
-            required: true
+            required: false
         }
     ],
     permissions: {
@@ -20,31 +20,26 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         await interaction.deferReply();
-        const member = interaction.options.getMember("usuario") || interaction.member;
-        const member2 = interaction.options.get("usuario");
-        let user;
 
+        // Obtener el miembro especificado o el que ejecuta el comando
+        const member = interaction.options.getMember("usuario") || interaction.member;
+
+        // Obtener ID del servidor y del usuario
         const guildID = member.guild.id;
         const userID = member.user.id;
 
-        user = await xpSchema.findOne({
-            guildID,
-            userID
-        });
+        // Obtener datos de XP del usuario
+        let user = await xpSchema.findOne({ guildID, userID });
 
         if (!user) {
-            user = {
-                level: 1,
-                xp: 0
-            };
+            user = { level: 1, xp: 0 }; // Valor predeterminado si no se encuentra el usuario
         }
 
-        const ranking = await xpSchema.find({ guildID }).sort({
-            level: -1,
-            xp: -1
-        });
-        const position = ranking.findIndex((r) => r.userID == member.id) + 1;
+        // Obtener el ranking
+        const ranking = await xpSchema.find({ guildID }).sort({ level: -1, xp: -1 });
+        const position = ranking.findIndex((r) => r.userID == userID) + 1;
 
+        // Generar la imagen de perfil con los datos de rango
         const profileBuffer = await profileImage(member.id, {
             rankData: {
                 currentXp: user.xp,
@@ -57,20 +52,14 @@ module.exports = {
             },
             borderColor: ["#cc9900", "#b3b3b3"],
             badgesFrame: true,
-            presenceStatus:
-                member2.member.presence?.status == "online"
-                    ? "online"
-                    : member2.member.presence?.status == "idle"
-                    ? "idle"
-                    : member2.member.presence?.status == "dnd"
-                    ? "dnd"
-                    : "offline",
+            presenceStatus: member.presence?.status || "offline", // Uso de estado de presencia del miembro
             moreBackgroundBlur: true,
             localDateType: "es"
         });
+
         const imageAttachment = new AttachmentBuilder(profileBuffer, { name: "rank.png" });
 
+        // Enviar la respuesta con el archivo adjunto
         interaction.editReply({ files: [imageAttachment] });
-        return;
     }
 };

@@ -2,7 +2,6 @@ const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const { profileImage } = require("discord-arts");
 const xpSchema = require("../../../schemas/xpSchema");
-require("dotenv").config();
 
 module.exports = {
     name: "ranking",
@@ -13,100 +12,80 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         await interaction.deferReply();
-        const guildID = process.env.GUILD_ID;
 
-        const ranking = await xpSchema.find({ guildID }).sort({
-            level: -1,
-            xp: -1
-        });
+        try {
+            const guildID = process.env.GUILD_ID;
 
-        const top1 = ranking[0];
-        const top2 = ranking[1];
-        const top3 = ranking[2];
+            const ranking = await xpSchema.find({ guildID }).sort({ level: -1, xp: -1 });
 
-        // RANK 1
-        const position1 = ranking.findIndex((r) => r.userID == top1.userID) + 1;
+            if (ranking.length < 1) {
+                return interaction.editReply({
+                    content: "❌ No hay datos de ranking disponibles.",
+                    ephemeral: true
+                });
+            }
 
-        const profileBuffer1 = await profileImage(top1.userID, {
-            rankData: {
-                currentXp: top1.xp,
-                requiredXp: top1.level * 250,
-                level: top1.level,
-                rank: position1,
-                autoColorRank: true,
-                barColor: "#BB8813",
-                levelColor: "#D5D4D5"
-            },
-            borderColor: ["#cc9900", "#b3b3b3"],
-            badgesFrame: true,
-            moreBackgroundBlur: true,
-            localDateType: "es"
-        });
+            // Función para generar imagen y embed
+            const createRankEmbed = async (rank, position, color, title) => {
+                const profileBuffer = await profileImage(rank.userID, {
+                    rankData: {
+                        currentXp: rank.xp,
+                        requiredXp: rank.level * 250,
+                        level: rank.level,
+                        rank: position,
+                        autoColorRank: true,
+                        barColor: "#BB8813",
+                        levelColor: "#D5D4D5"
+                    },
+                    borderColor: ["#cc9900", "#b3b3b3"],
+                    badgesFrame: true,
+                    moreBackgroundBlur: true,
+                    localDateType: "es"
+                });
+                const imageAttachment = new AttachmentBuilder(profileBuffer, {
+                    name: `rank${position}.png`
+                });
+                const embed = new EmbedBuilder()
+                    .setTitle(title)
+                    .setColor(color)
+                    .setImage(`attachment://rank${position}.png`);
+                return [embed, imageAttachment]; // Asegúrate de que se devuelvan como array
+            };
 
-        const imageAttachment1 = new AttachmentBuilder(profileBuffer1, { name: "rank1.png" });
+            // Generar embeds e imágenes para los tres primeros puestos
+            const top1 = ranking[0] || {};
+            const top2 = ranking[1] || {};
+            const top3 = ranking[2] || {};
 
-        const embed1 = new EmbedBuilder()
-            .setTitle("🥇 RANK 1 🥇")
-            .setColor("#ffd700")
-            .setImage("attachment://rank1.png");
+            const [embed1, imageAttachment1] = await createRankEmbed(
+                top1,
+                1,
+                "#ffd700",
+                "🥇 RANK 1 🥇"
+            );
+            const [embed2, imageAttachment2] = await createRankEmbed(
+                top2,
+                2,
+                "#c0c0c0",
+                "🥈 RANK 2 🥈"
+            );
+            const [embed3, imageAttachment3] = await createRankEmbed(
+                top3,
+                3,
+                "#cd7f32",
+                "🥉 RANK 3 🥉"
+            );
 
-        // RANK 2
-        const position2 = ranking.findIndex((r) => r.userID == top2.userID) + 1;
-
-        const profileBuffer2 = await profileImage(top2.userID, {
-            rankData: {
-                currentXp: top2.xp,
-                requiredXp: top2.level * 250,
-                level: top2.level,
-                rank: position2,
-                autoColorRank: true,
-                barColor: "#BB8813",
-                levelColor: "#D5D4D5"
-            },
-            borderColor: ["#cc9900", "#b3b3b3"],
-            badgesFrame: true,
-            moreBackgroundBlur: true,
-            localDateType: "es"
-        });
-
-        const imageAttachment2 = new AttachmentBuilder(profileBuffer2, { name: "rank2.png" });
-
-        const embed2 = new EmbedBuilder()
-            .setTitle("🥈 RANK 2 🥈")
-            .setColor("#c0c0c0")
-            .setImage("attachment://rank2.png");
-
-        // RANK 3
-        const position3 = ranking.findIndex((r) => r.userID == top3.userID) + 1;
-
-        const profileBuffer3 = await profileImage(top3.userID, {
-            rankData: {
-                currentXp: top3.xp,
-                requiredXp: top3.level * 250,
-                level: top3.level,
-                rank: position3,
-                autoColorRank: true,
-                barColor: "#BB8813",
-                levelColor: "#D5D4D5"
-            },
-            borderColor: ["#cc9900", "#b3b3b3"],
-            badgesFrame: true,
-            moreBackgroundBlur: true,
-            localDateType: "es"
-        });
-
-        const imageAttachment3 = new AttachmentBuilder(profileBuffer3, { name: "rank3.png" });
-
-        const embed3 = new EmbedBuilder()
-            .setTitle("🥉 RANK 3 🥉")
-            .setColor("#cd7f32")
-            .setImage("attachment://rank3.png");
-
-        await interaction.editReply({
-            embeds: [embed1, embed2, embed3],
-            files: [imageAttachment1, imageAttachment2, imageAttachment3]
-        });
-
-        return;
+            await interaction.editReply({
+                embeds: [embed1, embed2, embed3],
+                files: [imageAttachment1, imageAttachment2, imageAttachment3]
+            });
+        } catch (error) {
+            console.error("Error al ejecutar el comando ranking:", error);
+            return interaction.editReply({
+                content: "❌ Hubo un error al procesar el comando. Inténtalo de nuevo más tarde.",
+                ephemeral: true
+            });
+        }
     }
 };

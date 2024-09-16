@@ -11,7 +11,8 @@ const reminders = async (client) => {
     for (let i = 0; i < remindersBD.length; i++) {
         const reminder = remindersBD[i];
 
-        cron.schedule(
+        // Definimos el cron job y lo asignamos a una variable
+        const job = cron.schedule(
             reminder.Cron,
             async () => {
                 const remindEmbed = new EmbedBuilder()
@@ -25,8 +26,7 @@ const reminders = async (client) => {
                         },
                         { name: "\u200B", value: " " },
                         {
-                            name: ` `,
-                            value: `📝 Tarea: **${reminder.Task}**`
+                            name: `📝 Tarea: **${reminder.Task}**`
                         },
                         { name: "\u200B", value: " " }
                     )
@@ -36,12 +36,15 @@ const reminders = async (client) => {
                     user.send({ embeds: [remindEmbed] });
                 });
 
+                // Eliminar el recordatorio de la base de datos
                 await reminderSchema.findOneAndDelete({
                     Guild: reminder.Guild,
                     UserID: reminder.UserID,
                     Task: reminder.Task,
                     Cron: reminder.Cron
                 });
+
+                // Detener el cron job
                 job.stop();
             },
             {
