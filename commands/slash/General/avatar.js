@@ -17,6 +17,8 @@ module.exports = {
         DEFAULT_MEMBER_PERMISSIONS: "SendMessages"
     },
     run: async (client, interaction, config) => {
+        await interaction.deferReply();
+
         const userAvatar = interaction.options.get("usuario").user.displayAvatarURL({
             format: "png",
             dynamic: true,
@@ -32,6 +34,6 @@ module.exports = {
                 text: process.env.NAME_BOT,
                 iconURL: client.user.displayAvatarURL()
             });
-        await interaction.reply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
     }
 };
