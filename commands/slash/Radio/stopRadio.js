@@ -1,4 +1,5 @@
 const { joinVoiceChannel, createAudioPlayer } = require("@discordjs/voice");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "stop-radio",
@@ -57,12 +58,12 @@ module.exports = {
         try {
             player.stop();
             voiceConnection.destroy(player);
-        } catch (error) {
-            console.log(error);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
         } finally {
             interaction
                 .editReply({ content: "⏹️ Radio Detenida", ephemeral: true })
-                .catch((e) => console.log(e));
+                .catch((e) => logger.error(`Error: ${e}`));
         }
     }
 };

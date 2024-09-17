@@ -2,6 +2,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 require("dotenv").config();
 const { profileImage } = require("discord-arts");
 const xpSchema = require("../../../schemas/xpSchema");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "resetnivel",
@@ -107,7 +108,7 @@ module.exports = {
                     });
                 });
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 };

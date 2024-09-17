@@ -42,7 +42,6 @@ module.exports = {
                 const $ = cherio.load(html);
 
                 $("video").map(function () {
-                    // console.log($(this).attr("src"));
                     arrayVideos.push($(this).attr("src"));
                 });
 

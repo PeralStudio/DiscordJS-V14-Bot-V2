@@ -1,5 +1,6 @@
 const googleIt = require("google-it");
 const { EmbedBuilder } = require("discord.js");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -53,7 +54,7 @@ module.exports = {
                         .join("\n")
                 );
         } catch (e) {
-            console.log(e);
+            logger.error(e);
             interaction.editReply({ content: "Busqueda no encontrada", ephemeral: true });
         }
 

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const logger = require("../../../utils/logger.js");
 const triviaQuestions = require("../../../utils/triviaQuestions.js");
 
 module.exports = {
@@ -30,11 +31,11 @@ module.exports = {
                     collected.first().author
                 } obtuvo la respuesta correcta! Respuesta(s): ${item.answers.join(", ")}!`
             );
-        } catch (error) {
-            if (error instanceof DiscordAPIError && error.code === 10062) {
-                console.error("La interacción ha expirado o ya no es válida.");
+        } catch (e) {
+            if (e instanceof DiscordAPIError && e.code === 10062) {
+                logger.error("La interacción ha expirado o ya no es válida.");
             } else {
-                console.error("Error al manejar la interacción:", error);
+                logger.error(`Error al manejar la interacción: ${e}`);
             }
 
             await interaction.followUp(

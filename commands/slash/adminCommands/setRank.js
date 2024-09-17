@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const xpSchema = require("../../../schemas/xpSchema");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "setnivel",
@@ -76,7 +77,7 @@ module.exports = {
                     })
                 );
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 };

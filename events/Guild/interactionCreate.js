@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const client = require("../../index");
 const config = require("../../config/config.js");
+const logger = require("../../utils/logger.js");
 
 module.exports = {
     name: "interactionCreate"
@@ -15,7 +16,7 @@ client.on("interactionCreate", async (interaction) => {
         try {
             command.run(client, interaction, config);
         } catch (e) {
-            console.error(e);
+            logger.error(`Error: ${e}`);
         }
     }
 
@@ -28,7 +29,7 @@ client.on("interactionCreate", async (interaction) => {
         try {
             command.run(client, interaction, config);
         } catch (e) {
-            console.error(e);
+            logger.error(`Error: ${e}`);
         }
     }
 
@@ -41,7 +42,7 @@ client.on("interactionCreate", async (interaction) => {
         try {
             command.run(client, interaction, config);
         } catch (e) {
-            console.error(e);
+            logger.error(`Error: ${e}`);
         }
     }
 
@@ -64,7 +65,7 @@ client.on("interactionCreate", async (interaction) => {
         try {
             modal.run(client, interaction, config);
         } catch (e) {
-            console.error(e);
+            logger.error(`Error: ${e}`);
         }
     }
 });

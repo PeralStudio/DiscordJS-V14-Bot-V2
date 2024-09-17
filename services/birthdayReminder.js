@@ -1,13 +1,14 @@
 const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../schemas/birthdaySchema");
 const cron = require("node-cron");
+const logger = require("../utils/logger");
 require("dotenv").config();
 
 const birthdaysReminder = (client) => {
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
     if (!guild) {
-        console.error("El GUILD_ID no es válido o el bot no está en el servidor especificado.");
+        logger.error("El GUILD_ID no es válido o el bot no está en el servidor especificado.");
         return;
     }
 
@@ -25,7 +26,7 @@ const birthdaysReminder = (client) => {
                 });
 
                 if (usersWithBirthdaysToday.length === 0) {
-                    console.log("No hay cumpleaños hoy.");
+                    logger.info("No hay cumpleaños hoy.");
                     return;
                 }
 
@@ -48,17 +49,14 @@ const birthdaysReminder = (client) => {
                         if (discordUser) {
                             await discordUser.send({ embeds: [embed] });
                         } else {
-                            console.error(`No se encontró el usuario con ID: ${user.UserID}`);
+                            logger.error(`No se encontró el usuario con ID: ${user.UserID}`);
                         }
                     } catch (error) {
-                        console.error(
-                            `Error al enviar mensaje al usuario con ID: ${user.UserID}`,
-                            error
-                        );
+                        logger.error(`Error al enviar mensaje al usuario con ID: ${user.UserID}`);
                     }
                 }
-            } catch (error) {
-                console.error("Error al buscar usuarios con cumpleaños hoy:", error);
+            } catch (e) {
+                logger.error(`Error al buscar usuarios con cumpleaños hoy: ${e}`);
             }
         },
         {

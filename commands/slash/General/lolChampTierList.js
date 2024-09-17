@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const axios = require("axios");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "lol-tierlist",
@@ -98,7 +99,6 @@ module.exports = {
         await axios
             .request(options)
             .then(function (response) {
-                console.log(response);
                 embed = new EmbedBuilder()
                     .setTitle(`${selectedRegion.toUpperCase()} - Campeones tier S+ (${division})`)
                     .addFields(
@@ -141,8 +141,8 @@ module.exports = {
                         iconURL: client?.user.displayAvatarURL()
                     });
             })
-            .catch(function (error) {
-                console.error("error", error);
+            .catch(function (e) {
+                logger.error(`error: ${e}`);
             });
 
         interaction.editReply({ embeds: [embed], ephemeral: true });

@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const moment = require("moment");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -76,6 +77,6 @@ module.exports = {
                     });
                 await interaction.reply({ embeds: [embed] });
             })
-            .catch((err) => console.log("Solicitud fallida", err));
+            .catch((e) => logger.error(`Solicitud fallida\n${e}`));
     }
 };

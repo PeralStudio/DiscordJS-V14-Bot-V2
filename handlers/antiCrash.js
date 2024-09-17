@@ -1,6 +1,7 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 const { inspect } = require("util");
 const deleteOldMsg = require("../services/deleteOldMsg");
+const logger = require("../utils/logger");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
@@ -12,9 +13,9 @@ module.exports = (client) => {
 
     const embed = new EmbedBuilder().setColor("Red");
 
-    client.on("error", (err) => {
+    client.on("error", (e) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
-        console.log(err);
+        logger.error(`Error: ${e}`);
 
         embed
             .setTitle("Discord API Error")
@@ -62,13 +63,13 @@ module.exports = (client) => {
         if (embed.data.fields.length <= 25) {
             webhook.send({ embeds: [embed] });
         } else {
-            console.error("El embed tiene más de 25 campos, no se enviará.");
+            logger.error("El embed tiene más de 25 campos, no se enviará.");
         }
     });
 
-    process.on("uncaughtException", (err, origin) => {
+    process.on("uncaughtException", (e, origin) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
-        console.log(err, "\n", origin);
+        logger.error(`Error: ${e}\n ${origin}`);
 
         embed
             .setTitle("Uncaught Exception/Catch")
@@ -94,7 +95,7 @@ module.exports = (client) => {
 
     process.on("uncaughtExceptionMonitor", (err, origin) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
-        console.log(err, "\n", origin);
+        logger.error(`Error: ${e}\n ${origin}`);
 
         embed
             .setTitle("Uncaught Exception Monitor")
@@ -120,7 +121,7 @@ module.exports = (client) => {
 
     process.on("warning", (warn) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
-        console.log(warn);
+        logger.warn(warn);
 
         embed
             .setTitle("Uncaught Exception Monitor Warning")

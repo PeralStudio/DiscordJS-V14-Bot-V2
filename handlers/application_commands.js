@@ -1,17 +1,16 @@
 const client = require("../index");
-const { PermissionsBitField, Routes, REST, User } = require("discord.js");
+const { PermissionsBitField, Routes, REST } = require("discord.js");
 const fs = require("fs");
-const colors = require("colors");
-const superDjs = require("super-djs");
+const logger = require("../utils/logger");
 
 module.exports = (client, config) => {
-    console.log(superDjs.colourText("------------------>> Application commands Handler:", "blue"));
+    logger.info("------------------>> Application commands Handler:");
 
     let commands = [];
 
     // Slash commands handler:
     fs.readdirSync("./commands/slash/").forEach((dir) => {
-        console.log(superDjs.colourText("[!] Started loading slash commands...", "yellow"));
+        logger.info("[!] Started loading slash commands...");
         const SlashCommands = fs
             .readdirSync(`./commands/slash/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -21,11 +20,8 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.description, pull.type == 1)) {
                 client.slash_commands.set(pull.name, pull);
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - SLASH(${dir})] Loaded a file: ${pull.name} (#${client.slash_commands.size})`,
-                        "green"
-                    )
+                logger.info(
+                    `[HANDLER - SLASH(${dir})] Loaded a file: ${pull.name} (#${client.slash_commands.size})`
                 );
 
                 commands.push({
@@ -43,11 +39,8 @@ module.exports = (client, config) => {
                         : null
                 });
             } else {
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - SLASH(${dir})] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`,
-                        "red"
-                    )
+                logger.error(
+                    `[HANDLER - SLASH(${dir})] Couldn't load the file ${file}, missing module name value, description, or type isn't 1.`
                 );
                 continue;
             }
@@ -56,7 +49,7 @@ module.exports = (client, config) => {
 
     // User commands handler:
     fs.readdirSync("./commands/user/").forEach((dir) => {
-        console.log(superDjs.colourText("[!] Started loading user commands...", "yellow"));
+        logger.info("[!] Started loading user commands...");
         const UserCommands = fs
             .readdirSync(`./commands/user/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -66,11 +59,8 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.type == 2)) {
                 client.user_commands.set(pull.name, pull);
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - USER(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
-                        "green"
-                    )
+                logger.info(
+                    `[HANDLER - USER(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`
                 );
 
                 commands.push({
@@ -78,11 +68,8 @@ module.exports = (client, config) => {
                     type: pull.type || 2
                 });
             } else {
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - USER(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
-                        "red"
-                    )
+                logger.error(
+                    `[HANDLER - USER(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`
                 );
                 continue;
             }
@@ -91,7 +78,7 @@ module.exports = (client, config) => {
 
     // Message commands handler:
     fs.readdirSync("./commands/message/").forEach((dir) => {
-        console.log(superDjs.colourText("[!] Started loading message commands...", "yellow"));
+        logger.info("[!] Started loading message commands...");
         const UserCommands = fs
             .readdirSync(`./commands/message/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -101,11 +88,8 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.type == 3)) {
                 client.message_commands.set(pull.name, pull);
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - MESSAGE(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`,
-                        "green"
-                    )
+                logger.info(
+                    `[HANDLER - MESSAGE(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`
                 );
 
                 commands.push({
@@ -113,11 +97,8 @@ module.exports = (client, config) => {
                     type: pull.type || 3
                 });
             } else {
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - MESSAGE(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`,
-                        "red"
-                    )
+                logger.error(
+                    `[HANDLER - MESSAGE(${dir})] Couldn't load the file ${file}, missing module name value or type isn't 2.`
                 );
                 continue;
             }
@@ -126,36 +107,21 @@ module.exports = (client, config) => {
 
     // Registering all the application commands:
     if (!config.Client.ID) {
-        console.log(
-            superDjs.colourText(
-                "[CRASH] You need to provide your bot ID in config.js!",
-                "red" + "\n"
-            )
-        );
+        logger.error("[CRASH] You need to provide your bot ID in config.js!");
         return process.exit();
     }
 
     const rest = new REST({ version: "10" }).setToken(config.Client.TOKEN || process.env.TOKEN);
 
     (async () => {
-        console.log(
-            superDjs.colourText(
-                "[HANDLER] Started registering all the application commands.",
-                "green"
-            )
-        );
+        logger.info("[HANDLER] Started registering all the application commands.");
 
         try {
             await rest.put(Routes.applicationCommands(config.Client.ID), { body: commands });
 
-            console.log(
-                superDjs.colourText(
-                    "[HANDLER] Successfully registered all the application commands.",
-                    "green"
-                )
-            );
-        } catch (err) {
-            console.log(err);
+            logger.info("[HANDLER] Successfully registered all the application commands.");
+        } catch (e) {
+            logger.error(`Error: ${e}`);
         }
     })();
 };

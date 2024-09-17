@@ -2,7 +2,7 @@ const { Client, Partials, Collection, GatewayIntentBits, IntentsBitField } = req
 const config = require("./config/config");
 require("dotenv").config();
 const { Player } = require("discord-player");
-const superDjs = require("super-djs");
+const logger = require(".//utils/logger");
 
 // Creating a new client:
 const client = new Client({
@@ -41,11 +41,8 @@ const client = new Client({
 // Getting the bot token:
 const AuthenticationToken = process.env.TOKEN_DISCORD || config.Client.TOKEN;
 if (!AuthenticationToken) {
-    console.warn(
-        superDjs.colourText(
-            "[CRASH] Authentication Token for Discord bot is required! Use Envrionment Secrets or config.js.",
-            "red"
-        )
+    logger.warn(
+        "[CRASH] Authentication Token for Discord bot is required! Use Envrionment Secrets or config.js."
     );
     return process.exit();
 }
@@ -73,17 +70,38 @@ module.exports = client;
 
 // Login to the bot:
 client.login(AuthenticationToken).catch((err) => {
-    console.error(
-        superDjs.colourText("[CRASH] Something went wrong while connecting to your bot...", "red")
-    );
-    console.error(superDjs.colourText("[CRASH] Error from Discord API:", "red" + err));
+    logger.error("[CRASH] Something went wrong while connecting to your bot...");
+    logger.error("[CRASH] Error from Discord API:", "red" + err);
     return process.exit();
 });
 
 // Handle errors:
-process.on("unhandledRejection", async (err, promise) => {
-    console.log(superDjs.colourText(`[ANTI-CRASH] Unhandled Rejection:  ${err}`, "red"));
-    console.error(promise);
+process.on("unhandledRejection", async (reason, promise) => {
+    // Registra el error
+    logger.error(
+        `[ANTI-CRASH] Unhandled Rejection: ${
+            reason instanceof Error ? reason.stack || reason.message : reason
+        }`
+    );
+
+    // Registra el contenido de la promesa si es una promesa no resuelta
+    if (promise && typeof promise === "object" && typeof promise.then === "function") {
+        // Si es posible, intenta resolver la promesa para registrar su resultado
+        try {
+            const result = await promise; // Espera la resolución de la promesa
+            logger.error(`[ANTI-CRASH] Promise resolved with: ${JSON.stringify(result)}`);
+        } catch (err) {
+            // Si la promesa también falla, regístralo
+            logger.error(
+                `[ANTI-CRASH] Promise rejected with: ${
+                    err instanceof Error ? err.stack || err.message : err
+                }`
+            );
+        }
+    } else {
+        // Registra que la promesa no se pudo resolver
+        logger.error(`[ANTI-CRASH] Promise was not resolved or is not a valid promise.`);
+    }
 });
 
 require(`./handlers/antiCrash`)(client);

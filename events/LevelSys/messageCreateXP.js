@@ -2,6 +2,7 @@ const { AttachmentBuilder } = require("discord.js");
 const xpSchema = require("../../schemas/xpSchema");
 const client = require("../../index");
 const { profileImage } = require("discord-arts");
+const logger = require("../../utils/logger");
 require("dotenv").config();
 
 const coolDown = new Set();
@@ -96,8 +97,8 @@ client.on("messageCreate", async (message) => {
                 xp
             }
         );
-    } catch (error) {
-        console.log(error);
+    } catch (e) {
+        logger.error(`Error: ${e}`);
     }
 
     coolDown.add(message.author.id);

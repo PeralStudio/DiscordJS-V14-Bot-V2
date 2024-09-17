@@ -1,12 +1,12 @@
 const axios = require("axios");
 const cheerio = require("cherio");
-const superDjs = require("super-djs");
 const cron = require("node-cron");
 const elrellano = require("../schemas/elrellanoSchema");
 const dotenv = require("dotenv");
 const deleteOldMsg = require("./deleteOldMsg.js");
 const checkRepeatMsgs = require("./checkRepeatMsgs.js");
 const { format, parseISO, addHours } = require("date-fns");
+const logger = require("../utils/logger.js");
 dotenv.config();
 
 const elrellanoScrap = async (client) => {
@@ -19,16 +19,13 @@ const elrellanoScrap = async (client) => {
             //Delete old messages
             deleteOldMsg(client, ELRELLANO_CHANNEL_ID);
 
-            console.log(
-                superDjs.colourText(
-                    `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
-                        "es-ES",
-                        {
-                            timeZone: "Europe/Madrid"
-                        }
-                    )}`,
-                    "blue"
-                )
+            logger.info(
+                `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
+                    "es-ES",
+                    {
+                        timeZone: "Europe/Madrid"
+                    }
+                )}`
             );
 
             // try {
@@ -170,7 +167,7 @@ const elrellanoScrap = async (client) => {
                 });
 
                 videos.forEach(async (video, i) => {
-                    console.log(
+                    logger.info(
                         `Verificando si existe video en BBDD || post: ${i} - Título: ${video?.title}`
                     );
 
@@ -181,7 +178,7 @@ const elrellanoScrap = async (client) => {
                         });
 
                         if (!data) {
-                            console.log(`video no existe en BBDD  ${i} - Título: ${video.title}`);
+                            logger.info(`video no existe en BBDD  ${i} - Título: ${video.title}`);
 
                             const newData = new elrellano({
                                 title: video.title,
@@ -221,19 +218,16 @@ const elrellanoScrap = async (client) => {
 
                             await newData.save();
 
-                            console.log(
-                                superDjs.colourText(
-                                    `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
-                                        "es-ES",
-                                        {
-                                            timeZone: "Europe/Madrid"
-                                        }
-                                    )} \n(${i}) - Video Guardado en BBDD ${newData}`,
-                                    "green"
-                                )
+                            logger.warn(
+                                `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
+                                    "es-ES",
+                                    {
+                                        timeZone: "Europe/Madrid"
+                                    }
+                                )} \n(${i}) - Video Guardado en BBDD ${newData}`
                             );
                         } else {
-                            console.log(`Video ya existe en BBDD: ${i} - Título: ${data.title}`);
+                            logger.info(`Video ya existe en BBDD: ${i} - Título: ${data.title}`);
                         }
                     }
                 });
@@ -241,8 +235,8 @@ const elrellanoScrap = async (client) => {
                 videos = [];
 
                 await checkRepeatMsgs(client, ELRELLANO_CHANNEL_ID);
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                logger.error(`Error: ${e}`);
             }
         },
         {

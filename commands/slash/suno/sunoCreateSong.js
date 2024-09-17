@@ -3,6 +3,7 @@ const axios = require("axios");
 const prism = require("prism-media");
 const fs = require("fs");
 const path = require("path");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -121,8 +122,8 @@ module.exports = {
                 // Eliminar los archivos después de enviarlos
                 files.forEach((file) => fs.unlinkSync(file.filePath));
             }
-        } catch (error) {
-            console.error("Error al generar la canción: ", error);
+        } catch (e) {
+            logger.error(`Error al generar la canción: ${e}`);
             interaction.editReply({
                 content: "Hubo un error al generar la canción. Inténtalo de nuevo más tarde.",
                 ephemeral: true

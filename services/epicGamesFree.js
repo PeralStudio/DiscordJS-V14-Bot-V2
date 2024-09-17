@@ -2,9 +2,9 @@ const { IntentsBitField, Client, GatewayIntentBits, EmbedBuilder } = require("di
 const { EpicFreeGames } = require("epic-free-games");
 const cron = require("node-cron");
 const dayjs = require("dayjs");
-const superDjs = require("super-djs");
 const deleteOldMsg = require("./deleteOldMsg");
 const dotenv = require("dotenv");
+const logger = require("../utils/logger");
 dotenv.config();
 
 const { NAME_BOT, EPICGAMES_CHANNEL_ID, TOKEN_DISCORD } = process.env;
@@ -31,16 +31,13 @@ const epicGamesFree = async (client) => {
             // Delete old messages
             deleteOldMsg(clientDC, EPICGAMES_CHANNEL_ID);
 
-            console.log(
-                superDjs.colourText(
-                    `(Es jueves (17:30) Envia embeds al canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
-                        "es-ES",
-                        {
-                            timeZone: "Europe/Madrid"
-                        }
-                    )})`,
-                    "green"
-                )
+            logger.info(
+                `(Es jueves (17:30) Envia embeds al canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
+                    "es-ES",
+                    {
+                        timeZone: "Europe/Madrid"
+                    }
+                )})`
             );
 
             const epicFreeGames = new EpicFreeGames({
@@ -159,8 +156,8 @@ const epicGamesFree = async (client) => {
                         .get(EPICGAMES_CHANNEL_ID)
                         .send({ embeds: nextGameEmbeds });
                 }
-            } catch (err) {
-                console.log(err);
+            } catch (e) {
+                logger.error(`Error: ${e}`);
             }
         },
         {

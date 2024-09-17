@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const backup = require("discord-backup");
 const path = require("path");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
                         .setTimestamp();
                 })
                 .catch(async (e) => {
-                    console.log(e);
+                    logger.error(e);
                     embed = new EmbedBuilder()
                         .setDescription(`❌ Error: ${e}`)
                         .setColor("#db1e1e")

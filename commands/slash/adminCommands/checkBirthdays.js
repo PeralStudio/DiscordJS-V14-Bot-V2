@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../../../schemas/birthdaySchema");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 const age1 = (birthYear, birthMonth, birthDay) => {
@@ -42,9 +43,9 @@ module.exports = {
                 iconURL: client.user.displayAvatarURL()
             });
 
-        bdSchema.find({}, async (err, data) => {
-            if (err) {
-                console.error(err);
+        bdSchema.find({}, async (e, data) => {
+            if (e) {
+                logger.error(`Error: ${e}`);
                 return interaction.reply({
                     ephemeral: true,
                     embeds: [

@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -58,8 +59,8 @@ module.exports = {
                 .setColor("#D4B053");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
-        } catch (error) {
-            console.error("Error:", error);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
             await interaction.reply({
                 content: `<a:error:1218596001506529360> Error al actualizar el banner: ${error.message}`
             });

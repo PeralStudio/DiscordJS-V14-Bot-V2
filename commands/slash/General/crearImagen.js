@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { EmbedBuilder } = require("discord.js");
 const { Configuration, OpenAIApi } = require("openai");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 const configuracion = new Configuration({
@@ -61,7 +62,7 @@ module.exports = {
 
             await interaction.editReply({ embeds: [embed] });
         } catch (e) {
-            console.log(e);
+            logger.error(e);
             return await interaction.editReply({
                 content: `solicitud fallida con el estado del codigo **${e}**`,
                 ephemeral: true

@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 const nodeSuperFetch = require("node-superfetch");
-const superDjs = require("super-djs");
 const twitch = require("../schemas/twitchSchema");
 const deleteOldMsg = require("./deleteOldMsg");
 const checkRepeatMsgs = require("./checkRepeatMsgs");
 // const cron = require("node-cron");
 const dotenv = require("dotenv");
+const logger = require("../utils/logger");
 dotenv.config();
 
 const twitchCron = async (client, user) => {
@@ -17,13 +17,10 @@ const twitchCron = async (client, user) => {
     const remainingLetters = user.slice(1);
     const capitalizedUser = firstLetterCap + remainingLetters;
 
-    console.log(
-        superDjs.colourText(
-            `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid"
-            })})`,
-            "blue"
-        )
+    logger.info(
+        `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
+            timeZone: "Europe/Madrid"
+        })})`
     );
 
     const httpHeaders = {
@@ -58,8 +55,8 @@ const twitchCron = async (client, user) => {
             headers: httpHeaders,
             timeout: TIMEOUT
         });
-    } catch (error) {
-        console.error(`Error al obtener datos de Twitch para ${user}:`, error);
+    } catch (e) {
+        logger.error(`Error al obtener datos de Twitch para ${user}: ${e}`);
         return;
     }
 

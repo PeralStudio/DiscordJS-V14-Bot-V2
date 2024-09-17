@@ -1,9 +1,9 @@
 const ytch = require("yt-channel-info");
 const dotenv = require("dotenv");
-const superDjs = require("super-djs");
 const youtube = require("../schemas/youtubeSchema");
 const deleteOldMsg = require("./deleteOldMsg.js");
 const checkRepeatMsgs = require("./checkRepeatMsgs.js");
+const logger = require("../utils/logger.js");
 dotenv.config();
 
 const youtubeCron = async (client, userId) => {
@@ -56,88 +56,41 @@ const youtubeCron = async (client, userId) => {
         .then((response) => {
             return response.items[0];
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((e) => {
+            logger.error(`Error: ${e}`);
         });
 
-    switch (userId) {
-        case "UCg1c09_sFOd-TVPCNgHw8qg":
-            userId = "Kerios";
-            break;
-        case "UCEx9whgAgQPG7e4dAXIq1VQ":
-            userId = "ElOjoNinja - Gameplays";
-            break;
-        case "UCmcBZPvWyXBKw0d6XE5XDOQ":
-            userId = "Elyoya";
-            break;
-        case "UCwXh0iKPlI4hXNntPECFSbg":
-            userId = "Zazza el italiano";
-            break;
-        case "UCNfoPrh2gSZpwijbb9SOKmA":
-            userId = "Portillo";
-            break;
-        case "UCFC19W1bS1Zv73fwgiexm-w":
-            userId = "Comiendocondalmau";
-            break;
-        case "UC9eM3jqq5IfxbGHbuRR_jRw":
-            userId = "SFDXShow";
-            break;
-        case "UCvmKFknIG9Z_tj0ZyMHPViQ":
-            userId = "JRBmotors";
-            break;
-        case "UCNGH2ZZH3gPj0J1Z2HU0ITg":
-            userId = "Lofi Serenade Hub";
-            break;
-        case "UC8rNKrqBxJqL9izOOMxBJtw":
-            userId = "Willyrex";
-            break;
-        case "UC5uFttEUB_fNnJqBly_jRXQ":
-            userId = "xFaRgAnx";
-            break;
-        case "UCtZ-NR6mtwRGRR48AtrYLjg":
-            userId = "Nico - Ride Me Five";
-            break;
-        case "UCv1HX9GgqyAYE999BoGYc1g":
-            userId = "Esttik";
-            break;
-        case "UCuk4lplU8fQIG7CUdJqeZ8g":
-            userId = "JDalmau";
-            break;
-        case "UCiMRXuxr-1wdimyv82y0DvQ":
-            userId = "SeVenJungle";
-            break;
-        case "UCiRgvVzF6kf7fnYCjDYa6Bg":
-            userId = "Werlyb - Gameplays";
-            break;
-        case "UCWcp1Mwm7_bJ-mVoZb8TdkQ":
-            userId = "TuberViejuner";
-            break;
-        case "UCCVPjsqUlFIfDXeWO7V1nLQ":
-            userId = "Reven";
-            break;
-        case "UCWU8fcAN3X8hjMR9k0rbV5g":
-            userId = "Nadie Sabe Nada";
-            break;
-        case "UCzFESlED8MTJOTHpQhxlqGg":
-            userId = "FRANK CUESTA - CANAL YOUTUBE";
-            break;
-        case "UCdKPGAiw0WjT3IeZCkZlz1A":
-            userId = "Detección Metálica";
-            break;
-        case "UCeiyuZljcK9iXzMAgzb9kpA":
-            userId = "HRom";
-            break;
-        default:
-            break;
-    }
+    const channelNames = new Map([
+        ["UCg1c09_sFOd-TVPCNgHw8qg", "Kerios"],
+        ["UCEx9whgAgQPG7e4dAXIq1VQ", "ElOjoNinja - Gameplays"],
+        ["UCmcBZPvWyXBKw0d6XE5XDOQ", "Elyoya"],
+        ["UCwXh0iKPlI4hXNntPECFSbg", "Zazza el italiano"],
+        ["UCNfoPrh2gSZpwijbb9SOKmA", "Portillo"],
+        ["UCFC19W1bS1Zv73fwgiexm-w", "Comiendocondalmau"],
+        ["UC9eM3jqq5IfxbGHbuRR_jRw", "SFDXShow"],
+        ["UCvmKFknIG9Z_tj0ZyMHPViQ", "JRBmotors"],
+        ["UCNGH2ZZH3gPj0J1Z2HU0ITg", "Lofi Serenade Hub"],
+        ["UC8rNKrqBxJqL9izOOMxBJtw", "Willyrex"],
+        ["UC5uFttEUB_fNnJqBly_jRXQ", "xFaRgAnx"],
+        ["UCtZ-NR6mtwRGRR48AtrYLjg", "Nico - Ride Me Five"],
+        ["UCv1HX9GgqyAYE999BoGYc1g", "Esttik"],
+        ["UCuk4lplU8fQIG7CUdJqeZ8g", "JDalmau"],
+        ["UCiMRXuxr-1wdimyv82y0DvQ", "SeVenJungle"],
+        ["UCiRgvVzF6kf7fnYCjDYa6Bg", "Werlyb - Gameplays"],
+        ["UCWcp1Mwm7_bJ-mVoZb8TdkQ", "TuberViejuner"],
+        ["UCCVPjsqUlFIfDXeWO7V1nLQ", "Reven"],
+        ["UCWU8fcAN3X8hjMR9k0rbV5g", "Nadie Sabe Nada"],
+        ["UCzFESlED8MTJOTHpQhxlqGg", "FRANK CUESTA - CANAL YOUTUBE"],
+        ["UCdKPGAiw0WjT3IeZCkZlz1A", "Detección Metálica"],
+        ["UCeiyuZljcK9iXzMAgzb9kpA", "HRom"]
+    ]);
 
-    console.log(
-        superDjs.colourText(
-            `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid"
-            })})`,
-            "blue"
-        )
+    userId = channelNames.get(userId) || userId;
+
+    logger.info(
+        `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
+            timeZone: "Europe/Madrid"
+        })})`
     );
 
     if (ultimoVideo === undefined) return;
@@ -187,7 +140,7 @@ const youtubeCron = async (client, userId) => {
 
             await newData.save();
         } else {
-            // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
+            // FILTRO SI ES MENOR A 240 SEGUNDOS NO NOTIFICAR
             if (ultimoVideo?.lengthSeconds < 240 && ultimoVideo.liveNow === false) {
                 return;
             }
@@ -236,9 +189,8 @@ const youtubeCron = async (client, userId) => {
 
                 return;
             }
-            // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
+            // FILTRO SI ES MENOR A 240 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
             if (ultimoVideo?.lengthSeconds < 240 && ultimoVideo.liveNow === false) {
-                console.log("Video menor a 60 segundos = short");
                 return;
             }
 
@@ -264,7 +216,7 @@ const youtubeCron = async (client, userId) => {
                     }
                 );
             } else {
-                // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
+                // FILTRO SI ES MENOR A 240 SEGUNDOS NO NOTIFICAR
                 if (ultimoVideo?.lengthSeconds < 240 && ultimoVideo.liveNow === false) {
                     return;
                 }

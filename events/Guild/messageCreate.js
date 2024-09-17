@@ -2,6 +2,7 @@ const { EmbedBuilder, PermissionsBitField, WebhookClient } = require("discord.js
 const axios = require("axios");
 const client = require("../../index");
 const config = require("../../config/config.js");
+const logger = require("../../utils/logger.js");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
@@ -92,8 +93,8 @@ client.on("messageCreate", async (message) => {
                     content: `Error en el canal **<#${message.channel.id}>**\n\nError: ${error}`
                 });
             }
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
         }
     }
 
@@ -161,8 +162,8 @@ client.on("messageCreate", async (message) => {
 
         try {
             command.run(client, message, args, prefix, config);
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
         }
     }
 });

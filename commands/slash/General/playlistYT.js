@@ -2,6 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const ytch = require("yt-channel-info");
 const playListYoutubeSchema = require("../../../schemas/playListYoutubeSchema");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "playlistyt",
@@ -34,8 +35,8 @@ module.exports = {
             .then((response) => {
                 return response.items[0];
             })
-            .catch((err) => {
-                console.log("err", err);
+            .catch((e) => {
+                logger.error(`Error: ${e}`);
                 error = true;
             });
 

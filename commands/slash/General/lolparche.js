@@ -2,6 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const cheerio = require("cheerio");
 const fetch = require("node-fetch");
 const request = require("request");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -22,8 +23,8 @@ module.exports = {
             const versionRes = await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`);
             const versions = await versionRes.json();
             currentVersionPatch = versions[0].slice(0, -2);
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
             return interaction.editReply({
                 embeds: [
                     new EmbedBuilder()

@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const SoundBoard = require("djs-soundboard");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "sonidos",
@@ -83,7 +84,7 @@ module.exports = {
         await sound.play(channel, selectedSound);
         await interaction
             .reply({ content: `✅ Audio ${selectedSound} enviado correctamente`, ephemeral: true })
-            .catch((e) => console.error);
+            .catch((e) => logger.error(`Error: ${e}`));
 
         setTimeout(() => interaction.deleteReply(), 4000);
     }

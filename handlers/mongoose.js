@@ -1,16 +1,16 @@
 const config = require("../config/config.js");
 require("dotenv").config();
-const colors = require("colors");
-const superDjs = require("super-djs");
 const mongoose = require("mongoose");
+const logger = require("../utils/logger.js");
 
 module.exports = (client) => {
-    console.log(superDjs.colourText("[DATABASE] Connecting to MongoDB...", "yellow"));
+    logger.info("[DATABASE] Connecting to MongoDB...");
+
     const mongo = process.env.MONGO_URL || config.Handlers.MONGO;
     mongoose.set("strictQuery", false);
 
     if (!mongo) {
-        console.warn("[WARN] A Mongo URI/URL isn't provided! (Not required)");
+        logger.warn("[WARN] A Mongo URI/URL isn't provided! (Not required)");
     } else {
         mongoose
             .connect(mongo, {
@@ -18,18 +18,13 @@ module.exports = (client) => {
                 useUnifiedTopology: true
             })
             .then(() =>
-                console.log(
-                    superDjs.colourText(
-                        `
+                logger.info(`
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║       Conectado a la base de datos MONGODB!         ║
 ║                                                     ║
-╚═════════════════════════════════════════════════════╝`,
-                        "green"
-                    )
-                )
+╚═════════════════════════════════════════════════════╝`)
             )
-            .catch((err) => console.log(err));
+            .catch((e) => logger.error(`Error: ${e}`));
     }
 };

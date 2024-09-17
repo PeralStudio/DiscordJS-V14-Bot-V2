@@ -1,9 +1,8 @@
 const fs = require("fs");
-const colors = require("colors");
-const superDjs = require("super-djs");
+const logger = require("../utils/logger");
 
 module.exports = (client) => {
-    console.log(superDjs.colourText("------------------>> Events Handler:", "blue"));
+    logger.info("------------------>> Events Handler:");
 
     fs.readdirSync("./events/").forEach((dir) => {
         const commands = fs.readdirSync(`./events/${dir}`).filter((file) => file.endsWith(".js"));
@@ -11,18 +10,10 @@ module.exports = (client) => {
             let pull = require(`../events/${dir}/${file}`);
             if (pull.name) {
                 client.events.set(pull.name, pull);
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - EVENTS(${dir})] Loaded a file: ${pull.name}`,
-                        "green"
-                    )
-                );
+                logger.info(`[HANDLER - EVENTS(${dir})] Loaded a file: ${pull.name}`);
             } else {
-                console.log(
-                    superDjs.colourText(
-                        `[HANDLER - EVENTS(${dir})] Couldn't load the file ${file}. missing name or aliases.`,
-                        "red"
-                    )
+                logger.error(
+                    `[HANDLER - EVENTS(${dir})] Couldn't load the file ${file}. missing name or aliases.`
                 );
                 continue;
             }

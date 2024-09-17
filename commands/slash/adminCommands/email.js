@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const nodemailer = require("nodemailer");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -66,9 +67,9 @@ module.exports = {
 
             transporter.sendMail(mailOptions, async function (error, info) {
                 if (error) {
-                    console.log(error);
+                    logger.error(error);
                 } else {
-                    console.log("Email sent: " + info.response);
+                    logger.info(`Email sent: ${info.response}`);
                     await interaction.reply({
                         embeds: [
                             new EmbedBuilder()

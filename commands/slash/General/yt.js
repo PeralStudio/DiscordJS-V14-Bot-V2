@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { EmbedBuilder } = require("discord.js");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -62,9 +63,9 @@ module.exports = {
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed1, embed2] });
-        } catch (error) {
-            console.error(error);
-            await interaction.reply(`Hubo un error al realizar la búsqueda: ${error}`);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
+            await interaction.reply(`Hubo un error al realizar la búsqueda: ${e}`);
         }
     }
 };

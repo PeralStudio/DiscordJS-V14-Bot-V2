@@ -1,6 +1,6 @@
 const { ActivityType, WebhookClient, EmbedBuilder } = require("discord.js");
 const client = require("../../index");
-const superDjs = require("super-djs");
+const logger = require("../../utils/logger");
 require("dotenv").config();
 
 const birthdaysReminder = require("../../services/birthdayReminder");
@@ -85,7 +85,7 @@ client.once("ready", async () => {
                 status: statusArray[option].status
             });
         } catch (error) {
-            console.log(superDjs.colourText(error), "red");
+            logger.error(error);
         }
     };
 
@@ -153,18 +153,13 @@ client.once("ready", async () => {
 
     webhook.send({ embeds: [embed] });
 
-    console.log(
-        superDjs.colourText(
-            `
+    logger.info(`
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║     Bot conectado como ${client.user.tag}!            ║
 ║                    (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid"
-            })})                       ║
+        timeZone: "Europe/Madrid"
+    })})                       ║
 ║                                                     ║
-╚═════════════════════════════════════════════════════╝`,
-            "green"
-        )
-    );
+╚═════════════════════════════════════════════════════╝`);
 });

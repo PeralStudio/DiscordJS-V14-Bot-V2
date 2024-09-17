@@ -2,7 +2,7 @@ const { EmbedBuilder, WebhookClient } = require("discord.js");
 const deleteOldMsg = require("./deleteOldMsg");
 const cron = require("node-cron");
 const fetch = require("node-fetch");
-const superDjs = require("super-djs");
+const logger = require("../utils/logger");
 require("dotenv").config();
 
 const webhookNews = new WebhookClient({
@@ -46,20 +46,17 @@ const fetchNews = async (client, user) => {
                     });
 
                     // Imprimir logs en la consola
-                    console.log(
-                        superDjs.colourText(
-                            `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
-                                "es-ES",
-                                {
-                                    timeZone: "Europe/Madrid"
-                                }
-                            )}`,
-                            "green"
-                        )
+                    logger.info(
+                        `¡Nuevas noticias publicadas en: 📰-noticias ${new Date().toLocaleTimeString(
+                            "es-ES",
+                            {
+                                timeZone: "Europe/Madrid"
+                            }
+                        )}`
                     );
                 }
             } catch (error) {
-                console.error(`Error al obtener o enviar las noticias: ${error.message}`);
+                logger.error(`Error al obtener o enviar las noticias: ${error.message}`);
             }
         },
         {

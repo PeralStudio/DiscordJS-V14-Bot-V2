@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const moment = require("moment");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -328,8 +329,8 @@ module.exports = {
                     });
                 });
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((e) => {
+                logger.error(e);
             })
             .finally(() => {
                 interaction.reply({

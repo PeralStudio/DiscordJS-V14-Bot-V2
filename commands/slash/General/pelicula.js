@@ -76,7 +76,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            console.error(`Error al buscar la película "${titulo}": ${error}`);
+            logger.error(`Error al buscar la película "${titulo}": ${error}`);
             webhook.send(`Error al buscar la película "${titulo}": ${error}`);
             await interaction.reply(
                 "Hubo un error al buscar la película. Intenta nuevamente más tarde."

@@ -2,6 +2,7 @@ const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const { profileImage } = require("discord-arts");
 const xpSchema = require("../../../schemas/xpSchema");
+const logger = require("../../../utils/logger");
 
 module.exports = {
     name: "ranking",
@@ -80,8 +81,8 @@ module.exports = {
                 embeds: [embed1, embed2, embed3],
                 files: [imageAttachment1, imageAttachment2, imageAttachment3]
             });
-        } catch (error) {
-            console.error("Error al ejecutar el comando ranking:", error);
+        } catch (e) {
+            logger.error(`Error al ejecutar el comando ranking: ${e}`);
             return interaction.editReply({
                 content: "❌ Hubo un error al procesar el comando. Inténtalo de nuevo más tarde.",
                 ephemeral: true

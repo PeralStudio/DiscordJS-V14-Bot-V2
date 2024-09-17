@@ -1,3 +1,5 @@
+const logger = require("../utils/logger");
+
 const checkRepeatMsgs = async (client, channelID) => {
     try {
         const channel = await client.channels.fetch(channelID);
@@ -29,15 +31,17 @@ const checkRepeatMsgs = async (client, channelID) => {
                         await message.delete({
                             reason: "Deleting duplicate messages based on URL"
                         });
-                        console.log(`Mensaje eliminado: ${message.content}`);
-                    } catch (err) {
-                        console.error(`Error al eliminar el mensaje: ${message.id}`, err);
+                        logger.info(`Mensaje eliminado: ${message.content}`);
+                    } catch (e) {
+                        logger.error(`Error al eliminar el mensaje: ${message.id}\nError: ${e}`);
                     }
                 }
             });
         }
-    } catch (err) {
-        console.error(`Error al verificar mensajes duplicados en el canal: ${channelID}`, err);
+    } catch (e) {
+        logger.error(
+            `Error al verificar mensajes duplicados en el canal: ${channelID}\nError: ${e}`
+        );
     }
 };
 

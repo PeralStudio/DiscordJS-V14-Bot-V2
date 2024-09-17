@@ -6,6 +6,7 @@ const {
     getVoiceConnection
 } = require("@discordjs/voice");
 const { EmbedBuilder } = require("discord.js");
+const logger = require("../../../utils/logger");
 
 const urlRadio = {
     cadenaSer:
@@ -94,8 +95,8 @@ module.exports = {
             });
         });
 
-        player.on("error", (error) => {
-            console.error("Error en el reproductor de audio:", error);
+        player.on("error", (e) => {
+            logger.error(`Error en el reproductor de audio: ${e}`);
             interaction.followUp({
                 content: `❌ Hubo un error al intentar reproducir la radio.`,
                 ephemeral: true

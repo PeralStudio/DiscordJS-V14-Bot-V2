@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -50,7 +51,7 @@ module.exports = {
             );
 
             if (!accountRes.ok) {
-                console.log("Error al obtener el PUUID del invocador:", accountRes.status);
+                logger.error(`Error al obtener el PUUID del invocador: ${accountRes.status}`);
                 return interaction.editReply({
                     ephemeral: true,
                     embeds: [
@@ -72,7 +73,7 @@ module.exports = {
             );
 
             if (!summonerRes.ok) {
-                console.log("Error al obtener el summonerId:", summonerRes.status);
+                logger.error(`Error al obtener el summonerId: ${summonerRes.status}`);
                 return interaction.editReply({
                     ephemeral: true,
                     embeds: [
@@ -95,7 +96,7 @@ module.exports = {
             );
 
             if (!leagueRes.ok) {
-                console.log("Error al obtener las ligas:", leagueRes.status);
+                logger.error(`Error al obtener las ligas: ${leagueRes.status}`);
                 return interaction.editReply({
                     ephemeral: true,
                     embeds: [
@@ -159,8 +160,8 @@ module.exports = {
             });
 
             return interaction.editReply({ embeds });
-        } catch (err) {
-            console.error("Error general:", err);
+        } catch (e) {
+            logger.error(`Error general: ${e}`);
             return interaction.editReply({
                 ephemeral: true,
                 embeds: [
