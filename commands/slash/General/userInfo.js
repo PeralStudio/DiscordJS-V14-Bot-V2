@@ -73,7 +73,13 @@ module.exports = {
             const avatarButton = new ButtonBuilder()
                 .setLabel("Avatar")
                 .setStyle(5)
-                .setURL(member.displayAvatarURL());
+                .setURL(
+                    member.displayAvatarURL({
+                        format: "png",
+                        dynamic: true,
+                        size: 1024
+                    })
+                );
 
             const disabled = (await member.user.fetch()).bannerURL();
 
