@@ -4,4 +4,3 @@
 /backups
 services/alertLarevuelta.js
 services/twitchCron2.js
-/logs
