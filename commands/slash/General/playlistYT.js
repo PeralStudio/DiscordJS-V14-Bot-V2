@@ -21,14 +21,12 @@ module.exports = {
     },
     run: async (client, interaction, config) => {
         const idChannel = interaction.options.get("id").value;
-        const idChannelLower = idChannel.toLowerCase();
         let error = false;
 
         const { getChannelPlaylistInfo /* , getChannelInfo */ } = ytch;
 
-        // setInterval(async () => {
         const payload = {
-            channelId: idChannelLower
+            channelId: idChannel
         };
 
         const playList = await getChannelPlaylistInfo(payload, 0)
