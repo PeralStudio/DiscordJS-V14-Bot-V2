@@ -4,7 +4,7 @@ const ytpl = require("ytpl");
 const logger = require("../../../utils/logger");
 
 module.exports = {
-    name: "playlistytComplete",
+    name: "playlistyt_completa",
     description: "Playlist Youtube",
     type: 1,
     options: [
