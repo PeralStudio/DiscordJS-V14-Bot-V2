@@ -18,7 +18,7 @@ module.exports = (client) => {
                 useUnifiedTopology: true
             })
             .then(() =>
-                logger.info(`
+                logger.gold(`
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║       Conectado a la base de datos MONGODB!         ║

@@ -29,6 +29,7 @@ const fetchNews = async (client, user) => {
                 }
 
                 const articles = await response.json();
+                logger.info(`articles: ${JSON.stringify(articles, null, 2)}`);
 
                 // Enviar noticias al canal
                 for (const article of articles.articles) {

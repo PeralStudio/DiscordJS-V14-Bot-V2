@@ -10,7 +10,7 @@ module.exports = (client) => {
             let pull = require(`../events/${dir}/${file}`);
             if (pull.name) {
                 client.events.set(pull.name, pull);
-                logger.info(`[HANDLER - EVENTS(${dir})] Loaded a file: ${pull.name}`);
+                logger.success(`[HANDLER - EVENTS(${dir})] Loaded a file: ${pull.name}`);
             } else {
                 logger.error(
                     `[HANDLER - EVENTS(${dir})] Couldn't load the file ${file}. missing name or aliases.`

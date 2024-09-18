@@ -20,7 +20,7 @@ module.exports = (client) => {
         embed
             .setTitle("Discord API Error")
             .setURL("https://discordjs.guide/popular-topics/errors.html#api-errors")
-            .setDescription(`\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``)
+            .setDescription(`\`\`\`${inspect(e, { depth: 0 }).slice(0, 1000)}\`\`\``)
             .setTimestamp()
             .setFooter({
                 text: versionbot,
@@ -77,7 +77,7 @@ module.exports = (client) => {
             .addFields(
                 {
                     name: "Error",
-                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``
+                    value: `\`\`\`${inspect(e, { depth: 0 }).slice(0, 1000)}\`\`\``
                 },
                 {
                     name: "Origin",
@@ -93,7 +93,7 @@ module.exports = (client) => {
         return webhook.send({ embeds: [embed] });
     });
 
-    process.on("uncaughtExceptionMonitor", (err, origin) => {
+    process.on("uncaughtExceptionMonitor", (e, origin) => {
         deleteOldMsg(client, process.env.ERRORES_BOT_CHANNEL);
         logger.error(`Error: ${e}\n ${origin}`);
 
@@ -103,7 +103,7 @@ module.exports = (client) => {
             .addFields(
                 {
                     name: "Error",
-                    value: `\`\`\`${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``
+                    value: `\`\`\`${inspect(e, { depth: 0 }).slice(0, 1000)}\`\`\``
                 },
                 {
                     name: "Origin",

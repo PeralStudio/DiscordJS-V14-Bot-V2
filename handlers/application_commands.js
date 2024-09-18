@@ -10,7 +10,7 @@ module.exports = (client, config) => {
 
     // Slash commands handler:
     fs.readdirSync("./commands/slash/").forEach((dir) => {
-        logger.info("[!] Started loading slash commands...");
+        logger.title("[!] Started loading slash commands...");
         const SlashCommands = fs
             .readdirSync(`./commands/slash/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -20,7 +20,7 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.description, pull.type == 1)) {
                 client.slash_commands.set(pull.name, pull);
-                logger.info(
+                logger.success(
                     `[HANDLER - SLASH(${dir})] Loaded a file: ${pull.name} (#${client.slash_commands.size})`
                 );
 
@@ -49,7 +49,7 @@ module.exports = (client, config) => {
 
     // User commands handler:
     fs.readdirSync("./commands/user/").forEach((dir) => {
-        logger.info("[!] Started loading user commands...");
+        logger.title("[!] Started loading user commands...");
         const UserCommands = fs
             .readdirSync(`./commands/user/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -59,7 +59,7 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.type == 2)) {
                 client.user_commands.set(pull.name, pull);
-                logger.info(
+                logger.success(
                     `[HANDLER - USER(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`
                 );
 
@@ -78,7 +78,7 @@ module.exports = (client, config) => {
 
     // Message commands handler:
     fs.readdirSync("./commands/message/").forEach((dir) => {
-        logger.info("[!] Started loading message commands...");
+        logger.title("[!] Started loading message commands...");
         const UserCommands = fs
             .readdirSync(`./commands/message/${dir}`)
             .filter((file) => file.endsWith(".js"));
@@ -88,7 +88,7 @@ module.exports = (client, config) => {
 
             if ((pull.name, pull.type == 3)) {
                 client.message_commands.set(pull.name, pull);
-                logger.info(
+                logger.success(
                     `[HANDLER - MESSAGE(${dir})] Loaded a file: ${pull.name} (#${client.user_commands.size})`
                 );
 
@@ -114,12 +114,12 @@ module.exports = (client, config) => {
     const rest = new REST({ version: "10" }).setToken(config.Client.TOKEN || process.env.TOKEN);
 
     (async () => {
-        logger.info("[HANDLER] Started registering all the application commands.");
+        logger.title("[HANDLER] Started registering all the application commands.");
 
         try {
             await rest.put(Routes.applicationCommands(config.Client.ID), { body: commands });
 
-            logger.info("[HANDLER] Successfully registered all the application commands.");
+            logger.gold("[HANDLER] Successfully registered all the application commands.");
         } catch (e) {
             logger.error(`Error: ${e}`);
         }

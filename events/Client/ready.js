@@ -153,7 +153,7 @@ client.once("ready", async () => {
 
     webhook.send({ embeds: [embed] });
 
-    logger.info(`
+    logger.gold(`
 ╔═════════════════════════════════════════════════════╗
 ║                                                     ║
 ║     Bot conectado como ${client.user.tag}!            ║

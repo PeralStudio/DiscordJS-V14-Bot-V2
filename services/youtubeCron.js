@@ -87,7 +87,7 @@ const youtubeCron = async (client, userId) => {
 
     userId = channelNames.get(userId) || userId;
 
-    logger.info(
+    logger.red(
         `Comprobando Youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
             timeZone: "Europe/Madrid"
         })})`

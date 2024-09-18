@@ -12,7 +12,7 @@ module.exports = (client, config) => {
             let pull = require(`../commands/prefix/${dir}/${file}`);
             if (pull.config.name) {
                 client.prefix_commands.set(pull.config.name, pull);
-                logger.info(
+                logger.success(
                     `[HANDLER - PREFIX(${dir})] Loaded a file: ${pull.config.name} (#${client.prefix_commands.size})`
                 );
             } else {

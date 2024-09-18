@@ -17,7 +17,7 @@ const twitchCron = async (client, user) => {
     const remainingLetters = user.slice(1);
     const capitalizedUser = firstLetterCap + remainingLetters;
 
-    logger.info(
+    logger.title(
         `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
             timeZone: "Europe/Madrid"
         })})`

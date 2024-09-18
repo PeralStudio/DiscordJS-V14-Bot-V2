@@ -10,7 +10,7 @@ module.exports = (client, config) => {
         let pull = require(`../modals/${file}`);
         if (pull.id) {
             client.modals.set(pull.id, pull);
-            logger.info(`[HANDLER - MODALS] Loaded a file: ${file}`);
+            logger.success(`[HANDLER - MODALS] Loaded a file: ${file}`);
         } else {
             logger.error(`[HANDLER - MODALS] Couldn't load the file ${file}. Missing modal ID.`);
             continue;
