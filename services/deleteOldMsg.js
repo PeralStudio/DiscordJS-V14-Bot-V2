@@ -36,7 +36,7 @@ const deleteOldMsg = (client, channelID) => {
             break;
         case NOTICIAS_CHANNEL_ID:
             channelName = "📰-noticias";
-            time = 720 * 60 * 1000;
+            time = 23 * 60 * 60 * 1000;
             break;
         case ERRORES_BOT_CHANNEL:
             channelName = "❌errores-bot🤖";
