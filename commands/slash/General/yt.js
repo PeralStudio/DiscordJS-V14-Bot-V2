@@ -46,23 +46,16 @@ module.exports = {
             const video1 = videos[0];
             const video2 = videos[1];
 
-            const embed1 = new EmbedBuilder()
-                .setTitle(video1.snippet.title)
-                .setURL(`https://www.youtube.com/watch?v=${video1.id.videoId}`)
-                .setImage(video1.snippet.thumbnails.high.url) // Portada del video
-                .setDescription(`Descripción:\n\n${video1.snippet.description}`)
-                .setColor("#FF0000")
-                .setTimestamp();
+            // Enviar un mensaje con los enlaces a los videos
+            const mensaje =
+                "Aquí están los resultados para " +
+                "**`" +
+                query +
+                "`**:\n\n" +
+                `1- https://www.youtube.com/watch?v=${video1.id.videoId}\n` +
+                `2- https://www.youtube.com/watch?v=${video2.id.videoId}`;
 
-            const embed2 = new EmbedBuilder()
-                .setTitle(video2.snippet.title)
-                .setURL(`https://www.youtube.com/watch?v=${video2.id.videoId}`)
-                .setImage(video2.snippet.thumbnails.high.url) // Portada del video
-                .setDescription(`Descripción:\n\n${video2.snippet.description}`)
-                .setColor("#FF0000")
-                .setTimestamp();
-
-            await interaction.reply({ embeds: [embed1, embed2] });
+            await interaction.reply(mensaje);
         } catch (e) {
             logger.error(`Error: ${e}`);
             await interaction.reply(`Hubo un error al realizar la búsqueda: ${e}`);
