@@ -5,6 +5,7 @@ const dayjs = require("dayjs");
 const deleteOldMsg = require("./deleteOldMsg");
 const dotenv = require("dotenv");
 const logger = require("../utils/logger");
+const cronJobs = require("../utils/cronJobs");
 dotenv.config();
 
 const { NAME_BOT, EPICGAMES_CHANNEL_ID, TOKEN_DISCORD } = process.env;
@@ -25,7 +26,7 @@ const clientDC = new Client({
 clientDC.login(TOKEN_DISCORD);
 
 const epicGamesFree = async (client) => {
-    cron.schedule(
+    const epicGamesCron = cron.schedule(
         "30 17 * * thu",
         async () => {
             // Delete old messages
@@ -161,9 +162,12 @@ const epicGamesFree = async (client) => {
             }
         },
         {
+            scheduled: true,
             timezone: "Europe/Madrid"
         }
     );
+
+    cronJobs.push({ name: "EpicGames Cron", task: epicGamesCron, pattern: "30 17 * * thu" });
 };
 
 module.exports = epicGamesFree;

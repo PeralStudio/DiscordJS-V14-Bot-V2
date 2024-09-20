@@ -2,6 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const bdSchema = require("../schemas/birthdaySchema");
 const cron = require("node-cron");
 const logger = require("../utils/logger");
+const cronJobs = require("../utils/cronJobs");
 require("dotenv").config();
 
 const birthdaysReminder = (client) => {
@@ -12,7 +13,7 @@ const birthdaysReminder = (client) => {
         return;
     }
 
-    cron.schedule(
+    const birthdaysCron = cron.schedule(
         "1 0 * * *",
         async () => {
             const zoneId = "Europe/Madrid";
@@ -60,9 +61,12 @@ const birthdaysReminder = (client) => {
             }
         },
         {
+            scheduled: true,
             timezone: "Europe/Madrid"
         }
     );
+
+    cronJobs.push({ name: "birthdays Cron", task: birthdaysCron, pattern: "1 0 * * *" });
 };
 
 module.exports = birthdaysReminder;

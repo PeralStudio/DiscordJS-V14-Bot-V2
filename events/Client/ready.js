@@ -13,6 +13,7 @@ const epicGamesFree = require("../../services/epicGamesFree");
 const fetchNews = require("../../services/fetchNews");
 const reminders = require("../../services/reminders");
 const alertLarevuelta = require("../../services/alertLarevuelta");
+const getCronTasks = require("../../services/getCronTasks");
 
 const webhook = new WebhookClient({
     url: process.env.WEBHOOK_LOGS_CHANNEL
@@ -118,9 +119,14 @@ client.once("ready", async () => {
     //Funtion Reminders
     reminders(client);
 
+    //Function alertLarevuelta
     alertLarevuelta(client);
 
+    //Function pickPresence
     setInterval(pickPresence, 60 * 1000);
+
+    //Function getCronTasks
+    setInterval(getCronTasks, 60 * 30 * 1000);
 
     const embed = new EmbedBuilder()
         .setDescription(`🟢 <@${client.user.id}> Online`)

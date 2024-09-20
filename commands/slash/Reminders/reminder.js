@@ -2,6 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const cron = require("node-cron");
 const generator = require("generate-password");
 const reminderSchema = require("../../../schemas/reminderSchema");
+const cronJobs = require("../../../utils/cronJobs");
 require("dotenv").config();
 
 module.exports = {
@@ -147,7 +148,7 @@ module.exports = {
             Cron: cronTime
         });
 
-        const job = cron.schedule(
+        const reminderCron = cron.schedule(
             cronTime,
             async () => {
                 const remindEmbed = new EmbedBuilder()
@@ -188,6 +189,8 @@ module.exports = {
             }
         );
 
-        job.start();
+        reminderCron.start();
+
+        cronJobs.push({ name: "Recordatorios Cron", task: reminderCron, pattern: cronTime });
     }
 };

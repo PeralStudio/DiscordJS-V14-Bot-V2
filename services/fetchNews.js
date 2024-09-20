@@ -3,6 +3,7 @@ const deleteOldMsg = require("./deleteOldMsg");
 const cron = require("node-cron");
 const fetch = require("node-fetch");
 const logger = require("../utils/logger");
+const cronJobs = require("../utils/cronJobs");
 require("dotenv").config();
 
 const webhookNews = new WebhookClient({
@@ -13,11 +14,11 @@ const fetchNews = async (client, user) => {
     const { GNEWS_KEY, NOTICIAS_CHANNEL_ID } = process.env;
     const url = `https://gnews.io/api/v4/search?q=general&lang=es&country=es&max=10&apikey=${GNEWS_KEY}`;
 
-    cron.schedule(
+    const fetchNewsCron = cron.schedule(
         "0 9 * * *",
         async () => {
             // Eliminar mensajes antiguos
-            await deleteOldMsg(client, NOTICIAS_CHANNEL_ID);
+            deleteOldMsg(client, NOTICIAS_CHANNEL_ID);
 
             try {
                 // Fetch de noticias
@@ -29,7 +30,6 @@ const fetchNews = async (client, user) => {
                 }
 
                 const articles = await response.json();
-                logger.info(`articles: ${JSON.stringify(articles, null, 2)}`);
 
                 // Enviar noticias al canal
                 for (const article of articles.articles) {
@@ -61,9 +61,12 @@ const fetchNews = async (client, user) => {
             }
         },
         {
+            scheduled: true,
             timezone: "Europe/Madrid"
         }
     );
+
+    cronJobs.push({ name: "fetchNews Cron", task: fetchNewsCron, pattern: "0 9 * * *" });
 };
 
 module.exports = fetchNews;

@@ -7,13 +7,14 @@ const deleteOldMsg = require("./deleteOldMsg.js");
 const checkRepeatMsgs = require("./checkRepeatMsgs.js");
 const { format, parseISO, addHours } = require("date-fns");
 const logger = require("../utils/logger.js");
+const cronJobs = require("../utils/cronJobs.js");
 dotenv.config();
 
 const elrellanoScrap = async (client) => {
     const { ELRELLANO_CHANNEL_ID } = process.env;
     let videos = [];
 
-    cron.schedule(
+    const elRellanoCron = cron.schedule(
         "*/30 8-23,0-1 * * *", // Cada 30min de 08:00 a 23:59 y también desde 00:00 hasta 01:00
         async () => {
             //Delete old messages
@@ -240,9 +241,12 @@ const elrellanoScrap = async (client) => {
             }
         },
         {
+            scheduled: true,
             timezone: "Europe/Madrid"
         }
     );
+
+    cronJobs.push({ name: "ElRellano Cron", task: elRellanoCron, pattern: "*/30 8-23,0-1 * * *" });
 };
 
 module.exports = elrellanoScrap;
