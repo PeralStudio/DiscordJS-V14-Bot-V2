@@ -28,6 +28,10 @@ module.exports = {
         try {
             await interaction.deferReply();
 
+            const versionRes = await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`);
+            const versions = await versionRes.json();
+            currentVersionPatch = versions[0];
+
             // Obtener el nombre de invocador y etiqueta del comando
             const gameName = interaction.options.get("invocador").value;
             const tagLine = interaction.options.get("tag").value;
@@ -134,7 +138,7 @@ module.exports = {
                 return new EmbedBuilder()
                     .setAuthor({
                         name: `${gameName} (${summonerData.summonerLevel})`,
-                        iconURL: `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/profileicon/${summonerData.profileIconId}.png`
+                        iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersionPatch}/img/profileicon/${summonerData.profileIconId}.png`
                     })
                     .addFields(
                         { name: "Tipo de cola", value: queueType.replace(/_/g, " "), inline: true },
@@ -149,7 +153,7 @@ module.exports = {
                         }
                     )
                     .setThumbnail(
-                        `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/profileicon/${summonerData.profileIconId}.png`
+                        `https://ddragon.leagueoflegends.com/cdn/${currentVersionPatch}/img/profileicon/${summonerData.profileIconId}.png`
                     )
                     .setTimestamp()
                     .setColor("#0099ff")

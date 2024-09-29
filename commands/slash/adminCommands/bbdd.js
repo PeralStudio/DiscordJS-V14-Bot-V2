@@ -28,6 +28,7 @@ module.exports = {
             });
             return;
         }
+        await interaction.deferReply({ ephemeral: true });
 
         const collectionName = interaction.options.getString("collenctionname");
 
@@ -36,7 +37,7 @@ module.exports = {
             const collectionItems = await connection.collections[collectionName].find({});
             const collectionItemsData = await collectionItems.toArray();
 
-            const embedCollections = new EmbedBuilder()
+            const baseEmbed = new EmbedBuilder()
                 .setTitle(`Colección **${collectionName}**`)
                 .setDescription(`\`${collectionsLength} Documentos\``)
                 .setColor("#0099ff")
@@ -49,19 +50,24 @@ module.exports = {
                     iconURL: client.user.displayAvatarURL()
                 });
 
-            for (const item of collectionItemsData) {
-                const i = collectionItemsData.indexOf(item);
+            // Dividir los documentos en lotes de 24
+            for (let i = 0; i < collectionItemsData.length; i += 24) {
+                const chunk = collectionItemsData.slice(i, i + 24);
+                const embedCollections = new EmbedBuilder(baseEmbed);
 
-                embedCollections.addFields({
-                    name: `Documento ${i + 1}`,
-                    value: `\`\`\`${JSON.stringify(item, null, 2)}\`\`\``
+                chunk.forEach((item, index) => {
+                    embedCollections.addFields({
+                        name: `Documento ${i + index + 1}`,
+                        value: `\`\`\`${JSON.stringify(item, null, 2)}\`\`\``
+                    });
                 });
-            }
 
-            interaction.reply({
-                embeds: [embedCollections],
-                ephemeral: true
-            });
+                if (i === 0) {
+                    await interaction.editReply({ embeds: [embedCollections], ephemeral: true });
+                } else {
+                    await interaction.followUp({ embeds: [embedCollections], ephemeral: true });
+                }
+            }
 
             return;
         }
