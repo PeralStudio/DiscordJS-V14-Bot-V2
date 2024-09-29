@@ -70,5 +70,8 @@
     "yt-channel-info": "^3.2.1",
     "ytdl-core": "^4.11.5",
     "ytpl": "^2.3.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas-linux-arm64-gnu": "^0.1.44"
   }
 }
