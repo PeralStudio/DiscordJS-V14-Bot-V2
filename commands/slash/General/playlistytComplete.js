@@ -1,7 +1,11 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, WebhookClient } = require("discord.js");
 require("dotenv").config();
 const ytpl = require("ytpl");
 const logger = require("../../../utils/logger");
+
+const webhook = new WebhookClient({
+    url: process.env.WEBHOOK_ERRORESBOT
+});
 
 module.exports = {
     name: "playlistyt_completa",
@@ -77,8 +81,9 @@ module.exports = {
             } else {
                 await interaction.reply("No se encontraron videos en la playlist.");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            logger.error(`Error: ${e}`);
+            webhook.send(`Error: ${e}`);
             await interaction.reply("Hubo un error al recuperar la playlist.");
         }
     }

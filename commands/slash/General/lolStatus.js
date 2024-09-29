@@ -1,5 +1,6 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 const axios = require("axios");
+const logger = require("../../../utils/logger");
 require("dotenv").config();
 
 const webhook = new WebhookClient({
@@ -162,11 +163,15 @@ module.exports = {
             } else if (spanishTranslation && spanishTranslation2) {
                 await interaction.editReply({ embeds: [maintenanceEmbed, maintenanceEmbed2] });
             } else {
+                logger.error(
+                    `Error comando ${interaction.commandName}: No se encontró la traducción en español.`
+                );
                 webhook.send({
                     content: `No se encontró la traducción en español.`
                 });
             }
         } catch (err) {
+            logger.error(`Error comando ${interaction.commandName}: ${err}`);
             webhook.send({
                 content: `Error comando: **${interaction.commandName}**\`\`\`${err}\`\`\``
             });

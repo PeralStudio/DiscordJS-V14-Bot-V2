@@ -2,7 +2,7 @@ const { Client, Partials, Collection, GatewayIntentBits, IntentsBitField } = req
 const config = require("./config/config");
 require("dotenv").config();
 const { Player } = require("discord-player");
-const logger = require(".//utils/logger");
+const logger = require("./utils/logger");
 
 // Creating a new client:
 const client = new Client({
@@ -74,6 +74,12 @@ client.login(AuthenticationToken).catch((err) => {
     logger.error("[CRASH] Error from Discord API:", "red" + err);
     return process.exit();
 });
+
+// Trye upgrade listeners
+client.ws._ws.maxListeners = 30;
+client.ws._ws._maxListeners = 30;
+client.ws._ws.options.rest._maxListeners = 30;
+process.setMaxListeners(30);
 
 // Handle errors:
 process.on("unhandledRejection", async (reason, promise) => {
