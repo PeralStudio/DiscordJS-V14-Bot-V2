@@ -25,7 +25,8 @@ const client = new Client({
         Partials.Message,
         Partials.User,
         Partials.GuildMember,
-        Partials.Reaction
+        Partials.Reaction,
+        Partials.Flags
     ],
     presence: {
         activities: [
